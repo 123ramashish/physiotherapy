@@ -5,227 +5,351 @@ import { Menu, X, ChevronRight, Activity, Heart, Users, Award } from 'lucide-rea
 const PhysiotherapyHome = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <>
       {/* SEO Meta Tags */}
-      <div style={{ display: 'none' }}>
-        <h1>SKM Physiotherapy - Expert Physiotherapy & Chiropractic Care</h1>
-        <meta name="description" content="Professional physiotherapy and chiropractic clinic offering personalized treatment plans for optimal recovery and wellbeing. Book your appointment today." />
-        <meta name="keywords" content="physiotherapy, chiropractic, physical therapy, rehabilitation, pain management, sports injury" />
-      </div>
+      <title>SKM Physiotherapy - Expert Physiotherapy & Chiropractic Care</title>
 
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
-        {/* Header */}
-        <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
-          <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16 sm:h-20">
-              {/* Logo */}
-              <div className="flex-shrink-0">
-                <a href="/" className="text-xl sm:text-2xl font-bold">
-                  <span className="text-gray-900">skm</span>
-                  <span className="text-red-600">physiotherapy</span>
-                  <span className="text-gray-900">.com</span>
-                </a>
+      {/* Header */}
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled 
+            ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-red-100/20 py-3' 
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center space-x-3 group">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                <div className="relative bg-gradient-to-br from-red-500 to-red-600 p-2 rounded-full transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                  <Activity className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <span className={`text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent transition-all duration-300 ${
+                scrolled ? 'text-xl' : 'text-2xl'
+              }`}>
+                skm physiotherapy
+                <span className="text-red-600">.com</span>
+              </span>
+            </div>
 
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-8">
-                <a href="#home" className="text-gray-700 hover:text-red-600 transition-colors">Home</a>
-                <a href="#about" className="text-gray-700 hover:text-red-600 transition-colors">About</a>
-                <a href="#services" className="text-gray-700 hover:text-red-600 transition-colors">Services</a>
-                <a href="#therapist" className="text-gray-700 hover:text-red-600 transition-colors">Therapist</a>
-                <a href="#gallery" className="text-gray-700 hover:text-red-600 transition-colors">Gallery</a>
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-2">
+              {['Home', 'About', 'Services', 'Therapist', 'Gallery'].map((item, idx) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="relative px-5 py-2.5 text-gray-700 font-medium group overflow-hidden rounded-xl transition-all duration-300"
+                  style={{ animationDelay: `${idx * 100}ms` }}
+                >
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                    {item}
+                  </span>
+                  {/* Background color on hover */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-600 transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center rounded-xl"></span>
+                  {/* Glow effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-xl"></span>
+                  {/* Bottom line */}
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
+                </a>
+              ))}
+            </nav>
+
+            {/* Social Icons & CTA */}
+            <div className="hidden md:flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                {[
+                  { icon: '📱', label: 'Phone' },
+                  { icon: '📧', label: 'Email' },
+                  { icon: '📍', label: 'Location' }
+                ].map((social, idx) => (
+                  <button
+                    key={social.label}
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 hover:from-red-50 hover:to-red-100 transform hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-md hover:shadow-lg group"
+                    aria-label={social.label}
+                    style={{ animationDelay: `${idx * 100}ms` }}
+                  >
+                    <span className="text-lg group-hover:scale-125 transition-transform duration-300">
+                      {social.icon}
+                    </span>
+                  </button>
+                ))}
               </div>
-
-              {/* Social Icons & CTA */}
-              <div className="hidden md:flex items-center space-x-4">
-                <a href="#" className="text-gray-600 hover:text-red-600 transition-colors" aria-label="Facebook">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-                </a>
-                <a href="#" className="text-gray-600 hover:text-red-600 transition-colors" aria-label="Twitter">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
-                </a>
-                <a href="#" className="text-gray-600 hover:text-red-600 transition-colors" aria-label="Instagram">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                </a>
-                <a href="#" className="text-gray-600 hover:text-red-600 transition-colors" aria-label="YouTube">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-                </a>
-                <button className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors font-medium">
-                  Book Appointment
-                </button>
-              </div>
-
-              {/* Mobile Menu Button */}
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden text-gray-700 hover:text-red-600"
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              
+              <button className="relative px-6 py-2.5 font-semibold text-white overflow-hidden group rounded-full">
+                <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-600"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                <span className="relative flex items-center space-x-2 z-10">
+                  <span>Book Appointment</span>
+                  <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+                <span className="absolute inset-0 rounded-full ring-2 ring-red-500 ring-offset-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
             </div>
-          </nav>
 
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden bg-white border-t">
-              <div className="px-4 py-4 space-y-3">
-                <a href="#home" className="block text-gray-700 hover:text-red-600">Home</a>
-                <a href="#about" className="block text-gray-700 hover:text-red-600">About</a>
-                <a href="#services" className="block text-gray-700 hover:text-red-600">Services</a>
-                <a href="#therapist" className="block text-gray-700 hover:text-red-600">Therapist</a>
-                <a href="#gallery" className="block text-gray-700 hover:text-red-600">Gallery</a>
-                <button className="w-full bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors font-medium">
-                  Book Appointment
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 hover:from-red-50 hover:to-red-100 text-gray-700 hover:text-red-600 transition-all duration-300 shadow-md hover:shadow-lg"
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-6 h-6">
+                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isMenuOpen ? 'rotate-90 opacity-0' : 'rotate-0 opacity-100'}`}>
+                  <Menu className="w-6 h-6" />
+                </span>
+                <span className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isMenuOpen ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'}`}>
+                  <X className="w-6 h-6" />
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      <div 
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
+          isMenuOpen ? 'visible' : 'invisible'
+        }`}
+      >
+        {/* Backdrop */}
+        <div 
+          className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${
+            isMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+        
+        {/* Menu Panel */}
+        <div 
+          className={`absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform transition-all duration-500 ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex flex-col h-full">
+            {/* Menu Header */}
+            <div className="p-6 border-b border-gray-100 bg-gradient-to-br from-red-50 to-white">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="bg-gradient-to-br from-red-500 to-red-600 p-2 rounded-full">
+                    <Activity className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="font-bold text-gray-800">Menu</span>
+                </div>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-100 text-gray-700 hover:text-red-600 transition-all duration-300"
+                >
+                  <X className="w-6 h-6" />
                 </button>
               </div>
             </div>
-          )}
-        </header>
-
-        {/* Hero Section */}
-        <main className="pt-20 sm:pt-24">
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              {/* Left Content */}
-              <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-                <div className="inline-block">
-                  <span className="text-red-600 text-sm sm:text-base font-semibold tracking-wide uppercase animate-pulse">
-                    Welcome To
+            
+            {/* Menu Items */}
+            <nav className="flex-1 p-6 space-y-2 overflow-y-auto">
+              {['Home', 'About', 'Services', 'Therapist', 'Gallery'].map((item, idx) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="group flex items-center justify-between p-4 rounded-xl hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 transition-all duration-300 transform hover:translate-x-2"
+                  style={{ 
+                    animation: isMenuOpen ? `slideInRight 0.3s ease-out ${idx * 0.1}s both` : 'none'
+                  }}
+                >
+                  <span className="font-medium text-gray-700 group-hover:text-red-600 transition-colors duration-300">
+                    {item}
                   </span>
-                </div>
-                
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  Physiotherapy &<br />
-                  <span className="text-red-600">Chiropractor Clinic</span>
-                </h1>
-                
-                <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl">
-                  Expert care for your recovery and wellbeing. We provide personalized treatment plans using the latest techniques in physiotherapy and chiropractic care to help you achieve optimal health.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="group bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 transition-all duration-300 font-medium flex items-center justify-center hover:shadow-lg hover:scale-105">
-                    View Intro
-                    <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-                  </button>
-                  <button className="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full hover:bg-yellow-500 transition-all duration-300 font-medium hover:shadow-lg hover:scale-105">
-                    Know More
-                  </button>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 pt-8">
-                  <div className="text-center sm:text-left">
-                    <div className="text-2xl sm:text-3xl font-bold text-red-600">500+</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Patients Treated</div>
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <div className="text-2xl sm:text-3xl font-bold text-red-600">15+</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Years Experience</div>
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <div className="text-2xl sm:text-3xl font-bold text-red-600">98%</div>
-                    <div className="text-xs sm:text-sm text-gray-600">Success Rate</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Content - Card */}
-              <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -left-4 w-24 h-24 bg-yellow-300 rounded-3xl opacity-50 animate-pulse"></div>
-                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-red-300 rounded-3xl opacity-30 animate-pulse delay-150"></div>
-                
-                {/* Main Card */}
-                <div className="relative bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-500 rounded-3xl p-6 sm:p-8 shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                  {/* Inner Card */}
-                  <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-8 sm:p-12 min-h-[400px] flex flex-col items-center justify-center relative overflow-hidden">
-                    {/* Animated Background Pattern */}
-                    <div className="absolute inset-0 opacity-5">
-                      <div className="absolute top-0 left-0 w-full h-full" style={{
-                        backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
-                        backgroundSize: '20px 20px'
-                      }}></div>
-                    </div>
-                    
-                    {/* Icon */}
-                    <div className="relative mb-6 animate-bounce">
-                      <div className="bg-white rounded-full p-6 shadow-lg">
-                        <Activity className="text-red-600" size={48} />
-                      </div>
-                    </div>
-                    
-                    {/* Text */}
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-800 text-center">
-                      Professional Physiotherapist
-                    </h3>
-                    
-                    {/* Features */}
-                    <div className="mt-8 grid grid-cols-2 gap-4 w-full">
-                      <div className="bg-white/50 rounded-lg p-3 text-center hover:bg-white transition-colors">
-                        <Heart className="mx-auto mb-2 text-red-600" size={24} />
-                        <div className="text-xs font-medium text-gray-700">Caring</div>
-                      </div>
-                      <div className="bg-white/50 rounded-lg p-3 text-center hover:bg-white transition-colors">
-                        <Users className="mx-auto mb-2 text-red-600" size={24} />
-                        <div className="text-xs font-medium text-gray-700">Expert Team</div>
-                      </div>
-                      <div className="bg-white/50 rounded-lg p-3 text-center hover:bg-white transition-colors">
-                        <Award className="mx-auto mb-2 text-red-600" size={24} />
-                        <div className="text-xs font-medium text-gray-700">Certified</div>
-                      </div>
-                      <div className="bg-white/50 rounded-lg p-3 text-center hover:bg-white transition-colors">
-                        <Activity className="mx-auto mb-2 text-red-600" size={24} />
-                        <div className="text-xs font-medium text-gray-700">Advanced Tech</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Features Section */}
-          <section className="bg-white py-12 sm:py-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-red-600 transform group-hover:translate-x-1 transition-all duration-300" />
+                </a>
+              ))}
+            </nav>
+            
+            {/* Menu Footer */}
+            <div className="p-6 border-t border-gray-100 space-y-4 bg-gradient-to-br from-white to-red-50">
+              <div className="flex items-center justify-center space-x-3">
                 {[
-                  { icon: Activity, title: 'Expert Care', desc: 'Professional treatment' },
-                  { icon: Heart, title: 'Personalized Plans', desc: 'Tailored to you' },
-                  { icon: Users, title: 'Experienced Team', desc: 'Qualified therapists' },
-                  { icon: Award, title: 'Proven Results', desc: 'High success rate' }
-                ].map((feature, idx) => (
-                  <div 
-                    key={idx}
-                    className={`text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                    style={{ transitionDelay: `${idx * 100}ms` }}
+                  { icon: '📱', label: 'Phone' },
+                  { icon: '📧', label: 'Email' },
+                  { icon: '📍', label: 'Location' }
+                ].map((social, idx) => (
+                  <button
+                    key={social.label}
+                    className="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 hover:from-red-100 hover:to-red-200 transform hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-md hover:shadow-lg"
+                    aria-label={social.label}
                   >
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-                      <feature.icon className="text-red-600" size={32} />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                    <p className="text-gray-600 text-sm">{feature.desc}</p>
+                    <span className="text-xl">{social.icon}</span>
+                  </button>
+                ))}
+              </div>
+              <button 
+                className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span>Book Appointment</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
+
+      {/* Hero Section */}
+      <section className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 pt-24 pb-16 px-4">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className={`space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+              <div className="inline-block bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-semibold">
+                Welcome To
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-800 leading-tight">
+                Physiotherapy &<br />
+                <span className="text-red-600">Chiropractor</span> Clinic
+              </h1>
+              
+              <p className="text-gray-600 text-lg leading-relaxed">
+                Expert care for your recovery and wellbeing. We provide personalized treatment plans using the latest techniques in physiotherapy and chiropractic care to help you achieve optimal health.
+              </p>
+              
+              <div className="flex flex-wrap gap-4">
+                <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105">
+                  <span>View Intro</span>
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+                <button className="bg-white hover:bg-gray-50 text-gray-800 px-8 py-3 rounded-full font-semibold border-2 border-gray-200 transition-all duration-300 hover:border-red-600 hover:text-red-600">
+                  Know More
+                </button>
+              </div>
+              
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 pt-8">
+                {[
+                  { number: '500+', label: 'Patients Treated' },
+                  { number: '15+', label: 'Years Experience' },
+                  { number: '98%', label: 'Success Rate' }
+                ].map((stat, idx) => (
+                  <div key={idx} className="text-center">
+                    <div className="text-3xl font-bold text-red-600">{stat.number}</div>
+                    <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
-          </section>
-        </main>
 
-        {/* Floating Action Button */}
-        <button className="fixed bottom-8 right-8 bg-red-600 text-white p-4 rounded-full shadow-2xl hover:bg-red-700 transition-all duration-300 hover:scale-110 z-40 animate-bounce">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-        </button>
-      </div>
+            {/* Right Content - Card */}
+            <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-72 h-72 bg-red-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+              <div className="absolute bottom-0 left-0 w-72 h-72 bg-red-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
+              
+              {/* Main Card */}
+              <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-transform duration-500">
+                {/* Inner Card */}
+                <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl p-8 relative overflow-hidden">
+                  {/* Animated Background Pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, white 10px, white 20px)'
+                    }}></div>
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className="relative bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                    <Activity className="w-8 h-8 text-red-600" />
+                  </div>
+                  
+                  {/* Text */}
+                  <h3 className="relative text-white text-2xl font-bold mb-8">
+                    Professional<br />Physiotherapist
+                  </h3>
+                  
+                  {/* Features */}
+                  <div className="relative grid grid-cols-2 gap-4">
+                    {[
+                      { icon: Heart, label: 'Caring' },
+                      { icon: Users, label: 'Expert Team' },
+                      { icon: Award, label: 'Certified' },
+                      { icon: Activity, label: 'Advanced Tech' }
+                    ].map((feature, idx) => {
+                      const Icon = feature.icon;
+                      return (
+                        <div key={idx} className="bg-white/20 backdrop-blur-sm rounded-xl p-4 flex items-center space-x-3 hover:bg-white/30 transition-all duration-300">
+                          <Icon className="w-5 h-5 text-white" />
+                          <span className="text-white text-sm font-medium">{feature.label}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { icon: Activity, title: 'Expert Care', desc: 'Professional treatment' },
+              { icon: Heart, title: 'Personalized Plans', desc: 'Tailored to you' },
+              { icon: Users, title: 'Experienced Team', desc: 'Qualified therapists' },
+              { icon: Award, title: 'Proven Results', desc: 'High success rate' }
+            ].map((feature, idx) => {
+              const Icon = feature.icon;
+              return (
+                <div 
+                  key={idx} 
+                  className="text-center p-6 rounded-2xl hover:bg-red-50 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl group"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4 group-hover:bg-red-600 transition-colors duration-300">
+                    <Icon className="w-8 h-8 text-red-600 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Floating Action Button */}
+      <button className="fixed bottom-8 right-8 bg-gradient-to-r from-red-500 to-red-600 text-white p-4 rounded-full shadow-2xl hover:shadow-red-500/50 transition-all duration-300 transform hover:scale-110 z-50 group">
+        <Activity className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
+      </button>
     </>
   );
 };
