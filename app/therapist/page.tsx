@@ -1,283 +1,326 @@
 'use client';
-import Link from 'next/link';
 import { FaStethoscope, FaUserMd, FaAward, FaGraduationCap, FaCheckCircle, FaCalendarAlt } from 'react-icons/fa';
 import { MdAccessTimeFilled, MdHealthAndSafety } from 'react-icons/md';
 
-
-
 export default function TherapistsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      {/* Hero Section */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-teal-50 opacity-90"></div>
-        <div className="absolute top-10 right-10 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-        <div className="absolute bottom-10 left-10 w-72 h-72 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
+    <>
+      {/* SEO Meta Tags */}
+      <head>
+        <title>Expert Physiotherapists & Chiropractors | SKM Physiotherapy Team</title>
+        <meta name="description" content="Meet our team of licensed physiotherapists and chiropractors. 50+ years combined experience, specialized certifications, and personalized care for your recovery journey." />
+        <meta name="keywords" content="physiotherapist, chiropractor, sports therapy, rehabilitation specialist, certified therapist, physical therapy team" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-full mb-6">
-              <FaUserMd className="text-3xl text-blue-600" />
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
-              Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500">Expert Therapists</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Our team of licensed physiotherapists and chiropractors bring years of specialized experience, 
-              advanced training, and a compassionate approach to every patient&apos;s journey to recovery.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link 
-                href="#therapists" 
-                className="group px-8 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2"
-              >
-                <FaStethoscope className="group-hover:rotate-12 transition-transform" />
-                View Our Team
-              </Link>
-              <Link 
-                href="/contact" 
-                className="px-8 py-3 bg-white border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 shadow-md flex items-center gap-2"
-              >
-                <FaCalendarAlt />
-                Book Consultation
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+        {/* Open Graph */}
+        <meta property="og:title" content="Meet Our Expert Therapists - SKM Physiotherapy" />
+        <meta property="og:description" content="Licensed physiotherapists and chiropractors with specialized training and compassionate care" />
+        <meta property="og:type" content="website" />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalBusiness",
+            "name": "SKM Physiotherapy",
+            "employee": therapists.map(t => ({
+              "@type": "Person",
+              "name": t.name,
+              "jobTitle": t.specialty,
+              "description": t.description
+            }))
+          })}
+        </script>
+      </head>
 
-      {/* Stats Section */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 mb-4">
-                    {stat.icon}
-                  </div>
-                  <div className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{stat.value}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Therapists Grid */}
-      <section id="therapists" className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-              Our <span className="text-blue-600">Specialized</span> Professionals
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Each therapist brings unique expertise and specialized training to provide comprehensive care for your specific needs.
-            </p>
-          </div>
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+        {/* Hero Section - Enhanced Responsive */}
+        <section 
+          className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden"
+          itemScope 
+          itemType="https://schema.org/MedicalBusiness"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-rose-50 via-white to-amber-50 opacity-90"></div>
+          <div className="absolute top-5 sm:top-10 right-5 sm:right-10 w-40 h-40 sm:w-64 sm:h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+          <div className="absolute bottom-5 sm:bottom-10 left-5 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {therapists.map((therapist, index) => (
-              <div 
-                key={index}
-                className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100"
-              >
-                {/* Therapist Image/Profile */}
-                <div className="relative h-72 bg-gradient-to-br from-blue-50 to-teal-50 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative">
-                      <div className="w-48 h-48 rounded-full bg-gradient-to-r from-blue-200 to-teal-200 flex items-center justify-center text-6xl font-bold text-blue-800 mb-4 shadow-inner">
-                        {therapist.initials}
-                      </div>
-                      <div className="absolute -bottom-2 -right-2 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">
-                        {therapist.role}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/20 to-transparent h-20"></div>
-                </div>
-                
-                {/* Therapist Details */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{therapist.name}</h3>
-                  <p className="text-blue-600 font-semibold mb-4 flex items-center gap-2">
-                    <FaGraduationCap />
-                    {therapist.specialty}
-                  </p>
-                  <p className="text-gray-600 mb-6">{therapist.description}</p>
-                  
-                  {/* Qualifications */}
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                      <FaAward className="text-teal-500" />
-                      Qualifications
-                    </h4>
-                    <ul className="space-y-2">
-                      {therapist.qualifications.map((qual, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
-                          <span className="text-gray-600 text-sm">{qual}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Specialties */}
-                  <div>
-                    <h4 className="font-semibold text-gray-700 mb-3">Areas of Expertise</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {therapist.expertise.map((area, idx) => (
-                        <span 
-                          key={idx} 
-                          className="px-3 py-1 bg-gradient-to-r from-blue-50 to-teal-50 text-blue-700 text-sm rounded-full border border-blue-100"
-                        >
-                          {area}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Action Button */}
-                <div className="px-6 pb-6">
-                  <Link 
-                    href={`/contact?therapist=${therapist.id}`}
-                    className="block w-full text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform group-hover:scale-[1.02]"
-                  >
-                    Book with {therapist.name.split(' ')[0]}
-                  </Link>
-                </div>
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center justify-center p-2 sm:p-3 bg-rose-100 rounded-full mb-4 sm:mb-6 animate-bounce">
+                <FaUserMd className="text-2xl sm:text-3xl text-rose-600" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Our Therapists */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-blue-50 to-teal-50">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                Why <span className="text-blue-600">Choose</span> Our Therapists
-              </h2>
-              <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-                Our team stands out through continuous education, compassionate care, and evidence-based practices.
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight px-2">
+                Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-amber-500">Expert Therapists</span>
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed px-4" itemProp="description">
+                Our team of licensed physiotherapists and chiropractors bring years of specialized experience, 
+                advanced training, and a compassionate approach to every patient&apos;s journey to recovery.
               </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <div 
-                  key={index}
-                  className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6 px-4">
+                <a 
+                  href="#therapists" 
+                  className="group px-6 sm:px-8 py-3 sm:py-3.5 bg-gradient-to-r from-rose-600 to-amber-500 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2"
+                  aria-label="View our team of therapists"
                 >
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-r from-blue-100 to-teal-100 text-blue-600 mb-6">
-                    {feature.icon}
+                  <FaStethoscope className="group-hover:rotate-12 transition-transform text-lg sm:text-base" />
+                  <span className="text-sm sm:text-base">View Our Team</span>
+                </a>
+                <a 
+                  href="/contact" 
+                  className="px-6 sm:px-8 py-3 sm:py-3.5 bg-white border-2 border-rose-600 text-rose-600 font-semibold rounded-lg hover:bg-rose-50 transition-all duration-300 transform hover:-translate-y-1 shadow-md flex items-center justify-center gap-2"
+                  aria-label="Book a consultation"
+                >
+                  <FaCalendarAlt className="text-lg sm:text-base" />
+                  <span className="text-sm sm:text-base">Book Consultation</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats Section - Enhanced Mobile */}
+        <section className="py-8 sm:py-12 md:py-16 px-4">
+          <div className="container mx-auto px-2 sm:px-4 md:px-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+              {stats.map((stat, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
+                >
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-rose-100 to-amber-100 mb-2 sm:mb-3 md:mb-4">
+                      <div className="text-xl sm:text-2xl md:text-3xl">
+                        {stat.icon}
+                      </div>
+                    </div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-1 sm:mb-2">{stat.value}</div>
+                    <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium leading-tight">{stat.label}</div>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-4">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Treatment Approach */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-                Our <span className="text-blue-600">Collaborative</span> Treatment Approach
+        {/* Therapists Grid - Enhanced Cards */}
+        <section id="therapists" className="py-12 sm:py-16 md:py-20 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16 px-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
+                Our <span className="text-rose-600">Specialized</span> Professionals
               </h2>
-              <p className="text-gray-600 text-lg mb-8">
-                Our therapists work together as a multidisciplinary team, combining physiotherapy and chiropractic expertise to develop comprehensive treatment plans tailored to your unique needs.
+              <p className="text-sm sm:text-base md:text-lg text-gray-600">
+                Each therapist brings unique expertise and specialized training to provide comprehensive care for your specific needs.
               </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {therapists.map((therapist, index) => (
+                <article 
+                  key={index}
+                  className="group bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100"
+                  itemScope
+                  itemType="https://schema.org/Person"
+                >
+                  {/* Therapist Image/Profile */}
+                  <div className="relative h-56 sm:h-64 md:h-72 bg-gradient-to-br from-rose-50 to-amber-50 overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative">
+                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-r from-rose-200 to-amber-200 flex items-center justify-center text-4xl sm:text-5xl md:text-6xl font-bold text-rose-800 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                          {therapist.initials}
+                        </div>
+                        <div className="absolute -bottom-2 -right-2 bg-rose-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg">
+                          {therapist.role}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/20 to-transparent h-16 sm:h-20"></div>
+                  </div>
+                  
+                  {/* Therapist Details */}
+                  <div className="p-4 sm:p-5 md:p-6">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2" itemProp="name">{therapist.name}</h3>
+                    <p className="text-rose-600 font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base" itemProp="jobTitle">
+                      <FaGraduationCap />
+                      {therapist.specialty}
+                    </p>
+                    <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed" itemProp="description">{therapist.description}</p>
+                    
+                    {/* Qualifications */}
+                    <div className="mb-4 sm:mb-6">
+                      <h4 className="font-semibold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                        <FaAward className="text-amber-500 flex-shrink-0" />
+                        Qualifications
+                      </h4>
+                      <ul className="space-y-1.5 sm:space-y-2">
+                        {therapist.qualifications.map((qual, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <FaCheckCircle className="text-green-500 mt-0.5 sm:mt-1 flex-shrink-0 text-sm" />
+                            <span className="text-gray-600 text-xs sm:text-sm leading-snug">{qual}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    {/* Specialties */}
+                    <div>
+                      <h4 className="font-semibold text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">Areas of Expertise</h4>
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                        {therapist.expertise.map((area, idx) => (
+                          <span 
+                            key={idx} 
+                            className="px-2 sm:px-3 py-1 bg-gradient-to-r from-rose-50 to-amber-50 text-rose-700 text-xs sm:text-sm rounded-full border border-rose-100"
+                          >
+                            {area}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Action Button */}
+                  <div className="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6">
+                    <a 
+                      href={`/contact?therapist=${therapist.id}`}
+                      className="block w-full text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-rose-600 to-amber-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform group-hover:scale-[1.02] text-sm sm:text-base"
+                      aria-label={`Book appointment with ${therapist.name}`}
+                    >
+                      Book with {therapist.name.split(' ')[0]}
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Our Therapists */}
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-r from-rose-50 to-amber-50">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-10 sm:mb-12 md:mb-16 px-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
+                  Why <span className="text-rose-600">Choose</span> Our Therapists
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
+                  Our team stands out through continuous education, compassionate care, and evidence-based practices.
+                </p>
+              </div>
               
-              <div className="space-y-6">
-                {approaches.map((approach, index) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+                {features.map((feature, index) => (
                   <div 
                     key={index}
-                    className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-white to-blue-50 hover:shadow-lg transition-all duration-300"
+                    className="bg-white p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                   >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
-                      {approach.step}
+                    <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-r from-rose-100 to-amber-100 text-rose-600 mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                      <div className="text-xl sm:text-2xl">
+                        {feature.icon}
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800 mb-2">{approach.title}</h4>
-                      <p className="text-gray-600">{approach.description}</p>
-                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3 md:mb-4">{feature.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{feature.description}</p>
                   </div>
                 ))}
               </div>
             </div>
-            
-            <div className="relative">
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-500 opacity-10"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <MdHealthAndSafety className="text-9xl text-blue-600 opacity-20 mx-auto mb-8" />
-                    <h3 className="text-3xl font-bold text-gray-800 mb-4">Team-Based Care</h3>
-                    <p className="text-gray-700 text-lg">
-                      Regular case reviews and collaborative planning ensure you receive the most effective treatment from multiple perspectives.
-                    </p>
+          </div>
+        </section>
+
+        {/* Treatment Approach - Responsive Layout */}
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+              <div className="order-2 lg:order-1">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 md:mb-8">
+                  Our <span className="text-rose-600">Collaborative</span> Treatment Approach
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+                  Our therapists work together as a multidisciplinary team, combining physiotherapy and chiropractic expertise to develop comprehensive treatment plans tailored to your unique needs.
+                </p>
+                
+                <div className="space-y-4 sm:space-y-6">
+                  {approaches.map((approach, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-r from-white to-rose-50 hover:shadow-lg transition-all duration-300"
+                    >
+                      <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 font-bold text-sm sm:text-base">
+                        {approach.step}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-800 mb-1 sm:mb-2 text-sm sm:text-base">{approach.title}</h4>
+                        <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">{approach.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="relative order-1 lg:order-2">
+                <div className="relative h-64 sm:h-80 md:h-96 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-rose-600 to-amber-500 opacity-10"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center p-4 sm:p-6 md:p-8">
+                      <MdHealthAndSafety className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-rose-600 opacity-20 mx-auto mb-4 sm:mb-6 md:mb-8" />
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2 sm:mb-3 md:mb-4">Team-Based Care</h3>
+                      <p className="text-sm sm:text-base md:text-lg text-gray-700 px-4">
+                        Regular case reviews and collaborative planning ensure you receive the most effective treatment from multiple perspectives.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-teal-500 text-white">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              Ready to Start Your Recovery Journey?
-            </h2>
-            <p className="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
-              Schedule a consultation with one of our expert therapists and take the first step toward optimal health and wellbeing.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Link 
-                href="/contact" 
-                className="group px-10 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3"
-              >
-                <FaCalendarAlt className="group-hover:scale-110 transition-transform" />
-                Book Your Appointment
-              </Link>
-              <Link 
-                href="/contact" 
-                className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-3"
-              >
-                <MdAccessTimeFilled className="text-xl" />
-                Emergency Consultation
-              </Link>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-white/20">
-              <p className="text-lg mb-6">Not sure which therapist is right for you?</p>
-              <Link 
-                href="/contact" 
-                className="inline-flex items-center gap-2 text-white/90 hover:text-white font-medium underline decoration-2 underline-offset-4"
-              >
-                Let us match you with the perfect specialist
-                <span className="text-xl">→</span>
-              </Link>
+        {/* CTA Section - Mobile Optimized */}
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-r from-rose-600 to-amber-500 text-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8 px-4">
+                Ready to Start Your Recovery Journey?
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 md:mb-10 opacity-90 max-w-2xl mx-auto px-4 leading-relaxed">
+                Schedule a consultation with one of our expert therapists and take the first step toward optimal health and wellbeing.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6 px-4">
+                <a 
+                  href="/contact" 
+                  className="group px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-white text-rose-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
+                  aria-label="Book your appointment"
+                >
+                  <FaCalendarAlt className="group-hover:scale-110 transition-transform" />
+                  Book Your Appointment
+                </a>
+                <a 
+                  href="/contact" 
+                  className="px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
+                  aria-label="Emergency consultation"
+                >
+                  <MdAccessTimeFilled className="text-lg sm:text-xl" />
+                  Emergency Consultation
+                </a>
+              </div>
+              
+              <div className="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-white/20">
+                <p className="text-base sm:text-lg mb-4 sm:mb-6 px-4">Not sure which therapist is right for you?</p>
+                <a 
+                  href="/contact" 
+                  className="inline-flex items-center gap-2 text-white/90 hover:text-white font-medium underline decoration-2 underline-offset-4 transition-colors text-sm sm:text-base"
+                  aria-label="Get matched with a specialist"
+                >
+                  Let us match you with the perfect specialist
+                  <span className="text-lg sm:text-xl">→</span>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
 
@@ -286,22 +329,22 @@ const stats = [
   {
     value: "50+",
     label: "Years Combined Experience",
-    icon: <FaAward className="text-3xl text-blue-600" />
+    icon: <FaAward className="text-rose-600" />
   },
   {
     value: "5000+",
     label: "Patients Treated",
-    icon: <FaUserMd className="text-3xl text-teal-600" />
+    icon: <FaUserMd className="text-amber-600" />
   },
   {
     value: "15+",
     label: "Specialized Certifications",
-    icon: <FaGraduationCap className="text-3xl text-blue-600" />
+    icon: <FaGraduationCap className="text-rose-600" />
   },
   {
     value: "24/7",
     label: "Emergency Support",
-    icon: <MdHealthAndSafety className="text-3xl text-teal-600" />
+    icon: <MdHealthAndSafety className="text-amber-600" />
   }
 ];
 
@@ -357,32 +400,32 @@ const therapists = [
 // Features Data
 const features = [
   {
-    icon: <FaGraduationCap className="text-2xl" />,
+    icon: <FaGraduationCap />,
     title: "Continuous Education",
     description: "Our therapists complete 50+ hours of continuing education annually to stay current with the latest research and techniques."
   },
   {
-    icon: <FaUserMd className="text-2xl" />,
+    icon: <FaUserMd />,
     title: "Personalized Care",
     description: "One-on-one attention with treatment plans customized to your specific needs, goals, and lifestyle."
   },
   {
-    icon: <MdHealthAndSafety className="text-2xl" />,
+    icon: <MdHealthAndSafety />,
     title: "Evidence-Based Practice",
     description: "All treatments are based on the latest scientific research and proven clinical outcomes."
   },
   {
-    icon: <FaStethoscope className="text-2xl" />,
+    icon: <FaStethoscope />,
     title: "Advanced Technology",
     description: "Utilizing state-of-the-art equipment and diagnostic tools for accurate assessment and effective treatment."
   },
   {
-    icon: <FaAward className="text-2xl" />,
+    icon: <FaAward />,
     title: "Multiple Specializations",
     description: "Team members hold specialized certifications in various areas of physiotherapy and chiropractic care."
   },
   {
-    icon: <FaCheckCircle className="text-2xl" />,
+    icon: <FaCheckCircle />,
     title: "Proven Results",
     description: "Track record of successful outcomes with measurable improvements in patient function and pain reduction."
   }
