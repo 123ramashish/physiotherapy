@@ -87,7 +87,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Team Section */}
-      <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
+      {/* <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
@@ -135,7 +135,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Our Approach Section */}
       <section className="py-16 md:py-20 lg:py-24">
@@ -191,7 +191,7 @@ export default function AboutPage() {
               Book Your First Session
             </Link>
             <Link 
-              href="/services" 
+              href="/service" 
               className="px-8 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
               aria-label="Learn more about our services"
             >

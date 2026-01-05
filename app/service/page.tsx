@@ -134,11 +134,11 @@ const ServicesPage = () => {
   ];
 
   const handleBookAppointment = () => {
-    router.push('/contact?service=consultation');
+    router.push('/contact');
   };
 
   const handleServiceClick = (serviceTitle: string) => {
-    router.push(`/contact?service=${encodeURIComponent(serviceTitle)}`);
+    router.push(`/contact`);
   };
 
   return (
@@ -212,9 +212,9 @@ const ServicesPage = () => {
             {/* Stats Bar */}
             <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 max-w-4xl mx-auto px-4">
               {[
-                { number: '6+', label: 'Specialized Services', icon: Award },
-                { number: '5000+', label: 'Patients Treated', icon: Users },
-                { number: '15+', label: 'Years Experience', icon: Calendar },
+                { number: '20+', label: 'Specialized Services', icon: Award },
+                { number: '1000+', label: 'Patients Treated', icon: Users },
+                { number: '3+', label: 'Years Experience', icon: Calendar },
                 { number: '98%', label: 'Patient Satisfaction', icon: Star },
                 { number: '24/7', label: 'Support', icon: Shield }
               ].map((stat, idx) => (

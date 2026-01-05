@@ -15,7 +15,7 @@ import TestimonialsPage from './testimonials/page';
 import ContactPage from './contact/page';
 
 const Home = () => {
-const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [animatedStats, setAnimatedStats] = useState([0, 0, 0, 0]);
@@ -55,8 +55,8 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
   ];
 
   const stats = [
-    { number: 15, suffix: '+', label: 'Years Experience', duration: 2000 },
-    { number: 5000, suffix: '+', label: 'Happy Patients', duration: 1500 },
+    { number: 3, suffix: '+', label: 'Years Experience', duration: 2000 },
+    { number: 1000, suffix: '+', label: 'Happy Patients', duration: 1500 },
     { number: 98, suffix: '%', label: 'Success Rate', duration: 1800 },
     { number: 24, suffix: '/7', label: 'Support Available', duration: 1000 },
   ];
@@ -180,13 +180,13 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
   }; // Scroll effects and active nav detection
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      
+
       // Update active nav based on scroll position
       const scrollPosition = window.scrollY + 100;
-      
+
       Object.keys(sectionRefs.current).forEach(key => {
         const section = sectionRefs.current[key];
         if (section) {
@@ -197,7 +197,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
         }
       });
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -283,9 +283,8 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
       <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 overflow-x-hidden">
         {/* Navigation */}
         <nav
-          className={`fixed w-full z-50 transition-all duration-500 ${
-            scrolled ? 'bg-white/95 backdrop-blur-lg shadow-2xl py-3' : 'bg-transparent py-6'
-          }`}
+          className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-lg shadow-2xl py-3' : 'bg-transparent py-6'
+            }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center">
@@ -297,9 +296,8 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                   </div>
                 </div>
                 <span
-                  className={`text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent transition-all duration-300 ${
-                    scrolled ? 'text-xl' : 'text-2xl'
-                  }`}
+                  className={`text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'
+                    }`}
                 >
                   skm physiotherapy
                 </span>
@@ -310,19 +308,19 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative px-5 py-2.5 font-medium group overflow-hidden rounded-xl transition-all duration-300 ${
-                      activeNav === item.id ? 'text-white' : 'text-gray-700 hover:text-white'
-                    }`}
+                    className={`relative px-5 py-2.5 font-medium group overflow-hidden rounded-xl transition-all duration-300 ${activeNav === item.id ? 'text-white' : 'text-gray-700 hover:text-white'
+                      }`}
                   >
                     <span className="relative z-10 transition-colors duration-300 flex items-center">{item.label}</span>
                     <span
-                      className={`absolute inset-0 bg-gradient-to-r from-rose-600 to-amber-500 transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center rounded-xl ${
-                        activeNav === item.id ? 'scale-100' : ''
-                      }`}
+                      className={`absolute inset-0 bg-gradient-to-r from-rose-600 to-amber-500 transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center rounded-xl ${activeNav === item.id ? 'scale-100' : ''
+                        }`}
                     />
                   </button>
                 ))}
-                <button className="ml-4 bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 text-white px-6 py-2.5 rounded-full hover:shadow-xl shadow-lg shadow-rose-500/30 transition-all duration-300 flex items-center gap-2">
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="ml-4 bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 text-white px-6 py-2.5 rounded-full hover:shadow-xl shadow-lg shadow-rose-500/30 transition-all duration-300 flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   Book Now
                 </button>
@@ -340,11 +338,10 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`relative px-5 py-3 font-medium group overflow-hidden rounded-xl transition-all duration-300 text-left ${
-                        activeNav === item.id
-                          ? 'text-white bg-gradient-to-r from-rose-600 to-amber-500'
-                          : 'text-gray-700'
-                      }`}
+                      className={`relative px-5 py-3 font-medium group overflow-hidden rounded-xl transition-all duration-300 text-left ${activeNav === item.id
+                        ? 'text-white bg-gradient-to-r from-rose-600 to-amber-500'
+                        : 'text-gray-700'
+                        }`}
                     >
                       {item.label}
                     </button>
@@ -444,11 +441,10 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                         title={content.heading}
                       >
                         <div
-                          className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${
-                            idx === autoScrollIndex
-                              ? 'w-8 sm:w-12 bg-gradient-to-r from-rose-600 to-amber-500'
-                              : 'w-1.5 sm:w-2 bg-gray-300 group-hover:bg-gray-400 group-focus:bg-gray-500'
-                          }`}
+                          className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${idx === autoScrollIndex
+                            ? 'w-8 sm:w-12 bg-gradient-to-r from-rose-600 to-amber-500'
+                            : 'w-1.5 sm:w-2 bg-gray-300 group-hover:bg-gray-400 group-focus:bg-gray-500'
+                            }`}
                         >
                           {idx === autoScrollIndex && !isPaused && (
                             <div
@@ -466,7 +462,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                   </nav>
 
                   {/* Arrows */}
-                  <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none px-1 sm:px-2">
+                  {/* <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none px-1 sm:px-2">
                     <button
                       onClick={() => {
                         setAutoScrollIndex((prev) => (prev - 1 + scrollableContent.length) % scrollableContent.length);
@@ -489,7 +485,7 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                     >
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Stats Preview */}
@@ -510,11 +506,12 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-4 pt-4">
-                  <button className="group bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 text-white px-8 py-4 rounded-xl hover:shadow-2xl shadow-lg shadow-rose-500/30 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                  <button onClick={() => scrollToSection('about')}
+                    className="group bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 text-white px-8 py-4 rounded-xl hover:shadow-2xl shadow-lg shadow-rose-500/30 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                     <span className="font-medium">View Intro</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </button>
-                  <button className="bg-gradient-to-r from-amber-300 via-amber-200 to-amber-100 text-gray-800 px-8 py-4 rounded-xl hover:shadow-xl border border-amber-200 transform hover:scale-105 transition-all duration-300 font-medium">
+                  <button onClick={() => scrollToSection('about')} className="bg-gradient-to-r from-amber-300 via-amber-200 to-amber-100 text-gray-800 px-8 py-4 rounded-xl hover:shadow-xl border border-amber-200 transform hover:scale-105 transition-all duration-300 font-medium">
                     Know More
                   </button>
                 </div>
@@ -618,29 +615,29 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
             </div>
           </div>
         </section>
- {/* Imported Pages */}
-     
-      <div ref={el => { sectionRefs.current.services = el; }} id="services">
-        <ServicesPage />
-      </div>
-      <div ref={el => { sectionRefs.current.about = el; }} id="about">
-        <AboutPage />
-      </div>
-      {/* <div ref={el => { sectionRefs.current.blog = el; }} id="blog">
+        {/* Imported Pages */}
+
+        <div ref={el => { sectionRefs.current.services = el; }} id="services">
+          <ServicesPage />
+        </div>
+        <div ref={el => { sectionRefs.current.about = el; }} id="about">
+          <AboutPage />
+        </div>
+        {/* <div ref={el => { sectionRefs.current.blog = el; }} id="blog">
         <BlogPage />
       </div>
       <div ref={el => { sectionRefs.current.gallery = el; }} id="gallery">
         <GalleryPage />
       </div> */}
-      <div ref={el => { sectionRefs.current.therapists = el; }} id="therapists">
-        <TherapistsPage />
-      </div>
-      <div ref={el => { sectionRefs.current.testimonials = el; }} id="testimonials">
-        <TestimonialsPage />
-      </div>
-      <div ref={el => { sectionRefs.current.contact = el; }} id="contact">
-        <ContactPage />
-      </div>
+        <div ref={el => { sectionRefs.current.therapists = el; }} id="therapists">
+          <TherapistsPage />
+        </div>
+        <div ref={el => { sectionRefs.current.testimonials = el; }} id="testimonials">
+          <TestimonialsPage />
+        </div>
+        <div ref={el => { sectionRefs.current.contact = el; }} id="contact">
+          <ContactPage />
+        </div>
         <button className="fixed bottom-8 right-8 bg-gradient-to-r from-rose-600 to-amber-500 text-white p-4 rounded-full shadow-2xl shadow-rose-500/50 z-40 flex items-center justify-center hover:scale-110 transition-transform duration-300">
           <MessageSquare className="w-6 h-6" />
         </button>

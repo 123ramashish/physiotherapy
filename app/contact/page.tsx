@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
+import {
+  Phone,
+  Mail,
+  MapPin,
   Clock,
   Send,
   User,
@@ -24,7 +24,8 @@ import {
   ExternalLink,
   ChevronRight,
   AlertCircle,
-  Loader2
+  Loader2,
+  Navigation
 } from 'lucide-react';
 
 const ContactPage = () => {
@@ -45,7 +46,7 @@ const ContactPage = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     // Add structured data for SEO
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -78,31 +79,31 @@ const ContactPage = () => {
 
   const validateForm = () => {
     const newErrors: any = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
     } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[-\s()]/g, ''))) {
       newErrors.phone = 'Please enter a valid phone number';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -124,13 +125,13 @@ const ContactPage = () => {
   const handlePhoneChange = (e: any) => {
     const value = e.target.value.replace(/\D/g, '');
     let formattedValue = value;
-    
+
     if (value.length > 3 && value.length <= 6) {
-      formattedValue = `(${value.slice(0,3)}) ${value.slice(3)}`;
+      formattedValue = `(${value.slice(0, 3)}) ${value.slice(3)}`;
     } else if (value.length > 6) {
-      formattedValue = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+      formattedValue = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
     }
-    
+
     setFormData(prev => ({
       ...prev,
       phone: formattedValue
@@ -139,10 +140,10 @@ const ContactPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       setIsSubmitting(true);
-      
+
       try {
         // In a real application, replace this with your API endpoint
         const response = await fetch('/api/contact', {
@@ -173,7 +174,7 @@ const ContactPage = () => {
           }
 
           setIsSubmitted(true);
-          
+
           // Reset form
           setTimeout(() => {
             setFormData({
@@ -185,7 +186,7 @@ const ContactPage = () => {
               message: ''
             });
             setIsSubmitted(false);
-            
+
             // Scroll to success message
             formRef.current?.scrollIntoView({ behavior: 'smooth' });
           }, 5000);
@@ -205,9 +206,9 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: 'Phone Support',
-      detail: '+1 (555) 123-4567',
+      detail: '+91 7982799147',
       subtitle: 'Call us directly',
-      link: 'tel:+15551234567',
+      link: 'tel:+917982799147',
       color: 'from-blue-500 to-cyan-500',
       bgColor: 'bg-gradient-to-br from-blue-50 to-cyan-50',
       action: 'Call Now'
@@ -215,9 +216,9 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      detail: 'info@skmphysiotherapy.com',
+      detail: 'skmphysiotherapy@gmail.com',
       subtitle: 'We reply within 24 hours',
-      link: 'mailto:info@skmphysiotherapy.com',
+      link: 'mailto:skmphysiotherapy@gmail.com',
       color: 'from-red-500 to-pink-600',
       bgColor: 'bg-gradient-to-br from-red-50 to-pink-50',
       action: 'Send Email'
@@ -227,7 +228,7 @@ const ContactPage = () => {
       title: 'Visit Clinic',
       detail: '123 Health Street, Medical City',
       subtitle: 'Get directions',
-      link: 'https://maps.google.com/?q=123+Health+Street+Medical+City',
+      link: 'https://maps.app.goo.gl/Us4jVhy8foKxxawE7',
       color: 'from-green-500 to-emerald-600',
       bgColor: 'bg-gradient-to-br from-green-50 to-emerald-50',
       action: 'View Map'
@@ -236,6 +237,7 @@ const ContactPage = () => {
       icon: Clock,
       title: 'Working Hours',
       detail: 'Mon-Sat: 9AM - 8PM',
+      href: '#appointment-form',
       subtitle: 'Sunday: Emergency Only',
       link: null,
       color: 'from-purple-500 to-violet-600',
@@ -249,37 +251,28 @@ const ContactPage = () => {
       icon: Facebook,
       name: 'Facebook',
       handle: '@skmphysiotherapy',
-      link: 'https://facebook.com/skmphysiotherapy',
+      link: 'https://www.facebook.com/share/17MJCfKqw4/',
       color: 'hover:bg-blue-600',
       iconColor: 'text-blue-600',
-      followers: '2.5K'
+      // followers: '2.5K'
     },
     {
       icon: Instagram,
       name: 'Instagram',
       handle: '@skmphysio',
-      link: 'https://instagram.com/skmphysio',
+      link: 'https://www.instagram.com/skmphysiotherapy?igsh=MW5yYmd2aTFxOGM1Yg==',
       color: 'hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-600 hover:to-orange-500',
       iconColor: 'text-pink-600',
-      followers: '3.1K'
+      // followers: '3.1K'
     },
     {
       icon: Youtube,
       name: 'YouTube',
       handle: 'SKM Physiotherapy',
-      link: 'https://youtube.com/c/skmphysiotherapy',
+      link: 'https://youtube.com/@skmphysiotherapy?si=qxyrOFO23Xm1YBl9',
       color: 'hover:bg-red-600',
       iconColor: 'text-red-600',
-      followers: '1.8K'
-    },
-    {
-      icon: Twitter,
-      name: 'Twitter',
-      handle: '@skmphysio',
-      link: 'https://twitter.com/skmphysio',
-      color: 'hover:bg-blue-400',
-      iconColor: 'text-blue-400',
-      followers: '1.2K'
+      // followers: '1.8K'
     }
   ];
 
@@ -306,7 +299,7 @@ const ContactPage = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://skmphysiotherapy.com/contact" />
         <link rel="canonical" href="https://skmphysiotherapy.com/contact" />
-        
+
         {/* Breadcrumb Schema */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -340,7 +333,7 @@ const ContactPage = () => {
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="mb-8" aria-label="Breadcrumb">
+            {/* <nav className="mb-8" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2 text-sm text-gray-600">
                 <li>
                   <a href="/" className="hover:text-red-600 transition-colors">Home</a>
@@ -350,7 +343,7 @@ const ContactPage = () => {
                   <span className="ml-2 font-medium text-gray-900">Contact</span>
                 </li>
               </ol>
-            </nav>
+            </nav> */}
 
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 md:px-5 md:py-2.5 rounded-full shadow-lg mb-4 md:mb-6 animate-bounce">
@@ -363,20 +356,20 @@ const ContactPage = () => {
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-                Reach out to our team of certified physiotherapists for personalized care. 
+                Reach out to our team of certified physiotherapists for personalized care.
                 Book your appointment today and take the first step towards recovery.
               </p>
 
               <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                <a 
+                <a
                   href="tel:+15551234567"
                   className="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-3 md:px-6 md:py-3.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
-                  aria-label="Call us at (555) 123-4567"
+                  aria-label="Call us at 7982799147"
                 >
                   <Phone className="w-4 h-4 md:w-5 md:h-5" />
-                  Call Now: (555) 123-4567
+                  Call Now: 7982799147
                 </a>
-                <a 
+                <a
                   href="#appointment-form"
                   className="inline-flex items-center gap-2 bg-white text-gray-900 px-5 py-3 md:px-6 md:py-3.5 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-gray-200 text-sm md:text-base"
                   aria-label="Book appointment online"
@@ -396,9 +389,8 @@ const ContactPage = () => {
               {contactInfo.map((info, idx) => (
                 <div
                   key={idx}
-                  className={`group ${info.bgColor} rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 md:hover:-translate-y-2 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
+                  className={`group ${info.bgColor} rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 md:hover:-translate-y-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}
                   style={{ transitionDelay: `${idx * 100}ms` }}
                 >
                   <div className="flex items-start gap-4">
@@ -409,7 +401,7 @@ const ContactPage = () => {
                       <h3 className="text-sm md:text-lg font-bold text-gray-900 mb-1 truncate">{info.title}</h3>
                       <p className="text-xs md:text-sm text-gray-600 mb-1 truncate">{info.subtitle}</p>
                       {info.link ? (
-                        <a 
+                        <a
                           href={info.link}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -440,7 +432,7 @@ const ContactPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Form */}
-              <div 
+              <div
                 ref={formRef}
                 className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
                 id="appointment-form"
@@ -484,7 +476,7 @@ const ContactPage = () => {
                         </div>
                       </div>
                     ) : (
-                      <form onSubmit={handleSubmit} className="space-y-6">
+                      <form onSubmit={handleSubmit} className="space-y-6 text-black">
                         {/* Name Field */}
                         <div className="group">
                           <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -498,9 +490,8 @@ const ContactPage = () => {
                               name="name"
                               value={formData.name}
                               onChange={handleChange}
-                              className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${
-                                errors.name ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                              } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
+                              className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.name ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                                } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
                               placeholder="Enter your full name"
                               aria-required="true"
                               aria-invalid={!!errors.name}
@@ -529,9 +520,8 @@ const ContactPage = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${
-                                  errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                                } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
+                                className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                                  } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
                                 placeholder="your.email@example.com"
                                 aria-required="true"
                                 aria-invalid={!!errors.email}
@@ -558,9 +548,8 @@ const ContactPage = () => {
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handlePhoneChange}
-                                className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${
-                                  errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                                } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
+                                className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                                  } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
                                 placeholder="(555) 123-4567"
                                 maxLength={14}
                                 aria-required="true"
@@ -639,9 +628,8 @@ const ContactPage = () => {
                               value={formData.message}
                               onChange={handleChange}
                               rows={4}
-                              className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${
-                                errors.message ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                              } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base resize-none`}
+                              className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.message ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                                } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base resize-none`}
                               placeholder="Please describe your condition, symptoms, or any specific concerns..."
                               aria-required="true"
                               aria-invalid={!!errors.message}
@@ -703,7 +691,7 @@ const ContactPage = () => {
                 {/* Doctor Profile */}
                 <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 md:p-8 relative overflow-hidden border border-gray-100">
                   <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-rose-400 to-rose-600 rounded-full -mr-8 -mt-8 opacity-10"></div>
-                  
+
                   <div className="relative">
                     <div className="flex items-start gap-4 md:gap-6 mb-6">
                       <div className="flex-shrink-0">
@@ -727,7 +715,7 @@ const ContactPage = () => {
                     <div className="space-y-3 md:space-y-4">
                       <div className="flex items-center gap-3 p-3 md:p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl">
                         <Star className="w-5 h-5 text-rose-600 flex-shrink-0" />
-                        <span className="text-sm md:text-base text-gray-700 font-medium">15+ Years Clinical Experience</span>
+                        <span className="text-sm md:text-base text-gray-700 font-medium">3+ Years Clinical Experience</span>
                       </div>
                       <div className="flex items-center gap-3 p-3 md:p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl">
                         <Shield className="w-5 h-5 text-rose-600 flex-shrink-0" />
@@ -756,7 +744,7 @@ const ContactPage = () => {
                 <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 md:p-8 border border-gray-100">
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Connect With Us</h2>
                   <p className="text-gray-600 mb-6">Follow us for health tips, updates, and success stories</p>
-                  
+
                   <div className="space-y-3 md:space-y-4">
                     {socialLinks.map((social, idx) => (
                       <a
@@ -778,11 +766,7 @@ const ContactPage = () => {
                             <p className="text-xs md:text-sm text-gray-500 group-hover:text-white/80 transition-colors">
                               {social.handle}
                             </p>
-                            {social.followers && (
-                              <p className="text-xs text-gray-400 group-hover:text-white/60 mt-1">
-                                {social.followers} followers
-                              </p>
-                            )}
+
                           </div>
                         </div>
                         <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all w-4 h-4 md:w-5 md:h-5" />
@@ -792,26 +776,40 @@ const ContactPage = () => {
                 </div>
 
                 {/* Location Map */}
+                {/* Location Map */}
                 <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 md:p-8 border border-gray-100">
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Visit Our Clinic</h2>
                   <p className="text-gray-600 mb-4">State-of-the-art facility with modern equipment</p>
-                  
-                  <div className="relative aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl md:rounded-2xl overflow-hidden mb-4">
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center p-4">
-                        <MapPin className="mx-auto text-gray-400 mb-3 w-8 h-8 md:w-12 md:h-12" />
-                        <p className="text-gray-600 font-medium">Interactive Map View</p>
-                        <p className="text-gray-500 text-sm mt-1">Click to open in Google Maps</p>
-                      </div>
-                    </div>
-                    <a 
-                      href="https://maps.google.com/?q=123+Health+Street+Medical+City"
+
+                  <div className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden mb-4 border border-gray-200">
+                    {/* Embedded Google Maps */}
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.086697416308!2d77.4982626760839!3d28.474854075756152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce8c5d57d41ed%3A0x3d5e2bc68c3cd57d!2sD-BLOCK%2C%20D-3%2C%20near%20Krishna%20hospital%2C%20Block%20D%2C%20Swarn%20Nagari%2C%20Sector%20Swarn%20Nagri%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201315!5e0!3m2!1sen!2sin!4v1704444444444!5m2!1sen!2sin"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Dermaclinix Location Map"
+                      className="absolute inset-0"
+                    />
+
+                    {/* Overlay with link for mobile/accessibility */}
+                    <a
+                      href="https://maps.app.goo.gl/Us4jVhy8foKxxawE7"
                       target="_blank"
                       rel="noopener noreferrer nofollow"
-                      className="absolute inset-0"
+                      className="absolute inset-0 z-10 md:hidden"
                       aria-label="Open location in Google Maps"
-                    ></a>
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/10 to-gray-900/5 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+                          <MapPin className="mx-auto text-red-600 mb-2 w-6 h-6" />
+                          <p className="text-gray-800 font-medium text-sm">Tap to open in Maps app</p>
+                        </div>
+                      </div>
+                    </a>
                   </div>
 
                   <div className="space-y-3">
@@ -819,15 +817,29 @@ const ContactPage = () => {
                       <Map className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm md:text-base">Our Address</h3>
-                        <p className="text-gray-600 text-sm">123 Health Street, Medical City, MC 12345</p>
+                        <p className="text-gray-600 text-sm">D-BLOCK, D-3, near Krishna hospital, Block D, Swarn Nagari, Sector Swarn Nagri, Greater Noida, Uttar Pradesh 201315</p>
                       </div>
                     </div>
+
                     <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
                       <Clock className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm md:text-base">Parking Information</h3>
                         <p className="text-gray-600 text-sm">Free parking available in front of the clinic</p>
                       </div>
+                    </div>
+
+                    {/* Optional: Get Directions Button */}
+                    <div className="pt-2">
+                      <a
+                        href="https://www.google.com/maps/dir//D-BLOCK,+D-3,+near+Krishna+hospital,+Block+D,+Swarn+Nagari,+Sector+Swarn+Nagri,+Greater+Noida,+Uttar+Pradesh+201315"
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl w-full transition-colors duration-200"
+                      >
+                        <Navigation className="w-5 h-5" />
+                        Get Directions
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -878,56 +890,18 @@ const ContactPage = () => {
             </div>
 
             <div className="text-center mt-8">
-              <a 
-                href="/faq"
+              <button
+
                 className="inline-flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
               >
                 View All FAQs
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-12 md:py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl md:rounded-3xl p-8 md:p-12 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 bg-red-200 rounded-full -mr-16 -mt-16 opacity-20"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 md:w-48 md:h-48 bg-pink-200 rounded-full -ml-16 -mb-16 opacity-20"></div>
-              
-              <div className="relative z-10">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                  Ready to Start Your Recovery Journey?
-                </h2>
-                <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                  Take the first step towards pain-free living. Our team of experts is ready to help you achieve your health goals.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <a 
-                    href="tel:+15551234567"
-                    className="inline-flex items-center gap-3 bg-red-600 text-white px-6 md:px-8 py-3.5 md:py-4 rounded-full font-bold hover:bg-red-700 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl text-base md:text-lg"
-                    aria-label="Call us now at (555) 123-4567"
-                  >
-                    <Phone className="w-5 h-5" />
-                    Call Now: (555) 123-4567
-                  </a>
-                  <a 
-                    href="#appointment-form"
-                    className="inline-flex items-center gap-3 bg-white text-gray-900 px-6 md:px-8 py-3.5 md:py-4 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl border border-gray-200 text-base md:text-lg"
-                    aria-label="Book an appointment online"
-                  >
-                    <Calendar className="w-5 h-5" />
-                    Book Online Appointment
-                  </a>
-                </div>
-                <p className="text-sm text-gray-500 mt-6">
-                  Emergency? Call our 24/7 emergency line: <strong>+1 (555) 987-6543</strong>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-8 md:py-12">
@@ -937,7 +911,7 @@ const ContactPage = () => {
               <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
                 Professional physiotherapy services committed to helping you achieve optimal health and mobility.
               </p>
-              
+
               <div className="flex justify-center space-x-6 mb-6">
                 {socialLinks.map((social, idx) => (
                   <a
@@ -952,12 +926,12 @@ const ContactPage = () => {
                   </a>
                 ))}
               </div>
-              
+
               <div className="text-gray-400 text-sm">
                 <p>© {currentYear} SKM Physiotherapy. All rights reserved.</p>
                 <p className="mt-2">
-                  <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a> • 
-                  <a href="/terms" className="hover:text-white transition-colors ml-2">Terms of Service</a> • 
+                  <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a> •
+                  <a href="/terms" className="hover:text-white transition-colors ml-2">Terms of Service</a> •
                   <a href="/sitemap" className="hover:text-white transition-colors ml-2">Sitemap</a>
                 </p>
               </div>

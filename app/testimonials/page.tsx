@@ -285,7 +285,7 @@ export default function TestimonialsPage() {
             </div>
             
             {/* Trust Indicators */}
-            <div className="mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {/* <div className="mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
                 <div className="text-2xl md:text-3xl font-bold text-rose-600 mb-2">500+</div>
                 <div className="text-gray-700">Patients Treated</div>
@@ -302,10 +302,10 @@ export default function TestimonialsPage() {
                 <div className="text-2xl md:text-3xl font-bold text-rose-600 mb-2">15+</div>
                 <div className="text-gray-700">Cities Served</div>
               </div>
-            </div>
+            </div> */}
             
             {/* Micro Testimonials Grid - Mobile Horizontal Scroll */}
-            <div className="mt-12 md:mt-16">
+            {/* <div className="mt-12 md:mt-16">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center">
                 More Happy Patients
               </h3>
@@ -337,7 +337,7 @@ export default function TestimonialsPage() {
                   </button>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

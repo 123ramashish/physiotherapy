@@ -23,12 +23,7 @@ export default function TherapistsPage() {
             "@context": "https://schema.org",
             "@type": "MedicalBusiness",
             "name": "SKM Physiotherapy",
-            "employee": therapists.map(t => ({
-              "@type": "Person",
-              "name": t.name,
-              "jobTitle": t.specialty,
-              "description": t.description
-            }))
+           
           })}
         </script>
       </head>
@@ -79,7 +74,7 @@ export default function TherapistsPage() {
         </section>
 
         {/* Stats Section - Enhanced Mobile */}
-        <section className="py-8 sm:py-12 md:py-16 px-4">
+        {/* <section className="py-8 sm:py-12 md:py-16 px-4">
           <div className="container mx-auto px-2 sm:px-4 md:px-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
               {stats.map((stat, index) => (
@@ -100,97 +95,21 @@ export default function TherapistsPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Therapists Grid - Enhanced Cards */}
         <section id="therapists" className="py-12 sm:py-16 md:py-20 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-            <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16 px-4">
+            {/* <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16 px-4">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
                 Our <span className="text-rose-600">Specialized</span> Professionals
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-gray-600">
                 Each therapist brings unique expertise and specialized training to provide comprehensive care for your specific needs.
               </p>
-            </div>
+            </div> */}
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {therapists.map((therapist, index) => (
-                <article 
-                  key={index}
-                  className="group bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100"
-                  itemScope
-                  itemType="https://schema.org/Person"
-                >
-                  {/* Therapist Image/Profile */}
-                  <div className="relative h-56 sm:h-64 md:h-72 bg-gradient-to-br from-rose-50 to-amber-50 overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative">
-                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-r from-rose-200 to-amber-200 flex items-center justify-center text-4xl sm:text-5xl md:text-6xl font-bold text-rose-800 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                          {therapist.initials}
-                        </div>
-                        <div className="absolute -bottom-2 -right-2 bg-rose-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg">
-                          {therapist.role}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/20 to-transparent h-16 sm:h-20"></div>
-                  </div>
-                  
-                  {/* Therapist Details */}
-                  <div className="p-4 sm:p-5 md:p-6">
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2" itemProp="name">{therapist.name}</h3>
-                    <p className="text-rose-600 font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base" itemProp="jobTitle">
-                      <FaGraduationCap />
-                      {therapist.specialty}
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed" itemProp="description">{therapist.description}</p>
-                    
-                    {/* Qualifications */}
-                    <div className="mb-4 sm:mb-6">
-                      <h4 className="font-semibold text-gray-700 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
-                        <FaAward className="text-amber-500 flex-shrink-0" />
-                        Qualifications
-                      </h4>
-                      <ul className="space-y-1.5 sm:space-y-2">
-                        {therapist.qualifications.map((qual, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <FaCheckCircle className="text-green-500 mt-0.5 sm:mt-1 flex-shrink-0 text-sm" />
-                            <span className="text-gray-600 text-xs sm:text-sm leading-snug">{qual}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    {/* Specialties */}
-                    <div>
-                      <h4 className="font-semibold text-gray-700 mb-2 sm:mb-3 text-sm sm:text-base">Areas of Expertise</h4>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                        {therapist.expertise.map((area, idx) => (
-                          <span 
-                            key={idx} 
-                            className="px-2 sm:px-3 py-1 bg-gradient-to-r from-rose-50 to-amber-50 text-rose-700 text-xs sm:text-sm rounded-full border border-rose-100"
-                          >
-                            {area}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Action Button */}
-                  <div className="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6">
-                    <a 
-                      href={`/contact?therapist=${therapist.id}`}
-                      className="block w-full text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-rose-600 to-amber-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform group-hover:scale-[1.02] text-sm sm:text-base"
-                      aria-label={`Book appointment with ${therapist.name}`}
-                    >
-                      Book with {therapist.name.split(' ')[0]}
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
+            
           </div>
         </section>
 
@@ -276,7 +195,7 @@ export default function TherapistsPage() {
         </section>
 
         {/* CTA Section - Mobile Optimized */}
-        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-r from-rose-600 to-amber-500 text-white">
+        {/* <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-r from-rose-600 to-amber-500 text-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 md:mb-8 px-4">
@@ -318,84 +237,84 @@ export default function TherapistsPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </>
   );
 }
 
 // Stats Data
-const stats = [
-  {
-    value: "50+",
-    label: "Years Combined Experience",
-    icon: <FaAward className="text-rose-600" />
-  },
-  {
-    value: "5000+",
-    label: "Patients Treated",
-    icon: <FaUserMd className="text-amber-600" />
-  },
-  {
-    value: "15+",
-    label: "Specialized Certifications",
-    icon: <FaGraduationCap className="text-rose-600" />
-  },
-  {
-    value: "24/7",
-    label: "Emergency Support",
-    icon: <MdHealthAndSafety className="text-amber-600" />
-  }
-];
+// const stats = [
+//   {
+//     value: "50+",
+//     label: "Years Combined Experience",
+//     icon: <FaAward className="text-rose-600" />
+//   },
+//   {
+//     value: "5000+",
+//     label: "Patients Treated",
+//     icon: <FaUserMd className="text-amber-600" />
+//   },
+//   {
+//     value: "15+",
+//     label: "Specialized Certifications",
+//     icon: <FaGraduationCap className="text-rose-600" />
+//   },
+//   {
+//     value: "24/7",
+//     label: "Emergency Support",
+//     icon: <MdHealthAndSafety className="text-amber-600" />
+//   }
+// ];
 
 // Therapists Data
-const therapists = [
-  {
-    id: "dr-sarah-johnson",
-    initials: "SJ",
-    name: "Dr. Sarah Johnson",
-    role: "Lead Physiotherapist",
-    specialty: "Doctor of Physiotherapy",
-    description: "Specializing in sports rehabilitation and orthopedic physiotherapy with over 15 years of clinical experience. Former team physiotherapist for professional athletes.",
-    qualifications: [
-      "Doctor of Physiotherapy (DPT)",
-      "Certified Orthopedic Specialist",
-      "Sports Physiotherapy Certification",
-      "Advanced Dry Needling Certification"
-    ],
-    expertise: ["Sports Injuries", "Post-Surgical Rehab", "Chronic Pain", "Musculoskeletal Disorders"]
-  },
-  {
-    id: "michael-chen",
-    initials: "MC",
-    name: "Michael Chen",
-    role: "Chiropractic Director",
-    specialty: "Doctor of Chiropractic",
-    description: "Expert in spinal health, posture correction, and pain management. Integrates chiropractic care with rehabilitative exercises for comprehensive treatment.",
-    qualifications: [
-      "Doctor of Chiropractic (DC)",
-      "Certified in Spinal Rehabilitation",
-      "Advanced Biomechanics Training",
-      "Webster Technique Certified"
-    ],
-    expertise: ["Spinal Adjustments", "Posture Correction", "Headache Relief", "Joint Mobility"]
-  },
-  {
-    id: "elena-rodriguez",
-    initials: "ER",
-    name: "Elena Rodriguez",
-    role: "Senior Physiotherapist",
-    specialty: "Neurological Specialist",
-    description: "Focuses on neurological rehabilitation and geriatric care. Passionate about helping patients regain independence and improve quality of life.",
-    qualifications: [
-      "MSc in Neurological Physiotherapy",
-      "Bobath Certified Therapist",
-      "Parkinson's Disease Specialist",
-      "Vestibular Rehabilitation Certified"
-    ],
-    expertise: ["Stroke Recovery", "Parkinson's Care", "Balance Disorders", "Geriatric Rehab"]
-  }
-];
+// const therapists = [
+//   {
+//     id: "dr-sarah-johnson",
+//     initials: "SJ",
+//     name: "Dr. Sarah Johnson",
+//     role: "Lead Physiotherapist",
+//     specialty: "Doctor of Physiotherapy",
+//     description: "Specializing in sports rehabilitation and orthopedic physiotherapy with over 15 years of clinical experience. Former team physiotherapist for professional athletes.",
+//     qualifications: [
+//       "Doctor of Physiotherapy (DPT)",
+//       "Certified Orthopedic Specialist",
+//       "Sports Physiotherapy Certification",
+//       "Advanced Dry Needling Certification"
+//     ],
+//     expertise: ["Sports Injuries", "Post-Surgical Rehab", "Chronic Pain", "Musculoskeletal Disorders"]
+//   },
+//   {
+//     id: "michael-chen",
+//     initials: "MC",
+//     name: "Michael Chen",
+//     role: "Chiropractic Director",
+//     specialty: "Doctor of Chiropractic",
+//     description: "Expert in spinal health, posture correction, and pain management. Integrates chiropractic care with rehabilitative exercises for comprehensive treatment.",
+//     qualifications: [
+//       "Doctor of Chiropractic (DC)",
+//       "Certified in Spinal Rehabilitation",
+//       "Advanced Biomechanics Training",
+//       "Webster Technique Certified"
+//     ],
+//     expertise: ["Spinal Adjustments", "Posture Correction", "Headache Relief", "Joint Mobility"]
+//   },
+//   {
+//     id: "elena-rodriguez",
+//     initials: "ER",
+//     name: "Elena Rodriguez",
+//     role: "Senior Physiotherapist",
+//     specialty: "Neurological Specialist",
+//     description: "Focuses on neurological rehabilitation and geriatric care. Passionate about helping patients regain independence and improve quality of life.",
+//     qualifications: [
+//       "MSc in Neurological Physiotherapy",
+//       "Bobath Certified Therapist",
+//       "Parkinson's Disease Specialist",
+//       "Vestibular Rehabilitation Certified"
+//     ],
+//     expertise: ["Stroke Recovery", "Parkinson's Care", "Balance Disorders", "Geriatric Rehab"]
+//   }
+// ];
 
 // Features Data
 const features = [
