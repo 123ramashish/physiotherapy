@@ -12,8 +12,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "skmphysiotherapy",
+export const metadata = {
+  title: "SKM Physiotherapy Clinic | Best Physiotherapist in [City]",
+  description:
+    "SKM Physiotherapy Clinic provides expert physiotherapy treatment for pain relief, sports injury, and rehabilitation in [City].",
+  keywords: [
+    "SKM Physiotherapy",
+    "physiotherapy clinic",
+    "physiotherapist",
+    "pain relief",
+    "sports injury",
+    "rehabilitation"
+  ],
 };
 
 export default function RootLayout({
