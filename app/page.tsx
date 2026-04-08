@@ -280,7 +280,7 @@ const Home = () => {
         <link rel="canonical" href="https://skmphysiotherapy.com" />
       </head>
 
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-rose-50 overflow-x-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 overflow-x-hidden">
         {/* Navigation */}
         <nav
           className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-lg shadow-2xl py-3' : 'bg-transparent py-6'
@@ -290,8 +290,8 @@ const Home = () => {
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('home')}>
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-rose-600 to-amber-500 rounded-full blur-xl opacity-50" />
-                  <div className="relative bg-gradient-to-br from-red-500 to-rose-600 p-2 rounded-full transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-green-600 to-blue-500 rounded-full blur-xl opacity-50" />
+                  <div className="relative bg-gradient-to-br from-red-500 to-green-600 p-2 rounded-full transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
                     <Activity className="w-6 h-6 text-white" />
                   </div>
                 </div>
@@ -313,14 +313,14 @@ const Home = () => {
                   >
                     <span className="relative z-10 transition-colors duration-300 flex items-center">{item.label}</span>
                     <span
-                      className={`absolute inset-0 bg-gradient-to-r from-rose-600 to-amber-500 transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center rounded-xl ${activeNav === item.id ? 'scale-100' : ''
+                      className={`absolute inset-0 bg-gradient-to-r from-green-600 to-blue-500 transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center rounded-xl ${activeNav === item.id ? 'scale-100' : ''
                         }`}
                     />
                   </button>
                 ))}
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="ml-4 bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 text-white px-6 py-2.5 rounded-full hover:shadow-xl shadow-lg shadow-rose-500/30 transition-all duration-300 flex items-center gap-2">
+                  className="ml-4 bg-gradient-to-r from-green-700  to-blue-500 text-white px-6 py-2.5 rounded-full hover:shadow-xl shadow-lg shadow-green-500/30 transition-all duration-300 flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   Book Now
                 </button>
@@ -339,14 +339,14 @@ const Home = () => {
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
                       className={`relative px-5 py-3 font-medium group overflow-hidden rounded-xl transition-all duration-300 text-left ${activeNav === item.id
-                        ? 'text-white bg-gradient-to-r from-rose-600 to-amber-500'
+                        ? 'text-white bg-gradient-to-r from-green-600 to-blue-500'
                         : 'text-gray-700'
                         }`}
                     >
                       {item.label}
                     </button>
                   ))}
-                  <button className="mt-2 w-full bg-gradient-to-r from-rose-700 to-amber-500 text-white px-6 py-3 rounded-full hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                  <button className="mt-2 w-full bg-gradient-to-r from-green-700 to-blue-500 text-white px-6 py-3 rounded-full hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                     Book Appointment
                   </button>
                 </div>
@@ -368,9 +368,9 @@ const Home = () => {
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
-                <div className="inline-flex items-center bg-gradient-to-r from-white to-amber-50 px-6 py-3 rounded-full shadow-lg shadow-amber-200/50 border border-amber-100">
-                  <Sparkles className="w-5 h-5 text-amber-500 mr-2" />
-                  <span className="font-semibold bg-gradient-to-r from-amber-600 to-rose-600 bg-clip-text text-transparent">
+                <div className="inline-flex items-center bg-gradient-to-r from-white to-blue-50 px-6 py-3 rounded-full shadow-lg shadow-blue-200/50 border border-blue-100">
+                  <Sparkles className="w-5 h-5 text-blue-500 mr-2" />
+                  <span className="font-semibold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                     Welcome To Excellence
                   </span>
                 </div>
@@ -413,7 +413,7 @@ const Home = () => {
                             <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent block">
                               {otherWords}
                             </span>
-                            <span className="bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 bg-clip-text text-transparent block mt-1 sm:mt-2">
+                            <span className="bg-gradient-to-r from-green-700 via-green-600 to-blue-500 bg-clip-text text-transparent block mt-1 sm:mt-2">
                               {lastWord}
                             </span>
                           </h1>
@@ -435,20 +435,20 @@ const Home = () => {
                           setIsPaused(true);
                           setTimeout(() => setIsPaused(false), 1000);
                         }}
-                        className="relative group focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 rounded-full"
+                        className="relative group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 rounded-full"
                         aria-label={`Navigate to ${content.heading}`}
                         aria-current={idx === autoScrollIndex ? 'true' : 'false'}
                         title={content.heading}
                       >
                         <div
                           className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${idx === autoScrollIndex
-                            ? 'w-8 sm:w-12 bg-gradient-to-r from-rose-600 to-amber-500'
+                            ? 'w-8 sm:w-12 bg-gradient-to-r from-green-600 to-blue-500'
                             : 'w-1.5 sm:w-2 bg-gray-300 group-hover:bg-gray-400 group-focus:bg-gray-500'
                             }`}
                         >
                           {idx === autoScrollIndex && !isPaused && (
                             <div
-                              className="h-full bg-gradient-to-r from-rose-700 to-amber-600 rounded-full"
+                              className="h-full bg-gradient-to-r from-green-700 to-blue-600 rounded-full"
                               style={{ animation: 'progress 5s linear', transformOrigin: 'left' }}
                               role="progressbar"
                               aria-valuenow={autoScrollIndex + 1}
@@ -469,7 +469,7 @@ const Home = () => {
                         setIsPaused(true);
                         setTimeout(() => setIsPaused(false), 1000);
                       }}
-                      className="pointer-events-auto bg-white/90 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="pointer-events-auto bg-white/90 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all focus:outline-none focus:ring-2 focus:ring-green-500"
                       aria-label="Previous service"
                     >
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 rotate-180" />
@@ -480,7 +480,7 @@ const Home = () => {
                         setIsPaused(true);
                         setTimeout(() => setIsPaused(false), 1000);
                       }}
-                      className="pointer-events-auto bg-white/90 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="pointer-events-auto bg-white/90 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all focus:outline-none focus:ring-2 focus:ring-green-500"
                       aria-label="Next service"
                     >
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
@@ -493,9 +493,9 @@ const Home = () => {
                   {stats.slice(0, 2).map((stat, index) => (
                     <div
                       key={index}
-                      className="bg-white/80 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-amber-100 hover:shadow-xl transition-shadow duration-300"
+                      className="bg-white/80 backdrop-blur-sm p-5 rounded-xl shadow-lg border border-blue-100 hover:shadow-xl transition-shadow duration-300"
                     >
-                      <div className="text-3xl font-bold bg-gradient-to-r from-rose-700 to-amber-500 bg-clip-text text-transparent">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-green-700 to-blue-500 bg-clip-text text-transparent">
                         {animatedStats[index]}
                         {stat.suffix}
                       </div>
@@ -507,11 +507,11 @@ const Home = () => {
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-4 pt-4">
                   <button onClick={() => scrollToSection('about')}
-                    className="group bg-gradient-to-r from-rose-700 via-rose-600 to-amber-500 text-white px-8 py-4 rounded-xl hover:shadow-2xl shadow-lg shadow-rose-500/30 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                    className="group bg-gradient-to-r from-green-700 via-green-600 to-blue-500 text-white px-8 py-4 rounded-xl hover:shadow-2xl shadow-lg shadow-green-500/30 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                     <span className="font-medium">View Intro</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </button>
-                  <button onClick={() => scrollToSection('about')} className="bg-gradient-to-r from-amber-300 via-amber-200 to-amber-100 text-gray-800 px-8 py-4 rounded-xl hover:shadow-xl border border-amber-200 transform hover:scale-105 transition-all duration-300 font-medium">
+                  <button onClick={() => scrollToSection('about')} className="bg-gradient-to-r from-blue-300 via-blue-200 to-blue-100 text-gray-800 px-8 py-4 rounded-xl hover:shadow-xl border border-blue-200 transform hover:scale-105 transition-all duration-300 font-medium">
                     Know More
                   </button>
                 </div>
@@ -520,26 +520,26 @@ const Home = () => {
               {/* Right side (unchanged) */}
               <div className="relative h-[500px] lg:h-[600px]">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-72 sm:w-80 md:w-96 hover:scale-105 transition-transform duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-amber-300 rounded-3xl transform rotate-2 blur-sm" />
-                  <div className="relative bg-gradient-to-br from-amber-100 to-amber-50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden group">
-                    <div className="aspect-square bg-gradient-to-br from-rose-50 to-amber-50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-300 rounded-3xl transform rotate-2 blur-sm" />
+                  <div className="relative bg-gradient-to-br from-blue-100 to-blue-50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden group">
+                    <div className="aspect-square bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl flex items-center justify-center relative overflow-hidden">
                       <div className="text-center relative z-10">
                         <div className="text-7xl sm:text-8xl mb-4 group-hover:scale-110 transition-transform duration-500">👨‍⚕️</div>
                         <p className="text-gray-800 font-bold text-lg sm:text-xl">Professional Team</p>
                         <p className="text-gray-600 mt-2 text-sm sm:text-base">Certified Physiotherapists</p>
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-amber-500/10 group-hover:opacity-0 transition-opacity duration-500" />
-                      <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br from-rose-500/20 to-amber-500/20 rounded-full blur-3xl" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-blue-500/10 group-hover:opacity-0 transition-opacity duration-500" />
+                      <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-3xl" />
                     </div>
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-br from-rose-500/20 to-amber-500/20 rounded-full blur-2xl" />
+                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-2xl" />
                   </div>
                 </div>
 
                 <div className="absolute left-0 sm:left-4 top-16 sm:top-20 z-10 w-40 sm:w-48 hover:-translate-x-2 hover:rotate-[-8deg] transition-all duration-500">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-rose-300 to-rose-400 rounded-2xl transform -rotate-6 blur-sm" />
-                    <div className="relative bg-gradient-to-br from-rose-100 to-rose-50 rounded-2xl p-4 sm:p-5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                      <div className="aspect-square bg-gradient-to-br from-white to-rose-50 rounded-xl flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-300 to-green-400 rounded-2xl transform -rotate-6 blur-sm" />
+                    <div className="relative bg-gradient-to-br from-green-100 to-green-50 rounded-2xl p-4 sm:p-5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                      <div className="aspect-square bg-gradient-to-br from-white to-green-50 rounded-xl flex items-center justify-center overflow-hidden">
                         <div className="text-center hover:scale-110 transition-transform duration-300">
                           <div className="text-5xl sm:text-6xl mb-2">💆</div>
                           <p className="text-gray-700 font-semibold text-sm sm:text-base">Therapy</p>
@@ -552,9 +552,9 @@ const Home = () => {
 
                 <div className="absolute right-0 sm:right-4 bottom-16 sm:bottom-20 z-10 w-40 sm:w-48 hover:translate-x-2 hover:rotate-[8deg] transition-all duration-500">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-amber-500 rounded-2xl transform rotate-6 blur-sm" />
-                    <div className="relative bg-gradient-to-br from-amber-100 to-amber-50 rounded-2xl p-4 sm:p-5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                      <div className="aspect-square bg-gradient-to-br from-white to-amber-50 rounded-xl flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-500 rounded-2xl transform rotate-6 blur-sm" />
+                    <div className="relative bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl p-4 sm:p-5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                      <div className="aspect-square bg-gradient-to-br from-white to-blue-50 rounded-xl flex items-center justify-center overflow-hidden">
                         <div className="text-center hover:scale-110 transition-transform duration-300">
                           <div className="text-5xl sm:text-6xl mb-2">🏃</div>
                           <p className="text-gray-700 font-semibold text-sm sm:text-base">Recovery</p>
@@ -565,9 +565,9 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="absolute top-0 right-1/4 w-20 h-20 bg-gradient-to-br from-rose-300/30 to-amber-300/30 rounded-full blur-2xl animate-pulse" />
+                <div className="absolute top-0 right-1/4 w-20 h-20 bg-gradient-to-br from-green-300/30 to-blue-300/30 rounded-full blur-2xl animate-pulse" />
                 <div
-                  className="absolute bottom-0 left-1/4 w-24 h-24 bg-gradient-to-br from-amber-300/30 to-rose-300/30 rounded-full blur-2xl animate-pulse"
+                  className="absolute bottom-0 left-1/4 w-24 h-24 bg-gradient-to-br from-blue-300/30 to-green-300/30 rounded-full blur-2xl animate-pulse"
                   style={{ animationDelay: '1s' }}
                 />
               </div>
@@ -579,12 +579,12 @@ const Home = () => {
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="group bg-gradient-to-br from-white to-amber-50/50 p-6 rounded-2xl shadow-lg hover:shadow-2xl border border-amber-100/50 transition-all duration-300 relative overflow-hidden hover:-translate-y-2"
+                    className="group bg-gradient-to-br from-white to-blue-50/50 p-6 rounded-2xl shadow-lg hover:shadow-2xl border border-blue-100/50 transition-all duration-300 relative overflow-hidden hover:-translate-y-2"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-rose-500/0 via-amber-500/0 to-amber-400/0 group-hover:from-rose-500/5 group-hover:via-amber-500/5 group-hover:to-amber-400/5 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 via-blue-500/0 to-blue-400/0 group-hover:from-green-500/5 group-hover:via-blue-500/5 group-hover:to-blue-400/5 transition-all duration-500" />
                     <div className="relative">
-                      <div className="w-16 h-16 bg-gradient-to-br from-rose-100 to-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                        <feature.icon className="w-8 h-8 text-rose-600" />
+                      <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                        <feature.icon className="w-8 h-8 text-green-600" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
                       <p className="text-gray-600">{feature.desc}</p>
@@ -597,17 +597,17 @@ const Home = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 bg-gradient-to-r from-white via-amber-50/30 to-rose-50/30">
+        <section className="py-20 bg-gradient-to-r from-white via-blue-50/30 to-green-50/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-xl hover:shadow-2xl border border-amber-100 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+                  className="text-center bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-xl hover:shadow-2xl border border-blue-100 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
                 >
-                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-rose-700 to-amber-500 bg-clip-text text-transparent mb-3">
+                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-green-700 to-blue-500 bg-clip-text text-transparent mb-3">
                     {animatedStats[index]}
-                    <span className="text-rose-600">{stat.suffix}</span>
+                    <span className="text-green-600">{stat.suffix}</span>
                   </div>
                   <div className="text-gray-600 font-semibold text-sm sm:text-base">{stat.label}</div>
                 </div>
@@ -623,12 +623,12 @@ const Home = () => {
         <div ref={el => { sectionRefs.current.about = el; }} id="about">
           <AboutPage />
         </div>
-        {/* <div ref={el => { sectionRefs.current.blog = el; }} id="blog">
+        <div ref={el => { sectionRefs.current.blog = el; }} id="blog">
         <BlogPage />
       </div>
       <div ref={el => { sectionRefs.current.gallery = el; }} id="gallery">
         <GalleryPage />
-      </div> */}
+      </div>
         <div ref={el => { sectionRefs.current.therapists = el; }} id="therapists">
           <TherapistsPage />
         </div>
@@ -638,7 +638,7 @@ const Home = () => {
         <div ref={el => { sectionRefs.current.contact = el; }} id="contact">
           <ContactPage />
         </div>
-        <button className="fixed bottom-8 right-8 bg-gradient-to-r from-rose-600 to-amber-500 text-white p-4 rounded-full shadow-2xl shadow-rose-500/50 z-40 flex items-center justify-center hover:scale-110 transition-transform duration-300">
+        <button className="fixed bottom-8 right-8 bg-gradient-to-r from-green-600 to-blue-500 text-white p-4 rounded-full shadow-2xl shadow-green-500/50 z-40 flex items-center justify-center hover:scale-110 transition-transform duration-300">
           <MessageSquare className="w-6 h-6" />
         </button>
 
