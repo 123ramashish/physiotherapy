@@ -1,346 +1,499 @@
-'use client'
-import { ArrowRight, Star, Quote } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
-import Head from 'next/head';
+// app/testimonials/page.tsx
+'use client';
 
-export default function TestimonialsPage() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const testimonialIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+import { useState, useMemo, useCallback } from 'react';
+import { 
+  Search, Filter, Star, MapPin, User, Image as ImageIcon, 
+  Send, X, CheckCircle, ChevronDown, ChevronUp, Sparkles 
+} from 'lucide-react';
+import dynamic from 'next/dynamic';
 
-  const testimonials = [
-    { 
-      name: 'Priya Sharma', 
-      city: 'Mumbai',
-      treatment: 'Back Pain Treatment',
-      text: 'Excellent care and professional service. My chronic back pain is completely gone after 6 weeks of therapy!', 
-      rating: 5,
-      image: '👩‍⚕️'
-    },
-    { 
-      name: 'Rajesh Patel', 
-      city: 'Delhi',
-      treatment: 'Sports Injury Recovery',
-      text: 'The physiotherapists are incredibly knowledgeable. Recovered from my cricket injury faster than expected.', 
-      rating: 5,
-      image: '🏏'
-    },
-    { 
-      name: 'Ananya Gupta', 
-      city: 'Bangalore',
-      treatment: 'Post-Surgery Rehabilitation',
-      text: 'Highly recommend! They helped me recover from knee surgery and get back to my daily yoga practice.', 
-      rating: 5,
-      image: '🧘‍♀️'
-    },
-    { 
-      name: 'Vikram Singh', 
-      city: 'Chennai',
-      treatment: 'Neck & Shoulder Pain',
-      text: 'Outstanding personalized program. The ergonomic advice completely changed my work-from-home setup.', 
-      rating: 5,
-      image: '💼'
-    },
-    { 
-      name: 'Meera Reddy', 
-      city: 'Hyderabad',
-      treatment: 'Arthritis Management',
-      text: 'The staff is amazing! Their holistic approach to arthritis management has improved my quality of life significantly.', 
-      rating: 5,
-      image: '🌟'
-    },
-    { 
-      name: 'Arjun Kumar', 
-      city: 'Pune',
-      treatment: 'Carpal Tunnel Syndrome',
-      text: 'Professional care with excellent results. My wrist pain has reduced by 90% after just 8 sessions.', 
-      rating: 5,
-      image: '👨‍💻'
-    }
+// Lazy load heavy components
+const TestimonialForm = dynamic(() => import('@/components/testimonials/TestimonialForm'), { 
+  loading: () => <div className="p-8 text-center text-slate-500">Loading form...</div>,
+  ssr: false 
+});
+
+// ─── Types ───
+type Testimonial = {
+  id: string;
+  name: string;
+  branch: string;
+  city: string;
+  treatment: string;
+  rating: number;
+  text: string;
+  date: string;
+  verified: boolean;
+  avatar?: string;
+  helpful: number;
+};
+
+type FilterState = {
+  branch: string;
+  treatment: string;
+  rating: number;
+  search: string;
+};
+
+// ─── Mock Data (Replace with API/CMS) ───
+const BRANCHES = ['All', 'SKM Main Centre (Delhi)', 'SKM Gurgaon', 'SKM Noida', 'SKM Faridabad'];
+const TREATMENTS = ['All', 'Back Pain', 'Sports Injury', 'Cupping Therapy', 'Dry Needling', 'Knee Pain', 'Post-Surgery', 'Neuro Rehab'];
+
+const INITIAL_TESTIMONIALS: Testimonial[] = [
+  {
+    id: '1',
+    name: 'Priya Sharma',
+    branch: 'SKM Main Centre (Delhi)',
+    city: 'Delhi',
+    treatment: 'Back Pain Treatment',
+    rating: 5,
+    text: "After 3 years of chronic lower back pain, SKM's therapy gave me my life back in just 6 weeks. The dry needling combined with personalised exercises was truly transformational!",
+    date: '2025-03-15',
+    verified: true,
+    avatar: 'https://i.pravatar.cc/150?img=5',
+    helpful: 42
+  },
+  {
+    id: '2',
+    name: 'Rajesh Patel',
+    branch: 'SKM Gurgaon',
+    city: 'Gurgaon',
+    treatment: 'Sports Injury Rehab',
+    rating: 5,
+    text: "Suffered a ligament tear during cricket. SKM's sports rehab got me back on the field in 10 weeks — faster than the surgeon predicted. Their AI-based progress tracking was incredibly motivating.",
+    date: '2025-03-10',
+    verified: true,
+    avatar: 'https://i.pravatar.cc/150?img=12',
+    helpful: 38
+  },
+  {
+    id: '3',
+    name: 'Ananya Gupta',
+    branch: 'SKM Noida',
+    city: 'Noida',
+    treatment: 'Cupping Therapy (Hijama)',
+    rating: 5,
+    text: "Reluctant at first, but the cupping sessions completely resolved my shoulder stiffness. The therapist explained every step and I felt results after just the second session. Highly professional!",
+    date: '2025-03-08',
+    verified: true,
+    avatar: 'https://i.pravatar.cc/150?img=9',
+    helpful: 31
+  },
+  // Add more testimonials...
+];
+
+// ─── Summary Stats Component ───
+function SummaryStats({ testimonials }: { testimonials: Testimonial[] }) {
+  const avgRating = useMemo(() => {
+    const total = testimonials.reduce((sum, t) => sum + t.rating, 0);
+    return (total / testimonials.length).toFixed(1);
+  }, [testimonials]);
+
+  const stats = [
+    { label: 'Verified Reviews', value: testimonials.length.toLocaleString(), icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { label: 'Average Rating', value: `⭐ ${avgRating}/5`, icon: Star, color: 'text-amber-500', bg: 'bg-amber-50' },
+    { label: 'Branches', value: '4 NCR Locations', icon: MapPin, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'Recovery Rate', value: '98%', icon: Sparkles, color: 'text-indigo-600', bg: 'bg-indigo-50' },
   ];
 
-  // Smooth testimonial transition
-  const goToTestimonial = (index: number) => {
-    if (isTransitioning || index === currentTestimonial) return;
-    
-    setIsTransitioning(true);
-    setCurrentTestimonial(index);
-    
-    // Reset auto-slider
-    if (testimonialIntervalRef.current) {
-      clearInterval(testimonialIntervalRef.current);
-    }
-    
-    testimonialIntervalRef.current = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
-    }, 5000);
-    
-    setTimeout(() => setIsTransitioning(false), 500);
-  };
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {stats.map((stat, i) => (
+        <div key={i} className={`${stat.bg} rounded-2xl p-4 border border-slate-100`}>
+          <div className="flex items-center gap-2 mb-2">
+            <stat.icon size={18} className={stat.color} />
+            <span className="text-xs font-medium text-slate-500">{stat.label}</span>
+          </div>
+          <div className={`text-xl md:text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-  const nextTestimonial = () => {
-    goToTestimonial((currentTestimonial + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    goToTestimonial((currentTestimonial - 1 + testimonials.length) % testimonials.length);
-  };
-
-  // Testimonial auto slider
-  useEffect(() => {
-    testimonialIntervalRef.current = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
-    return () => {
-      if (testimonialIntervalRef.current) {
-        clearInterval(testimonialIntervalRef.current);
-      }
-    };
-  }, []);
+// ─── Filter Bar Component ───
+function FilterBar({ 
+  filters, 
+  setFilters, 
+  onSearch 
+}: { 
+  filters: FilterState; 
+  setFilters: (f: FilterState) => void;
+  onSearch: (q: string) => void;
+}) {
+  const [showFilters, setShowFilters] = useState(false);
 
   return (
-    <>
-      <Head>
-        <title>Patient Testimonials | Our Physiotherapy Clinic</title>
-        <meta 
-          name="description" 
-          content="Read genuine patient testimonials and success stories from our physiotherapy clinic. See how our patients recovered from back pain, sports injuries, and more." 
+    <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 mb-8">
+      {/* Search */}
+      <div className="relative mb-4">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+        <input
+          type="search"
+          placeholder="Search reviews by name, treatment, or keyword..."
+          className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+          value={filters.search}
+          onChange={(e) => {
+            setFilters({ ...filters, search: e.target.value });
+            onSearch(e.target.value);
+          }}
+          aria-label="Search testimonials"
         />
-        <meta 
-          name="keywords" 
-          content="physiotherapy testimonials, patient reviews, back pain recovery, sports injury rehabilitation, Indian patient experiences" 
-        />
-        <meta property="og:title" content="Patient Testimonials | Our Physiotherapy Clinic" />
-        <meta property="og:description" content="Real success stories from our patients across India" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalClinic",
-            "name": "Our Physiotherapy Clinic",
-            "medicalSpecialty": "Physiotherapy",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5",
-              "ratingCount": testimonials.length.toString(),
-              "bestRating": "5",
-              "worstRating": "1"
-            },
-            "review": testimonials.map(testimonial => ({
-              "@type": "Review",
-              "author": testimonial.name,
-              "reviewBody": testimonial.text,
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": testimonial.rating.toString(),
-                "bestRating": "5"
-              }
-            }))
-          })}
-        </script>
-      </Head>
+      </div>
 
-      {/* Testimonials Section */}
-      <section 
-        id="testimonials" 
-        className="py-12 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50"
-        aria-label="Patient Testimonials"
+      {/* Filter Toggle (Mobile) */}
+      <button
+        onClick={() => setShowFilters(!showFilters)}
+        className="md:hidden flex items-center gap-2 text-sm font-medium text-slate-600 mb-4"
+        aria-expanded={showFilters}
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 md:mb-16 lg:mb-20">
-            <div className="inline-flex items-center justify-center p-2 bg-rose-50 rounded-full mb-4">
-              <Quote className="w-6 h-6 text-rose-600" />
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Patient Success Stories
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Real experiences from our patients across India. Discover how we've helped people regain their mobility and live pain-free lives.
-            </p>
-            <div className="mt-6 flex items-center justify-center">
-              <div className="flex items-center">
-                <Star className="w-5 h-5 text-amber-400 fill-current" />
-                <span className="ml-1 text-lg font-semibold text-gray-900">5.0</span>
-                <span className="mx-2 text-gray-400">•</span>
-                <span className="text-gray-600">{testimonials.length}+ Verified Reviews</span>
-              </div>
-            </div>
+        <Filter size={16} /> Filters {showFilters ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+      </button>
+
+      {/* Filter Options */}
+      <div className={`${showFilters ? 'block' : 'hidden'} md:block space-y-4`}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Branch Filter */}
+          <select
+            className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+            value={filters.branch}
+            onChange={(e) => setFilters({ ...filters, branch: e.target.value })}
+            aria-label="Filter by branch"
+          >
+            {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
+          </select>
+
+          {/* Treatment Filter */}
+          <select
+            className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+            value={filters.treatment}
+            onChange={(e) => setFilters({ ...filters, treatment: e.target.value })}
+            aria-label="Filter by treatment"
+          >
+            {TREATMENTS.map(t => <option key={t} value={t}>{t}</option>)}
+          </select>
+
+          {/* Rating Filter */}
+          <select
+            className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+            value={filters.rating}
+            onChange={(e) => setFilters({ ...filters, rating: Number(e.target.value) })}
+            aria-label="Filter by rating"
+          >
+            <option value={0}>All Ratings</option>
+            <option value={5}>⭐⭐⭐⭐⭐ (5)</option>
+            <option value={4}>⭐⭐⭐⭐+ (4+)</option>
+            <option value={3}>⭐⭐⭐+ (3+)</option>
+          </select>
+        </div>
+
+        {/* Active Filters */}
+        {(filters.branch !== 'All' || filters.treatment !== 'All' || filters.rating > 0) && (
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+            {filters.branch !== 'All' && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-teal-50 text-teal-700 text-xs font-medium rounded-full">
+                {filters.branch}
+                <button onClick={() => setFilters({ ...filters, branch: 'All' })} aria-label="Remove branch filter">
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+            {filters.treatment !== 'All' && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                {filters.treatment}
+                <button onClick={() => setFilters({ ...filters, treatment: 'All' })} aria-label="Remove treatment filter">
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+            {filters.rating > 0 && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded-full">
+                {filters.rating}+ ⭐
+                <button onClick={() => setFilters({ ...filters, rating: 0 })} aria-label="Remove rating filter">
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+            <button 
+              onClick={() => setFilters({ branch: 'All', treatment: 'All', rating: 0, search: '' })}
+              className="text-xs text-slate-500 hover:text-slate-700 underline"
+            >
+              Clear all
+            </button>
           </div>
-          
-          <div className="relative">
-            {/* Main Testimonial Card */}
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-rose-50/50 to-amber-50 p-6 md:p-8 lg:p-12 shadow-2xl shadow-rose-100/50 border border-rose-100">
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-10 left-10 w-64 h-64 bg-rose-300 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-10 right-10 w-64 h-64 bg-amber-300 rounded-full blur-3xl"></div>
-              </div>
-              
-              {/* Testimonial content */}
-              <div className="relative">
-                <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  {/* Patient Avatar & Info - Left Column */}
-                  <div className="lg:col-span-4 text-center lg:text-left">
-                    <div className="flex flex-col items-center lg:items-start">
-                      <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 text-4xl md:text-5xl flex items-center justify-center bg-gradient-to-br from-rose-100 to-amber-100 rounded-2xl mb-4 shadow-lg">
-                        {testimonials[currentTestimonial].image}
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
-                        {testimonials[currentTestimonial].name}
-                      </h3>
-                      <p className="text-rose-600 font-medium mb-2">
-                        {testimonials[currentTestimonial].city}
-                      </p>
-                      <p className="text-sm md:text-base text-gray-500 mb-4">
-                        Treated for: {testimonials[currentTestimonial].treatment}
-                      </p>
-                      <div className="flex items-center justify-center lg:justify-start">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className="w-5 h-5 md:w-6 md:h-6 text-amber-400 fill-current" 
-                          />
-                        ))}
-                        <span className="ml-2 text-sm font-medium text-gray-700">5.0</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Testimonial Text - Right Column */}
-                  <div className="lg:col-span-8">
-                    <div className="relative h-48 md:h-40 lg:h-48">
-                      {testimonials.map((testimonial, index) => (
-                        <div
-                          key={index}
-                          className={`absolute inset-0 transition-all duration-700 ease-in-out transform ${
-                            index === currentTestimonial
-                              ? 'opacity-100 translate-x-0'
-                              : 'opacity-0 translate-x-8'
-                          }`}
-                          aria-hidden={index !== currentTestimonial}
-                        >
-                          <div className="relative">
-                            <Quote className="absolute -top-6 -left-2 w-12 h-12 md:w-16 md:h-16 text-rose-200/50" />
-                            <blockquote className="pl-4 md:pl-8">
-                              <p className="text-lg md:text-xl lg:text-2xl text-gray-700 mb-6 leading-relaxed md:leading-relaxed">
-                                "{testimonial.text}"
-                              </p>
-                            </blockquote>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {/* Progress Bar */}
-                    <div className="mt-8 md:mt-12">
-                      <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-gradient-to-r from-rose-500 to-amber-500 rounded-full transition-all duration-1000 ease-out"
-                          style={{ 
-                            width: `${((currentTestimonial + 1) / testimonials.length) * 100}%` 
-                          }}
-                        />
-                      </div>
-                      <div className="flex justify-between mt-2 text-sm text-gray-500">
-                        <span>Testimonial {currentTestimonial + 1} of {testimonials.length}</span>
-                        <span>100% Satisfied Patients</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Navigation dots - Mobile Optimized */}
-                <div className="flex justify-center mt-8 lg:mt-12 space-x-2 md:space-x-3">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToTestimonial(index)}
-                      className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 ${
-                        index === currentTestimonial
-                          ? 'bg-gradient-to-r from-rose-600 to-amber-600 w-8 md:w-10 h-3'
-                          : 'bg-gray-300 hover:bg-gray-400 w-3 h-3'
-                      }`}
-                      aria-label={`Go to testimonial ${index + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
-              
-              {/* Navigation arrows - Enhanced */}
-              <button
-                onClick={prevTestimonial}
-                className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-x-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-rose-500"
-                aria-label="Previous testimonial"
-              >
-                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 rotate-180" />
-              </button>
-              
-              <button
-                onClick={nextTestimonial}
-                className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-sm p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:translate-x-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-rose-500"
-                aria-label="Next testimonial"
-              >
-                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
-              </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Testimonial Card Component ───
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+  return (
+    <article className="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 hover:shadow-md hover:border-teal-100 transition-all duration-300 group">
+      {/* Header */}
+      <div className="flex items-start gap-4 mb-4">
+        {/* Avatar */}
+        <div className="relative">
+          {testimonial.avatar ? (
+            <img 
+              src={testimonial.avatar} 
+              alt={`${testimonial.name}'s profile`}
+              className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-teal-400 to-blue-600 flex items-center justify-center text-white font-bold">
+              {testimonial.name.charAt(0)}
             </div>
-            
-            {/* Trust Indicators */}
-            {/* <div className="mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-                <div className="text-2xl md:text-3xl font-bold text-rose-600 mb-2">500+</div>
-                <div className="text-gray-700">Patients Treated</div>
-              </div>
-              <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-                <div className="text-2xl md:text-3xl font-bold text-rose-600 mb-2">98%</div>
-                <div className="text-gray-700">Recovery Rate</div>
-              </div>
-              <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-                <div className="text-2xl md:text-3xl font-bold text-rose-600 mb-2">4.9/5</div>
-                <div className="text-gray-700">Average Rating</div>
-              </div>
-              <div className="bg-white p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 text-center">
-                <div className="text-2xl md:text-3xl font-bold text-rose-600 mb-2">15+</div>
-                <div className="text-gray-700">Cities Served</div>
-              </div>
-            </div> */}
-            
-            {/* Micro Testimonials Grid - Mobile Horizontal Scroll */}
-            {/* <div className="mt-12 md:mt-16">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center">
-                More Happy Patients
-              </h3>
-              <div className="flex overflow-x-auto pb-4 space-x-4 md:grid md:grid-cols-3 lg:grid-cols-6 md:gap-4 md:space-x-0 scrollbar-hide">
-                {testimonials.map((testimonial, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    className={`flex-shrink-0 w-64 md:w-auto md:flex-shrink md:flex-1 p-4 rounded-xl border transition-all duration-300 ${
-                      index === currentTestimonial
-                        ? 'bg-rose-50 border-rose-200 shadow-md'
-                        : 'bg-white border-gray-200 hover:border-rose-300 hover:shadow-sm'
-                    }`}
-                  >
-                    <div className="flex items-start space-x-3">
-                      <div className="text-2xl">{testimonial.image}</div>
-                      <div className="text-left">
-                        <div className="flex items-center mb-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-3 h-3 text-amber-400 fill-current" />
-                          ))}
-                        </div>
-                        <div className="font-semibold text-gray-900 text-sm">
-                          {testimonial.name}
-                        </div>
-                        <div className="text-xs text-gray-500">{testimonial.city}</div>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div> */}
+          )}
+          {testimonial.verified && (
+            <span className="absolute -bottom-1 -right-1 bg-emerald-500 text-white rounded-full p-0.5" title="Verified Patient">
+              <CheckCircle size={12} />
+            </span>
+          )}
+        </div>
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3 className="font-semibold text-slate-900 truncate">{testimonial.name}</h3>
+            {testimonial.verified && (
+              <span className="text-[10px] font-medium px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full">Verified</span>
+            )}
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
+            <MapPin size={12} />
+            <span>{testimonial.city}</span>
+            <span>•</span>
+            <span>{testimonial.branch.split('(')[0].trim()}</span>
+          </div>
+        </div>
+
+        {/* Rating */}
+        <div className="flex items-center gap-0.5">
+          {[...Array(5)].map((_, i) => (
+            <Star 
+              key={i} 
+              size={14} 
+              className={i < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-slate-200'} 
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Treatment Badge */}
+      <div className="inline-flex items-center gap-1 px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded-full mb-3">
+        <Sparkles size={10} />
+        {testimonial.treatment}
+      </div>
+
+      {/* Review Text */}
+      <blockquote className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-4 group-hover:line-clamp-none transition-all">
+        {testimonial.text}
+      </blockquote>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-400">
+        <time dateTime={testimonial.date}>
+          {new Date(testimonial.date).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })}
+        </time>
+        <button className="flex items-center gap-1 hover:text-teal-600 transition-colors" aria-label="Mark as helpful">
+          <Star size={12} /> {testimonial.helpful} found helpful
+        </button>
+      </div>
+    </article>
+  );
+}
+
+// ─── Main Page Component ───
+export default function TestimonialsPage() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(INITIAL_TESTIMONIALS);
+  const [filters, setFilters] = useState<FilterState>({ branch: 'All', treatment: 'All', rating: 0, search: '' });
+  const [showForm, setShowForm] = useState(false);
+  const [sortBy, setSortBy] = useState<'newest' | 'helpful' | 'rating'>('newest');
+
+  // Filter & Search Logic
+  const filteredTestimonials = useMemo(() => {
+    let result = [...testimonials];
+
+    // Search
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      result = result.filter(t => 
+        t.name.toLowerCase().includes(q) ||
+        t.treatment.toLowerCase().includes(q) ||
+        t.text.toLowerCase().includes(q) ||
+        t.city.toLowerCase().includes(q)
+      );
+    }
+
+    // Branch Filter
+    if (filters.branch !== 'All') {
+      result = result.filter(t => t.branch === filters.branch);
+    }
+
+    // Treatment Filter
+    if (filters.treatment !== 'All') {
+      result = result.filter(t => t.treatment.includes(filters.treatment));
+    }
+
+    // Rating Filter
+    if (filters.rating > 0) {
+      result = result.filter(t => t.rating >= filters.rating);
+    }
+
+    // Sort
+    result.sort((a, b) => {
+      if (sortBy === 'newest') return new Date(b.date).getTime() - new Date(a.date).getTime();
+      if (sortBy === 'helpful') return b.helpful - a.helpful;
+      if (sortBy === 'rating') return b.rating - a.rating;
+      return 0;
+    });
+
+    return result;
+  }, [testimonials, filters, sortBy]);
+
+  // Debounced Search (optional enhancement)
+  const handleSearch = useCallback((query: string) => {
+    // Could add debounce here with setTimeout
+  }, []);
+
+  // Handle Form Submission
+  const handleSubmitTestimonial = async (data: Partial<Testimonial>) => {
+    // TODO: Replace with actual API call / server action
+    const newTestimonial: Testimonial = {
+      id: Date.now().toString(),
+      name: data.name || 'Anonymous',
+      branch: data.branch || 'SKM Main Centre (Delhi)',
+      city: data.city || 'Delhi',
+      treatment: data.treatment || 'General Consultation',
+      rating: data.rating || 5,
+      text: data.text || '',
+      date: new Date().toISOString().split('T')[0],
+      verified: false, // Pending verification
+      avatar: data.avatar,
+      helpful: 0
+    };
+    
+    setTestimonials(prev => [newTestimonial, ...prev]);
+    setShowForm(false);
+    
+    // Show success toast (implement with your toast library)
+    alert('Thank you! Your review is pending verification and will appear soon.');
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-teal-50 via-white to-blue-50 py-12 md:py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+            <CheckCircle size={12} /> 5,000+ Verified Reviews
+          </div>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            Real Stories, Real <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">Recovery</span>
+          </h1>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto mb-8">
+            Discover how patients across Delhi NCR achieved pain-free living with expert physiotherapy at SKM.
+          </p>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap justify-center gap-3">
+            <button 
+              onClick={() => setShowForm(true)}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-teal-200"
+            >
+              <Send size={16} /> Share Your Story
+            </button>
+            <a 
+              href="#reviews"
+              className="inline-flex items-center gap-2 border-2 border-teal-200 text-teal-700 font-semibold px-6 py-3 rounded-xl hover:bg-teal-50 transition-colors"
+            >
+              Browse Reviews
+            </a>
           </div>
         </div>
       </section>
-    </>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 py-8 md:py-12" id="reviews">
+        {/* Summary Stats */}
+        <SummaryStats testimonials={testimonials} />
+
+        {/* Filters & Search */}
+        <FilterBar filters={filters} setFilters={setFilters} onSearch={handleSearch} />
+
+        {/* Sort & Count */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <p className="text-slate-500 text-sm">
+            Showing <span className="font-semibold text-slate-900">{filteredTestimonials.length}</span> of {testimonials.length} reviews
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-slate-500">Sort by:</span>
+            <select
+              className="px-3 py-1.5 rounded-lg border border-slate-200 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+            >
+              <option value="newest">Newest First</option>
+              <option value="helpful">Most Helpful</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Testimonials Grid */}
+        {filteredTestimonials.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {filteredTestimonials.map(t => (
+              <TestimonialCard key={t.id} testimonial={t} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+            <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-slate-700 mb-2">No reviews found</h3>
+            <p className="text-slate-500 text-sm mb-4">Try adjusting your filters or search terms</p>
+            <button 
+              onClick={() => setFilters({ branch: 'All', treatment: 'All', rating: 0, search: '' })}
+              className="text-teal-600 font-medium text-sm hover:underline"
+            >
+              Clear all filters
+            </button>
+          </div>
+        )}
+
+        {/* Load More (if paginating) */}
+        {filteredTestimonials.length >= 9 && (
+          <div className="text-center mt-10">
+            <button className="px-6 py-3 bg-white border-2 border-teal-200 text-teal-700 font-semibold rounded-xl hover:bg-teal-50 transition-colors">
+              Load More Reviews
+            </button>
+          </div>
+        )}
+      </main>
+
+      {/* Testimonial Submission Modal */}
+      {showForm && (
+        <TestimonialForm 
+          onClose={() => setShowForm(false)} 
+          onSubmit={handleSubmitTestimonial}
+          branches={BRANCHES.filter(b => b !== 'All')}
+          treatments={TREATMENTS.filter(t => t !== 'All')}
+        />
+      )}
+
+      {/* Floating CTA (Mobile) */}
+      <div className="fixed bottom-6 left-4 right-4 md:hidden z-40">
+        <button
+          onClick={() => setShowForm(true)}
+          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold py-3.5 rounded-2xl shadow-lg shadow-teal-200/50"
+        >
+          <Send size={16} /> Share Your Experience
+        </button>
+      </div>
+    </div>
   );
 }

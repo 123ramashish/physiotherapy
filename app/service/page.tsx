@@ -7,7 +7,6 @@ import {
   Zap,
   Target,
   Baby,
-  ArrowRight,
   CheckCircle2,
   Sparkles,
   Clock,
@@ -17,474 +16,577 @@ import {
   Calendar,
   Phone,
   Star,
-  ChevronRight
+  ChevronRight,
+  MapPin,
+  Stethoscope,
+  Brain,
+  Bone,
+  Wind,
+  Dumbbell,
+  Syringe,
+  Waves,
+  PersonStanding,
+  ArrowRight
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
 
+// ─── Branch data ────────────────────────────────────────────────────────────
+const branches = [
+  {
+    id: 1,
+    name: 'Branch 1 – Main Centre',
+    address: '123 MG Road, Sector 14, Gurugram, Haryana',
+    phone: '7982799147',
+    timing: 'Mon–Sat: 9 AM – 8 PM',
+    mapLink: '#'
+  },
+  {
+    id: 2,
+    name: 'Branch 2 – South Extension',
+    address: '45 South Ex Road, Sector 45, Gurugram, Haryana',
+    phone: '7982799148',
+    timing: 'Mon–Sat: 9 AM – 8 PM',
+    mapLink: '#'
+  },
+  {
+    id: 3,
+    name: 'Branch 3 – DLF Phase',
+    address: '78 Cyber Hub, DLF Phase 2, Gurugram, Haryana',
+    phone: '7982799149',
+    timing: 'Mon–Sat: 9 AM – 8 PM',
+    mapLink: '#'
+  }
+];
+
+// ─── Service image backgrounds (Unsplash free) ──────────────────────────────
+const serviceImages = [
+  'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80', // cupping
+  'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&q=80', // dry needling / acupuncture
+  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80', // back pain
+  'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80', // neck / spine
+  'https://images.unsplash.com/photo-1567013127542-490d757e51cd?w=600&q=80', // knee pain
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80', // arthritis
+  'https://images.unsplash.com/photo-1598901865264-4f54e0c2a11c?w=600&q=80', // heel / foot
+  'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80', // bell's palsy / neuro
+  'https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=600&q=80', // sciatica / sports
+  'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80', // sports injuries
+  'https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=600&q=80', // relaxation
+  'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80', // post covid
+  'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&q=80', // frozen shoulder
+  'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80', // paralysis rehab
+];
+
+// ─── Services from the image ─────────────────────────────────────────────────
+const services = [
+  {
+    icon: Waves,
+    title: 'Cupping & Hijama',
+    hindiTitle: 'कपिंग व हिजामा',
+    description: 'Traditional cupping therapy and Hijama for deep tissue relief, improved blood flow, and detoxification.',
+    accent: 'from-emerald-500 to-teal-600',
+    badge: 'Traditional',
+    img: serviceImages[0],
+  },
+  {
+    icon: Syringe,
+    title: 'Dry Needling',
+    hindiTitle: 'ड्राई निडलिंग',
+    description: 'Precision dry needling therapy targeting trigger points to relieve chronic muscle pain and tension.',
+    accent: 'from-blue-500 to-indigo-600',
+    badge: 'Advanced',
+    img: serviceImages[1],
+  },
+  {
+    icon: Activity,
+    title: 'Back Pain',
+    hindiTitle: 'कमर दर्द',
+    description: 'Comprehensive treatment for acute and chronic back pain using manual therapy and therapeutic exercises.',
+    accent: 'from-teal-500 to-cyan-600',
+    badge: 'Popular',
+    img: serviceImages[2],
+  },
+  {
+    icon: PersonStanding,
+    title: 'Neck Pain',
+    hindiTitle: 'गर्दन दर्द',
+    description: 'Specialized cervical spine therapy, postural correction, and mobilization for neck pain relief.',
+    accent: 'from-indigo-500 to-blue-600',
+    badge: 'Popular',
+    img: serviceImages[3],
+  },
+  {
+    icon: Bone,
+    title: 'Knee Pain',
+    hindiTitle: 'घुटनों का दर्द',
+    description: 'Expert knee rehabilitation including strengthening, bracing, and biomechanical correction programs.',
+    accent: 'from-green-500 to-emerald-600',
+    badge: 'Popular',
+    img: serviceImages[4],
+  },
+  {
+    icon: Stethoscope,
+    title: 'Arthritis',
+    hindiTitle: 'गठिया, बाय',
+    description: 'Holistic arthritis management reducing inflammation, improving joint mobility, and enhancing quality of life.',
+    accent: 'from-blue-600 to-indigo-700',
+    badge: null,
+    img: serviceImages[5],
+  },
+  {
+    icon: Activity,
+    title: 'Heel Pain',
+    hindiTitle: 'एड़ी का दर्द',
+    description: 'Plantar fasciitis and heel spur treatment through targeted therapy, orthotics, and exercise programs.',
+    accent: 'from-teal-600 to-green-600',
+    badge: null,
+    img: serviceImages[6],
+  },
+  {
+    icon: Brain,
+    title: "Bell's Palsy",
+    hindiTitle: 'चेहरे का लकवा',
+    description: 'Neuro-rehabilitation for facial palsy including electrical stimulation, massage, and facial exercises.',
+    accent: 'from-indigo-600 to-blue-700',
+    badge: 'Specialized',
+    img: serviceImages[7],
+  },
+  {
+    icon: Zap,
+    title: 'Sciatica Pain',
+    hindiTitle: 'साइटिका',
+    description: 'Sciatica nerve pain relief through decompression, neural mobilization, and core strengthening protocols.',
+    accent: 'from-emerald-600 to-teal-700',
+    badge: 'Popular',
+    img: serviceImages[8],
+  },
+  {
+    icon: Dumbbell,
+    title: 'Sports Injuries',
+    hindiTitle: 'खेल कूद की चोटें',
+    description: 'Rapid sports injury rehabilitation with performance optimization for a safe return to sport.',
+    accent: 'from-blue-500 to-teal-600',
+    badge: 'Most Popular',
+    img: serviceImages[9],
+  },
+  {
+    icon: Heart,
+    title: 'Soreness & Relaxation',
+    hindiTitle: 'सूजन की परेशानी',
+    description: 'Therapeutic relaxation techniques, soft tissue therapy, and recovery protocols to ease soreness.',
+    accent: 'from-green-500 to-indigo-500',
+    badge: null,
+    img: serviceImages[10],
+  },
+  {
+    icon: Wind,
+    title: 'Post COVID Rehab',
+    hindiTitle: 'टेपिंग',
+    description: 'Specialised post-COVID rehabilitation for breathlessness, fatigue, and musculoskeletal recovery.',
+    accent: 'from-teal-500 to-blue-500',
+    badge: 'Specialized',
+    img: serviceImages[11],
+  },
+  {
+    icon: Target,
+    title: 'Frozen Shoulder',
+    hindiTitle: 'कंधे की जकड़न',
+    description: 'Adhesive capsulitis treatment with joint mobilization, stretching, and progressive shoulder rehabilitation.',
+    accent: 'from-indigo-500 to-green-500',
+    badge: null,
+    img: serviceImages[12],
+  },
+  {
+    icon: Users,
+    title: 'Paralysis (Stroke)',
+    hindiTitle: 'लकवा',
+    description: 'Comprehensive neuro-rehabilitation for stroke and paralysis recovery, rebuilding strength and independence.',
+    accent: 'from-blue-600 to-emerald-600',
+    badge: 'Specialized',
+    img: serviceImages[13],
+  },
+];
+
+// ─── Why Choose Us ────────────────────────────────────────────────────────────
+const whyUs = [
+  { icon: Target, title: 'Personalised Plans', desc: 'Customised recovery programs based on individual assessment.', color: 'bg-emerald-100 text-emerald-700' },
+  { icon: Award, title: 'Certified Experts', desc: 'Licensed physiotherapists with advanced specialisation training.', color: 'bg-blue-100 text-blue-700' },
+  { icon: Zap, title: 'Advanced Technology', desc: 'Latest equipment and evidence-based treatment modalities.', color: 'bg-indigo-100 text-indigo-700' },
+  { icon: Heart, title: 'Holistic Approach', desc: 'Comprehensive care for physical, emotional, and lifestyle wellbeing.', color: 'bg-teal-100 text-teal-700' },
+];
+
+// ─── Component ────────────────────────────────────────────────────────────────
 const ServicesPage = () => {
-  const [visibleCards, setVisibleCards] = useState<any>([]);
-  const cardRefs = useRef<any>([]);
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeService, setActiveService] = useState(0);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const [selectedBranch, setSelectedBranch] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
-    setIsVisible(true);
-    const interval = setInterval(() => {
-      setActiveService((prev) => (prev + 1) % 6);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const observers = cardRefs.current.map((ref: any, index: any) => {
+    const observers = cardRefs.current.map((ref, index) => {
       if (!ref) return null;
-      
       const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setVisibleCards((prev: any) => [...new Set([...prev, index])]);
-              observer.unobserve(ref);
-            }
-          });
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleCards(prev => new Set([...prev, index]));
+            observer.unobserve(ref);
+          }
         },
-        { 
-          threshold: 0.1,
-          rootMargin: '50px'
-        }
+        { threshold: 0.08, rootMargin: '60px' }
       );
-
       observer.observe(ref);
       return observer;
-    }).filter(Boolean);
-
-    return () => observers.forEach((observer: IntersectionObserver) => observer.disconnect());
+    });
+    return () => observers.forEach(o => o?.disconnect());
   }, []);
 
-  const services = [
-    {
-      icon: Activity,
-      title: 'Sports Injury Rehabilitation',
-      description: 'Specialized treatment for athletic injuries, performance enhancement, and quick return to sports',
-      color: 'from-red-50 to-orange-50',
-      iconBg: 'bg-gradient-to-br from-red-100 to-orange-100',
-      iconColor: 'text-red-600',
-      features: ['Quick recovery protocols', 'Performance optimization', 'Injury prevention strategies', 'Sport-specific training'],
-      duration: '45-60 min sessions',
-      popular: true
-    },
-    {
-      icon: Heart,
-      title: 'Manual Therapy',
-      description: 'Advanced hands-on techniques for pain relief, improved mobility, and tissue healing',
-      color: 'from-pink-50 to-rose-50',
-      iconBg: 'bg-gradient-to-br from-pink-100 to-rose-100',
-      iconColor: 'text-pink-600',
-      features: ['Pain management techniques', 'Joint mobilization', 'Soft tissue manipulation', 'Myofascial release'],
-      duration: '30-45 min sessions',
-      popular: false
-    },
-    {
-      icon: Target,
-      title: 'Post-Surgical Rehabilitation',
-      description: 'Comprehensive recovery programs for post-surgery healing and functional restoration',
-      color: 'from-purple-50 to-violet-50',
-      iconBg: 'bg-gradient-to-br from-purple-100 to-violet-100',
-      iconColor: 'text-purple-600',
-      features: ['Post-surgery care plans', 'Scar tissue management', 'Strength & mobility restoration', 'Functional training'],
-      duration: '60 min sessions',
-      popular: true
-    },
-    {
-      icon: Zap,
-      title: 'Chronic Pain Management',
-      description: 'Holistic approach to managing long-term pain and improving quality of life',
-      color: 'from-amber-50 to-orange-50',
-      iconBg: 'bg-gradient-to-br from-amber-100 to-orange-100',
-      iconColor: 'text-amber-600',
-      features: ['Pain neuroscience education', 'Lifestyle modification coaching', 'Exercise therapy', 'Mind-body techniques'],
-      duration: 'Custom plans',
-      popular: false
-    },
-    {
-      icon: Users,
-      title: 'Orthopedic Physical Therapy',
-      description: 'Expert treatment for musculoskeletal conditions, joint disorders, and movement dysfunctions',
-      color: 'from-blue-50 to-cyan-50',
-      iconBg: 'bg-gradient-to-br from-blue-100 to-cyan-100',
-      iconColor: 'text-blue-600',
-      features: ['Joint preservation techniques', 'Osteoarthritis management', 'Postural correction', 'Movement analysis'],
-      duration: '45-60 min sessions',
-      popular: true
-    },
-    {
-      icon: Baby,
-      title: 'Pediatric Physiotherapy',
-      description: 'Specialized care for children with developmental delays and physical challenges',
-      color: 'from-emerald-50 to-green-50',
-      iconBg: 'bg-gradient-to-br from-emerald-100 to-green-100',
-      iconColor: 'text-emerald-600',
-      features: ['Developmental assessment', 'Play-based therapy', 'Family education & support', 'School integration'],
-      duration: '30-45 min sessions',
-      popular: false
-    }
-  ];
-
-  const handleBookAppointment = () => {
-    router.push('/contact');
-  };
-
-  const handleServiceClick = (serviceTitle: string) => {
-    router.push(`/contact`);
-  };
+  const handleBook = () => router.push('/contact');
 
   return (
     <>
-      {/* SEO Structured Data */}
       <Head>
-        <title>Physiotherapy Services | Sports Injury, Manual Therapy & Rehabilitation</title>
-        <meta name="description" content="Expert physiotherapy services including sports injury rehabilitation, manual therapy, post-surgical rehab, chronic pain management, orthopedic care, and pediatric therapy. Book your appointment today." />
-        <meta name="keywords" content="sports injury rehabilitation, manual therapy, physiotherapy services, chronic pain management, orthopedic physical therapy, pediatric physiotherapy, post-surgical rehab" />
-        <meta property="og:title" content="Comprehensive Physiotherapy Services | Expert Care" />
-        <meta property="og:description" content="Discover our specialized physiotherapy services tailored to your recovery needs. From sports injuries to chronic pain management." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://yourclinic.com/services" />
+        <title>SKM Physiotherapy & Rehabilitation Centre | Services</title>
+        <meta name="description" content="SKM Physiotherapy & Rehabilitation Centre offers cupping, dry needling, back pain, sports injuries, paralysis rehab and much more across multiple branches in Gurugram." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
       </Head>
 
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalBusiness",
-            "name": "Physiotherapy & Chiropractic Clinic",
-            "description": "Comprehensive physiotherapy and chiropractic services",
-            "medicalSpecialty": "Physiotherapy, Chiropractic",
-            "offers": services.map(service => ({
-              "@type": "Service",
-              "name": service.title,
-              "description": service.description
-            })),
-            "areaServed": {
-              "@type": "City",
-              "name": "Your City"
-            }
-          })
-        }}
-      />
+      {/* Google Fonts */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap');
 
-      <div className="min-h-screen bg-gradient-to-b from-white via-amber-50/30 to-rose-50/30">
-        {/* Hero Section */}
-        <section className="relative pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 overflow-hidden" aria-label="Our Services Introduction">
-          {/* Background Elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-10 left-4 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-red-200/40 rounded-full mix-blend-multiply blur-3xl animate-pulse"></div>
-            <div className="absolute top-20 right-4 sm:right-10 w-48 h-48 sm:w-72 sm:h-72 bg-amber-200/40 rounded-full mix-blend-multiply blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-64 h-64 sm:w-96 sm:h-96 bg-pink-200/40 rounded-full mix-blend-multiply blur-3xl animate-pulse delay-500"></div>
-          </div>
+        * { box-sizing: border-box; }
 
-          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-lg mb-6 sm:mb-8 animate-bounce-sm" role="note">
-              <Sparkles className="text-red-600 w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-              <span className="text-xs sm:text-sm font-semibold text-gray-800">Premium Healthcare Services</span>
+        body { font-family: 'Outfit', sans-serif; }
+
+        .skm-hero-text { font-family: 'Playfair Display', serif; }
+
+        .card-appear {
+          opacity: 0;
+          transform: translateY(32px);
+          transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .card-appear.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .service-card {
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          cursor: pointer;
+          transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s ease;
+          border: 1px solid #e2e8f0;
+          background: #fff;
+        }
+        .service-card:hover {
+          transform: translateY(-8px) scale(1.01);
+          box-shadow: 0 24px 48px rgba(0,0,0,0.15);
+        }
+        .service-card .card-img {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          opacity: 0.18;
+          transition: opacity 0.4s ease;
+        }
+        .service-card:hover .card-img {
+          opacity: 0.28;
+        }
+        .service-card .card-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(255,255,255,0.97) 55%, rgba(255,255,255,0.7) 100%);
+        }
+        .service-card:hover .card-overlay {
+          background: linear-gradient(135deg, rgba(255,255,255,0.93) 40%, rgba(255,255,255,0.55) 100%);
+        }
+
+        .branch-tab {
+          transition: all 0.25s ease;
+          cursor: pointer;
+          border-radius: 12px;
+          padding: 10px 20px;
+          font-weight: 600;
+          font-size: 0.85rem;
+          border: 2px solid transparent;
+        }
+        .branch-tab.active {
+          background: linear-gradient(135deg, #059669, #3b82f6);
+          color: #fff;
+          border-color: transparent;
+          box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+        }
+        .branch-tab:not(.active) {
+          background: #f0fdf4;
+          color: #047857;
+          border-color: #a7f3d0;
+        }
+        .branch-tab:not(.active):hover {
+          background: #dcfce7;
+          border-color: #6ee7b7;
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, #059669 0%, #3b82f6 50%, #6366f1 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .stat-card {
+          background: #fff;
+          border-radius: 16px;
+          padding: 18px 12px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+          border: 1px solid #e2e8f0;
+          text-align: center;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
+
+        .hero-bg-pattern {
+          background-image: radial-gradient(circle at 20% 20%, rgba(16,185,129,0.07) 0%, transparent 50%),
+                            radial-gradient(circle at 80% 80%, rgba(99,102,241,0.07) 0%, transparent 50%),
+                            radial-gradient(circle at 50% 50%, rgba(59,130,246,0.05) 0%, transparent 60%);
+        }
+
+        .section-divider {
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #10b981, #3b82f6, #6366f1, transparent);
+          margin: 0 auto;
+          width: 120px;
+          border-radius: 2px;
+        }
+
+        @media (max-width: 640px) {
+          .skm-heading { font-size: 2rem !important; }
+        }
+      `}</style>
+
+      <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Outfit', sans-serif" }}>
+
+        {/* ── Hero ── */}
+        <section className="hero-bg-pattern" style={{ paddingTop: '5rem', paddingBottom: '3rem' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
+
+            {/* Pill badge */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg,#ecfdf5,#eff6ff)', border: '1px solid #a7f3d0', borderRadius: '50px', padding: '8px 20px', marginBottom: '1.5rem', boxShadow: '0 2px 12px rgba(16,185,129,0.15)' }}>
+              <Sparkles size={16} color="#059669" />
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#047857', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Multi-Branch Physiotherapy Excellence</span>
             </div>
 
-            {/* Main Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-              Expert <span className="text-red-600 relative inline-block">
-                Physiotherapy
-                <svg className="absolute -bottom-2 left-0 w-full h-2" aria-hidden="true">
-                  <path d="M0 2Q100 6 200 2" stroke="currentColor" strokeWidth="3" fill="none" />
-                </svg>
-              </span> Services
+            {/* Clinic Name */}
+            <h1 className="skm-hero-text skm-heading" style={{ fontSize: '3rem', fontWeight: 900, color: '#0f172a', lineHeight: 1.15, marginBottom: '0.5rem' }}>
+              SKM Physiotherapy
             </h1>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '1rem', letterSpacing: '0.06em' }}>
+              <span className="gradient-text">&amp; REHABILITATION CENTRE</span>
+            </h2>
+            <div className="section-divider" style={{ marginBottom: '1.5rem' }}></div>
 
-            {/* Subtitle */}
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4">
-              Comprehensive, evidence-based physiotherapy and chiropractic services tailored to your individual recovery goals and lifestyle needs.
+            <p style={{ fontSize: '1.05rem', color: '#475569', maxWidth: '640px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+              Comprehensive physiotherapy and rehabilitation care across <strong>3 branches</strong> in Gurugram. Expert treatment for pain relief, sports injuries, neuro-rehab, and more.
             </p>
 
-            {/* Stats Bar */}
-            <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 max-w-4xl mx-auto px-4">
+            {/* Stats */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', maxWidth: '800px', margin: '0 auto 2.5rem' }}>
               {[
-                { number: '20+', label: 'Specialized Services', icon: Award },
-                { number: '1000+', label: 'Patients Treated', icon: Users },
-                { number: '3+', label: 'Years Experience', icon: Calendar },
-                { number: '98%', label: 'Patient Satisfaction', icon: Star },
-                { number: '24/7', label: 'Support', icon: Shield }
-              ].map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                  role="region"
-                  aria-label={`${stat.number} ${stat.label}`}
-                >
-                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 mx-auto mb-2" aria-hidden="true" />
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-red-600">{stat.number}</div>
-                  <div className="text-xs sm:text-sm text-gray-600 mt-1 font-medium">{stat.label}</div>
+                { n: '14+', l: 'Services Offered', color: '#059669' },
+                { n: '3', l: 'Branches', color: '#3b82f6' },
+                { n: '1000+', l: 'Patients Treated', color: '#6366f1' },
+                { n: '98%', l: 'Satisfaction Rate', color: '#0891b2' },
+                { n: '24/7', l: 'Emergency Care', color: '#047857' },
+              ].map((s, i) => (
+                <div className="stat-card" key={i}>
+                  <div style={{ fontSize: '1.6rem', fontWeight: 800, color: s.color, lineHeight: 1 }}>{s.n}</div>
+                  <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '4px', fontWeight: 500 }}>{s.l}</div>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Services Grid */}
-        <section className="py-12 sm:py-16 md:py-20 lg:py-24" aria-label="Our Services">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-                Our <span className="text-red-600">Specialized</span> Services
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg">
-                Each service is tailored to meet specific patient needs with evidence-based approaches
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {services.map((service, index) => (
-                <article
-                  key={index}
-                  ref={(el: any) => (cardRefs.current[index] = el)}
-                  className={`group relative bg-white rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 
-                    ${visibleCards.includes(index) || hoveredCard === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-                    ${activeService === index ? 'ring-2 ring-red-500/30' : ''}
-                  `}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  onClick={() => handleServiceClick(service.title)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`Learn more about ${service.title}`}
-                >
-                  {/* Popular Badge */}
-                  {service.popular && (
-                    <div className="absolute top-4 right-4 z-10">
-                      <span className="bg-gradient-to-r from-red-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Gradient Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-
-                  {/* Card Content */}
-                  <div className="relative p-5 sm:p-6 md:p-8">
-                    {/* Icon & Duration */}
-                    <div className="mb-5 sm:mb-6 relative flex items-start justify-between">
-                      <div className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 ${service.iconBg} rounded-2xl shadow-lg group-hover:scale-110 transition-all duration-500`}>
-                        <service.icon className={`${service.iconColor} w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10`} aria-hidden="true" />
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
-                        <Clock className="inline w-3 h-3 mr-1" />
-                        {service.duration}
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors duration-300">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-600 text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    {/* Features List */}
-                    <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm sm:text-base text-gray-600">
-                          <CheckCircle2 className="text-red-500 flex-shrink-0 mt-0.5 w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA Button */}
-                    <button
-                      className="w-full bg-gradient-to-r from-gray-900 to-gray-800 text-white py-3 px-4 rounded-xl font-medium group-hover:from-red-600 group-hover:to-pink-600 transition-all duration-300 flex items-center justify-center gap-2 hover:gap-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleServiceClick(service.title);
-                      }}
-                      aria-label={`Book ${service.title} service`}
-                    >
-                      <span>Book Service</span>
-                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                    </button>
-                  </div>
-
-                  {/* Hover Effects */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-pink-500 to-red-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                  <div className="absolute top-0 right-0 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-bl from-red-100/50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us Section */}
-        <section className="py-12 sm:py-16 md:py-20 bg-white/80 backdrop-blur-sm" aria-label="Why Choose Us">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-                Why Choose <span className="text-red-600">Our Clinic</span>
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg">
-                We combine expertise, technology, and compassion for optimal patient outcomes
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-              {[
-                { 
-                  icon: Target, 
-                  title: 'Personalized Treatment Plans', 
-                  desc: 'Customized recovery programs based on individual assessment and goals',
-                  color: 'from-red-100 to-pink-100'
-                },
-                { 
-                  icon: Award, 
-                  title: 'Certified Experts', 
-                  desc: 'All therapists are licensed professionals with specialized training',
-                  color: 'from-blue-100 to-cyan-100'
-                },
-                { 
-                  icon: Zap, 
-                  title: 'Advanced Technology', 
-                  desc: 'Latest equipment and evidence-based treatment modalities',
-                  color: 'from-amber-100 to-orange-100'
-                },
-                { 
-                  icon: Heart, 
-                  title: 'Holistic Approach', 
-                  desc: 'Comprehensive care addressing physical, emotional, and lifestyle factors',
-                  color: 'from-emerald-100 to-green-100'
-                }
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="text-center p-5 sm:p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group border border-gray-100"
-                  role="article"
-                >
-                  <div className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br ${item.color} rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <item.icon className="text-gray-800 w-6 h-6 sm:w-7 sm:h-7" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Home Visits Banner */}
-        <section 
-          className={`container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-          aria-label="Home Visits Service"
-        >
-          <div className="bg-gradient-to-r from-pink-500 via-rose-600 to-red-500 rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 text-white relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-            <div className="absolute top-0 right-0 w-40 h-40 sm:w-64 sm:h-64 bg-white/10 rounded-full -mr-20 -mt-20 sm:-mr-32 sm:-mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-48 sm:h-48 bg-white/10 rounded-full -ml-16 -mb-16 sm:-ml-24 sm:-mb-24"></div>
-
-            <div className="relative z-10 text-center">
-              <Home className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 animate-bounce-sm" aria-hidden="true" />
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-                CONVENIENT HOME VISITS AVAILABLE
-              </h2>
-              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md px-5 sm:px-6 py-2.5 sm:py-3 rounded-full mb-6 sm:mb-8">
-                <Clock className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-                <span className="text-sm sm:text-base font-semibold">Flexible Scheduling • 24/7 Emergency Service</span>
-              </div>
-              <p className="text-white/90 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto">
-                Receive expert physiotherapy care in the comfort of your home. Perfect for post-surgical patients, elderly clients, and those with mobility challenges.
-              </p>
+            {/* CTA Buttons */}
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button
-                onClick={handleBookAppointment}
-                className="bg-white text-red-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base md:text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-600"
-                aria-label="Book Home Visit Service"
+                onClick={handleBook}
+                style={{ background: 'linear-gradient(135deg,#059669,#3b82f6)', color: '#fff', border: 'none', borderRadius: '50px', padding: '14px 32px', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer', boxShadow: '0 6px 20px rgba(59,130,246,0.35)', display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Outfit',sans-serif" }}
               >
-                <Phone className="inline w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Schedule Home Visit
+                <Phone size={16} /> Book Appointment
               </button>
+              <a
+                href={`tel:7982799147`}
+                style={{ background: '#fff', color: '#059669', border: '2px solid #059669', borderRadius: '50px', padding: '14px 32px', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
+              >
+                <Phone size={16} /> 7982799147
+              </a>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-12 sm:py-16 md:py-20" aria-label="Call to Action">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 relative overflow-hidden">
-              {/* Decorative Elements */}
-              <div className="absolute top-0 left-0 w-32 h-32 sm:w-40 sm:h-40 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute bottom-0 right-0 w-32 h-32 sm:w-40 sm:h-40 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2"></div>
+        {/* ── Branch Selector ── */}
+        <section style={{ background: '#f0fdf4', borderTop: '1px solid #d1fae5', borderBottom: '1px solid #d1fae5', padding: '2.5rem 1.5rem' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>Our <span className="gradient-text">Branches</span></h2>
+              <p style={{ color: '#64748b', fontSize: '0.9rem' }}>Select a branch for location &amp; contact details</p>
+            </div>
 
-              <div className="relative text-center">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                  Start Your Journey to Recovery Today
-                </h2>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto">
-                  Take the first step towards pain-free living. Our expert team is ready to create a personalized treatment plan for you.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button
-                    onClick={handleBookAppointment}
-                    className="bg-white text-red-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-600"
-                    aria-label="Book Appointment Now"
-                  >
-                    Book Your First Appointment
-                  </button>
-                  <button
-                    onClick={() => router.push('/contact')}
-                    className="bg-transparent border-2 border-white text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base hover:bg-white/10 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white"
-                    aria-label="Contact Us for Consultation"
-                  >
-                    Free Consultation
-                  </button>
+            {/* Branch Tabs */}
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+              {branches.map((b, i) => (
+                <button
+                  key={b.id}
+                  className={`branch-tab ${selectedBranch === i ? 'active' : ''}`}
+                  onClick={() => setSelectedBranch(i)}
+                  style={{ fontFamily: "'Outfit',sans-serif" }}
+                >
+                  {b.name}
+                </button>
+              ))}
+            </div>
+
+            {/* Branch Detail Card */}
+            <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #a7f3d0', padding: '1.5rem 2rem', maxWidth: '700px', margin: '0 auto', boxShadow: '0 4px 20px rgba(16,185,129,0.1)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '1rem' }}>
+              {[
+                { icon: <MapPin size={18} color="#059669" />, label: 'Address', value: branches[selectedBranch].address },
+                { icon: <Phone size={18} color="#3b82f6" />, label: 'Contact', value: branches[selectedBranch].phone },
+                { icon: <Clock size={18} color="#6366f1" />, label: 'Timings', value: branches[selectedBranch].timing },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                  <div style={{ marginTop: '2px' }}>{item.icon}</div>
+                  <div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</div>
+                    <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#1e293b', marginTop: '2px' }}>{item.value}</div>
+                  </div>
                 </div>
-                <p className="text-white/70 text-xs sm:text-sm mt-6">
-                  <Calendar className="inline w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                  Same-day appointments available • Insurance accepted
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Testimonial Snapshot */}
-        <section className="py-12 sm:py-16 bg-gray-50" aria-label="Patient Testimonials">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="max-w-3xl mx-auto">
-              <Star className="w-8 h-8 sm:w-10 sm:h-10 text-amber-500 mx-auto mb-4" aria-hidden="true" />
-              <blockquote className="text-lg sm:text-xl md:text-2xl text-gray-700 italic mb-6">
-                "The personalized care and expertise at this clinic transformed my recovery journey. I'm back to my active lifestyle!"
-              </blockquote>
-              <div className="text-gray-600 text-sm sm:text-base">
-                <span className="font-semibold">Sarah M.</span> • Sports Injury Patient • 5-star review
+        {/* ── Services Grid ── */}
+        <section style={{ padding: '5rem 1.5rem' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+                Our <span className="gradient-text">Specialized Services</span>
+              </h2>
+              <div className="section-divider" style={{ marginBottom: '1rem' }}></div>
+              <p style={{ color: '#64748b', maxWidth: '560px', margin: '0 auto', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                Evidence-based physiotherapy treatments in Hindi &amp; English — available at all branches.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
+              {services.map((service, index) => {
+                const isVisible = visibleCards.has(index);
+                return (
+                  <article
+                    key={index}
+                    ref={(el: any) => (cardRefs.current[index] = el)}
+                    className={`service-card card-appear ${isVisible ? 'visible' : ''}`}
+                    style={{ transitionDelay: `${(index % 4) * 80}ms`, minHeight: '300px' }}
+                    onClick={handleBook}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Book ${service.title}`}
+                    onKeyDown={e => e.key === 'Enter' && handleBook()}
+                  >
+                    {/* BG Image */}
+                    <div className="card-img" style={{ backgroundImage: `url(${service.img})` }} />
+                    <div className="card-overlay" />
+
+                    {/* Content */}
+                    <div style={{ position: 'relative', zIndex: 1, padding: '1.5rem' }}>
+                      {/* Badge */}
+                      {service.badge && (
+                        <span style={{ display: 'inline-block', background: `linear-gradient(135deg, ${service.accent.includes('emerald') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6'}, ${service.accent.includes('teal') ? '#0d9488' : '#4f46e5'})`, color: '#fff', fontSize: '0.65rem', fontWeight: 700, padding: '3px 10px', borderRadius: '20px', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                          {service.badge}
+                        </span>
+                      )}
+
+                      {/* Icon */}
+                      <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: `linear-gradient(135deg, ${service.accent.includes('emerald') || service.accent.includes('teal') || service.accent.includes('green') ? '#d1fae5' : service.accent.includes('indigo') ? '#e0e7ff' : '#dbeafe'}, #fff)`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+                        <service.icon size={22} color={service.accent.includes('emerald') || service.accent.includes('teal') || service.accent.includes('green') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6'} />
+                      </div>
+
+                      {/* Title */}
+                      <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', marginBottom: '2px', lineHeight: 1.25 }}>{service.title}</h3>
+                      <p style={{ fontSize: '0.8rem', fontWeight: 600, color: service.accent.includes('emerald') || service.accent.includes('teal') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6', marginBottom: '0.75rem' }}>{service.hindiTitle}</p>
+
+                      {/* Description */}
+                      <p style={{ fontSize: '0.84rem', color: '#475569', lineHeight: 1.65, marginBottom: '1.25rem' }}>{service.description}</p>
+
+                      {/* Book Button */}
+                      <button
+                        style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', border: `2px solid ${service.accent.includes('emerald') || service.accent.includes('teal') || service.accent.includes('green') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6'}`, color: service.accent.includes('emerald') || service.accent.includes('teal') || service.accent.includes('green') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6', borderRadius: '30px', padding: '8px 18px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Outfit',sans-serif", transition: 'all 0.2s ease' }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = service.accent.includes('emerald') || service.accent.includes('teal') || service.accent.includes('green') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6'; (e.currentTarget as HTMLButtonElement).style.color = '#fff'; }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = service.accent.includes('emerald') || service.accent.includes('teal') || service.accent.includes('green') ? '#059669' : service.accent.includes('indigo') ? '#6366f1' : '#3b82f6'; }}
+                        onClick={e => { e.stopPropagation(); handleBook(); }}
+                      >
+                        Book Now <ChevronRight size={14} />
+                      </button>
+                    </div>
+
+                    {/* Bottom gradient bar */}
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '3px', background: `linear-gradient(90deg, ${service.accent.includes('emerald') ? '#059669' : service.accent.includes('blue') ? '#3b82f6' : '#6366f1'}, ${service.accent.includes('teal') ? '#0d9488' : service.accent.includes('indigo') ? '#6366f1' : '#059669'})` }} />
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Why Choose Us ── */}
+        <section style={{ background: '#f8fafc', padding: '5rem 1.5rem', borderTop: '1px solid #e2e8f0' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Why Choose <span className="gradient-text">SKM?</span></h2>
+              <div className="section-divider" style={{ marginBottom: '1rem' }}></div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+              {whyUs.map((item, i) => (
+                <div key={i} style={{ background: '#fff', borderRadius: '16px', padding: '1.75rem', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', border: '1px solid #e2e8f0', textAlign: 'center', transition: 'transform 0.25s, box-shadow 0.25s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-6px)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.11)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = ''; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)'; }}
+                >
+                  <div style={{ width: '56px', height: '56px', borderRadius: '14px', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className={item.color}>
+                    <item.icon size={24} />
+                  </div>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>{item.title}</h3>
+                  <p style={{ fontSize: '0.83rem', color: '#64748b', lineHeight: 1.6 }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Home Visits Banner ── */}
+        <section style={{ padding: '3rem 1.5rem' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', background: 'linear-gradient(135deg,#059669 0%,#3b82f6 50%,#6366f1 100%)', borderRadius: '24px', padding: '3rem 2.5rem', textAlign: 'center', position: 'relative', overflow: 'hidden', boxShadow: '0 20px 60px rgba(59,130,246,0.3)' }}>
+            <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '180px', height: '180px', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }} />
+            <div style={{ position: 'absolute', bottom: '-40px', left: '-40px', width: '140px', height: '140px', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }} />
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <Home size={44} color="#fff" style={{ marginBottom: '1rem' }} />
+              <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.2 }}>
+                Convenient Home Visits Available
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '0.95rem', marginBottom: '1.5rem', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: 1.7 }}>
+                Expert physiotherapy at your doorstep. Ideal for post-surgical patients, elderly clients, and those with mobility challenges.
+              </p>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button onClick={handleBook} style={{ background: '#fff', color: '#059669', border: 'none', borderRadius: '50px', padding: '13px 30px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', fontFamily: "'Outfit',sans-serif", boxShadow: '0 4px 16px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Calendar size={16} /> Schedule Home Visit
+                </button>
+                <a href="tel:7982799147" style={{ background: 'transparent', color: '#fff', border: '2px solid rgba(255,255,255,0.6)', borderRadius: '50px', padding: '13px 30px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Phone size={16} /> Call Now
+                </a>
               </div>
             </div>
           </div>
         </section>
       </div>
-
-      <style jsx>{`
-        @keyframes bounce-sm {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
-        }
-        .animate-bounce-sm {
-          animation: bounce-sm 2s infinite;
-        }
-      `}</style>
     </>
   );
 };
