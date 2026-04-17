@@ -1,1278 +1,1855 @@
-// 'use client';
-// import { useState, useEffect, useCallback } from "react";
-
-// // ─────────────────────────────────────────────
-// //  Types & Interfaces
-// // ─────────────────────────────────────────────
-
-// interface Branch {
-//   id: string;
-//   label: string;
-//   city: string;
-// }
-
-// interface Category {
-//   slug: string;
-//   name: string;
-//   icon: string;
-// }
-
-// interface Post {
-//   id: number;
-//   title: string;
-//   excerpt: string;
-//   category: string;
-//   branch: string;
-//   author: string;
-//   authorRole: string;
-//   date: string;
-//   readTime: string;
-//   views: number;
-//   comments: number;
-//   featured: boolean;
-//   tags: string[];
-// }
-
-// interface FormState {
-//   title: string;
-//   category: string;
-//   branch: string;
-//   tags: string;
-//   excerpt: string;
-// }
-
-// // ─────────────────────────────────────────────
-// //  Mock Data (replace with real API)
-// // ─────────────────────────────────────────────
-
-// const API_BASE = "https://api.yourdomain.com/v1";
-
-// const BRANCHES: Branch[] = [
-//   { id: "all", label: "All Branches", city: "" },
-//   { id: "delhi", label: "Delhi HQ", city: "New Delhi" },
-//   { id: "mumbai", label: "Mumbai Centre", city: "Mumbai" },
-//   { id: "bengaluru", label: "Bengaluru Hub", city: "Bengaluru" },
-//   { id: "hyderabad", label: "Hyderabad", city: "Hyderabad" },
-//   { id: "chennai", label: "Chennai", city: "Chennai" },
-// ];
-
-// const CATEGORIES: Category[] = [
-//   { slug: "all", name: "All Topics", icon: "✦" },
-//   { slug: "sports-therapy", name: "Sports Therapy", icon: "⚡" },
-//   { slug: "chiropractic", name: "Chiropractic", icon: "🦴" },
-//   { slug: "pain-management", name: "Pain Management", icon: "💊" },
-//   { slug: "rehabilitation", name: "Rehabilitation", icon: "🏃" },
-//   { slug: "wellness", name: "Wellness", icon: "🌿" },
-//   { slug: "ergonomics", name: "Ergonomics", icon: "💺" },
-//   { slug: "treatment-methods", name: "Treatment", icon: "⚕" },
-// ];
-
-// const MOCK_POSTS: Post[] = [
-//   { id:1, title:"Complete Guide to Preventing Sports Injuries", excerpt:"Essential techniques and exercises to prevent common sports injuries and maintain peak physical performance.", category:"sports-therapy", branch:"delhi", author:"Dr. Sarah Johnson", authorRole:"Senior Physiotherapist", date:"2024-03-15", readTime:"8 min", views:4201, comments:24, featured:true, tags:["prevention","sports","exercises"] },
-//   { id:2, title:"Chiropractic Care for Chronic Back Pain", excerpt:"Modern chiropractic techniques that provide lasting relief from chronic back pain without invasive procedures.", category:"chiropractic", branch:"mumbai", author:"Dr. Michael Chen", authorRole:"Chief Chiropractor", date:"2024-03-12", readTime:"6 min", views:3850, comments:18, featured:true, tags:["back pain","chiropractic","relief"] },
-//   { id:3, title:"Posture Correction: 5 Desk Exercises", excerpt:"Daily exercises at your desk to improve posture, reduce back pain, and prevent long-term spinal issues.", category:"ergonomics", branch:"bengaluru", author:"Elena Rodriguez", authorRole:"Ergonomics Specialist", date:"2024-03-10", readTime:"5 min", views:2980, comments:12, featured:false, tags:["posture","office","desk"] },
-//   { id:4, title:"Understanding Sciatica: Symptoms & Treatment", excerpt:"A comprehensive look at sciatic nerve pain including diagnosis and physiotherapy treatments for lasting relief.", category:"pain-management", branch:"delhi", author:"Dr. Sarah Johnson", authorRole:"Senior Physiotherapist", date:"2024-03-08", readTime:"7 min", views:5100, comments:21, featured:false, tags:["sciatica","nerve pain","diagnosis"] },
-//   { id:5, title:"Nutrition's Role in Injury Recovery", excerpt:"How proper nutrition accelerates healing, reduces inflammation, and supports muscle repair during rehabilitation.", category:"wellness", branch:"hyderabad", author:"Dr. Michael Chen", authorRole:"Chief Chiropractor", date:"2024-03-05", readTime:"6 min", views:2750, comments:15, featured:false, tags:["nutrition","healing","recovery"] },
-//   { id:6, title:"Winter Sports Injury Prevention Guide", excerpt:"Pre-season conditioning exercises to stay safe and injury-free during winter sports and outdoor activities.", category:"sports-therapy", branch:"chennai", author:"Dr. Sarah Johnson", authorRole:"Senior Physiotherapist", date:"2024-03-03", readTime:"9 min", views:1890, comments:8, featured:false, tags:["winter sports","prevention","conditioning"] },
-//   { id:7, title:"Manual vs. Instrument-Assisted Therapy", excerpt:"Comparing physiotherapy techniques to help you understand which approach best suits your recovery needs.", category:"treatment-methods", branch:"mumbai", author:"Elena Rodriguez", authorRole:"Ergonomics Specialist", date:"2024-02-28", readTime:"7 min", views:3200, comments:14, featured:false, tags:["manual therapy","treatment","comparison"] },
-//   { id:8, title:"Rehabilitation After ACL Surgery", excerpt:"A structured step-by-step rehabilitation programme designed for safe and effective recovery after ACL reconstruction.", category:"rehabilitation", branch:"bengaluru", author:"Dr. Michael Chen", authorRole:"Chief Chiropractor", date:"2024-02-25", readTime:"10 min", views:4600, comments:31, featured:false, tags:["ACL","surgery","rehabilitation"] },
-// ];
-
-// // ─── Utilities ────────────────────────────────
-
-// const fmt = (d: string): string => new Date(d).toLocaleDateString("en-IN", { day:"numeric", month:"short", year:"numeric" });
-// const initials = (name: string): string => name.split(" ").map(n => n[0]).join("").slice(0,2);
-
-// const colorFor = (slug: string): string => {
-//   const colors: Record<string, string> = {
-//     "sports-therapy": "#10b981",
-//     "chiropractic": "#3b82f6",
-//     "pain-management": "#6366f1",
-//     "rehabilitation": "#0ea5e9",
-//     "wellness": "#059669",
-//     "ergonomics": "#4f46e5",
-//     "treatment-methods": "#1d4ed8"
-//   };
-//   return colors[slug] ?? "#6366f1";
-// };
-
-// // ─── Theme Constants ─────────────────────────
-
-// const G = {
-//   primary: "linear-gradient(135deg,#1e3a5f 0%,#1a4731 100%)",
-//   accent: "linear-gradient(135deg,#10b981 0%,#3b82f6 50%,#6366f1 100%)",
-//   card: "rgba(255,255,255,0.97)",
-//   glass: "rgba(255,255,255,0.12)",
-//   darkBg: "#0d1f2d",
-//   midBg: "#f0f7f4",
-//   textDark: "#0d1f2d",
-//   textMid: "#4a5568",
-//   green: "#10b981",
-//   blue: "#3b82f6",
-//   indigo: "#6366f1",
-// };
-
-// // ─── Global CSS ──────────────────────────────
-
-// const css = `
-//   @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-//   * { box-sizing: border-box; margin: 0; padding: 0; }
-//   body { font-family: 'Plus Jakarta Sans', sans-serif; background: ${G.midBg}; color: ${G.textDark}; -webkit-font-smoothing: antialiased; }
-  
-//   /* Scrollbar */
-//   ::-webkit-scrollbar { width: 6px; height: 6px; }
-//   ::-webkit-scrollbar-track { background: #e2e8f0; }
-//   ::-webkit-scrollbar-thumb { background: ${G.indigo}; border-radius: 3px; }
-//   ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
-  
-//   /* Typography */
-//   .serif { font-family: 'DM Serif Display', serif; }
-//   .gradient-text { 
-//     background: ${G.accent}; 
-//     -webkit-background-clip: text; 
-//     -webkit-text-fill-color: transparent; 
-//     background-clip: text; 
-//   }
-  
-//   /* Cards & Hover Effects */
-//   .card-hover { 
-//     transition: transform 0.25s ease, box-shadow 0.25s ease; 
-//     will-change: transform;
-//   }
-//   .card-hover:hover { 
-//     transform: translateY(-4px); 
-//     box-shadow: 0 20px 48px rgba(99,102,241,0.15) !important; 
-//   }
-  
-//   /* Tags & Pills */
-//   .tag-pill { 
-//     display:inline-flex; align-items:center; gap:4px; 
-//     padding:3px 10px; border-radius:99px; 
-//     font-size:11px; font-weight:600; letter-spacing:0.04em; 
-//     text-transform:uppercase; white-space: nowrap;
-//   }
-  
-//   /* Buttons */
-//   .btn-primary { 
-//     background:${G.accent}; color:#fff; border:none; cursor:pointer; 
-//     border-radius:10px; font-family:inherit; font-weight:700; 
-//     transition: opacity 0.2s, transform 0.2s; 
-//   }
-//   .btn-primary:hover { opacity:0.9; transform:translateY(-1px); }
-//   .btn-primary:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
-  
-//   .btn-ghost { 
-//     background:transparent; border:2px solid ${G.indigo}; color:${G.indigo}; 
-//     cursor:pointer; border-radius:10px; font-family:inherit; font-weight:600; 
-//     transition: background 0.2s, color 0.2s; 
-//   }
-//   .btn-ghost:hover { background:${G.indigo}; color:#fff; }
-//   .btn-ghost:disabled { opacity:0.5; cursor:not-allowed; }
-  
-//   /* Form Fields */
-//   .input-field, .textarea-field, .select-field { 
-//     width:100%; padding:12px 16px; border:2px solid #e2e8f0; 
-//     border-radius:10px; font-family:inherit; font-size:14px; 
-//     transition:border-color 0.2s, box-shadow 0.2s; outline:none; background:#fff; 
-//   }
-//   .input-field:focus, .textarea-field:focus, .select-field:focus { 
-//     border-color:${G.indigo}; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); 
-//   }
-//   .textarea-field { min-height:120px; resize:vertical; }
-  
-//   /* Modal */
-//   .modal-backdrop { 
-//     position:fixed; inset:0; background:rgba(13,31,45,0.7); 
-//     backdrop-filter:blur(4px); z-index:1000; 
-//     display:flex; align-items:center; justify-content:center; 
-//     padding:16px; animation: fadeIn 0.2s ease;
-//   }
-//   .modal-box { 
-//     background:#fff; border-radius:20px; padding:32px; 
-//     width:100%; max-width:640px; max-height:90vh; 
-//     overflow-y:auto; animation: slideUp 0.3s ease;
-//   }
-  
-//   /* Branch Chips */
-//   .branch-chip { 
-//     display:inline-flex; align-items:center; gap:6px; 
-//     padding:7px 16px; border-radius:99px; font-size:13px; 
-//     font-weight:600; cursor:pointer; border:2px solid transparent; 
-//     transition: all 0.2s; white-space:nowrap;
-//   }
-//   .chip-active { background:${G.indigo}; color:#fff; border-color:${G.indigo}; }
-//   .chip-inactive { background:#fff; color:${G.textMid}; border-color:#e2e8f0; }
-//   .chip-inactive:hover { border-color:${G.indigo}; color:${G.indigo}; }
-  
-//   /* Skeleton Loading */
-//   .skeleton { 
-//     background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%); 
-//     background-size:200% 100%; animation: shimmer 1.4s infinite; 
-//     border-radius:8px;
-//   }
-//   @keyframes shimmer { 
-//     0%{background-position:200% 0} 100%{background-position:-200% 0} 
-//   }
-  
-//   /* Animations */
-//   .fade-in { animation: fadeIn 0.4s ease forwards; }
-//   @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-//   @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  
-//   /* Text Clamping */
-//   .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-//   .line-clamp-3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-  
-//   /* Labels */
-//   .prose-label { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:${G.indigo}; }
-  
-//   /* Avatars */
-//   .author-ring { 
-//     width:38px; height:38px; border-radius:50%; 
-//     display:flex; align-items:center; justify-content:center; 
-//     font-weight:800; font-size:13px; color:#fff; flex-shrink:0; 
-//   }
-//   .avatar-lg { 
-//     width:52px; height:52px; border-radius:50%; 
-//     display:flex; align-items:center; justify-content:center; 
-//     font-weight:800; font-size:16px; color:#fff; flex-shrink:0; 
-//   }
-  
-//   /* Responsive Utilities */
-//   @media(max-width: 1024px) {
-//     .sidebar-first { order: -1; }
-//   }
-//   @media(max-width: 768px) {
-//     .desktop-only { display: none !important; }
-//     .mobile-full { width: 100% !important; }
-//     .mobile-stack { flex-direction: column !important; }
-//     .mobile-center { text-align: center !important; }
-//     .modal-box { padding: 24px 20px; margin: 8px; }
-//   }
-//   @media(min-width: 769px) {
-//     .mobile-only { display: none !important; }
-//   }
-  
-//   /* Touch Targets */
-//   @media (hover: none) and (pointer: coarse) {
-//     .btn-primary, .btn-ghost, .branch-chip, .tag-pill {
-//       min-height: 44px;
-//       min-width: 44px;
-//       padding: 12px 16px;
-//     }
-//     .input-field, .select-field {
-//       min-height: 48px;
-//       font-size: 16px; /* Prevents iOS zoom */
-//     }
-//   }
-// `;
-
-// // ─────────────────────────────────────────────
-// //  Sub-components (with proper TypeScript)
-// // ─────────────────────────────────────────────
-
-// interface HeroBannerProps {
-//   totalPosts: number;
-//   onSubmitClick: () => void;
-// }
-
-// function HeroBanner({ totalPosts, onSubmitClick }: HeroBannerProps) {
-//   return (
-//     <div style={{ background: G.darkBg, position:"relative", overflow:"hidden", padding:"64px 0 72px" }}>
-//       {/* Decorative blobs */}
-//       {[
-//         { top:"-60px", left:"-60px", color:"rgba(16,185,129,.18)", size:"320px" },
-//         { bottom:"-40px", right:"-40px", color:"rgba(99,102,241,.2)", size:"280px" },
-//         { top:"30%", left:"40%", color:"rgba(59,130,246,.12)", size:"200px" },
-//       ].map((b,i)=>(
-//         <div key={i} style={{ 
-//           position:"absolute" as const, borderRadius:"50%", 
-//           background:b.color, width:b.size, height:b.size, 
-//           top:b.top, bottom:b.bottom, left:b.left, right:b.right, 
-//           filter:"blur(60px)", pointerEvents:"none" as const 
-//         }} />
-//       ))}
-//       <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 24px", position:"relative", zIndex:1 }}>
-//         {/* Breadcrumb */}
-//         <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:28, fontSize:13, color:"rgba(255,255,255,.5)", flexWrap:"wrap" }}>
-//           <span>Home</span>
-//           <span>/</span>
-//           <span style={{ color:G.green, fontWeight:600 }}>Health Insights Blog</span>
-//         </div>
-
-//         <div style={{ display:"flex", flexWrap:"wrap", alignItems:"flex-end", justifyContent:"space-between", gap:24 }}>
-//           <div style={{ maxWidth:680, minWidth:0 }}>
-//             <div className="prose-label" style={{ color:G.green, marginBottom:14 }}>
-//               ✦ Multi-Branch Wellness Network
-//             </div>
-//             <h1 className="serif gradient-text" style={{ fontSize:"clamp(32px,5vw,58px)", lineHeight:1.1, marginBottom:20, wordBreak:"break-word" }}>
-//               Health & Wellness<br />Insights
-//             </h1>
-//             <p style={{ color:"rgba(255,255,255,.65)", fontSize:17, lineHeight:1.7, maxWidth:520 }}>
-//               Expert articles, research, and practical tips from physiotherapy and chiropractic specialists across all our branches.
-//             </p>
-//             <div style={{ display:"flex", gap:32, marginTop:28, flexWrap:"wrap" }}>
-//               {[
-//                 { n: totalPosts, l: "Articles" },
-//                 { n: "6", l: "Branch Cities" },
-//                 { n: "12", l: "Specialists" },
-//               ].map((s,i)=>(
-//                 <div key={i}>
-//                   <div style={{ fontSize:28, fontWeight:800, color:"#fff", lineHeight:1 }}>{s.n}</div>
-//                   <div style={{ fontSize:12, color:"rgba(255,255,255,.45)", marginTop:4, fontWeight:500 }}>{s.l}</div>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//           <button className="btn-primary" onClick={onSubmitClick}
-//             style={{ padding:"14px 28px", fontSize:15, display:"flex", alignItems:"center", gap:10, whiteSpace:"nowrap" }}>
-//             <span>✏</span> <span className="desktop-only">Submit Article</span><span className="mobile-only">Submit</span>
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// interface SearchBarProps {
-//   query: string;
-//   setQuery: (q: string) => void;
-//   onSearch: () => void;
-// }
-
-// function SearchBar({ query, setQuery, onSearch }: SearchBarProps) {
-//   return (
-//     <div style={{ maxWidth:620, width:"100%", position:"relative" }}>
-//       <span style={{ position:"absolute", left:16, top:"50%", transform:"translateY(-50%)", fontSize:18, color:G.indigo, pointerEvents:"none" as const }}>⌕</span>
-//       <input className="input-field" style={{ paddingLeft:46, paddingRight:100, fontSize:14, height:50 }}
-//         value={query} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
-//         placeholder="Search articles, conditions, treatments…"
-//         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key==="Enter" && onSearch()}
-//       />
-//       <button className="btn-primary" onClick={onSearch}
-//         style={{ position:"absolute", right:6, top:6, padding:"8px 18px", fontSize:13 }}>
-//         Search
-//       </button>
-//     </div>
-//   );
-// }
-
-// interface BranchSelectorProps {
-//   active: string;
-//   setActive: (id: string) => void;
-// }
-
-// function BranchSelector({ active, setActive }: BranchSelectorProps) {
-//   return (
-//     <div style={{ display:"flex", gap:8, overflowX:"auto", paddingBottom:4, scrollbarWidth:"none" as const, msOverflowStyle:"none" as const }} 
-//          className="hide-scrollbar">
-//       {BRANCHES.map(b=>(
-//         <button key={b.id} className={`branch-chip ${active===b.id?"chip-active":"chip-inactive"}`}
-//           onClick={()=>setActive(b.id)} style={{ flexShrink: 0 }}>
-//           {b.id!=="all" && <span style={{ fontSize:10 }}>📍</span>}
-//           {b.label}
-//         </button>
-//       ))}
-//     </div>
-//   );
-// }
-
-// interface CategoryTabsProps {
-//   active: string;
-//   setActive: (slug: string) => void;
-// }
-
-// function CategoryTabs({ active, setActive }: CategoryTabsProps) {
-//   return (
-//     <div style={{ display:"flex", gap:8, overflowX:"auto", paddingBottom:4, scrollbarWidth:"none" as const, msOverflowStyle:"none" as const }}>
-//       {CATEGORIES.map(c=>{
-//         const isActive = active === c.slug;
-//         const color = colorFor(c.slug);
-//         return (
-//           <button key={c.slug}
-//             onClick={()=>setActive(c.slug)}
-//             style={{
-//               display:"flex", alignItems:"center", gap:6, padding:"8px 16px",
-//               borderRadius:99, fontSize:13, fontWeight:600, cursor:"pointer",
-//               whiteSpace:"nowrap" as const, border:"2px solid",
-//               background: isActive ? color : "#fff",
-//               borderColor: isActive ? color : "#e2e8f0",
-//               color: isActive ? "#fff" : G.textMid,
-//               transition:"all .2s",
-//               flexShrink: 0
-//             }}>
-//             <span>{c.icon}</span><span className="desktop-only">{c.name}</span>
-//           </button>
-//         );
-//       })}
-//     </div>
-//   );
-// }
-
-// interface FeaturedCardProps {
-//   post: Post;
-// }
-
-// function FeaturedCard({ post }: FeaturedCardProps) {
-//   const col = colorFor(post.category);
-//   const cat = CATEGORIES.find(c=>c.slug===post.category);
-//   const branch = BRANCHES.find(b=>b.id===post.branch);
-  
-//   return (
-//     <article className="card-hover fade-in" style={{
-//       borderRadius:20, overflow:"hidden", background:G.card,
-//       boxShadow:"0 4px 24px rgba(0,0,0,.08)", height:"100%",
-//       display:"flex", flexDirection:"column",
-//     }}>
-//       <div style={{ height:8, background:`linear-gradient(90deg,${col},${G.indigo})` }} />
-//       <div style={{ padding:"28px 28px 0" }}>
-//         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16, flexWrap:"wrap", gap:8 }}>
-//           <span className="tag-pill" style={{ background:`${col}18`, color:col }}>
-//             {cat?.icon} <span className="desktop-only">{cat?.name}</span>
-//           </span>
-//           <span className="tag-pill" style={{ background:"#fef3c7", color:"#d97706" }}>★ Featured</span>
-//         </div>
-//         <h2 className="serif" style={{ fontSize:22, lineHeight:1.3, marginBottom:12, color:G.textDark, wordBreak:"break-word" }}>{post.title}</h2>
-//         <p className="line-clamp-3" style={{ color:G.textMid, fontSize:14, lineHeight:1.7 }}>{post.excerpt}</p>
-//       </div>
-//       <div style={{ padding:"20px 28px 28px", marginTop:"auto" }}>
-//         <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20, flexWrap:"wrap" }}>
-//           <div className="author-ring" style={{ background:`linear-gradient(135deg,${col},${G.indigo})` }}>
-//             {initials(post.author)}
-//           </div>
-//           <div style={{ minWidth: 0 }}>
-//             <div style={{ fontSize:13, fontWeight:700, color:G.textDark }}>{post.author}</div>
-//             <div style={{ fontSize:11, color:G.textMid }}>{post.authorRole} · {branch?.city}</div>
-//           </div>
-//         </div>
-//         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
-//           <div style={{ display:"flex", gap:16, fontSize:12, color:G.textMid, flexWrap:"wrap" }}>
-//             <span>📅 {fmt(post.date)}</span>
-//             <span>⏱ {post.readTime}</span>
-//             <span>👁 {post.views.toLocaleString()}</span>
-//           </div>
-//           <button className="btn-primary" style={{ padding:"8px 18px", fontSize:13 }}>Read →</button>
-//         </div>
-//       </div>
-//     </article>
-//   );
-// }
-
-// interface BlogCardProps {
-//   post: Post;
-// }
-
-// function BlogCard({ post }: BlogCardProps) {
-//   const col = colorFor(post.category);
-//   const cat = CATEGORIES.find(c=>c.slug===post.category);
-//   const branch = BRANCHES.find(b=>b.id===post.branch);
-  
-//   return (
-//     <article className="card-hover fade-in" style={{
-//       borderRadius:16, overflow:"hidden", background:G.card,
-//       boxShadow:"0 2px 16px rgba(0,0,0,.06)",
-//       display:"flex", flexDirection:"column",
-//     }}>
-//       <div style={{ height:5, background:`linear-gradient(90deg,${col},${G.indigo})` }} />
-//       <div style={{ padding:"22px 24px 20px", flex:1, display:"flex", flexDirection:"column" }}>
-//         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:14, gap:8, flexWrap:"wrap" }}>
-//           <span className="tag-pill" style={{ background:`${col}18`, color:col }}>
-//             {cat?.icon} <span className="desktop-only">{cat?.name}</span>
-//           </span>
-//           {branch && (
-//             <span style={{ fontSize:11, color:G.textMid, fontWeight:600, whiteSpace:"nowrap" as const }}>📍 {branch.city}</span>
-//           )}
-//         </div>
-//         <h3 className="serif line-clamp-2" style={{ fontSize:18, lineHeight:1.35, marginBottom:10, color:G.textDark, wordBreak:"break-word" }}>
-//           {post.title}
-//         </h3>
-//         <p className="line-clamp-2" style={{ color:G.textMid, fontSize:13, lineHeight:1.65, flex:1 }}>{post.excerpt}</p>
-//         <div style={{ marginTop:16, paddingTop:16, borderTop:"1px solid #f1f5f9", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:8 }}>
-//           <div style={{ display:"flex", alignItems:"center", gap:8 }}>
-//             <div className="author-ring" style={{ background:`linear-gradient(135deg,${col},${G.indigo})`, width:30, height:30, fontSize:11 }}>
-//               {initials(post.author)}
-//             </div>
-//             <div>
-//               <div style={{ fontSize:12, fontWeight:600, color:G.textDark }}>{post.author}</div>
-//               <div style={{ fontSize:11, color:G.textMid }}>{post.readTime} · {fmt(post.date)}</div>
-//             </div>
-//           </div>
-//           <div style={{ display:"flex", gap:12, fontSize:12, color:G.textMid, alignItems:"center" }}>
-//             <span>💬 {post.comments}</span>
-//             <span>👁 {post.views.toLocaleString()}</span>
-//           </div>
-//         </div>
-//       </div>
-//     </article>
-//   );
-// }
-
-// function Skeleton() {
-//   return (
-//     <div style={{ borderRadius:16, overflow:"hidden", background:"#fff", padding:24 }}>
-//       <div className="skeleton" style={{ height:12, width:"60%", marginBottom:16 }} />
-//       <div className="skeleton" style={{ height:20, marginBottom:10 }} />
-//       <div className="skeleton" style={{ height:20, width:"80%", marginBottom:10 }} />
-//       <div className="skeleton" style={{ height:14, marginBottom:6 }} />
-//       <div className="skeleton" style={{ height:14, width:"70%", marginBottom:24 }} />
-//       <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:8 }}>
-//         <div className="skeleton" style={{ height:32, width:"40%", borderRadius:99 }} />
-//         <div className="skeleton" style={{ height:32, width:"25%" }} />
-//       </div>
-//     </div>
-//   );
-// }
-
-// interface PaginationProps {
-//   page: number;
-//   total: number;
-//   limit: number;
-//   onChange: (page: number) => void;
-// }
-
-// function Pagination({ page, total, limit, onChange }: PaginationProps) {
-//   const totalPages = Math.ceil(total / limit);
-//   if (totalPages <= 1) return null;
-  
-//   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  
-//   return (
-//     <div style={{ display:"flex", justifyContent:"center", gap:8, marginTop:40, flexWrap:"wrap" }}>
-//       <button onClick={()=>onChange(page-1)} disabled={page===1}
-//         style={{ 
-//           width:38, height:38, borderRadius:8, border:"2px solid #e2e8f0", 
-//           background:"#fff", cursor: page===1 ? "not-allowed" : "pointer", 
-//           color:G.textMid, display:"flex", alignItems:"center", justifyContent:"center", 
-//           opacity: page===1 ? 0.4 : 1 
-//         }}>
-//         ‹
-//       </button>
-//       {pages.map(p=>(
-//         <button key={p} onClick={()=>onChange(p)}
-//           style={{ 
-//             width:38, height:38, borderRadius:8, border:"2px solid", 
-//             borderColor: p===page ? G.indigo : "#e2e8f0", 
-//             background: p===page ? G.indigo : "#fff", 
-//             color: p===page ? "#fff" : G.textMid, 
-//             fontWeight:700, fontSize:14, cursor:"pointer" 
-//           }}>
-//           {p}
-//         </button>
-//       ))}
-//       <button onClick={()=>onChange(page+1)} disabled={page===totalPages}
-//         style={{ 
-//           width:38, height:38, borderRadius:8, border:"2px solid #e2e8f0", 
-//           background:"#fff", cursor: page===totalPages ? "not-allowed" : "pointer", 
-//           color:G.textMid, display:"flex", alignItems:"center", justifyContent:"center", 
-//           opacity: page===totalPages ? 0.4 : 1 
-//         }}>
-//         ›
-//       </button>
-//     </div>
-//   );
-// }
-
-// // ─── Submit Modal ────────────────────────────
-
-// interface SubmitModalProps {
-//   onClose: () => void;
-//   onSuccess: (form: FormState) => void;
-// }
-
-// function SubmitModal({ onClose, onSuccess }: SubmitModalProps) {
-//   const [form, setForm] = useState<FormState>({ 
-//     title:"", category:"sports-therapy", branch:"delhi", tags:"", excerpt:"" 
-//   });
-//   const [loading, setLoading] = useState(false);
-//   const [aiLoading, setAiLoading] = useState(false);
-//   const [success, setSuccess] = useState(false);
-
-//   const setField = (key: keyof FormState, value: string) => 
-//     setForm(prev => ({ ...prev, [key]: value }));
-
-//   const generateExcerpt = async () => {
-//     if (!form.title) return;
-//     setAiLoading(true);
-//     try {
-//       // Mock AI response - replace with real API call
-//       await new Promise(res => setTimeout(res, 800));
-//       const mockExcerpt = `Discover expert insights on ${form.title.toLowerCase()} with practical tips from our wellness specialists.`;
-//       setField("excerpt", mockExcerpt);
-//     } catch {
-//       setField("excerpt", "Could not generate – please write manually.");
-//     }
-//     setAiLoading(false);
-//   };
-
-//   const handleSubmit = async () => {
-//     if (!form.title || !form.excerpt) return;
-//     setLoading(true);
-//     // Simulate API call
-//     await new Promise(r => setTimeout(r, 900));
-//     setLoading(false);
-//     setSuccess(true);
-//     setTimeout(() => { 
-//       onSuccess(form); 
-//       onClose(); 
-//     }, 1600);
-//   };
-
-//   return (
-//     <div className="modal-backdrop" onClick={(e: React.MouseEvent) => e.target === e.currentTarget && onClose()}>
-//       <div className="modal-box fade-in">
-//         {success ? (
-//           <div style={{ textAlign:"center", padding:"32px 0" }}>
-//             <div style={{ fontSize:52, marginBottom:16 }}>✅</div>
-//             <h3 className="serif" style={{ fontSize:26, marginBottom:8 }}>Article Submitted!</h3>
-//             <p style={{ color:G.textMid }}>Your article has been submitted for review.</p>
-//           </div>
-//         ) : (
-//           <>
-//             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:24, flexWrap:"wrap", gap:12 }}>
-//               <h2 className="serif" style={{ fontSize:24 }}>Submit an Article</h2>
-//               <button onClick={onClose} style={{ background:"none", border:"none", fontSize:22, cursor:"pointer", color:G.textMid, padding:4 }}>✕</button>
-//             </div>
-
-//             <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
-//               <div>
-//                 <label className="prose-label" style={{ display:"block", marginBottom:6 }}>Article Title *</label>
-//                 <input className="input-field" value={form.title} onChange={(e) => setField("title", e.target.value)} placeholder="Enter a compelling title…" />
-//               </div>
-
-//               <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(140px, 1fr))", gap:12 }}>
-//                 <div>
-//                   <label className="prose-label" style={{ display:"block", marginBottom:6 }}>Category</label>
-//                   <select className="select-field" value={form.category} onChange={(e) => setField("category", e.target.value)}>
-//                     {CATEGORIES.filter(c => c.slug !== "all").map(c => (
-//                       <option key={c.slug} value={c.slug}>{c.name}</option>
-//                     ))}
-//                   </select>
-//                 </div>
-//                 <div>
-//                   <label className="prose-label" style={{ display:"block", marginBottom:6 }}>Branch</label>
-//                   <select className="select-field" value={form.branch} onChange={(e) => setField("branch", e.target.value)}>
-//                     {BRANCHES.filter(b => b.id !== "all").map(b => (
-//                       <option key={b.id} value={b.id}>{b.label}</option>
-//                     ))}
-//                   </select>
-//                 </div>
-//               </div>
-
-//               <div>
-//                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:6, flexWrap:"wrap", gap:8 }}>
-//                   <label className="prose-label">Excerpt / Summary *</label>
-//                   <button onClick={generateExcerpt} disabled={!form.title || aiLoading}
-//                     style={{ 
-//                       background: aiLoading ? "#e2e8f0" : `linear-gradient(135deg,${G.green},${G.indigo})`, 
-//                       color: aiLoading ? G.textMid : "#fff", border:"none", borderRadius:8, 
-//                       padding:"5px 12px", fontSize:12, fontWeight:700, 
-//                       cursor: (!form.title || aiLoading) ? "not-allowed" : "pointer" 
-//                     }}>
-//                     {aiLoading ? "⏳ Generating…" : "✨ AI Generate"}
-//                   </button>
-//                 </div>
-//                 <textarea className="textarea-field" value={form.excerpt} onChange={(e) => setField("excerpt", e.target.value)} placeholder="Write a short compelling excerpt…" />
-//               </div>
-
-//               <div>
-//                 <label className="prose-label" style={{ display:"block", marginBottom:6 }}>Tags (comma-separated)</label>
-//                 <input className="input-field" value={form.tags} onChange={(e) => setField("tags", e.target.value)} placeholder="e.g. back pain, exercises, posture" />
-//               </div>
-
-//               <div style={{ display:"flex", gap:12, marginTop:8, flexWrap:"wrap" }}>
-//                 <button className="btn-ghost" onClick={onClose} style={{ padding:"12px 24px", fontSize:14, flex:1 }}>Cancel</button>
-//                 <button className="btn-primary" onClick={handleSubmit} disabled={loading || !form.title || !form.excerpt}
-//                   style={{ 
-//                     padding:"12px 24px", fontSize:14, flex:2, 
-//                     opacity: (loading || !form.title || !form.excerpt) ? 0.6 : 1 
-//                   }}>
-//                   {loading ? "Submitting…" : "Submit Article"}
-//                 </button>
-//               </div>
-//             </div>
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// // ─── AI Ask Panel ────────────────────────────
-
-// function AskAI() {
-//   const [q, setQ] = useState("");
-//   const [ans, setAns] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const ask = async () => {
-//     if (!q.trim()) return;
-//     setLoading(true); 
-//     setAns("");
-//     try {
-//       // Mock AI response - replace with real API
-//       await new Promise(res => setTimeout(res, 1000));
-//       const mockAnswer = `Based on current wellness research: ${q.includes("pain") ? "For pain management, consider gentle stretching, proper posture, and consulting a specialist for personalized care." : "Maintaining regular movement, proper hydration, and adequate rest are foundational to wellness. For specific concerns, please consult our specialists."}`;
-//       setAns(mockAnswer);
-//     } catch { 
-//       setAns("Unable to fetch answer. Please try again."); 
-//     }
-//     setLoading(false);
-//   };
-
-//   return (
-//     <div style={{ background:`linear-gradient(135deg,${G.darkBg},#1a2744)`, borderRadius:20, padding:28, color:"#fff" }}>
-//       <div className="prose-label" style={{ color:G.green, marginBottom:10 }}>✦ AI Health Assistant</div>
-//       <h3 className="serif" style={{ fontSize:20, marginBottom:8 }}>Ask Our AI Expert</h3>
-//       <p style={{ fontSize:13, color:"rgba(255,255,255,.55)", marginBottom:20, lineHeight:1.6 }}>
-//         Get instant answers to your health and wellness questions.
-//       </p>
-//       <div style={{ position:"relative", marginBottom:12 }}>
-//         <input
-//           style={{ 
-//             width:"100%", padding:"11px 14px", borderRadius:10, 
-//             border:"1.5px solid rgba(255,255,255,.15)", 
-//             background:"rgba(255,255,255,.08)", color:"#fff", 
-//             fontFamily:"inherit", fontSize:13, outline:"none" 
-//           }}
-//           placeholder="e.g. How to relieve lower back pain?"
-//           value={q} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQ(e.target.value)}
-//           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && ask()}
-//         />
-//       </div>
-//       <button className="btn-primary" onClick={ask} disabled={loading || !q.trim()} 
-//         style={{ 
-//           width:"100%", padding:"11px", fontSize:14, 
-//           opacity: (loading || !q.trim()) ? 0.6 : 1 
-//         }}>
-//         {loading ? "Thinking…" : "Ask Now →"}
-//       </button>
-//       {ans && (
-//         <div style={{ 
-//           marginTop:16, padding:"14px 16px", background:"rgba(16,185,129,.12)", 
-//           borderRadius:10, borderLeft:`3px solid ${G.green}`, 
-//           fontSize:13, lineHeight:1.7, color:"rgba(255,255,255,.85)" 
-//         }}>
-//           {ans}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// // ─── Newsletter ──────────────────────────────
-
-// function Newsletter() {
-//   const [email, setEmail] = useState(""); 
-//   const [done, setDone] = useState(false);
-  
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     if (email) setDone(true);
-//   };
-  
-//   return (
-//     <div style={{ background:`linear-gradient(135deg,${G.indigo},${G.blue})`, borderRadius:20, padding:28, color:"#fff" }}>
-//       <div style={{ fontSize:28, marginBottom:10 }}>📧</div>
-//       <h3 className="serif" style={{ fontSize:20, marginBottom:6 }}>Stay Updated</h3>
-//       <p style={{ fontSize:13, color:"rgba(255,255,255,.7)", marginBottom:18, lineHeight:1.6 }}>Get the latest wellness insights delivered to your inbox.</p>
-//       {done ? (
-//         <div style={{ textAlign:"center", padding:"12px", background:"rgba(255,255,255,.15)", borderRadius:10, fontWeight:700 }}>✅ Subscribed!</div>
-//       ) : (
-//         <form onSubmit={handleSubmit}>
-//           <input style={{ 
-//             width:"100%", padding:"11px 14px", borderRadius:10, border:"none", 
-//             fontFamily:"inherit", fontSize:13, marginBottom:10, outline:"none" 
-//           }}
-//             type="email" placeholder="your@email.com" 
-//             value={email} onChange={(e) => setEmail(e.target.value)} 
-//             required
-//           />
-//           <button type="submit"
-//             style={{ 
-//               width:"100%", padding:"11px", background:"#fff", color:G.indigo, 
-//               border:"none", borderRadius:10, fontWeight:800, fontSize:14, cursor:"pointer" 
-//             }}>
-//             Subscribe Now
-//           </button>
-//           <p style={{ fontSize:11, color:"rgba(255,255,255,.45)", textAlign:"center", marginTop:10 }}>No spam · Unsubscribe anytime</p>
-//         </form>
-//       )}
-//     </div>
-//   );
-// }
-
-// // ─────────────────────────────────────────────
-// //  Main Page Component
-// // ─────────────────────────────────────────────
-
-// export default function BlogPage() {
-//   // State
-//   const [posts, setPosts] = useState<Post[]>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [totalPosts, setTotal] = useState(MOCK_POSTS.length);
-//   const [page, setPage] = useState(1);
-//   const [limit, setLimit] = useState(6);
-//   const [sortBy, setSortBy] = useState<"latest" | "popular" | "comments">("latest");
-//   const [branch, setBranch] = useState("all");
-//   const [category, setCategory] = useState("all");
-//   const [query, setQuery] = useState("");
-//   const [searchInput, setSearchInput] = useState("");
-//   const [showModal, setShowModal] = useState(false);
-//   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-
-//   // Fetch posts (simulated)
-//   const fetchPosts = useCallback(async () => {
-//     setLoading(true);
-//     // Simulate API latency
-//     await new Promise(r => setTimeout(r, 500));
-    
-//     let data = [...MOCK_POSTS];
-    
-//     // Apply filters
-//     if (branch !== "all") data = data.filter(p => p.branch === branch);
-//     if (category !== "all") data = data.filter(p => p.category === category);
-//     if (query) {
-//       const q = query.toLowerCase();
-//       data = data.filter(p => 
-//         p.title.toLowerCase().includes(q) || 
-//         p.excerpt.toLowerCase().includes(q)
-//       );
-//     }
-    
-//     // Apply sorting
-//     if (sortBy === "popular") data.sort((a,b) => b.views - a.views);
-//     else if (sortBy === "comments") data.sort((a,b) => b.comments - a.comments);
-//     else data.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    
-//     setTotal(data.length);
-    
-//     // Pagination
-//     const start = (page - 1) * limit;
-//     const paginated = data.slice(start, start + limit);
-    
-//     setPosts(paginated);
-//     setLoading(false);
-//   }, [page, limit, sortBy, branch, category, query]);
-
-//   useEffect(() => { 
-//     fetchPosts(); 
-//   }, [fetchPosts]);
-
-//   const handleSearch = () => { 
-//     setQuery(searchInput); 
-//     setPage(1); 
-//   };
-
-//   const featured = MOCK_POSTS.filter(p => p.featured);
-//   const popularPosts = [...MOCK_POSTS].sort((a,b) => b.views - a.views).slice(0,4);
-//   const categories = CATEGORIES
-//     .filter(c => c.slug !== "all")
-//     .map(c => ({ 
-//       ...c, 
-//       count: MOCK_POSTS.filter(p => p.category === c.slug).length 
-//     }));
-
-//   return (
-//     <>
-//       <style>{css}</style>
-
-//       {/* SEO JSON-LD */}
-//       <script type="application/ld+json" dangerouslySetInnerHTML={{ 
-//         __html: JSON.stringify({
-//           "@context": "https://schema.org", 
-//           "@type": "Blog",
-//           "name": "Health & Wellness Insights", 
-//           "description": "Expert physiotherapy and chiropractic articles across our multi-branch network",
-//           "publisher": { 
-//             "@type": "Organization",
-//             "name": "HealthBlog",
-//             "logo": { "@type": "ImageObject", "url": "/logo.png" } 
-//           },
-//           "url": "https://healthblog.com/blog"
-//         })
-//       }} />
-
-//       {showModal && (
-//         <SubmitModal 
-//           onClose={() => setShowModal(false)} 
-//           onSuccess={(p) => { 
-//             const newPost: Post = {
-//               ...p,
-//               id: Date.now(),
-//               date: new Date().toISOString(),
-//               views: 0,
-//               comments: 0,
-//               featured: false,
-//               readTime: "5 min",
-//               authorRole: "Contributor",
-//               author: "You",
-//               tags: p.tags.split(",").map(t => t.trim()).filter(Boolean)
-//             };
-//             setPosts(prev => [newPost, ...prev]); 
-//           }} 
-//         />
-//       )}
-
-//       <div style={{ minHeight: "100vh", background: G.midBg }}>
-//         {/* Hero */}
-//         <HeroBanner totalPosts={MOCK_POSTS.length} onSubmitClick={() => setShowModal(true)} />
-
-//         {/* Filter Toolbar - Sticky */}
-//         <div style={{ 
-//           background: "#fff", borderBottom: "1px solid #e2e8f0", 
-//           position: "sticky" as const, top: 0, zIndex: 40,
-//           boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-//         }}>
-//           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-//             {/* Row 1 – search + sort + limit */}
-//             <div style={{ 
-//               display: "flex", flexWrap: "wrap", gap: 12, 
-//               padding: "14px 0 10px", alignItems: "center" 
-//             }}>
-//               <SearchBar query={searchInput} setQuery={setSearchInput} onSearch={handleSearch} />
-//               <div style={{ display: "flex", gap: 10, marginLeft: "auto", flexWrap: "wrap", alignItems: "center" }}>
-//                 <select className="select-field" style={{ width: "auto", minWidth: 130 }} 
-//                   value={sortBy} onChange={(e) => { 
-//                     setSortBy(e.target.value as "latest" | "popular" | "comments"); 
-//                     setPage(1); 
-//                   }}>
-//                   <option value="latest">↓ Latest</option>
-//                   <option value="popular">↓ Most Viewed</option>
-//                   <option value="comments">↓ Most Discussed</option>
-//                 </select>
-//                 <select className="select-field" style={{ width: "auto", minWidth: 110 }} 
-//                   value={limit} onChange={(e) => { 
-//                     setLimit(Number(e.target.value)); 
-//                     setPage(1); 
-//                   }}>
-//                   {[4, 6, 8, 12].map(n => (
-//                     <option key={n} value={n}>{n} / page</option>
-//                   ))}
-//                 </select>
-//                 <div style={{ display: "flex", borderRadius: 10, overflow: "hidden", border: "2px solid #e2e8f0" }} className="desktop-only">
-//                   {(["grid", "list"] as const).map(m => (
-//                     <button key={m} onClick={() => setViewMode(m)}
-//                       style={{ 
-//                         padding: "8px 14px", border: "none", cursor: "pointer", 
-//                         fontFamily: "inherit", fontSize: 13, fontWeight: 700,
-//                         background: viewMode === m ? G.indigo : "#fff", 
-//                         color: viewMode === m ? "#fff" : G.textMid 
-//                       }}>
-//                       {m === "grid" ? "⊞" : "☰"}
-//                     </button>
-//                   ))}
-//                 </div>
-//               </div>
-//             </div>
-//             {/* Row 2 – branches */}
-//             <div style={{ paddingBottom: 10 }}>
-//               <BranchSelector active={branch} setActive={(b) => { setBranch(b); setPage(1); }} />
-//             </div>
-//             {/* Row 3 – categories */}
-//             <div style={{ paddingBottom: 12 }}>
-//               <CategoryTabs active={category} setActive={(c) => { setCategory(c); setPage(1); }} />
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Main Content */}
-//         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 24px" }}>
-//           <div style={{ 
-//             display: "grid", 
-//             gridTemplateColumns: "1fr", 
-//             gap: 32 
-//           }}>
-            
-//             {/* Mobile: Sidebar first, then main content */}
-//             <div className="sidebar-first" style={{ 
-//               display: "grid", 
-//               gridTemplateColumns: "1fr", 
-//               gap: 24 
-//             }}>
-//               {/* Sidebar */}
-//               <aside style={{ 
-//                 display: "flex", flexDirection: "column", gap: 24,
-//                 order: 1
-//               }}>
-//                 <AskAI />
-//                 <Newsletter />
-                
-//                 {/* Categories */}
-//                 <div style={{ background: "#fff", borderRadius: 20, padding: 24, boxShadow: "0 2px 12px rgba(0,0,0,.06)" }}>
-//                   <div className="prose-label" style={{ marginBottom: 16 }}>Browse by Category</div>
-//                   {categories.map(c => (
-//                     <button key={c.slug} 
-//                       onClick={() => { setCategory(c.slug); setPage(1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-//                       style={{ 
-//                         display: "flex", justifyContent: "space-between", alignItems: "center", 
-//                         padding: "10px 12px", borderRadius: 10, width: "100%", 
-//                         background: category === c.slug ? `${colorFor(c.slug)}10` : "transparent", 
-//                         border: "none", cursor: "pointer", marginBottom: 4, 
-//                         transition: "background .2s", textAlign: "left" as const
-//                       }}>
-//                       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-//                         <div style={{ 
-//                           width: 8, height: 8, borderRadius: "50%", 
-//                           background: colorFor(c.slug), flexShrink: 0 
-//                         }} />
-//                         <span style={{ 
-//                           fontSize: 13, fontWeight: 600, 
-//                           color: category === c.slug ? colorFor(c.slug) : G.textDark 
-//                         }}>{c.name}</span>
-//                       </div>
-//                       <span style={{ 
-//                         fontSize: 12, fontWeight: 700, color: colorFor(c.slug), 
-//                         background: `${colorFor(c.slug)}15`, padding: "2px 8px", borderRadius: 99 
-//                       }}>{c.count}</span>
-//                     </button>
-//                   ))}
-//                 </div>
-
-//                 {/* Popular Posts */}
-//                 <div style={{ background: "#fff", borderRadius: 20, padding: 24, boxShadow: "0 2px 12px rgba(0,0,0,.06)" }}>
-//                   <div className="prose-label" style={{ marginBottom: 16 }}>🔥 Trending</div>
-//                   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-//                     {popularPosts.map((p, i) => (
-//                       <div key={p.id} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-//                         <div style={{ 
-//                           width: 32, height: 32, borderRadius: 8, 
-//                           background: `linear-gradient(135deg,${colorFor(p.category)},${G.indigo})`, 
-//                           display: "flex", alignItems: "center", justifyContent: "center", 
-//                           color: "#fff", fontWeight: 800, fontSize: 13, flexShrink: 0 
-//                         }}>
-//                           {String(i + 1).padStart(2, "0")}
-//                         </div>
-//                         <div style={{ minWidth: 0 }}>
-//                           <div style={{ 
-//                             fontSize: 13, fontWeight: 600, color: G.textDark, 
-//                             lineHeight: 1.4, marginBottom: 4, wordBreak: "break-word" as const 
-//                           }}>{p.title}</div>
-//                           <div style={{ fontSize: 11, color: G.textMid }}>
-//                             {p.readTime} · 👁 {p.views.toLocaleString()}
-//                           </div>
-//                         </div>
-//                       </div>
-//                     ))}
-//                   </div>
-//                 </div>
-
-//                 {/* Branches */}
-//                 <div style={{ 
-//                   background: `linear-gradient(135deg,${G.green}18,${G.blue}18)`, 
-//                   borderRadius: 20, padding: 24, 
-//                   border: `1px solid ${G.green}30` 
-//                 }}>
-//                   <div className="prose-label" style={{ marginBottom: 16, color: G.green }}>📍 Our Branches</div>
-//                   {BRANCHES.filter(b => b.id !== "all").map(b => (
-//                     <button key={b.id} 
-//                       onClick={() => { setBranch(b.id); setPage(1); }}
-//                       style={{ 
-//                         display: "flex", justifyContent: "space-between", alignItems: "center", 
-//                         padding: "9px 12px", borderRadius: 10, width: "100%", 
-//                         background: branch === b.id ? G.green : "transparent", 
-//                         border: "none", cursor: "pointer", marginBottom: 4, 
-//                         transition: "background .2s", textAlign: "left" as const
-//                       }}>
-//                       <span style={{ 
-//                         fontSize: 13, fontWeight: 600, 
-//                         color: branch === b.id ? "#fff" : G.textDark 
-//                       }}>📍 {b.label}</span>
-//                       <span style={{ 
-//                         fontSize: 11, 
-//                         color: branch === b.id ? "rgba(255,255,255,.7)" : G.textMid 
-//                       }}>{b.city}</span>
-//                     </button>
-//                   ))}
-//                 </div>
-
-//                 {/* CTA */}
-//                 <div style={{ 
-//                   background: G.darkBg, borderRadius: 20, padding: 24, 
-//                   textAlign: "center" as const 
-//                 }}>
-//                   <div style={{ fontSize: 36, marginBottom: 12 }}>💬</div>
-//                   <h3 className="serif" style={{ fontSize: 20, color: "#fff", marginBottom: 8 }}>Have Questions?</h3>
-//                   <p style={{ fontSize: 13, color: "rgba(255,255,255,.55)", marginBottom: 20, lineHeight: 1.6 }}>
-//                     Our experts across all branches are ready to help.
-//                   </p>
-//                   <button className="btn-primary" style={{ width: "100%", padding: "12px", fontSize: 14 }}>
-//                     Book Consultation
-//                   </button>
-//                   <button className="btn-ghost" style={{ 
-//                     width: "100%", padding: "11px", fontSize: 14, marginTop: 10, 
-//                     borderColor: "rgba(255,255,255,.3)", color: "rgba(255,255,255,.7)" 
-//                   }}>
-//                     Meet Our Team
-//                   </button>
-//                 </div>
-//               </aside>
-
-//               {/* Main Column */}
-//               <main style={{ order: 2, minWidth: 0 }}>
-//                 {/* Featured Section */}
-//                 {branch === "all" && category === "all" && !query && page === 1 && (
-//                   <div style={{ marginBottom: 48 }}>
-//                     <div style={{ 
-//                       display: "flex", alignItems: "center", justifyContent: "space-between", 
-//                       marginBottom: 20, flexWrap: "wrap", gap: 12 
-//                     }}>
-//                       <div>
-//                         <div className="prose-label" style={{ marginBottom: 4 }}>Highlighted Stories</div>
-//                         <h2 className="serif" style={{ fontSize: 26 }}>
-//                           Featured <span style={{ color: G.green }}>Articles</span>
-//                         </h2>
-//                       </div>
-//                       <button className="btn-ghost" style={{ padding: "8px 18px", fontSize: 13 }}>
-//                         View All →
-//                       </button>
-//                     </div>
-//                     <div style={{ 
-//                       display: "grid", 
-//                       gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 360px), 1fr))", 
-//                       gap: 24 
-//                     }}>
-//                       {featured.map(p => <FeaturedCard key={p.id} post={p} />)}
-//                     </div>
-//                   </div>
-//                 )}
-
-//                 {/* Posts Header */}
-//                 <div style={{ 
-//                   display: "flex", alignItems: "center", justifyContent: "space-between", 
-//                   marginBottom: 20, flexWrap: "wrap", gap: 12 
-//                 }}>
-//                   <div>
-//                     <div className="prose-label" style={{ marginBottom: 4 }}>
-//                       {branch !== "all" ? `📍 ${BRANCHES.find(b => b.id === branch)?.label}` : "All Locations"}
-//                       {category !== "all" && ` · ${CATEGORIES.find(c => c.slug === category)?.name}`}
-//                       {query && ` · Search: "${query}"`}
-//                     </div>
-//                     <h2 className="serif" style={{ fontSize: 24 }}>
-//                       Latest <span style={{ color: G.indigo }}>Articles</span>
-//                       <span style={{ 
-//                         fontSize: 14, fontFamily: "'Plus Jakarta Sans', sans-serif", 
-//                         fontWeight: 400, color: G.textMid, marginLeft: 10 
-//                       }}>
-//                         ({totalPosts} found)
-//                       </span>
-//                     </h2>
-//                   </div>
-//                   {query && (
-//                     <button onClick={() => { setQuery(""); setSearchInput(""); setPage(1); }}
-//                       style={{ 
-//                         background: "#fee2e2", color: "#dc2626", border: "none", 
-//                         borderRadius: 8, padding: "6px 12px", fontSize: 12, 
-//                         fontWeight: 700, cursor: "pointer" 
-//                       }}>
-//                       ✕ Clear
-//                     </button>
-//                   )}
-//                 </div>
-
-//                 {/* Post Grid / List */}
-//                 {loading ? (
-//                   <div style={{ 
-//                     display: "grid", 
-//                     gridTemplateColumns: viewMode === "grid" 
-//                       ? "repeat(auto-fill, minmax(min(100%, 320px), 1fr))" 
-//                       : "1fr", 
-//                     gap: 20 
-//                   }}>
-//                     {Array(limit).fill(0).map((_, i) => <Skeleton key={i} />)}
-//                   </div>
-//                 ) : posts.length === 0 ? (
-//                   <div style={{ 
-//                     textAlign: "center", padding: "64px 24px", 
-//                     background: "#fff", borderRadius: 20 
-//                   }}>
-//                     <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-//                     <h3 className="serif" style={{ fontSize: 22, marginBottom: 8 }}>No Articles Found</h3>
-//                     <p style={{ color: G.textMid }}>Try different filters or search terms.</p>
-//                   </div>
-//                 ) : viewMode === "grid" ? (
-//                   <div style={{ 
-//                     display: "grid", 
-//                     gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", 
-//                     gap: 20 
-//                   }}>
-//                     {posts.map(p => <BlogCard key={p.id} post={p} />)}
-//                   </div>
-//                 ) : (
-//                   <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-//                     {posts.map(p => (
-//                       <article key={p.id} className="card-hover fade-in" style={{ 
-//                         background: "#fff", borderRadius: 16, padding: "20px 24px", 
-//                         boxShadow: "0 2px 12px rgba(0,0,0,.05)", 
-//                         display: "flex", gap: 20, alignItems: "flex-start",
-//                         flexDirection: "column" as const
-//                       }}>
-//                         <div style={{ 
-//                           width: "100%", display: "flex", gap: 10, marginBottom: 10, flexWrap: "wrap" 
-//                         }}>
-//                           <span className="tag-pill" style={{ 
-//                             background: `${colorFor(p.category)}18`, color: colorFor(p.category) 
-//                           }}>
-//                             {CATEGORIES.find(c => c.slug === p.category)?.name}
-//                           </span>
-//                           <span style={{ fontSize: 11, color: G.textMid, fontWeight: 600 }}>
-//                             📍 {BRANCHES.find(b => b.id === p.branch)?.city}
-//                           </span>
-//                         </div>
-//                         <h3 className="serif" style={{ 
-//                           fontSize: 18, marginBottom: 6, color: G.textDark, wordBreak: "break-word" as const 
-//                         }}>{p.title}</h3>
-//                         <p className="line-clamp-2" style={{ 
-//                           fontSize: 13, color: G.textMid, lineHeight: 1.65, marginBottom: 12 
-//                         }}>{p.excerpt}</p>
-//                         <div style={{ 
-//                           display: "flex", justifyContent: "space-between", alignItems: "center", 
-//                           flexWrap: "wrap", gap: 8, width: "100%" 
-//                         }}>
-//                           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-//                             <div className="author-ring" style={{ 
-//                               background: `linear-gradient(135deg,${colorFor(p.category)},${G.indigo})`, 
-//                               width: 28, height: 28, fontSize: 10 
-//                             }}>{initials(p.author)}</div>
-//                             <span style={{ fontSize: 12, fontWeight: 600, color: G.textDark }}>{p.author}</span>
-//                             <span style={{ fontSize: 12, color: G.textMid }}>· {p.readTime} · {fmt(p.date)}</span>
-//                           </div>
-//                           <div style={{ display: "flex", gap: 14, fontSize: 12, color: G.textMid, alignItems: "center" }}>
-//                             <span>👁 {p.views.toLocaleString()}</span>
-//                             <span>💬 {p.comments}</span>
-//                             <button className="btn-primary" style={{ padding: "5px 14px", fontSize: 12 }}>Read →</button>
-//                           </div>
-//                         </div>
-//                       </article>
-//                     ))}
-//                   </div>
-//                 )}
-
-//                 <Pagination 
-//                   page={page} 
-//                   total={totalPosts} 
-//                   limit={limit} 
-//                   onChange={(p) => { 
-//                     setPage(p); 
-//                     window.scrollTo({ top: 0, behavior: "smooth" }); 
-//                   }} 
-//                 />
-//               </main>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Bottom accent bar */}
-//         <div style={{ height: 6, background: G.accent }} />
-//       </div>
-//     </>
-//   );
-// }
-
-'use client'
-import React from 'react'
-
-export default function page() {
+'use client';
+
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { motion, AnimatePresence, useScroll, useInView, useAnimation } from 'framer-motion';
+import {
+  Search, Filter, Tag, Calendar, Clock, Eye, MessageSquare, ChevronLeft,
+  ChevronRight, X, Plus, Edit, Trash2, Send, Sparkles, Loader2, CheckCircle,
+  AlertCircle, ArrowUp, Bookmark, Share2, Heart, TrendingUp, MapPin, User,
+  ChevronDown, ChevronUp, Globe, SlidersHorizontal, XCircle, Check
+} from 'lucide-react';
+
+// ─────────────────────────────────────────────
+//  Types & Interfaces
+// ─────────────────────────────────────────────
+
+interface BlogPost {
+  id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  branch: string;
+  author: string;
+  authorRole: string;
+  date: string;
+  readTime: string;
+  views: number;
+  comments: number;
+  featured: boolean;
+  tags: string[];
+  status: 'draft' | 'published' | 'archived';
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+interface FilterState {
+  branch: string;
+  category: string;
+  tags: string[];
+  search: string;
+  sortBy: 'latest' | 'popular' | 'comments' | 'featured';
+}
+
+interface ModalState {
+  type: 'read' | 'submit' | 'edit' | null;
+  data?: BlogPost | null;
+  isOpen: boolean;
+}
+
+interface FormState {
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  branch: string;
+  tags: string[];
+  featured: boolean;
+  status: 'draft' | 'published';
+}
+
+interface FormErrors {
+  [key: string]: string;
+}
+
+// ─────────────────────────────────────────────
+//  Constants & Mock Data (Replace with API)
+// ─────────────────────────────────────────────
+
+const CATEGORIES = [
+  { slug: 'sports-therapy', name: 'Sports Therapy', icon: '⚡', color: '#10b981' },
+  { slug: 'chiropractic', name: 'Chiropractic', icon: '🦴', color: '#3b82f6' },
+  { slug: 'pain-management', name: 'Pain Management', icon: '💊', color: '#6366f1' },
+  { slug: 'rehabilitation', name: 'Rehabilitation', icon: '🏃', color: '#0ea5e9' },
+  { slug: 'wellness', name: 'Wellness', icon: '🌿', color: '#059669' },
+  { slug: 'ergonomics', name: 'Ergonomics', icon: '💺', color: '#4f46e5' },
+  { slug: 'treatment-methods', name: 'Treatment', icon: '⚕', color: '#1d4ed8' },
+] as const;
+
+const BRANCHES = [
+  { id: 'all', name: 'All Branches', city: '' },
+  { id: 'delhi', name: 'Delhi HQ', city: 'New Delhi' },
+  { id: 'mumbai', name: 'Mumbai Centre', city: 'Mumbai' },
+  { id: 'bengaluru', name: 'Bengaluru Hub', city: 'Bengaluru' },
+  { id: 'hyderabad', name: 'Hyderabad', city: 'Hyderabad' },
+  { id: 'chennai', name: 'Chennai', city: 'Chennai' },
+] as const;
+
+const TAG_SUGGESTIONS = [
+  'back pain', 'knee pain', 'sports injury', 'rehabilitation', 'posture',
+  'stretching', 'strength training', 'pain relief', 'recovery', 'wellness',
+  'ergonomics', 'desk exercises', 'neck pain', 'sciatica', 'arthritis',
+  'frozen shoulder', 'physical therapy', 'manual therapy', 'dry needling',
+  'cupping', 'hijama', 'post-surgery', 'stroke recovery', 'bell palsy'
+];
+
+const MOCK_POSTS: BlogPost[] = [
+  {
+    id: 1,
+    title: 'Complete Guide to Preventing Sports Injuries',
+    excerpt: 'Essential techniques and exercises to prevent common sports injuries and maintain peak physical performance.',
+    content: `<h2>Understanding Sports Injuries</h2><p>Sports injuries can happen to anyone, from weekend warriors to professional athletes. Understanding the common types and how to prevent them is crucial for maintaining an active lifestyle.</p><h3>Common Sports Injuries</h3><ul><li><strong>Sprains and Strains:</strong> Overstretching or tearing of ligaments and muscles</li><li><strong>Fractures:</strong> Broken bones from impact or overuse</li><li><strong>Dislocations:</strong> When bones are forced out of their normal positions</li><li><strong>Tendonitis:</strong> Inflammation of tendons from repetitive motion</li></ul><h3>Prevention Strategies</h3><p>1. <strong>Proper Warm-up:</strong> Always spend 10-15 minutes warming up before intense activity. Dynamic stretches prepare your muscles and joints for movement.</p><p>2. <strong>Strength Training:</strong> Building muscle strength around joints provides better support and reduces injury risk. Focus on core stability, leg strength, and balanced muscle development.</p><p>3. <strong>Proper Technique:</strong> Learn and maintain correct form for your sport. Work with a coach or physiotherapist to ensure you're moving safely.</p><p>4. <strong>Rest and Recovery:</strong> Allow adequate time between intense sessions. Overtraining is a leading cause of injuries.</p><p>5. <strong>Proper Equipment:</strong> Use sport-appropriate footwear, protective gear, and well-maintained equipment.</p><h3>When to Seek Help</h3><p>If you experience persistent pain, swelling, limited range of motion, or instability in a joint, consult a physiotherapist promptly. Early intervention can prevent minor issues from becoming major problems.</p>`,
+    category: 'sports-therapy',
+    branch: 'delhi',
+    author: 'Dr. Sarah Johnson',
+    authorRole: 'Senior Physiotherapist',
+    date: '2024-03-15T10:00:00.000Z',
+    readTime: '8 min',
+    views: 4201,
+    comments: 24,
+    featured: true,
+    tags: ['prevention', 'sports', 'exercises', 'warm-up', 'strength training'],
+    status: 'published',
+    createdAt: '2024-03-15T09:00:00.000Z',
+    updatedAt: '2024-03-15T09:00:00.000Z',
+  },
+  {
+    id: 2,
+    title: 'Chiropractic Care for Chronic Back Pain',
+    excerpt: 'Modern chiropractic techniques that provide lasting relief from chronic back pain without invasive procedures.',
+    content: `<h2>The Science of Chiropractic Care</h2><p>Chiropractic care focuses on the relationship between the spine and nervous system. When spinal joints become misaligned (subluxated), they can interfere with nerve function and cause pain, stiffness, and reduced mobility.</p><h3>How Chiropractic Helps Back Pain</h3><p>1. <strong>Spinal Adjustments:</strong> Gentle, precise movements restore proper joint alignment and motion, reducing nerve irritation.</p><p>2. <strong>Soft Tissue Therapy:</strong> Techniques like massage and trigger point therapy release muscle tension that contributes to pain.</p><p>3. <strong>Rehabilitative Exercises:</strong> Customized exercises strengthen supporting muscles and improve posture for long-term relief.</p><p>4. <strong>Lifestyle Guidance:</strong> Advice on ergonomics, sleeping positions, and daily habits that support spinal health.</p><h3>What to Expect</h3><p>Your first visit includes a thorough assessment: medical history, physical examination, and possibly imaging. Your chiropractor will then create a personalized treatment plan with clear goals and timelines.</p><p>Most patients experience improvement within 2-4 weeks of consistent care. Maintenance visits help prevent recurrence and support overall wellness.</p>`,
+    category: 'chiropractic',
+    branch: 'mumbai',
+    author: 'Dr. Michael Chen',
+    authorRole: 'Chief Chiropractor',
+    date: '2024-03-12T10:00:00.000Z',
+    readTime: '6 min',
+    views: 3850,
+    comments: 18,
+    featured: true,
+    tags: ['back pain', 'chiropractic', 'relief', 'spine', 'adjustment'],
+    status: 'published',
+    createdAt: '2024-03-12T09:00:00.000Z',
+    updatedAt: '2024-03-12T09:00:00.000Z',
+  },
+  {
+    id: 3,
+    title: '5 Desk Exercises for Better Posture',
+    excerpt: 'Simple, effective exercises you can do at your desk to improve posture, reduce back pain, and prevent long-term spinal issues.',
+    content: `<h2>Why Posture Matters</h2><p>Poor posture from prolonged sitting can lead to chronic pain, reduced lung capacity, digestive issues, and decreased confidence. The good news: small, consistent changes make a big difference.</p><h3>Exercise 1: Chin Tucks</h3><p><strong>How:</strong> Sit tall, gently draw your chin straight back (like making a double chin). Hold 3 seconds, release. Repeat 10x.</p><p><strong>Benefits:</strong> Strengthens deep neck flexors, reduces forward head posture, alleviates neck tension.</p><h3>Exercise 2: Shoulder Blade Squeezes</h3><p><strong>How:</strong> Sit or stand tall. Squeeze shoulder blades together, hold 5 seconds, release. Repeat 15x.</p><p><strong>Benefits:</strong> Counters rounded shoulders, strengthens upper back, improves breathing.</p><h3>Exercise 3: Seated Cat-Cow</h3><p><strong>How:</strong> Sit on edge of chair. Inhale, arch back, look up (cow). Exhale, round spine, tuck chin (cat). Repeat 10x.</p><p><strong>Benefits:</strong> Mobilizes spine, reduces stiffness, improves flexibility.</p><h3>Exercise 4: Hip Flexor Stretch</h3><p><strong>How:</strong> Stand, step one foot back into lunge. Tuck pelvis, gently push hips forward. Hold 30s each side.</p><p><strong>Benefits:</strong> Releases tight hip flexors from sitting, reduces lower back strain.</p><h3>Exercise 5: Thoracic Extension</h3><p><strong>How:</strong> Clasp hands behind head. Gently arch upper back over chair back. Hold 15s, repeat 3x.</p><p><strong>Benefits:</strong> Opens chest, counters hunching, improves breathing.</p><p><strong>Pro Tip:</strong> Set hourly reminders to do one exercise. Consistency beats intensity!</p>`,
+    category: 'ergonomics',
+    branch: 'bengaluru',
+    author: 'Elena Rodriguez',
+    authorRole: 'Ergonomics Specialist',
+    date: '2024-03-10T10:00:00.000Z',
+    readTime: '5 min',
+    views: 2980,
+    comments: 12,
+    featured: false,
+    tags: ['posture', 'office', 'desk', 'exercises', 'stretching'],
+    status: 'published',
+    createdAt: '2024-03-10T09:00:00.000Z',
+    updatedAt: '2024-03-10T09:00:00.000Z',
+  },
+  // Add more mock posts as needed...
+];
+
+// ─────────────────────────────────────────────
+//  Utility Functions
+// ─────────────────────────────────────────────
+
+const formatDate = (dateString: string): string => {
+  return new Date(dateString).toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+};
+
+const getInitials = (name: string): string => {
+  return name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+};
+
+const getCategoryColor = (slug: string): string => {
+  const cat = CATEGORIES.find(c => c.slug === slug);
+  return cat?.color || '#6366f1';
+};
+
+const getCategoryInfo = (slug: string) => {
+  return CATEGORIES.find(c => c.slug === slug) || { name: slug, icon: '📄', color: '#6366f1' };
+};
+
+const getBranchInfo = (id: string) => {
+  return BRANCHES.find(b => b.id === id) || { name: id, city: '' };
+};
+
+// ─────────────────────────────────────────────
+//  Animation Variants
+// ─────────────────────────────────────────────
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 }
+  }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.3, ease: 'easeOut' }
+  }
+};
+
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.95, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: 'spring', damping: 25, stiffness: 300 }
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    transition: { duration: 0.2 }
+  }
+};
+
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 }
+};
+
+// ─────────────────────────────────────────────
+//  Tag Input Component with Suggestions
+// ─────────────────────────────────────────────
+
+interface TagInputProps {
+  value: string[];
+  onChange: (tags: string[]) => void;
+  suggestions?: string[];
+  placeholder?: string;
+  maxTags?: number;
+}
+
+function TagInput({
+  value,
+  onChange,
+  suggestions = TAG_SUGGESTIONS,
+  placeholder = 'Add tags...',
+  maxTags = 10
+}: TagInputProps) {
+  const [input, setInput] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const filteredSuggestions = useMemo(() => {
+    if (!input.trim()) return [];
+    return suggestions
+      .filter(tag =>
+        tag.toLowerCase().includes(input.toLowerCase()) &&
+        !value.includes(tag)
+      )
+      .slice(0, 5);
+  }, [input, suggestions, value]);
+
+  const addTag = (tag: string) => {
+    const normalized = tag.trim().toLowerCase();
+    if (normalized && !value.includes(normalized) && value.length < maxTags) {
+      onChange([...value, normalized]);
+      setInput('');
+      setShowSuggestions(false);
+    }
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    onChange(value.filter(tag => tag !== tagToRemove));
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && input.trim()) {
+      e.preventDefault();
+      addTag(input);
+    } else if (e.key === 'Backspace' && !input && value.length > 0) {
+      removeTag(value[value.length - 1]);
+    }
+  };
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <div>page</div>
-  )
+    <div ref={containerRef} className="relative">
+      <div className="flex flex-wrap gap-2 p-3 min-h-[48px] bg-white border-2 border-gray-200 rounded-xl focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-100 transition-all">
+        {value.map(tag => (
+          <motion.span
+            key={tag}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="inline-flex items-center gap-1 px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium"
+          >
+            <Tag className="w-3 h-3" />
+            {tag}
+            <button
+              type="button"
+              onClick={() => removeTag(tag)}
+              className="ml-1 hover:text-indigo-900 transition-colors"
+              aria-label={`Remove tag ${tag}`}
+            >
+              <X className="w-3 h-3" />
+            </button>
+          </motion.span>
+        ))}
+        <input
+          ref={inputRef}
+          type="text"
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value);
+            setShowSuggestions(true);
+          }}
+          onKeyDown={handleKeyDown}
+          onFocus={() => setShowSuggestions(true)}
+          placeholder={value.length >= maxTags ? 'Max tags reached' : placeholder}
+          disabled={value.length >= maxTags}
+          className="flex-1 min-w-[120px] outline-none text-sm bg-transparent"
+          aria-label="Add tags"
+        />
+      </div>
+
+      {/* Suggestions Dropdown */}
+      <AnimatePresence>
+        {showSuggestions && filteredSuggestions.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute z-20 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
+          >
+            {filteredSuggestions.map(suggestion => (
+              <button
+                key={suggestion}
+                type="button"
+                onClick={() => addTag(suggestion)}
+                className="w-full px-4 py-2 text-left text-sm hover:bg-indigo-50 hover:text-indigo-700 transition-colors flex items-center gap-2"
+              >
+                <Tag className="w-4 h-4 text-gray-400" />
+                {suggestion}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {value.length >= maxTags && (
+        <p className="mt-2 text-xs text-amber-600 flex items-center gap-1">
+          <AlertCircle className="w-3 h-3" />
+          Maximum {maxTags} tags allowed
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Modal Component (Reusable)
+// ─────────────────────────────────────────────
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  showClose?: boolean;
+}
+
+function Modal({
+  isOpen,
+  onClose,
+  title,
+  children,
+  size = 'lg',
+  showClose = true
+}: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  // Focus trap (basic)
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      const focusable = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length > 0) {
+        (focusable[0] as HTMLElement).focus();
+      }
+    }
+  }, [isOpen]);
+
+  const sizeClasses = {
+    sm: 'max-w-md',
+    md: 'max-w-lg',
+    lg: 'max-w-2xl',
+    xl: 'max-w-4xl',
+    full: 'max-w-full mx-4'
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={onClose}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            aria-hidden="true"
+          />
+
+          {/* Modal */}
+          <motion.div
+            ref={modalRef}
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className={`fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+          >
+            <div
+              className={`pointer-events-auto w-full ${sizeClasses[size]} bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-5 border-b border-gray-100">
+                <h2 id="modal-title" className="text-xl font-bold text-gray-900">
+                  {title}
+                </h2>
+                {showClose && (
+                  <button
+                    onClick={onClose}
+                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                    aria-label="Close modal"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 overflow-y-auto p-5">
+                {children}
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Read More Modal Content
+// ─────────────────────────────────────────────
+
+interface ReadModalContentProps {
+  post: BlogPost;
+}
+
+function ReadModalContent({ post }: ReadModalContentProps) {
+  const category = getCategoryInfo(post.category);
+  const branch = getBranchInfo(post.branch);
+
+  return (
+    <article className="prose prose-lg max-w-none">
+      {/* Article Header */}
+      <header className="mb-8 pb-6 border-b border-gray-100">
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <span
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium"
+            style={{
+              background: `${category.color}15`,
+              color: category.color
+            }}
+          >
+            <span>{category.icon}</span>
+            {category.name}
+          </span>
+          {post.featured && (
+            <span className="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">
+              <Sparkles className="w-3 h-3" />
+              Featured
+            </span>
+          )}
+        </div>
+
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
+          {post.title}
+        </h1>
+
+        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+          <div className="flex items-center gap-2">
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm"
+              style={{ background: `linear-gradient(135deg, ${category.color}, #6366f1)` }}
+            >
+              {getInitials(post.author)}
+            </div>
+            <div>
+              <p className="font-medium text-gray-900">{post.author}</p>
+              <p className="text-xs">{post.authorRole}</p>
+            </div>
+          </div>
+          <span>•</span>
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span>•</span>
+          <span className="flex items-center gap-1">
+            <Clock className="w-4 h-4" />
+            {post.readTime}
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1">
+            <MapPin className="w-4 h-4" />
+            {branch.city}
+          </span>
+        </div>
+      </header>
+
+      {/* Article Content */}
+      <div
+        className="text-gray-700 leading-relaxed space-y-4"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
+
+      {/* Tags */}
+      {post.tags.length > 0 && (
+        <div className="mt-8 pt-6 border-t border-gray-100">
+          <p className="text-sm font-medium text-gray-500 mb-3">Tags:</p>
+          <div className="flex flex-wrap gap-2">
+            {post.tags.map(tag => (
+              <span
+                key={tag}
+                className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Actions */}
+      <div className="mt-8 pt-6 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4 text-sm text-gray-600">
+          <span className="flex items-center gap-1">
+            <Eye className="w-4 h-4" />
+            {post.views.toLocaleString()} views
+          </span>
+          <span className="flex items-center gap-1">
+            <MessageSquare className="w-4 h-4" />
+            {post.comments} comments
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors" aria-label="Bookmark">
+            <Bookmark className="w-5 h-5 text-gray-500" />
+          </button>
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors" aria-label="Share">
+            <Share2 className="w-5 h-5 text-gray-500" />
+          </button>
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors" aria-label="Like">
+            <Heart className="w-5 h-5 text-gray-500" />
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Submit/Edit Blog Form Modal
+// ─────────────────────────────────────────────
+
+interface BlogFormModalProps {
+  mode: 'submit' | 'edit';
+  initialData?: BlogPost | null;
+  onSubmit: (data: FormState) => Promise<void>;
+  onClose: () => void;
+  isLoading?: boolean;
+}
+
+function BlogFormModal({
+  mode,
+  initialData,
+  onSubmit,
+  onClose,
+  isLoading = false
+}: BlogFormModalProps) {
+  const [form, setForm] = useState<FormState>({
+    title: initialData?.title || '',
+    excerpt: initialData?.excerpt || '',
+    content: initialData?.content || '',
+    category: initialData?.category || CATEGORIES[0].slug,
+    branch: initialData?.branch || BRANCHES[1].id,
+    tags: initialData?.tags || [],
+    featured: initialData?.featured || false,
+    status: initialData?.status || 'draft',
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [aiGenerating, setAiGenerating] = useState(false);
+
+  const handleChange = (field: keyof FormState, value: any) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
+
+  const validate = (): boolean => {
+    const newErrors: FormErrors = {};
+    if (!form.title.trim() || form.title.length < 5) {
+      newErrors.title = 'Title must be at least 5 characters';
+    }
+    if (!form.excerpt.trim() || form.excerpt.length < 20) {
+      newErrors.excerpt = 'Excerpt must be at least 20 characters';
+    }
+    if (!form.content.trim() || form.content.length < 100) {
+      newErrors.content = 'Content must be at least 100 characters';
+    }
+    if (!form.category) {
+      newErrors.category = 'Please select a category';
+    }
+    if (!form.branch) {
+      newErrors.branch = 'Please select a branch';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    await onSubmit(form);
+  };
+
+  const generateWithAI = async () => {
+    if (!form.title) return;
+    setAiGenerating(true);
+    try {
+      // Mock AI generation - replace with actual API call
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      const mockExcerpt = `Discover expert insights on ${form.title.toLowerCase()} with practical, evidence-based guidance from our certified specialists.`;
+      const mockContent = `<h2>Introduction</h2><p>${mockExcerpt}</p><h2>Key Points</h2><ul><li>Understanding the fundamentals</li><li>Practical application strategies</li><li>Common mistakes to avoid</li><li>When to seek professional help</li></ul><h2>Conclusion</h2><p>Remember, consistency is key. Small, regular efforts lead to significant long-term improvements in your health and wellness journey.</p>`;
+      setForm(prev => ({
+        ...prev,
+        excerpt: mockExcerpt,
+        content: mockContent
+      }));
+    } catch (error) {
+      console.error('AI generation failed:', error);
+    } finally {
+      setAiGenerating(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Title */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Title <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          value={form.title}
+          onChange={(e) => handleChange('title', e.target.value)}
+          className={`w-full px-4 py-3 rounded-xl border-2 ${errors.title ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-indigo-500'
+            } focus:ring-4 focus:ring-indigo-100 outline-none transition-all`}
+          placeholder="Enter a compelling title..."
+        />
+        {errors.title && (
+          <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+            <AlertCircle className="w-4 h-4" />
+            {errors.title}
+          </p>
+        )}
+      </div>
+
+      {/* Excerpt */}
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <label className="block text-sm font-semibold text-gray-700">
+            Excerpt <span className="text-red-500">*</span>
+          </label>
+          <button
+            type="button"
+            onClick={generateWithAI}
+            disabled={aiGenerating || !form.title}
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 hover:text-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {aiGenerating ? (
+              <><Loader2 className="w-3 h-3 animate-spin" /> Generating...</>
+            ) : (
+              <><Sparkles className="w-3 h-3" /> AI Generate</>
+            )}
+          </button>
+        </div>
+        <textarea
+          value={form.excerpt}
+          onChange={(e) => handleChange('excerpt', e.target.value)}
+          rows={3}
+          className={`w-full px-4 py-3 rounded-xl border-2 ${errors.excerpt ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-indigo-500'
+            } focus:ring-4 focus:ring-indigo-100 outline-none transition-all resize-none`}
+          placeholder="Write a short compelling summary (20-500 characters)..."
+        />
+        <p className="mt-1 text-xs text-gray-500">
+          {form.excerpt.length}/500 characters
+        </p>
+        {errors.excerpt && (
+          <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+            <AlertCircle className="w-4 h-4" />
+            {errors.excerpt}
+          </p>
+        )}
+      </div>
+
+      {/* Content */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Content <span className="text-red-500">*</span>
+        </label>
+        <textarea
+          value={form.content}
+          onChange={(e) => handleChange('content', e.target.value)}
+          rows={10}
+          className={`w-full px-4 py-3 rounded-xl border-2 ${errors.content ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-indigo-500'
+            } focus:ring-4 focus:ring-indigo-100 outline-none transition-all resize-none font-mono text-sm`}
+          placeholder="Write your article content (supports basic HTML)..."
+        />
+        <p className="mt-1 text-xs text-gray-500">
+          Tip: Use &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt; for formatting
+        </p>
+        {errors.content && (
+          <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+            <AlertCircle className="w-4 h-4" />
+            {errors.content}
+          </p>
+        )}
+      </div>
+
+      {/* Category & Branch */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Category <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={form.category}
+            onChange={(e) => handleChange('category', e.target.value)}
+            className={`w-full px-4 py-3 rounded-xl border-2 ${errors.category ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-indigo-500'
+              } focus:ring-4 focus:ring-indigo-100 outline-none transition-all bg-white appearance-none`}
+          >
+            {CATEGORIES.map(cat => (
+              <option key={cat.slug} value={cat.slug}>
+                {cat.icon} {cat.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Branch <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={form.branch}
+            onChange={(e) => handleChange('branch', e.target.value)}
+            className={`w-full px-4 py-3 rounded-xl border-2 ${errors.branch ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-indigo-500'
+              } focus:ring-4 focus:ring-indigo-100 outline-none transition-all bg-white appearance-none`}
+          >
+            {BRANCHES.filter(b => b.id !== 'all').map(branch => (
+              <option key={branch.id} value={branch.id}>
+                {branch.name} ({branch.city})
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Tags */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Tags
+        </label>
+        <TagInput
+          value={form.tags}
+          onChange={(tags) => handleChange('tags', tags)}
+          placeholder="Add relevant tags..."
+        />
+      </div>
+
+      {/* Options */}
+      <div className="flex flex-wrap gap-4">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={form.featured}
+            onChange={(e) => handleChange('featured', e.target.checked)}
+            className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+          />
+          <span className="text-sm text-gray-700">Mark as Featured</span>
+        </label>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            name="status"
+            value="draft"
+            checked={form.status === 'draft'}
+            onChange={() => handleChange('status', 'draft')}
+            className="w-4 h-4 text-indigo-600"
+          />
+          <span className="text-sm text-gray-700">Save as Draft</span>
+        </label>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            name="status"
+            value="published"
+            checked={form.status === 'published'}
+            onChange={() => handleChange('status', 'published')}
+            className="w-4 h-4 text-indigo-600"
+          />
+          <span className="text-sm text-gray-700">Publish Now</span>
+        </label>
+      </div>
+
+      {/* Actions */}
+      <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-100">
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex-1 sm:flex-none px-6 py-3 border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="flex-1 sm:flex-none px-6 py-3 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white rounded-xl font-semibold hover:from-emerald-600 hover:to-indigo-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {isLoading ? (
+            <><Loader2 className="w-5 h-5 animate-spin" /> {mode === 'submit' ? 'Submitting...' : 'Updating...'}</>
+          ) : (
+            <><Send className="w-5 h-5" /> {mode === 'submit' ? 'Submit Article' : 'Update Article'}</>
+          )}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Blog Card Component
+// ─────────────────────────────────────────────
+
+interface BlogCardProps {
+  post: BlogPost;
+  onRead: (post: BlogPost) => void;
+  onEdit?: (post: BlogPost) => void;
+  onDelete?: (post: BlogPost) => void;
+  showActions?: boolean;
+}
+
+function BlogCard({
+  post,
+  onRead,
+  onEdit,
+  onDelete,
+  showActions = false
+}: BlogCardProps) {
+  const category = getCategoryInfo(post.category);
+  const branch = getBranchInfo(post.branch);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+
+  return (
+    <motion.article
+      ref={cardRef}
+      variants={fadeInUp}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      whileHover={{ y: -4 }}
+      className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 hover:shadow-xl transition-all duration-300"
+    >
+      {/* Category Bar */}
+      <div
+        className="h-1.5"
+        style={{ background: `linear-gradient(90deg, ${category.color}, #6366f1)` }}
+      />
+
+      <div className="p-5 sm:p-6">
+        {/* Header */}
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <span
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
+              style={{
+                background: `${category.color}15`,
+                color: category.color
+              }}
+            >
+              <span className="text-xs">{category.icon}</span>
+              <span className="hidden sm:inline">{category.name}</span>
+            </span>
+            {post.featured && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">
+                <Sparkles className="w-3 h-3" />
+                <span className="hidden sm:inline">Featured</span>
+              </span>
+            )}
+          </div>
+          <span className="text-xs text-gray-500 flex items-center gap-1">
+            <MapPin className="w-3 h-3" />
+            {branch.city}
+          </span>
+        </div>
+
+        {/* Title & Excerpt */}
+        <h3
+          className="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-2 cursor-pointer hover:text-indigo-600 transition-colors"
+          onClick={() => onRead(post)}
+        >
+          {post.title}
+        </h3>
+        <p
+          className="text-gray-600 text-sm line-clamp-2 mb-4 cursor-pointer"
+          onClick={() => onRead(post)}
+        >
+          {post.excerpt}
+        </p>
+
+        {/* Tags */}
+        {post.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {post.tags.slice(0, 3).map(tag => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs"
+              >
+                #{tag}
+              </span>
+            ))}
+            {post.tags.length > 3 && (
+              <span className="px-2 py-0.5 text-gray-400 text-xs">
+                +{post.tags.length - 3} more
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-gray-100">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
+              style={{ background: `linear-gradient(135deg, ${category.color}, #6366f1)` }}
+            >
+              {getInitials(post.author)}
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">{post.author}</p>
+              <p className="text-xs text-gray-500">{post.readTime} • {formatDate(post.date)}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 text-sm text-gray-500">
+            <span className="flex items-center gap-1">
+              <Eye className="w-4 h-4" />
+              {post.views >= 1000 ? `${(post.views / 1000).toFixed(1)}k` : post.views}
+            </span>
+            <span className="flex items-center gap-1">
+              <MessageSquare className="w-4 h-4" />
+              {post.comments}
+            </span>
+          </div>
+        </div>
+
+        {/* Actions (for admin) */}
+        {showActions && onEdit && onDelete && (
+          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
+            <button
+              onClick={() => onEdit(post)}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+            >
+              <Edit className="w-4 h-4" />
+              Edit
+            </button>
+            <button
+              onClick={() => onDelete(post)}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete
+            </button>
+          </div>
+        )}
+      </div>
+    </motion.article>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Featured Card Component
+// ─────────────────────────────────────────────
+
+function FeaturedCard({ post, onRead }: { post: BlogPost; onRead: (p: BlogPost) => void }) {
+  const category = getCategoryInfo(post.category);
+  const branch = getBranchInfo(post.branch);
+
+  return (
+    <motion.article
+      variants={scaleIn}
+      className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 hover:shadow-2xl transition-all duration-300"
+    >
+      {/* Gradient Overlay */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          background: `linear-gradient(135deg, ${category.color}20, #6366f120)`
+        }}
+      />
+
+      <div className="relative p-6 sm:p-8">
+        {/* Badge */}
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          <span
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold"
+            style={{
+              background: `${category.color}20`,
+              color: category.color
+            }}
+          >
+            <span>{category.icon}</span>
+            {category.name}
+          </span>
+          <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold">
+            <Sparkles className="w-4 h-4" />
+            Featured
+          </span>
+        </div>
+
+        {/* Content */}
+        <h2
+          className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 cursor-pointer hover:text-indigo-600 transition-colors"
+          onClick={() => onRead(post)}
+        >
+          {post.title}
+        </h2>
+        <p
+          className="text-gray-600 mb-6 line-clamp-3 cursor-pointer"
+          onClick={() => onRead(post)}
+        >
+          {post.excerpt}
+        </p>
+
+        {/* Author & Meta */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
+              style={{ background: `linear-gradient(135deg, ${category.color}, #6366f1)` }}
+            >
+              {getInitials(post.author)}
+            </div>
+            <div>
+              <p className="font-medium text-gray-900">{post.author}</p>
+              <p className="text-sm text-gray-500">{post.authorRole} • {branch.city}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 text-sm text-gray-500">
+            <span className="flex items-center gap-1">
+              <Clock className="w-4 h-4" />
+              {post.readTime}
+            </span>
+            <span className="flex items-center gap-1">
+              <Eye className="w-4 h-4" />
+              {post.views.toLocaleString()}
+            </span>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <button
+          onClick={() => onRead(post)}
+          className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white rounded-xl font-semibold hover:from-emerald-600 hover:to-indigo-700 transition-all"
+        >
+          Read Article
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+    </motion.article>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Pagination Component
+// ─────────────────────────────────────────────
+
+interface PaginationProps {
+  pagination: Pagination;
+  onPageChange: (page: number) => void;
+}
+
+function Pagination({ pagination, onPageChange }: PaginationProps) {
+  const { page, totalPages, hasNext, hasPrev } = pagination;
+
+  // Generate page numbers to show
+  const pages = useMemo(() => {
+    const result: (number | string)[] = [];
+    const maxVisible = 5;
+
+    if (totalPages <= maxVisible + 2) {
+      for (let i = 1; i <= totalPages; i++) result.push(i);
+    } else {
+      if (page <= 3) {
+        for (let i = 1; i <= maxVisible; i++) result.push(i);
+        result.push('...');
+        result.push(totalPages);
+      } else if (page >= totalPages - 2) {
+        result.push(1);
+        result.push('...');
+        for (let i = totalPages - maxVisible + 1; i <= totalPages; i++) result.push(i);
+      } else {
+        result.push(1);
+        result.push('...');
+        for (let i = page - 1; i <= page + 1; i++) result.push(i);
+        result.push('...');
+        result.push(totalPages);
+      }
+    }
+    return result;
+  }, [page, totalPages]);
+
+  if (totalPages <= 1) return null;
+
+  return (
+    <nav className="flex items-center justify-center gap-1 sm:gap-2 mt-10" aria-label="Pagination">
+      <button
+        onClick={() => hasPrev && onPageChange(page - 1)}
+        disabled={!hasPrev}
+        className="p-2 sm:p-2.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
+
+      {pages.map((p, i) => (
+        <React.Fragment key={i}>
+          {p === '...' ? (
+            <span className="px-3 py-2 text-gray-400">...</span>
+          ) : (
+            <button
+              onClick={() => onPageChange(p as number)}
+              className={`min-w-[40px] px-3 py-2 rounded-lg font-medium transition-colors ${page === p
+                  ? 'bg-gradient-to-r from-emerald-500 to-indigo-600 text-white'
+                  : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              aria-current={page === p ? 'page' : undefined}
+            >
+              {p}
+            </button>
+          )}
+        </React.Fragment>
+      ))}
+
+      <button
+        onClick={() => hasNext && onPageChange(page + 1)}
+        disabled={!hasNext}
+        className="p-2 sm:p-2.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        aria-label="Next page"
+      >
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
+    </nav>
+  );
+}
+
+// ─────────────────────────────────────────────
+//  Main Blog Page Component
+// ─────────────────────────────────────────────
+
+export default function BlogPage() {
+  // State
+  const [posts, setPosts] = useState<BlogPost[]>(MOCK_POSTS);
+  const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState<Pagination>({
+    page: 1, limit: 6, total: MOCK_POSTS.length, totalPages: 1, hasNext: false, hasPrev: false
+  });
+  const [filters, setFilters] = useState<FilterState>({
+    branch: 'all',
+    category: 'all',
+    tags: [],
+    search: '',
+    sortBy: 'latest'
+  });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+  const [modal, setModal] = useState<ModalState>({ type: null, isOpen: false });
+  const [formLoading, setFormLoading] = useState(false);
+  const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  // Refs
+  const headerRef = useRef<HTMLElement>(null);
+  const { scrollY } = useScroll();
+  const headerControls = useAnimation();
+  const showScrollTop = useInView(headerRef, { margin: '-100px' });
+
+  // Debounce search
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(searchQuery), 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  // Header scroll effect
+  useEffect(() => {
+    headerControls.start({
+      y: scrollY.get() > 50 ? -100 : 0,
+      transition: { duration: 0.2 }
+    });
+  }, [scrollY, headerControls]);
+
+  // Load posts (simulated API call)
+  const loadPosts = useCallback(async () => {
+    setLoading(true);
+    try {
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 400));
+
+      let filtered = [...MOCK_POSTS];
+
+      // Apply filters
+      if (filters.branch !== 'all') {
+        filtered = filtered.filter(p => p.branch === filters.branch);
+      }
+      if (filters.category !== 'all') {
+        filtered = filtered.filter(p => p.category === filters.category);
+      }
+      if (filters.tags.length > 0) {
+        filtered = filtered.filter(p =>
+          filters.tags.some(tag => p.tags.includes(tag))
+        );
+      }
+      if (debouncedSearch) {
+        const q = debouncedSearch.toLowerCase();
+        filtered = filtered.filter(p =>
+          p.title.toLowerCase().includes(q) ||
+          p.excerpt.toLowerCase().includes(q) ||
+          p.tags.some(t => t.toLowerCase().includes(q))
+        );
+      }
+
+      // Apply sorting
+      switch (filters.sortBy) {
+        case 'popular':
+          filtered.sort((a, b) => b.views - a.views);
+          break;
+        case 'comments':
+          filtered.sort((a, b) => b.comments - a.comments);
+          break;
+        case 'featured':
+          filtered.sort((a, b) => Number(b.featured) - Number(a.featured));
+          break;
+        default:
+          filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      }
+
+      // Pagination
+      const total = filtered.length;
+      const totalPages = Math.ceil(total / filters.limit);
+      const start = (filters.limit) * (pagination.page - 1);
+      const paginated = filtered.slice(start, start + pagination.limit);
+
+      setPosts(paginated);
+      setPagination(prev => ({
+        ...prev,
+        total,
+        totalPages,
+        hasNext: pagination.page < totalPages,
+        hasPrev: pagination.page > 1
+      }));
+    } catch (error) {
+      console.error('Failed to load posts:', error);
+      showNotification('error', 'Failed to load articles. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [filters, debouncedSearch, pagination.page, pagination.limit]);
+
+  useEffect(() => {
+    loadPosts();
+  }, [loadPosts]);
+
+  // Handlers
+  const handleSearch = () => {
+    setFilters(prev => ({ ...prev, search: debouncedSearch }));
+    setPagination(prev => ({ ...prev, page: 1 }));
+  };
+
+  const handleFilterChange = (key: keyof FilterState, value: any) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+    setPagination(prev => ({ ...prev, page: 1 }));
+  };
+
+  const handlePageChange = (page: number) => {
+    setPagination(prev => ({ ...prev, page }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLimitChange = (limit: number) => {
+    setPagination(prev => ({ ...prev, limit, page: 1 }));
+  };
+
+  const openReadModal = (post: BlogPost) => {
+    setModal({ type: 'read', data: post, isOpen: true });
+  };
+
+  const openSubmitModal = () => {
+    setModal({ type: 'submit', isOpen: true });
+  };
+
+  const openEditModal = (post: BlogPost) => {
+    setModal({ type: 'edit', data: post, isOpen: true });
+  };
+
+  const handleDelete = async (post: BlogPost) => {
+    if (!confirm(`Delete "${post.title}"? This cannot be undone.`)) return;
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setPosts(prev => prev.filter(p => p.id !== post.id));
+      showNotification('success', 'Article deleted successfully');
+    } catch (error) {
+      showNotification('error', 'Failed to delete article');
+    }
+  };
+
+  const handleSubmitForm = async (data: FormState) => {
+    setFormLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      const newPost: BlogPost = {
+        id: modal.data?.id || Date.now(),
+        ...data,
+        date: new Date().toISOString(),
+        readTime: `${Math.max(3, Math.ceil(data.content.split(' ').length / 200))} min`,
+        views: modal.data?.views || 0,
+        comments: modal.data?.comments || 0,
+        createdAt: modal.data?.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      if (modal.type === 'submit') {
+        setPosts(prev => [newPost, ...prev]);
+        showNotification('success', 'Article submitted successfully!');
+      } else {
+        setPosts(prev => prev.map(p => p.id === newPost.id ? newPost : p));
+        showNotification('success', 'Article updated successfully!');
+      }
+
+      setModal({ type: null, isOpen: false });
+    } catch (error) {
+      showNotification('error', modal.type === 'submit' ? 'Failed to submit article' : 'Failed to update article');
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  const showNotification = (type: 'success' | 'error', message: string) => {
+    setNotification({ type, message });
+    setTimeout(() => setNotification(null), 4000);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Derived data
+  const featuredPosts = posts.filter(p => p.featured).slice(0, 2);
+  const regularPosts = posts.filter(p => !p.featured);
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Notification Toast */}
+      <AnimatePresence>
+        {notification && (
+          <motion.div
+            initial={{ opacity: 0, y: -50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: -50, x: '-50%' }}
+            className={`fixed top-4 left-1/2 z-50 px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 ${notification.type === 'success'
+                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                : 'bg-red-50 text-red-800 border border-red-200'
+              }`}
+          >
+            {notification.type === 'success' ? (
+              <CheckCircle className="w-5 h-5" />
+            ) : (
+              <AlertCircle className="w-5 h-5" />
+            )}
+            <span className="font-medium">{notification.message}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Header */}
+      <motion.header
+        ref={headerRef}
+        animate={headerControls}
+        className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-100"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-indigo-600 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">S</span>
+              </div>
+              <span className="text-xl font-bold text-gray-900 hidden sm:block">HealthBlog</span>
+            </div>
+
+            {/* Search Bar */}
+            <div className="flex-1 max-w-xl mx-4">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  placeholder="Search articles, topics, tags..."
+                  className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full"
+                  >
+                    <X className="w-4 h-4 text-gray-400" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={openSubmitModal}
+                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white rounded-xl font-medium hover:from-emerald-600 hover:to-indigo-700 transition-all"
+              >
+                <Plus className="w-4 h-4" />
+                Write
+              </button>
+              <button className="sm:hidden p-2 hover:bg-gray-100 rounded-lg">
+                <Filter className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Hero Section */}
+      <section className="relative py-12 sm:py-16 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium mb-6">
+              <Sparkles className="w-4 h-4" />
+              Expert Health & Wellness Insights
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Your Guide to{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-indigo-600">
+                Better Health
+              </span>
+            </h1>
+            <p className="text-lg text-gray-600 mb-8">
+              Evidence-based articles from certified physiotherapists and wellness experts across India.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button
+                onClick={openSubmitModal}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white rounded-xl font-semibold hover:from-emerald-600 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
+              >
+                <Plus className="w-5 h-5" />
+                Share Your Story
+              </button>
+              <a
+                href="#articles"
+                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+              >
+                Explore Articles
+                <ChevronDown className="w-4 h-4" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Filters Bar */}
+      <section className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Category Filter */}
+            <div className="relative">
+              <select
+                value={filters.category}
+                onChange={(e) => handleFilterChange('category', e.target.value)}
+                className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white"
+              >
+                <option value="all">All Categories</option>
+                {CATEGORIES.map(cat => (
+                  <option key={cat.slug} value={cat.slug}>
+                    {cat.icon} {cat.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            </div>
+
+            {/* Branch Filter */}
+            <div className="relative">
+              <select
+                value={filters.branch}
+                onChange={(e) => handleFilterChange('branch', e.target.value)}
+                className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white"
+              >
+                {BRANCHES.map(branch => (
+                  <option key={branch.id} value={branch.id}>
+                    {branch.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            </div>
+
+            {/* Sort */}
+            <div className="relative">
+              <select
+                value={filters.sortBy}
+                onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+                className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white"
+              >
+                <option value="latest">↓ Latest</option>
+                <option value="popular">↓ Most Viewed</option>
+                <option value="comments">↓ Most Discussed</option>
+                <option value="featured">↓ Featured</option>
+              </select>
+              <SlidersHorizontal className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            </div>
+
+            {/* Tags Filter */}
+            <div className="flex-1 min-w-[200px]">
+              <TagInput
+                value={filters.tags}
+                onChange={(tags) => handleFilterChange('tags', tags)}
+                placeholder="Filter by tags..."
+              />
+            </div>
+
+            {/* Limit & Search */}
+            <div className="flex items-center gap-2 ml-auto">
+              <select
+                value={pagination.limit}
+                onChange={(e) => handleLimitChange(Number(e.target.value))}
+                className="px-3 py-2 rounded-lg border border-gray-200 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white"
+              >
+                {[6, 9, 12].map(n => (
+                  <option key={n} value={n}>{n}/page</option>
+                ))}
+              </select>
+              <button
+                onClick={handleSearch}
+                className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                aria-label="Search"
+              >
+                <Search className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <main id="articles" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="space-y-12"
+        >
+          {/* Featured Section */}
+          {filters.branch === 'all' && filters.category === 'all' && !filters.tags.length && !debouncedSearch && pagination.page === 1 && featuredPosts.length > 0 && (
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Featured <span className="text-indigo-600">Articles</span>
+                </h2>
+                <button className="text-sm font-medium text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+                  View All
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {featuredPosts.map(post => (
+                  <FeaturedCard key={post.id} post={post} onRead={openReadModal} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Articles Grid */}
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Latest <span className="text-emerald-600">Articles</span>
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  ({pagination.total} found)
+                </span>
+              </h2>
+              {(filters.branch !== 'all' || filters.category !== 'all' || filters.tags.length > 0 || debouncedSearch) && (
+                <button
+                  onClick={() => {
+                    setFilters({ branch: 'all', category: 'all', tags: [], search: '', sortBy: 'latest' });
+                    setSearchQuery('');
+                    setDebouncedSearch('');
+                  }}
+                  className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1"
+                >
+                  <XCircle className="w-4 h-4" />
+                  Clear filters
+                </button>
+              )}
+            </div>
+
+            {loading ? (
+              // Loading Skeleton
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(pagination.limit)].map((_, i) => (
+                  <div key={i} className="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse">
+                    <div className="h-4 bg-gray-200 rounded w-24 mb-4" />
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-3" />
+                    <div className="h-4 bg-gray-200 rounded w-full mb-2" />
+                    <div className="h-4 bg-gray-200 rounded w-5/6 mb-4" />
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                      <div className="space-y-2">
+                        <div className="h-3 bg-gray-200 rounded w-24" />
+                        <div className="h-3 bg-gray-200 rounded w-16" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : regularPosts.length === 0 ? (
+              // Empty State
+              <div className="text-center py-16">
+                <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-10 h-10 text-gray-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles found</h3>
+                <p className="text-gray-600 mb-6">Try adjusting your filters or search terms.</p>
+                <button
+                  onClick={() => {
+                    setFilters({ branch: 'all', category: 'all', tags: [], search: '', sortBy: 'latest' });
+                    setSearchQuery('');
+                  }}
+                  className="px-6 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              // Articles Grid
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                variants={staggerContainer}
+              >
+                <AnimatePresence mode="popLayout">
+                  {regularPosts.map(post => (
+                    <BlogCard
+                      key={post.id}
+                      post={post}
+                      onRead={openReadModal}
+                      onEdit={openEditModal}
+                      onDelete={handleDelete}
+                      showActions={true}
+                    />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            )}
+
+            {/* Pagination */}
+            {!loading && regularPosts.length > 0 && (
+              <Pagination
+                pagination={pagination}
+                onPageChange={handlePageChange}
+              />
+            )}
+          </section>
+        </motion.div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-50 border-t border-gray-100 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-indigo-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">S</span>
+                </div>
+                <span className="text-xl font-bold text-gray-900">HealthBlog</span>
+              </div>
+              <p className="text-gray-600 text-sm">
+                Expert health and wellness insights from certified professionals across India.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-indigo-600 transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-indigo-600 transition-colors">Our Experts</a></li>
+                <li><a href="#" className="hover:text-indigo-600 transition-colors">Book Consultation</a></li>
+                <li><a href="#" className="hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Subscribe</h4>
+              <p className="text-sm text-gray-600 mb-4">Get weekly health tips in your inbox.</p>
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none text-sm"
+                />
+                <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+            © {new Date().getFullYear()} HealthBlog. All rights reserved.
+          </div>
+        </div>
+      </footer>
+
+      {/* Modals */}
+      <Modal
+        isOpen={modal.isOpen && modal.type === 'read'}
+        onClose={() => setModal({ type: null, isOpen: false })}
+        title="Article"
+        size="xl"
+      >
+        {modal.data && <ReadModalContent post={modal.data} />}
+      </Modal>
+
+      <Modal
+        isOpen={modal.isOpen && (modal.type === 'submit' || modal.type === 'edit')}
+        onClose={() => setModal({ type: null, isOpen: false })}
+        title={modal.type === 'submit' ? 'Submit New Article' : 'Edit Article'}
+        size="lg"
+      >
+        <BlogFormModal
+          mode={modal.type as 'submit' | 'edit'}
+          initialData={modal.data || null}
+          onSubmit={handleSubmitForm}
+          onClose={() => setModal({ type: null, isOpen: false })}
+          isLoading={formLoading}
+        />
+      </Modal>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={scrollToTop}
+            className="fixed bottom-6 right-6 p-3 bg-gradient-to-r from-emerald-500 to-indigo-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all z-40"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }

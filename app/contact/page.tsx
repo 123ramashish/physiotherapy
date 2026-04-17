@@ -1,5 +1,8 @@
+// app/contact/page.tsx - Client Component
 'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
+import { AnimatePresence, motion, useAnimation, useInView, type Variants } from 'framer-motion';
 import {
   Phone,
   Mail,
@@ -13,77 +16,183 @@ import {
   Facebook,
   Instagram,
   Youtube,
-  Twitter,
   Sparkles,
   ArrowRight,
   Star,
   Shield,
   Heart,
   Award,
-  Map,
-  ExternalLink,
-  ChevronRight,
+  Navigation,
+  ChevronDown,
   AlertCircle,
   Loader2,
-  Navigation
+  Building2,
+  Stethoscope,
+  ChevronRight
 } from 'lucide-react';
+import { CONTACT_BRANCHES, type ContactApiResponse, type ContactSubmissionInput } from '@/lib/contact';
+
+// Types
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  branch: string;
+  service: string;
+  serviceOther: string;
+  message: string;
+  preferredDate: string;
+}
+
+interface FormErrors {
+  [key: string]: string;
+}
+
+// Branches data - matches header/footer
+const BRANCHES = CONTACT_BRANCHES;
+
+// Services data - bilingual, grouped
+const SERVICE_GROUPS = [
+  {
+    label: 'Specialized Therapies / विशेष चिकित्सा',
+    icon: '🎯',
+    services: [
+      { id: 'cupping', name: 'Cupping & Hijama / कपिंग व हिजामा' },
+      { id: 'dry-needling', name: 'Dry Needling / ड्राई निडलिंग' },
+      { id: 'taping', name: 'Taping / टेपिंग' },
+    ]
+  },
+  {
+    label: 'Pain Management / दर्द प्रबंधन',
+    icon: '🩺',
+    services: [
+      { id: 'back-pain', name: 'Back Pain / कमर दर्द' },
+      { id: 'neck-pain', name: 'Neck Pain / गर्दन दर्द' },
+      { id: 'knee-pain', name: 'Knee Pain / घुटनों का दर्द' },
+      { id: 'sciatica', name: 'Sciatica / साइटिका' },
+    ]
+  },
+  {
+    label: 'Joint & Bone / जोड़ और हड्डी',
+    icon: '🦴',
+    services: [
+      { id: 'arthritis', name: 'Arthritis / गठिया' },
+      { id: 'frozen-shoulder', name: 'Frozen Shoulder / कंधे की जकड़न' },
+    ]
+  },
+  {
+    label: 'Neurological / न्यूरोलॉजिकल',
+    icon: '🧠',
+    services: [
+      { id: 'bells-palsy', name: "Bell's Palsy / चेहरे का लकवा" },
+      { id: 'paralysis', name: 'Paralysis / लकवा' },
+    ]
+  },
+  {
+    label: 'Injury & Rehab / चोट और पुनर्वास',
+    icon: '🏥',
+    services: [
+      { id: 'sports-injury', name: 'Sports Injuries / खेल चोटें' },
+      { id: 'post-covid', name: 'Post COVID Rehab / पोस्ट कोविड रिहैब' },
+    ]
+  },
+  {
+    label: 'Wellness / कल्याण',
+    icon: '🧘',
+    services: [
+      { id: 'relaxation', name: 'Relaxation Therapy / आराम थेरेपी' },
+    ]
+  },
+];
+
+const OTHER_OPTION = { id: 'other', name: 'Other / अन्य (Please specify below)' };
+
+// Animation variants
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+  }
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } }
+};
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
-    date: '',
+    branch: '',
     service: '',
-    message: ''
+    serviceOther: '',
+    message: '',
+    preferredDate: ''
   });
+
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errors, setErrors] = useState<any>({});
-  const [isVisible, setIsVisible] = useState(false);
-  const [currentYear] = useState(new Date().getFullYear());
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [showServiceOther, setShowServiceOther] = useState(false);
+
+  // Scroll animations
+  const controls = useAnimation();
+  const heroRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const formInView = useInView(formRef, { once: true, margin: "-100px" });
+  const infoInView = useInView(infoRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    setIsVisible(true);
+    if (heroInView) controls.start('visible');
+  }, [heroInView, controls]);
 
-    // Add structured data for SEO
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.innerHTML = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      "name": "SKM Physiotherapy",
-      "description": "Professional physiotherapy services with experienced certified practitioners",
-      "url": "https://skmphysiotherapy.com",
-      "telephone": "+1-555-123-4567",
-      "email": "info@skmphysiotherapy.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Health Street",
-        "addressLocality": "Medical City",
-        "addressCountry": "US"
-      },
-      "openingHours": [
-        "Mo-Sa 09:00-20:00"
-      ],
-      "priceRange": "$$",
-      "image": "https://skmphysiotherapy.com/og-image.jpg"
-    });
-    document.head.appendChild(script);
+  // Phone formatting for India
+  const formatPhone = (value: string) => {
+    const numbers = value.replace(/\D/g, '').slice(0, 10);
+    if (numbers.length <= 5) return numbers;
+    if (numbers.length <= 10) return `${numbers.slice(0, 5)} ${numbers.slice(5)}`;
+    return numbers;
+  };
 
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
 
-  const validateForm = () => {
-    const newErrors: any = {};
+    if (name === 'phone') {
+      setFormData(prev => ({ ...prev, phone: formatPhone(value) }));
+    } else if (name === 'service') {
+      const isOther = value === 'other';
+      setShowServiceOther(isOther);
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        serviceOther: isOther ? prev.serviceOther : ''
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      newErrors.name = 'Please enter your full name (min 2 characters)';
     }
 
     if (!formData.email.trim()) {
@@ -92,901 +201,656 @@ const ContactPage = () => {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[-\s()]/g, ''))) {
-      newErrors.phone = 'Please enter a valid phone number';
+    if (!formData.phone.trim() || formData.phone.replace(/\s/g, '').length < 10) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
     }
 
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+    if (!formData.branch) {
+      newErrors.branch = 'Please select your nearest branch';
+    }
+
+    if (!formData.service) {
+      newErrors.service = 'Please select a service';
+    }
+
+    if (formData.service === 'other' && !formData.serviceOther.trim()) {
+      newErrors.serviceOther = 'Please specify your service requirement';
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 20) {
+      newErrors.message = 'Please describe your concern (min 20 characters)';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    if (errors[name]) {
-      setErrors((prev: any) => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-
-  const handlePhoneChange = (e: any) => {
-    const value = e.target.value.replace(/\D/g, '');
-    let formattedValue = value;
-
-    if (value.length > 3 && value.length <= 6) {
-      formattedValue = `(${value.slice(0, 3)}) ${value.slice(3)}`;
-    } else if (value.length > 6) {
-      formattedValue = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
-    }
-
-    setFormData(prev => ({
-      ...prev,
-      phone: formattedValue
-    }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      setIsSubmitting(true);
+    if (!validateForm()) {
+      // Scroll to first error
+      const firstError = Object.keys(errors)[0];
+      document.getElementById(firstError)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
-      try {
-        // In a real application, replace this with your API endpoint
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-        if (response.ok) {
-          console.log('=== FORM SUBMISSION ===');
-          console.log('Name:', formData.name);
-          console.log('Email:', formData.email);
-          console.log('Phone:', formData.phone);
-          console.log('Preferred Date:', formData.date || 'Not specified');
-          console.log('Service:', formData.service || 'Not specified');
-          console.log('Message:', formData.message);
-          console.log('Submitted at:', new Date().toISOString());
-          console.log('=====================');
+    try {
+      const payload: ContactSubmissionInput = {
+        ...formData,
+        service: formData.service === 'other' ? formData.serviceOther : formData.service,
+      };
 
-          // Track conversion in analytics
-          if (typeof window !== 'undefined' && (window as any).gtag) {
-            (window as any).gtag('event', 'contact_form_submit', {
-              event_category: 'Contact',
-              event_label: 'Contact Form Submission'
-            });
-          }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
 
-          setIsSubmitted(true);
+      const result = (await response.json()) as ContactApiResponse;
 
-          // Reset form
-          setTimeout(() => {
-            setFormData({
-              name: '',
-              email: '',
-              phone: '',
-              date: '',
-              service: '',
-              message: ''
-            });
-            setIsSubmitted(false);
-
-            // Scroll to success message
-            formRef.current?.scrollIntoView({ behavior: 'smooth' });
-          }, 5000);
-        } else {
-          throw new Error('Submission failed');
+      if (response.ok && result.success) {
+        setSubmitStatus('success');
+        // Track conversion
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'contact_form_submit', {
+            event_category: 'Contact',
+            event_label: formData.branch,
+            value: 1
+          });
         }
-      } catch (error) {
-        console.error('Form submission error:', error);
-        setErrors({ submit: 'Failed to submit form. Please try again.' });
-      } finally {
-        setIsSubmitting(false);
+        // Reset form after success
+        setTimeout(() => {
+          setFormData({
+            name: '', email: '', phone: '', branch: '', service: '',
+            serviceOther: '', message: '', preferredDate: ''
+          });
+          setShowServiceOther(false);
+          setSubmitStatus('idle');
+        }, 5000);
+      } else {
+        setSubmitStatus('error');
+        setErrors({
+          submit: result.success ? 'Failed to submit. Please try again or call us directly.' : result.error
+        });
       }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitStatus('error');
+      setErrors({ submit: 'Network error. Please check your connection and try again.' });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: 'Phone Support',
-      detail: '+91 7982799147',
-      subtitle: 'Call us directly',
-      link: 'tel:+917982799147',
-      color: 'from-blue-500 to-cyan-500',
-      bgColor: 'bg-gradient-to-br from-blue-50 to-cyan-50',
-      action: 'Call Now'
-    },
-    {
-      icon: Mail,
-      title: 'Email Us',
-      detail: 'skmphysiotherapy@gmail.com',
-      subtitle: 'We reply within 24 hours',
-      link: 'mailto:skmphysiotherapy@gmail.com',
-      color: 'from-red-500 to-pink-600',
-      bgColor: 'bg-gradient-to-br from-red-50 to-pink-50',
-      action: 'Send Email'
-    },
-    {
-      icon: MapPin,
-      title: 'Visit Clinic',
-      detail: '123 Health Street, Medical City',
-      subtitle: 'Get directions',
-      link: 'https://maps.app.goo.gl/Us4jVhy8foKxxawE7',
-      color: 'from-green-500 to-emerald-600',
-      bgColor: 'bg-gradient-to-br from-green-50 to-emerald-50',
-      action: 'View Map'
-    },
-    {
-      icon: Clock,
-      title: 'Working Hours',
-      detail: 'Mon-Sat: 9AM - 8PM',
-      href: '#appointment-form',
-      subtitle: 'Sunday: Emergency Only',
-      link: null,
-      color: 'from-purple-500 to-violet-600',
-      bgColor: 'bg-gradient-to-br from-purple-50 to-violet-50',
-      action: 'Book Appointment'
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Facebook,
-      name: 'Facebook',
-      handle: '@skmphysiotherapy',
-      link: 'https://www.facebook.com/share/17MJCfKqw4/',
-      color: 'hover:bg-blue-600',
-      iconColor: 'text-blue-600',
-      // followers: '2.5K'
-    },
-    {
-      icon: Instagram,
-      name: 'Instagram',
-      handle: '@skmphysio',
-      link: 'https://www.instagram.com/skmphysiotherapy?igsh=MW5yYmd2aTFxOGM1Yg==',
-      color: 'hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-600 hover:to-orange-500',
-      iconColor: 'text-pink-600',
-      // followers: '3.1K'
-    },
-    {
-      icon: Youtube,
-      name: 'YouTube',
-      handle: 'SKM Physiotherapy',
-      link: 'https://youtube.com/@skmphysiotherapy?si=qxyrOFO23Xm1YBl9',
-      color: 'hover:bg-red-600',
-      iconColor: 'text-red-600',
-      // followers: '1.8K'
-    }
-  ];
-
-  const services = [
-    'Sports Injury Rehabilitation',
-    'Manual Therapy',
-    'Chronic Pain Management',
-    'Post-Surgical Rehabilitation',
-    'Pediatric Physiotherapy',
-    'Geriatric Care',
-    'Neurological Rehabilitation',
-    'Women\'s Health Physiotherapy'
+  // Flatten services for dropdown with "Other" option
+  const allServices = [
+    ...SERVICE_GROUPS.flatMap(group => group.services),
+    OTHER_OPTION
   ];
 
   return (
-    <>
-      {/* SEO Meta Tags */}
-      <head>
-        <title>Contact SKM Physiotherapy | Book Appointment | Expert Physiotherapy Care</title>
-        <meta name="description" content="Contact SKM Physiotherapy for expert physiotherapy services. Book appointments online, call us at (555) 123-4567, or visit our clinic. Dr. Shravan Kumar, B.P.T., with 15+ years experience." />
-        <meta name="keywords" content="physiotherapy contact, book physio appointment, physical therapy consultation, sports injury treatment, pain management specialist, rehabilitation center contact" />
-        <meta property="og:title" content="Contact SKM Physiotherapy | Expert Physiotherapy Services" />
-        <meta property="og:description" content="Get in touch with certified physiotherapist Dr. Shravan Kumar. Book your appointment today for personalized care." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://skmphysiotherapy.com/contact" />
-        <link rel="canonical" href="https://skmphysiotherapy.com/contact" />
+    <div className="min-h-screen bg-gray-100">
+      {/* Hero Section */}
+      <motion.section
+        ref={heroRef}
+        initial="hidden"
+        animate={controls}
+        variants={staggerContainer}
+        className="relative pb-16 sm:pb-20 overflow-hidden"
+      >
+        {/* Background decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute -top-20 -left-20 w-72 h-72 sm:w-96 sm:h-96 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+            animate={{ scale: [1, 1.1, 1], rotate: [0, 180, 360] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute top-40 -right-20 w-72 h-72 sm:w-96 sm:h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+            animate={{ scale: [1.1, 1, 1.1], rotate: [360, 180, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute -bottom-20 left-1/3 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+            animate={{ y: [0, 30, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
 
-        {/* Breadcrumb Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://skmphysiotherapy.com"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Contact",
-                "item": "https://skmphysiotherapy.com/contact"
-              }
-            ]
-          })}
-        </script>
-      </head>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto">
+            <motion.div
+              className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg mb-6 border border-emerald-100"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <Sparkles className="text-emerald-600 w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-sm font-semibold text-gray-700">
+                🤖 AI-Assisted Booking Available 24/7
+              </span>
+            </motion.div>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zinc-50">
-        {/* Hero Section */}
-        <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -top-20 -left-20 w-80 h-80 md:w-96 md:h-96 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-            <div className="absolute top-40 -right-20 w-80 h-80 md:w-96 md:h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
-            <div className="absolute -bottom-20 left-1/3 w-80 h-80 md:w-96 md:h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-500"></div>
-          </div>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight"
+            >
+              Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">SKM Physiotherapy</span>
+            </motion.h1>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* <nav className="mb-8" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-2 text-sm text-gray-600">
-                <li>
-                  <a href="/" className="hover:text-red-600 transition-colors">Home</a>
-                </li>
-                <li className="flex items-center">
-                  <ChevronRight size={16} />
-                  <span className="ml-2 font-medium text-gray-900">Contact</span>
-                </li>
-              </ol>
-            </nav> */}
+            <motion.p
+              variants={fadeInUp}
+              className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8"
+            >
+              Reach out to our certified physiotherapists for personalized care.
+              Book your appointment at your nearest branch and start your recovery journey today.
+            </motion.p>
 
-            <div className="text-center max-w-4xl mx-auto">
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 md:px-5 md:py-2.5 rounded-full shadow-lg mb-4 md:mb-6 animate-bounce">
-                <Sparkles className="text-red-600 w-4 h-4 md:w-5 md:h-5" />
-                <span className="text-xs md:text-sm font-semibold text-gray-700">We&apos;re Here to Help You Heal</span>
-              </div>
+            <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 sm:gap-4">
+              <motion.a
+                href="tel:+917982799147"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-5 py-3 sm:px-6 sm:py-3.5 rounded-full font-semibold hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Call: </span>+91 79827 99147
+              </motion.a>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
-                Contact <span className="text-red-600">SKM Physiotherapy</span>
-              </h1>
+              <motion.a
+                href="#contact-form"
+                className="inline-flex items-center gap-2 bg-white text-gray-900 px-5 py-3 sm:px-6 sm:py-3.5 rounded-full font-semibold hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-200"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+                Book Online
+              </motion.a>
 
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-                Reach out to our team of certified physiotherapists for personalized care.
-                Book your appointment today and take the first step towards recovery.
-              </p>
+              <motion.a
+                href="https://wa.me/917982799147"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-500 text-white px-5 py-3 sm:px-6 sm:py-3.5 rounded-full font-semibold hover:bg-green-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
+                WhatsApp
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
 
-              <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                <a
-                  href="tel:+15551234567"
-                  className="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-3 md:px-6 md:py-3.5 rounded-full font-bold hover:bg-red-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
-                  aria-label="Call us at 7982799147"
-                >
-                  <Phone className="w-4 h-4 md:w-5 md:h-5" />
-                  Call Now: 7982799147
-                </a>
-                <a
-                  href="#appointment-form"
-                  className="inline-flex items-center gap-2 bg-white text-gray-900 px-5 py-3 md:px-6 md:py-3.5 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-gray-200 text-sm md:text-base"
-                  aria-label="Book appointment online"
-                >
-                  <Calendar className="w-4 h-4 md:w-5 md:h-5" />
-                  Book Online
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Cards */}
-        <section className="py-8 md:py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {contactInfo.map((info, idx) => (
-                <div
-                  key={idx}
-                  className={`group ${info.bgColor} rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 md:hover:-translate-y-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                    }`}
-                  style={{ transitionDelay: `${idx * 100}ms` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 inline-flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br ${info.color} rounded-xl md:rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                      <info.icon className="text-white w-5 h-5 md:w-6 md:h-6" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-sm md:text-lg font-bold text-gray-900 mb-1 truncate">{info.title}</h3>
-                      <p className="text-xs md:text-sm text-gray-600 mb-1 truncate">{info.subtitle}</p>
-                      {info.link ? (
-                        <a
-                          href={info.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs md:text-sm text-gray-900 hover:text-red-600 transition-colors font-medium truncate block"
-                        >
-                          {info.detail}
-                          <ExternalLink className="inline-block ml-1 w-3 h-3" />
-                        </a>
-                      ) : (
-                        <p className="text-xs md:text-sm text-gray-900 font-medium truncate">{info.detail}</p>
-                      )}
-                      {info.action && (
-                        <button className="mt-2 text-xs text-red-600 font-semibold hover:text-red-700 transition-colors flex items-center gap-1">
-                          {info.action}
-                          <ArrowRight className="w-3 h-3" />
-                        </button>
-                      )}
-                    </div>
+      {/* Quick Contact Cards */}
+      <motion.section
+        ref={infoRef}
+        initial="hidden"
+        animate={infoInView ? 'visible' : 'hidden'}
+        variants={staggerContainer}
+        className="py-8 sm:py-12"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              { icon: Phone, title: 'Call Us', detail: '+91 79827 99147', subtitle: 'Mon-Sun: 10AM-10PM', link: 'tel:+917982799147', color: 'from-emerald-500 to-emerald-600', bg: 'from-emerald-50 to-emerald-100/50' },
+              { icon: Mail, title: 'Email', detail: 'skmphysiotherapy@gmail.com', subtitle: 'Reply within 24 hours', link: 'mailto:skmphysiotherapy@gmail.com', color: 'from-blue-500 to-blue-600', bg: 'from-blue-50 to-blue-100/50' },
+              { icon: MapPin, title: 'Visit Clinic', detail: '2 Branches in Noida', subtitle: 'Free parking available', link: '#branches', color: 'from-indigo-500 to-indigo-600', bg: 'from-indigo-50 to-indigo-100/50' },
+              { icon: Clock, title: 'Working Hours', detail: 'Mon-Sun: 10AM-10PM', subtitle: 'Emergency slots available', link: null, color: 'from-violet-500 to-violet-600', bg: 'from-violet-50 to-violet-100/50' },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={fadeInUp}
+                className={`group bg-gradient-to-br ${item.bg} rounded-2xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100`}
+              >
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    className={`flex-shrink-0 inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br ${item.color} rounded-xl shadow-md`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <item.icon className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+                  </motion.div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-0.5">{item.title}</h3>
+                    <p className="text-xs text-gray-500 mb-1">{item.subtitle}</p>
+                    {item.link ? (
+                      <a href={item.link} className="text-sm text-gray-900 font-medium hover:text-emerald-600 transition-colors truncate block">
+                        {item.detail}
+                      </a>
+                    ) : (
+                      <p className="text-sm text-gray-900 font-medium">{item.detail}</p>
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </motion.section>
 
-        {/* Main Content */}
-        <section className="py-12 md:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-              {/* Left Column - Form */}
-              <div
-                ref={formRef}
-                className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
-                id="appointment-form"
-              >
-                <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10 relative overflow-hidden border border-gray-100">
-                  <div className="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 bg-red-50 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50"></div>
-                  <div className="absolute bottom-0 left-0 w-32 h-32 md:w-40 md:h-40 bg-blue-50 rounded-full translate-y-1/2 -translate-x-1/2 opacity-50"></div>
+      {/* Main Content */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
 
-                  <div className="relative">
-                    <div className="mb-6 md:mb-8">
-                      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                        Book Your Appointment
-                      </h2>
-                      <p className="text-gray-600">
-                        Fill out the form below and we&apos;ll get back to you within 24 hours.
-                      </p>
+            {/* Contact Form */}
+            <motion.div
+              ref={formRef}
+              initial="hidden"
+              animate={formInView ? 'visible' : 'hidden'}
+              variants={fadeInUp}
+              id="contact-form"
+              className="order-2 lg:order-1"
+            >
+              <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 relative overflow-hidden border border-gray-100">
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full -translate-y-1/2 translate-x-1/2 opacity-50" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-50 rounded-full translate-y-1/2 -translate-x-1/2 opacity-50" />
+
+                <div className="relative">
+                  <div className="mb-6 sm:mb-8">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                      Book Your Appointment
+                    </h2>
+                    <p className="text-gray-600">
+                      Fill out the form and we'll contact you within 24 hours to confirm.
+                    </p>
+                  </div>
+
+
+                  <form onSubmit={handleSubmit} className="space-y-5 text-black">
+                    {/* Name */}
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Full Name *
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                        <input
+                          id="name"
+                          name="name"
+                          type="text"
+                          value={formData.name}
+                          onChange={handleChange}
+                          className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 ${errors.name ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all`}
+                          placeholder="Enter your full name"
+                          aria-invalid={!!errors.name}
+                        />
+                      </div>
+                      {errors.name && <p className="text-red-600 text-xs mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.name}</p>}
                     </div>
 
-                    {errors.submit && (
-                      <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
-                        <AlertCircle className="text-red-600 w-5 h-5 flex-shrink-0 mt-0.5" />
-                        <p className="text-red-600 text-sm">{errors.submit}</p>
-                      </div>
-                    )}
-
-                    {isSubmitted ? (
-                      <div className="flex flex-col items-center justify-center py-8 md:py-12 animate-fadeIn">
-                        <div className="bg-green-50 rounded-full p-4 md:p-6 mb-4 md:mb-6 animate-bounce">
-                          <CheckCircle2 className="text-green-600 w-12 h-12 md:w-16 md:h-16" />
+                    {/* Email & Phone */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                          Email Address *
+                        </label>
+                        <div className="relative">
+                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 ${errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all`}
+                            placeholder="your.email@example.com"
+                            aria-invalid={!!errors.email}
+                          />
                         </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 text-center">
-                          Appointment Request Received!
-                        </h3>
-                        <p className="text-gray-600 text-center max-w-md">
-                          Thank you for contacting SKM Physiotherapy. We&apos;ve received your message and will contact you within 24 hours to confirm your appointment.
-                        </p>
-                        <div className="mt-6 p-4 bg-gray-50 rounded-xl">
-                          <p className="text-sm text-gray-600">
-                            Confirmation ID: <span className="font-mono font-bold">SKM-{Date.now().toString().slice(-8)}</span>
+                        {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
+                      </div>
+
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                          Phone Number *
+                        </label>
+                        <div className="relative">
+                          <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                          <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 ${errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all`}
+                            placeholder="98765 43210"
+                            maxLength={12}
+                            aria-invalid={!!errors.phone}
+                          />
+                        </div>
+                        {errors.phone && <p className="text-red-600 text-xs mt-1">{errors.phone}</p>}
+                      </div>
+                    </div>
+
+                    {/* Branch Selection */}
+                    <div>
+                      <label htmlFor="branch" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Nearest Branch / नजदीकी शाखा *
+                      </label>
+                      <div className="relative">
+                        <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                        <select
+                          id="branch"
+                          name="branch"
+                          value={formData.branch}
+                          onChange={handleChange}
+                          className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 ${errors.branch ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all appearance-none bg-white`}
+                          aria-invalid={!!errors.branch}
+                        >
+                          <option value="">Select your nearest branch</option>
+                          {BRANCHES.map(branch => (
+                            <option key={branch.id} value={branch.id} disabled={branch.comingSoon}>
+                              {branch.name} {branch.comingSoon && '(Coming Soon)'}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+                      </div>
+                      {errors.branch && <p className="text-red-600 text-xs mt-1">{errors.branch}</p>}
+                    </div>
+
+                    {/* Service Selection */}
+                    <div>
+                      <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Service Required / सेवा *
+                      </label>
+                      <div className="relative">
+                        <Stethoscope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                        <select
+                          id="service"
+                          name="service"
+                          value={formData.service}
+                          onChange={handleChange}
+                          className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 ${errors.service ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all appearance-none bg-white`}
+                          aria-invalid={!!errors.service}
+                        >
+                          <option value="">Select a service</option>
+                          {SERVICE_GROUPS.map(group => (
+                            <optgroup key={group.label} label={group.label}>
+                              {group.services.map(svc => (
+                                <option key={svc.id} value={svc.id}>{svc.name}</option>
+                              ))}
+                            </optgroup>
+                          ))}
+                          <option value="other">{OTHER_OPTION.name}</option>
+                        </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+                      </div>
+                      {errors.service && <p className="text-red-600 text-xs mt-1">{errors.service}</p>}
+
+                      {/* Other Service Input */}
+                      <AnimatePresence>
+                        {showServiceOther && (
+                          <motion.input
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            type="text"
+                            name="serviceOther"
+                            value={formData.serviceOther}
+                            onChange={handleChange}
+                            placeholder="Please specify your service requirement..."
+                            className={`mt-3 w-full px-4 py-3 rounded-xl border-2 ${errors.serviceOther ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all`}
+                          />
+                        )}
+                      </AnimatePresence>
+                      {errors.serviceOther && <p className="text-red-600 text-xs mt-1">{errors.serviceOther}</p>}
+                    </div>
+
+                    {/* Preferred Date */}
+                    <div>
+                      <label htmlFor="preferredDate" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Preferred Date (Optional)
+                      </label>
+                      <div className="relative">
+                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                        <input
+                          id="preferredDate"
+                          name="preferredDate"
+                          type="date"
+                          value={formData.preferredDate}
+                          onChange={handleChange}
+                          min={new Date().toISOString().split('T')[0]}
+                          className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none transition-all bg-white"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Your Message / आपका संदेश *
+                      </label>
+                      <div className="relative">
+                        <MessageSquare className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          rows={4}
+                          className={`w-full pl-12 pr-4 py-3 rounded-xl border-2 ${errors.message ? 'border-red-300 bg-red-50' : 'border-gray-200 focus:border-emerald-500'} focus:ring-4 focus:ring-emerald-100 outline-none transition-all resize-none`}
+                          placeholder="Please describe your condition, symptoms, or any specific concerns..."
+                          aria-invalid={!!errors.message}
+                        />
+                      </div>
+                      {errors.message && <p className="text-red-600 text-xs mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.message}</p>}
+                    </div>
+
+                    {/* Submit Button */}
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:from-emerald-700 hover:to-blue-700 transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          Submit Request / अनुरोध भेजें
+                        </>
+                      )}
+                    </motion.button>
+
+                    <p className="text-xs text-gray-500 text-center">
+                      By submitting, you agree to our Privacy Policy. Your data is secure and never shared.
+                    </p>
+                  </form>
+                  {/* Submit Status Messages */}
+                  <AnimatePresence mode="wait">
+                    {submitStatus === 'success' && (
+                      <motion.div
+                        key="success"
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start gap-3"
+                      >
+                        <CheckCircle2 className="text-emerald-600 w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-emerald-800 font-medium">Appointment Request Received!</p>
+                          <p className="text-emerald-700 text-sm mt-1">
+                            Thank you! We'll contact you at {formData.phone || 'your number'} within 24 hours.
+                            <br />
+                            <span className="font-mono text-xs mt-1 block">Ref: SKM-{Date.now().toString().slice(-6)}</span>
                           </p>
                         </div>
-                      </div>
-                    ) : (
-                      <form onSubmit={handleSubmit} className="space-y-6 text-black">
-                        {/* Name Field */}
-                        <div className="group">
-                          <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                            Full Name *
-                          </label>
-                          <div className="relative">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors w-5 h-5" />
-                            <input
-                              id="name"
-                              type="text"
-                              name="name"
-                              value={formData.name}
-                              onChange={handleChange}
-                              className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.name ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                                } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
-                              placeholder="Enter your full name"
-                              aria-required="true"
-                              aria-invalid={!!errors.name}
-                              aria-describedby={errors.name ? "name-error" : undefined}
-                            />
-                          </div>
-                          {errors.name && (
-                            <p id="name-error" className="text-red-600 text-xs mt-2 flex items-center gap-1">
-                              <AlertCircle className="w-3 h-3" />
-                              {errors.name}
-                            </p>
-                          )}
-                        </div>
+                      </motion.div>
+                    )}
 
-                        {/* Email & Phone Fields */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                          <div className="group">
-                            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                              Email Address *
-                            </label>
-                            <div className="relative">
-                              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors w-5 h-5" />
-                              <input
-                                id="email"
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                                  } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
-                                placeholder="your.email@example.com"
-                                aria-required="true"
-                                aria-invalid={!!errors.email}
-                                aria-describedby={errors.email ? "email-error" : undefined}
-                              />
-                            </div>
-                            {errors.email && (
-                              <p id="email-error" className="text-red-600 text-xs mt-2 flex items-center gap-1">
-                                <AlertCircle className="w-3 h-3" />
-                                {errors.email}
-                              </p>
-                            )}
-                          </div>
+                    {submitStatus === 'error' && errors.submit && (
+                      <motion.div
+                        key="error"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3"
+                      >
+                        <AlertCircle className="text-red-600 w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <p className="text-red-700 text-sm">{errors.submit}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-                          <div className="group">
-                            <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                              Phone Number *
-                            </label>
-                            <div className="relative">
-                              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors w-5 h-5" />
-                              <input
-                                id="phone"
-                                type="tel"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handlePhoneChange}
-                                className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                                  } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base`}
-                                placeholder="(555) 123-4567"
-                                maxLength={14}
-                                aria-required="true"
-                                aria-invalid={!!errors.phone}
-                                aria-describedby={errors.phone ? "phone-error" : undefined}
-                              />
-                            </div>
-                            {errors.phone && (
-                              <p id="phone-error" className="text-red-600 text-xs mt-2 flex items-center gap-1">
-                                <AlertCircle className="w-3 h-3" />
-                                {errors.phone}
-                              </p>
-                            )}
-                          </div>
-                        </div>
+                </div>
+              </div>
+            </motion.div>
 
-                        {/* Date & Service Fields */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                          <div className="group">
-                            <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-2">
-                              Preferred Date
-                            </label>
-                            <div className="relative">
-                              <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors w-5 h-5" />
-                              <input
-                                id="date"
-                                type="date"
-                                name="date"
-                                value={formData.date}
-                                onChange={handleChange}
-                                min={new Date().toISOString().split('T')[0]}
-                                className="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base bg-white"
-                              />
-                            </div>
-                          </div>
+            {/* Right Column - Info */}
+            <div className="order-1 lg:order-2 space-y-6 sm:space-y-8">
 
-                          <div className="group">
-                            <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
-                              Service Needed
-                            </label>
-                            <div className="relative">
-                              <select
-                                id="service"
-                                name="service"
-                                value={formData.service}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base appearance-none bg-white cursor-pointer"
-                              >
-                                <option value="">Select a service</option>
-                                <option value="sports-injury">Sports Injury</option>
-                                <option value="manual-therapy">Manual Therapy</option>
-                                <option value="rehabilitation">Rehabilitation</option>
-                                <option value="chronic-pain">Chronic Pain Management</option>
-                                <option value="orthopedic">Orthopedic Care</option>
-                                <option value="pediatric">Pediatric Physiotherapy</option>
-                                <option value="neurological">Neurological Rehab</option>
-                                <option value="post-surgical">Post-Surgical Rehab</option>
-                              </select>
-                              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <ChevronRight className="w-5 h-5 text-gray-400 rotate-90" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
 
-                        {/* Message Field */}
-                        <div className="group">
-                          <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                            Your Message *
-                          </label>
-                          <div className="relative">
-                            <MessageSquare className="absolute left-4 top-4 text-gray-400 group-focus-within:text-red-600 transition-colors w-5 h-5" />
-                            <textarea
-                              id="message"
-                              name="message"
-                              value={formData.message}
-                              onChange={handleChange}
-                              rows={4}
-                              className={`w-full pl-12 pr-4 py-3.5 rounded-xl border-2 ${errors.message ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                                } focus:border-red-600 focus:ring-4 focus:ring-red-100 outline-none transition-all duration-300 text-base resize-none`}
-                              placeholder="Please describe your condition, symptoms, or any specific concerns..."
-                              aria-required="true"
-                              aria-invalid={!!errors.message}
-                              aria-describedby={errors.message ? "message-error" : undefined}
-                            ></textarea>
-                          </div>
-                          {errors.message && (
-                            <p id="message-error" className="text-red-600 text-xs mt-2 flex items-center gap-1">
-                              <AlertCircle className="w-3 h-3" />
-                              {errors.message}
-                            </p>
-                          )}
-                        </div>
 
-                        {/* Submit Button */}
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white py-4 rounded-xl font-bold text-lg hover:from-red-700 hover:to-pink-700 transition-all duration-300 hover:scale-[1.02] shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-base md:text-lg"
-                        >
-                          {isSubmitting ? (
-                            <>
-                              <Loader2 className="w-5 h-5 animate-spin" />
-                              Processing Your Request...
-                            </>
+              {/* Branches */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={formInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 border border-gray-100"
+                id="branches"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Our Branches / हमारी शाखाएँ</h3>
+
+                <div className="space-y-4">
+                  {BRANCHES.map((branch, idx) => (
+                    <motion.div
+                      key={branch.id}
+                      variants={scaleIn}
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ delay: idx * 0.1 }}
+                      className={`p-4 rounded-xl border-2 transition-all ${branch.comingSoon ? 'border-gray-200 bg-gray-50 opacity-70' : 'border-emerald-100 hover:border-emerald-300 hover:shadow-md'}`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{branch.name}</h4>
+                          {branch.comingSoon ? (
+                            <span className="text-xs text-amber-600 font-medium">Coming Soon / जल्द आ रहा है</span>
                           ) : (
                             <>
-                              <Send className="w-5 h-5" />
-                              Book Your Appointment
+                              <p className="text-xs text-gray-500 mt-1 line-clamp-2">{branch.address}</p>
+                              {branch.phone && <p className="text-xs text-gray-600 mt-1 font-medium">{branch.phone}</p>}
                             </>
                           )}
-                        </button>
-
-                        <p className="text-xs text-gray-500 text-center mt-4">
-                          By submitting this form, you agree to our Privacy Policy and Terms of Service.
-                          We respect your privacy and will never share your information.
-                        </p>
-                      </form>
-                    )}
-                  </div>
-                </div>
-
-                {/* Services Offered */}
-                <div className="mt-8 bg-white rounded-2xl shadow-xl p-6 md:p-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Services We Offer</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {services.map((service, index) => (
-                      <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-red-50 transition-colors duration-300">
-                        <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                        <span className="text-sm text-gray-700">{service}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column */}
-              <div className={`space-y-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-                {/* Doctor Profile */}
-                <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 md:p-8 relative overflow-hidden border border-gray-100">
-                  <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-rose-400 to-rose-600 rounded-full -mr-8 -mt-8 opacity-10"></div>
-
-                  <div className="relative">
-                    <div className="flex items-start gap-4 md:gap-6 mb-6">
-                      <div className="flex-shrink-0">
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg">
-                          <Award className="w-8 h-8 md:w-10 md:h-10 text-white" />
                         </div>
+                        {!branch.comingSoon && branch.map && (
+                          <a
+                            href={branch.map}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-shrink-0 p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+                            aria-label="Open in Maps"
+                          >
+                            <Navigation className="w-5 h-5" />
+                          </a>
+                        )}
                       </div>
-                      <div>
-                        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
-                          Dr. Shravan Kumar
-                        </h2>
-                        <p className="text-gray-600 text-sm md:text-base mb-2">
-                          B.P.T., C.D.C.T., M.C.T. (Sharda Hospital)
-                        </p>
-                        <p className="text-gray-500 text-xs md:text-sm">
-                          Certified Professional Physiotherapist with 15+ years of experience
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3 md:space-y-4">
-                      <div className="flex items-center gap-3 p-3 md:p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl">
-                        <Star className="w-5 h-5 text-rose-600 flex-shrink-0" />
-                        <span className="text-sm md:text-base text-gray-700 font-medium">3+ Years Clinical Experience</span>
-                      </div>
-                      <div className="flex items-center gap-3 p-3 md:p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl">
-                        <Shield className="w-5 h-5 text-rose-600 flex-shrink-0" />
-                        <span className="text-sm md:text-base text-gray-700 font-medium">Certified in Multiple Specializations</span>
-                      </div>
-                      <div className="flex items-center gap-3 p-3 md:p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl">
-                        <Heart className="w-5 h-5 text-rose-600 flex-shrink-0" />
-                        <span className="text-sm md:text-base text-gray-700 font-medium">1000+ Successfully Treated Patients</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 pt-6 border-t border-gray-200">
-                      <h4 className="text-lg font-semibold text-gray-900 mb-3">Specializations</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {['Sports Medicine', 'Orthopedic Rehab', 'Manual Therapy', 'Pain Management'].map((spec, idx) => (
-                          <span key={idx} className="px-3 py-1.5 bg-rose-100 text-rose-700 rounded-full text-xs font-medium">
-                            {spec}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  ))}
                 </div>
+              </motion.div>
 
-                {/* Social Media */}
-                <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 md:p-8 border border-gray-100">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Connect With Us</h2>
-                  <p className="text-gray-600 mb-6">Follow us for health tips, updates, and success stories</p>
-
-                  <div className="space-y-3 md:space-y-4">
-                    {socialLinks.map((social, idx) => (
-                      <a
-                        key={idx}
-                        href={social.link}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className={`group flex items-center justify-between p-3 md:p-4 rounded-xl border-2 border-gray-100 hover:border-transparent ${social.color} hover:text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
-                        aria-label={`Follow us on ${social.name}`}
-                      >
-                        <div className="flex items-center gap-3 md:gap-4">
-                          <div className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 ${social.iconColor} group-hover:text-white bg-gray-50 group-hover:bg-white/20 rounded-xl transition-all duration-300`}>
-                            <social.icon className="w-5 h-5 md:w-6 md:h-6" />
-                          </div>
-                          <div className="text-left">
-                            <h3 className="font-bold text-gray-900 group-hover:text-white transition-colors text-sm md:text-base">
-                              {social.name}
-                            </h3>
-                            <p className="text-xs md:text-sm text-gray-500 group-hover:text-white/80 transition-colors">
-                              {social.handle}
-                            </p>
-
-                          </div>
-                        </div>
-                        <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all w-4 h-4 md:w-5 md:h-5" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Location Map */}
-                {/* Location Map */}
-                <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl p-6 md:p-8 border border-gray-100">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Visit Our Clinic</h2>
-                  <p className="text-gray-600 mb-4">State-of-the-art facility with modern equipment</p>
-
-                  <div className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden mb-4 border border-gray-200">
-                    {/* Embedded Google Maps */}
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.086697416308!2d77.4982626760839!3d28.474854075756152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce8c5d57d41ed%3A0x3d5e2bc68c3cd57d!2sD-BLOCK%2C%20D-3%2C%20near%20Krishna%20hospital%2C%20Block%20D%2C%20Swarn%20Nagari%2C%20Sector%20Swarn%20Nagri%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201315!5e0!3m2!1sen!2sin!4v1704444444444!5m2!1sen!2sin"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Dermaclinix Location Map"
-                      className="absolute inset-0"
-                    />
-
-                    {/* Overlay with link for mobile/accessibility */}
-                    <a
-                      href="https://maps.app.goo.gl/Us4jVhy8foKxxawE7"
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      className="absolute inset-0 z-10 md:hidden"
-                      aria-label="Open location in Google Maps"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/10 to-gray-900/5 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-                          <MapPin className="mx-auto text-red-600 mb-2 w-6 h-6" />
-                          <p className="text-gray-800 font-medium text-sm">Tap to open in Maps app</p>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
-                      <Map className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold text-gray-900 text-sm md:text-base">Our Address</h3>
-                        <p className="text-gray-600 text-sm">D-BLOCK, D-3, near Krishna hospital, Block D, Swarn Nagari, Sector Swarn Nagri, Greater Noida, Uttar Pradesh 201315</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
-                      <Clock className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold text-gray-900 text-sm md:text-base">Parking Information</h3>
-                        <p className="text-gray-600 text-sm">Free parking available in front of the clinic</p>
-                      </div>
-                    </div>
-
-                    {/* Optional: Get Directions Button */}
-                    <div className="pt-2">
-                      <a
-                        href="https://www.google.com/maps/dir//D-BLOCK,+D-3,+near+Krishna+hospital,+Block+D,+Swarn+Nagari,+Sector+Swarn+Nagri,+Greater+Noida,+Uttar+Pradesh+201315"
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-xl w-full transition-colors duration-200"
-                      >
-                        <Navigation className="w-5 h-5" />
-                        Get Directions
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-gray-600">
-                Find answers to common questions about appointments and services
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {[
-                {
-                  q: "How soon can I get an appointment?",
-                  a: "We typically offer same-day or next-day appointments for urgent cases. Regular appointments are available within 24-48 hours."
-                },
-                {
-                  q: "Do you accept insurance?",
-                  a: "Yes, we accept most major insurance providers. Please contact our office to verify your coverage before your appointment."
-                },
-                {
-                  q: "What should I bring to my first appointment?",
-                  a: "Please bring your ID, insurance card, referral (if applicable), and any relevant medical reports or imaging results."
-                },
-                {
-                  q: "How long is each session?",
-                  a: "Initial evaluations are 60 minutes. Follow-up sessions typically last 45 minutes. Treatment duration may vary based on your needs."
-                }
-              ].map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                    {faq.q}
-                  </h3>
-                  <p className="text-gray-600 text-sm">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-8">
-              <button
-
-                className="inline-flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
+              {/* Social Links */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={formInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 border border-gray-100"
               >
-                View All FAQs
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
+                <p className="text-gray-600 text-sm mb-6">Follow for health tips & success stories</p>
+
+                <div className="space-y-3">
+                  {[
+                    { icon: Facebook, name: 'Facebook', handle: '@skmphysiotherapy', link: 'https://facebook.com', color: 'hover:bg-blue-600', iconColor: 'text-blue-600' },
+                    { icon: Instagram, name: 'Instagram', handle: '@skmphysio', link: 'https://instagram.com', color: 'hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600', iconColor: 'text-pink-600' },
+                    { icon: Youtube, name: 'YouTube', handle: 'SKM Physiotherapy', link: 'https://youtube.com', color: 'hover:bg-red-600', iconColor: 'text-red-600' },
+                  ].map((social, idx) => (
+                    <motion.a
+                      key={idx}
+                      href={social.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group flex items-center justify-between p-4 rounded-xl border-2 border-gray-100 ${social.color} hover:border-transparent hover:text-white transition-all duration-300`}
+                      whileHover={{ x: 4 }}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`flex items-center justify-center w-10 h-10 ${social.iconColor} group-hover:text-white bg-gray-50 group-hover:bg-white/20 rounded-xl transition-all`}>
+                          <social.icon className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 group-hover:text-white transition-colors text-sm">{social.name}</h4>
+                          <p className="text-xs text-gray-500 group-hover:text-white/80 transition-colors">{social.handle}</p>
+                        </div>
+                      </div>
+                      <ArrowRight className="text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all w-4 h-4" />
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
+
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
+      {/* FAQ Section */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10 sm:mb-12"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600">Quick answers to common questions</p>
+          </motion.div>
 
-
-        {/* Footer */}
-        <footer className="bg-gray-900 text-white py-8 md:py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h3 className="text-xl font-bold mb-4">SKM Physiotherapy</h3>
-              <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-                Professional physiotherapy services committed to helping you achieve optimal health and mobility.
-              </p>
-
-              <div className="flex justify-center space-x-6 mb-6">
-                {socialLinks.map((social, idx) => (
-                  <a
-                    key={idx}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className={`p-2 rounded-full ${social.iconColor.replace('text-', 'bg-')} bg-opacity-10 hover:bg-opacity-20 transition-all duration-300`}
-                    aria-label={`Follow us on ${social.name}`}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </div>
-
-              <div className="text-gray-400 text-sm">
-                <p>© {currentYear} SKM Physiotherapy. All rights reserved.</p>
-                <p className="mt-2">
-                  <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a> •
-                  <a href="/terms" className="hover:text-white transition-colors ml-2">Terms of Service</a> •
-                  <a href="/sitemap" className="hover:text-white transition-colors ml-2">Sitemap</a>
-                </p>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+            {[
+              { q: "How soon can I get an appointment?", a: "We offer same-day slots for urgent cases. Regular appointments are confirmed within 24 hours." },
+              { q: "Do you accept insurance?", a: "Yes, we accept most major providers. Please verify your coverage before your visit." },
+              { q: "What should I bring?", a: "Bring ID, insurance card, referral (if any), and relevant medical reports." },
+              { q: "How long is each session?", a: "Initial evaluations: 60 mins. Follow-ups: 45 mins. Duration varies by treatment plan." },
+            ].map((faq, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white rounded-xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2 text-sm sm:text-base">
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+                  {faq.q}
+                </h3>
+                <p className="text-gray-600 text-sm">{faq.a}</p>
+              </motion.div>
+            ))}
           </div>
-        </footer>
-      </div>
+        </div>
+      </section>
 
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px) scale(0.98); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: #dc2626;
-          border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-          background: #b91c1c;
-        }
-
-        /* Selection color */
-        ::selection {
-          background-color: rgba(220, 38, 38, 0.2);
-          color: #111827;
-        }
-
-        /* Focus styles for accessibility */
-        *:focus-visible {
-          outline: 3px solid rgba(220, 38, 38, 0.4);
-          outline-offset: 2px;
-        }
-
-        /* Smooth transitions */
-        html {
-          scroll-behavior: smooth;
-        }
-      `}</style>
-    </>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import {
   CheckCircle, ArrowRight, Activity, ChevronRight, Sparkles, Target, Shield,
   Users, Award, Star, Calendar, Map, MessageSquare
 } from 'lucide-react';
-import ServicesPage from './service/page';
+import ServicesPage from './services/page';
 import AboutPage from './about/page';
 import BlogPage from './blog/page';
 import GalleryPage from './gallery/page';
@@ -624,11 +624,11 @@ const Home = () => {
           <AboutPage />
         </div>
         <div ref={el => { sectionRefs.current.blog = el; }} id="blog">
-        <BlogPage />
-      </div>
-      <div ref={el => { sectionRefs.current.gallery = el; }} id="gallery">
-        <GalleryPage />
-      </div>
+          <BlogPage />
+        </div>
+        <div ref={el => { sectionRefs.current.gallery = el; }} id="gallery">
+          <GalleryPage />
+        </div>
         <div ref={el => { sectionRefs.current.therapists = el; }} id="therapists">
           <TherapistsPage />
         </div>
