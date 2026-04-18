@@ -22,6 +22,12 @@ const NAV_LINKS: NavItem[] = [
     href: "/services",
     id: "services",
     dropdown: [
+      {
+        label: "All Services / सभी सेवाएं",
+        href: "/services",
+        id: "all-services",
+        icon: "🎯",
+      },
       // Group 1: Specialized Therapies
       {
         label: "Specialized Therapies / विशेष चिकित्सा",
@@ -111,8 +117,8 @@ const NAV_LINKS: NavItem[] = [
           { label: "Sector 134 / सेक्टर 134", href: "/branches/noida-sector-134", id: "sector-134", icon: "🏢" },
         ]
       },
-      { label: "Delhi / दिल्ली", href: "/branches/delhi", id: "delhi", icon: "📍", comingSoon: true },
-      { label: "Gurgaon / गुड़गांव", href: "/branches/gurgaon", id: "gurgaon", icon: "📍", comingSoon: true },
+      // { label: "Delhi / दिल्ली", href: "/branches/delhi", id: "delhi", icon: "📍", comingSoon: true },
+      // { label: "Gurgaon / गुड़गांव", href: "/branches/gurgaon", id: "gurgaon", icon: "📍", comingSoon: true },
     ],
   },
   {
@@ -234,7 +240,7 @@ function DesktopNavItem({
             </span>
           )}
           <motion.svg
-            className={`w-3.5 h-3.5 ${depth === 0 ? "" : "rotate-90"}`}
+            className={`w-3.5 h-3.5 ${depth === 0 ? "" : "rotate-270"}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
