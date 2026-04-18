@@ -1,189 +1,359 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Activity, Home, Search, Phone, ArrowLeft, Heart, AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { Activity, Home, Search, Phone, ArrowLeft, Heart, AlertCircle, ArrowRight, MapPin, Clock, Mail, LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 
-const PageNotFound = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+// Type definitions
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+interface QuickLink {
+  icon: LucideIcon;
+  label: string;
+  link: string;
+  color: string;
+}
+
+const PageNotFound: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     setIsVisible(true);
-    
-    const handleMouseMove = (e:any) => {
+
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Animation variants with proper Variants type
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
+  const floatAnimation: Variants = {
+    initial: { y: 0 },
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const pulseRing: Variants = {
+    initial: { scale: 1, opacity: 0.3 },
+    animate: {
+      scale: [1, 1.2, 1],
+      opacity: [0.3, 0.1, 0.3],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const floatingIconVariants: Variants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: (index: number) => ({
+      opacity: 0.4,
+      scale: 1,
+      transition: { delay: index * 0.2 }
+    })
+  };
+
+  const backgroundGradientVariants: Variants = {
+    animate: {
+      scale: [1, 1.2, 1],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const rotatingIconVariants: Variants = {
+    animate: {
+      rotate: 360,
+      transition: {
+        duration: 20,
+        repeat: Infinity,
+        ease: "linear"
+      }
+    }
+  };
+
+  const errorCardIconVariants: Variants = {
+    animate: {
+      rotate: [0, -10, 10, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity
+      }
+    }
+  };
+
+  const quickLinks: QuickLink[] = [
+    { icon: Home, label: 'Home', link: '/', color: 'from-emerald-500 to-teal-500' },
+    { icon: Activity, label: 'Services', link: '/services', color: 'from-blue-500 to-indigo-500' },
+    { icon: Heart, label: 'About Us', link: '/about', color: 'from-indigo-500 to-purple-500' },
+    { icon: Phone, label: 'Contact', link: '/contact', color: 'from-teal-500 to-emerald-500' }
+  ];
+
+  const floatingIcons: LucideIcon[] = [Activity, Heart, Activity, Heart, MapPin, Clock];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 relative overflow-hidden flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-indigo-50 relative overflow-hidden flex items-center justify-center px-4 py-8">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute w-96 h-96 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"
+        <motion.div
+          className="absolute w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
           style={{
             left: `${mousePosition.x / 20}px`,
             top: `${mousePosition.y / 20}px`,
-            transition: 'all 0.3s ease-out'
           }}
-        ></div>
-        <div className="absolute top-1/4 right-20 w-96 h-96 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-2000"></div>
+          variants={backgroundGradientVariants}
+          animate="animate"
+        />
+        <motion.div
+          className="absolute top-1/4 right-20 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            x: [0, 50, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-1/3 w-80 h-80 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+          animate={{
+            scale: [1, 1.3, 1],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
       </div>
 
       {/* Floating Icons */}
       <div className="absolute inset-0 pointer-events-none">
-        <Activity className="absolute top-20 left-10 w-12 h-12 text-rose-300 animate-bounce opacity-40" style={{ animationDelay: '0s' }} />
-        <Heart className="absolute top-40 right-32 w-10 h-10 text-pink-300 animate-bounce opacity-40" style={{ animationDelay: '0.5s' }} />
-        <Activity className="absolute bottom-32 left-1/4 w-8 h-8 text-amber-300 animate-bounce opacity-40" style={{ animationDelay: '1s' }} />
-        <Heart className="absolute bottom-48 right-20 w-14 h-14 text-rose-300 animate-bounce opacity-40" style={{ animationDelay: '1.5s' }} />
+        {floatingIcons.map((Icon, index) => (
+          <motion.div
+            key={index}
+            custom={index}
+            variants={floatingIconVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ scale: 1.2, opacity: 0.6 }}
+            className="absolute"
+            style={{
+              top: `${20 + (index * 15)}%`,
+              left: `${[10, 85, 20, 90, 15, 80][index]}%`,
+            }}
+          >
+            <Icon className="w-8 h-8 md:w-12 md:h-12 text-emerald-300 animate-bounce"
+              style={{ animationDelay: `${index * 0.3}s` }}
+            />
+          </motion.div>
+        ))}
       </div>
 
-      <div className={`relative z-10 text-center max-w-4xl transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        className="relative z-10 text-center max-w-4xl w-full"
+      >
         {/* Logo */}
-        <div className="flex items-center justify-center space-x-3 mb-8">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 animate-pulse"></div>
-            <div className="relative bg-gradient-to-br from-amber-500 to-amber-600 p-4 rounded-full transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-              <Activity className="w-10 h-10 text-white" />
-            </div>
-          </div>
+        <motion.div variants={itemVariants} className="flex items-center justify-center space-x-3 mb-8">
+          <Image src="/logo.png" alt="Logo" width={60} height={60} />
+
           <div className="text-left">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">
+            <motion.h1
+              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-emerald-600 to-indigo-600 bg-clip-text text-transparent"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              style={{ backgroundSize: '200% auto' }}
+            >
               SKM PHYSIOTHERAPY
-            </h1>
+            </motion.h1>
+            <p className="text-sm text-gray-500">Say No To Pain</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* 404 Number */}
-        <div className="relative mb-8">
-          <h2 className="text-[150px] md:text-[200px] font-bold bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 bg-clip-text text-transparent leading-none animate-pulse">
+        <motion.div variants={itemVariants} className="relative mb-8">
+          <motion.h2
+            className="text-[120px] md:text-[180px] lg:text-[200px] font-bold bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent leading-none"
+            animate={{
+              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            style={{ backgroundSize: '200% auto' }}
+          >
             404
-          </h2>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <AlertCircle className="w-24 h-24 md:w-32 md:h-32 text-rose-300 animate-spin" style={{ animationDuration: '3s' }} />
-          </div>
-        </div>
+          </motion.h2>
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            variants={rotatingIconVariants}
+            animate="animate"
+          >
+            <AlertCircle className="w-20 h-20 md:w-28 md:h-28 text-emerald-300 opacity-50" />
+          </motion.div>
+        </motion.div>
 
         {/* Error Message */}
-        <div className={`mb-8 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+        <motion.div variants={itemVariants} className="mb-8">
+          <motion.h3
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4"
+            variants={floatAnimation}
+            initial="initial"
+            animate="animate"
+          >
             Oops! Page Not Found
-          </h3>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            The page you're looking for seems to have taken a break. Just like your body needs rest, sometimes pages do too! 
-            Let's get you back on track to better health.
+          </motion.h3>
+          <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed px-4">
+            The page you&apos;re looking for seems to have taken a break. Just like your body needs rest,
+            sometimes pages do too! Let&apos;s get you back on track to better health.
           </p>
-        </div>
+        </motion.div>
 
         {/* Error Card */}
-        <div className={`bg-white rounded-3xl shadow-2xl p-8 mb-8 max-w-2xl mx-auto transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div
+          variants={itemVariants}
+          whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
+          className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-8 max-w-2xl mx-auto"
+        >
           <div className="flex items-start space-x-4 text-left">
-            <div className="bg-gradient-to-br from-rose-500 to-pink-500 p-3 rounded-2xl flex-shrink-0 animate-bounce">
-              <AlertCircle className="w-8 h-8 text-white" />
-            </div>
+            <motion.div
+              className="bg-gradient-to-br from-emerald-500 to-indigo-500 p-3 rounded-2xl flex-shrink-0"
+              variants={errorCardIconVariants}
+              animate="animate"
+            >
+              <AlertCircle className="w-6 h-6 md:w-8 md:h-8 text-white" />
+            </motion.div>
             <div>
-              <h4 className="text-xl font-bold text-gray-800 mb-2">What happened?</h4>
-              <p className="text-gray-600 leading-relaxed">
-                The page you requested doesn't exist or may have been moved. This could be due to a typo in the URL or the page has been removed.
+              <h4 className="text-lg md:text-xl font-bold text-gray-800 mb-2">What happened?</h4>
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                The page you requested doesn&apos;t exist or may have been moved. This could be due to a
+                typo in the URL or the page has been removed.
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Action Buttons */}
-        <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <a
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 px-4">
+          <motion.a
             href="/"
-            className="group relative px-8 py-4 font-semibold text-white overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+            className="relative w-full sm:w-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-600"></span>
-            <span className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-700 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-            <span className="relative flex items-center justify-center space-x-3 z-10">
-              <Home className="w-5 h-5" />
-              <span>Go Home</span>
-            </span>
-          </a>
+            <div className="relative px-6 md:px-8 py-3 md:py-4 font-semibold text-white overflow-hidden rounded-2xl shadow-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 transition-all duration-300">
+              <span className="relative flex items-center justify-center space-x-2 z-10">
+                <Home className="w-4 h-4 md:w-5 md:h-5" />
+                <span>Go Home</span>
+              </span>
+            </div>
+          </motion.a>
 
-          <button
+          <motion.button
             onClick={() => window.history.back()}
-            className="group relative px-8 py-4 font-semibold text-gray-800 overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white w-full sm:w-auto"
+            className="relative w-full sm:w-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="relative flex items-center justify-center space-x-3 z-10 group-hover:text-amber-600 transition-colors duration-300">
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
-              <span>Go Back</span>
-            </span>
-          </button>
+            <div className="relative px-6 md:px-8 py-3 md:py-4 font-semibold text-gray-800 overflow-hidden rounded-2xl shadow-xl bg-white border-2 border-gray-200 hover:border-emerald-300 transition-all duration-300">
+              <span className="relative flex items-center justify-center space-x-2 z-10 group">
+                <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                <span>Go Back</span>
+              </span>
+            </div>
+          </motion.button>
 
-          <a
+          <motion.a
             href="/services"
-            className="group relative px-8 py-4 font-semibold text-white overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-rose-500 to-pink-500 w-full sm:w-auto"
+            className="relative w-full sm:w-auto"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="relative flex items-center justify-center space-x-3 z-10">
-              <Search className="w-5 h-5" />
-              <span>Our Services</span>
-            </span>
-          </a>
-        </div>
+            <div className="relative px-6 md:px-8 py-3 md:py-4 font-semibold text-white overflow-hidden rounded-2xl shadow-xl bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
+              <span className="relative flex items-center justify-center space-x-2 z-10">
+                <Search className="w-4 h-4 md:w-5 md:h-5" />
+                <span>Our Services</span>
+              </span>
+            </div>
+          </motion.a>
+        </motion.div>
 
-        {/* Quick Links */}
-        <div className={`bg-white rounded-3xl shadow-2xl p-8 max-w-3xl mx-auto transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h4 className="text-2xl font-bold text-gray-800 mb-6">Quick Links</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { icon: Home, label: 'Home', link: '/' },
-              { icon: Activity, label: 'Services', link: '/services' },
-              { icon: Heart, label: 'About Us', link: '/about' },
-              { icon: Phone, label: 'Contact', link: '/contact' }
-            ].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={idx}
-                  href={item.link}
-                  className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 hover:from-rose-50 hover:to-pink-50 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg"
-                >
-                  <div className="bg-gradient-to-br from-amber-500 to-amber-600 group-hover:from-rose-500 group-hover:to-pink-500 p-3 rounded-xl mb-3 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <span className="font-semibold text-gray-700 group-hover:text-rose-600 transition-colors duration-300 text-sm">
-                    {item.label}
-                  </span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
+
 
         {/* Contact Section */}
-        <div className={`mt-8 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <Phone className="w-5 h-5 animate-bounce" />
-            <span className="font-semibold">Need Help? Call:</span>
-            <a href="tel:7982799147" className="font-bold text-lg hover:text-yellow-300 transition-colors">
+        <motion.div variants={itemVariants} className="mt-8">
+          <motion.div
+            className="inline-flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 bg-gradient-to-r from-emerald-500 to-indigo-500 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="flex items-center space-x-2">
+              <Phone className="w-4 h-4 md:w-5 md:h-5 animate-bounce" />
+              <span className="font-semibold text-sm md:text-base">Need Help? Call:</span>
+            </div>
+            <a href="tel:7982799147" className="font-bold text-base md:text-lg hover:text-emerald-200 transition-colors">
               7982799147
             </a>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-8 right-8 flex flex-col space-y-4 z-50">
-        <a
-          href="/"
-          className="group bg-gradient-to-r from-amber-500 to-amber-600 text-white p-4 rounded-full shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 transform hover:scale-110"
-        >
-          <Home className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-        </a>
-        <a
-          href="tel:7982799147"
-          className="group bg-gradient-to-r from-rose-500 to-pink-500 text-white p-4 rounded-full shadow-2xl hover:shadow-rose-500/50 transition-all duration-300 transform hover:scale-110 animate-pulse"
-        >
-          <Phone className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-        </a>
-      </div>
     </div>
   );
 };

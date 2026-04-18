@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
             price: searchParams.get('price') || undefined,
             status: searchParams.get('status') || undefined,
             search: searchParams.get('search') || undefined,
+            sortBy: searchParams.get('sortBy') || undefined,
             limit: searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined,
             page: searchParams.get('page') ? parseInt(searchParams.get('page')!) : undefined,
         };

@@ -239,8 +239,9 @@ const ContactPage = () => {
     setSubmitStatus('idle');
 
     try {
+      const { serviceOther, ...rest } = formData;
       const payload: ContactSubmissionInput = {
-        ...formData,
+        ...rest,
         service: formData.service === 'other' ? formData.serviceOther : formData.service,
       };
 

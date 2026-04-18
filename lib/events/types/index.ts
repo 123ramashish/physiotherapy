@@ -25,6 +25,45 @@ export interface MediaItem {
     alt?: string;
 }
 
+export type EventCategory = 'health-camp' | 'workshop' | 'webinar' | 'conference' | 'community' | 'screening';
+
+export const EVENT_CATEGORIES = [
+    { id: 'all', name: 'All Events', icon: '📅', color: '#6366f1' },
+    { id: 'health-camp', name: 'Health Camps', icon: '🏥', color: '#10b981' },
+    { id: 'workshop', name: 'Workshops', icon: '🛠️', color: '#3b82f6' },
+    { id: 'webinar', name: 'Webinars', icon: '💻', color: '#8b5cf6' },
+    { id: 'conference', name: 'Conferences', icon: '🎤', color: '#f59e0b' },
+    { id: 'community', name: 'Community Events', icon: '🤝', color: '#ec4899' },
+    { id: 'screening', name: 'Free Screenings', icon: '🔍', color: '#6366f1' },
+] as const;
+
+export const LOCATIONS = ['All Locations', 'Greater Noida', 'Noida', 'Delhi', 'Gurgaon', 'Online'];
+
+export const DATE_RANGES = [
+    { id: 'all', name: 'All Time' },
+    { id: 'today', name: 'Today' },
+    { id: 'this-week', name: 'This Week' },
+    { id: 'this-month', name: 'This Month' },
+    { id: 'next-month', name: 'Next Month' },
+];
+
+export interface FilterState {
+    category: string;
+    location: string;
+    dateRange: string;
+    price: string;
+    status: string;
+    search: string;
+    sortBy: string;
+    viewMode: 'grid' | 'list' | 'calendar';
+}
+
+export interface ModalState {
+    type: 'create' | 'edit' | 'detail' | 'register' | 'share' | null;
+    data?: EventItem | null;
+    isOpen: boolean;
+}
+
 export interface EventItem {
     _id: string;
     id: string;
@@ -78,6 +117,7 @@ export interface EventItem {
 }
 
 export interface EventRegistration {
+    _id?: string;
     eventId: string;
     eventSlug: string;
     name: string;

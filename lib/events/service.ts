@@ -2,10 +2,12 @@
 'use server';
 
 import { revalidatePath, revalidateTag } from 'next/cache';
-import { getEventsCollection, getRegistrationsCollection, getBranchesCollection, ObjectId } from '@/model/dbconnection';
+import { connectDB } from '@/model/dbconnection';
+import { Event } from '@/model/schema/event.schema';
 import { uploadMedia, deleteMedia } from '@/lib/imagekit';
 import { EventItem, MediaItem, EventRegistration } from './types';
-import { slugify, sendEmailNotification, generateQRCode } from '@/lib/utils';
+import { slugify, generateQRCode } from '@/lib/utils';
+import { sendEmailNotification } from '@/lib/mail';
 import { cache } from 'react';
 
 // Cache wrapper for getEvents
@@ -17,10 +19,11 @@ export const getEvents = cache(async (filters?: {
     price?: string;
     status?: string;
     search?: string;
+    sortBy?: string;
     limit?: number;
     page?: number;
 }): Promise<{ events: EventItem[]; total: number; page: number; totalPages: number }> => {
-    const collection = await getEventsCollection();
+    await connectDB();
     const query: Record<string, any> = {};
 
     // Apply filters
@@ -77,52 +80,68 @@ export const getEvents = cache(async (filters?: {
                 startDate = today;
                 endDate = new Date('9999-12-31');
         }
-        query.startDate = { $gte: startDate.toISOString().split('T')[0], $lte: endDate.toISOString().split('T')[0] };
+        query.startDate = { $gte: startDate, $lte: endDate };
     }
 
     const page = filters?.page || 1;
     const limit = filters?.limit || 12;
     const skip = (page - 1) * limit;
 
+    let sort: any = { featured: -1, startDate: 1, createdAt: -1 };
+    if (filters?.sortBy) {
+        switch (filters.sortBy) {
+            case 'newest':
+                sort = { createdAt: -1 };
+                break;
+            case 'oldest':
+                sort = { createdAt: 1 };
+                break;
+            case 'date-asc':
+                sort = { startDate: 1 };
+                break;
+            case 'date-desc':
+                sort = { startDate: -1 };
+                break;
+            case 'title-asc':
+                sort = { title: 1 };
+                break;
+            case 'title-desc':
+                sort = { title: -1 };
+                break;
+        }
+    }
+
     const [events, total] = await Promise.all([
-        collection
-            .find(query)
-            .sort({ featured: -1, startDate: 1, createdAt: -1 })
+        Event.find(query)
+            .sort(sort)
             .skip(skip)
             .limit(limit)
-            .toArray(),
-        collection.countDocuments(query),
+            .lean(),
+        Event.countDocuments(query),
     ]);
 
     // Update event statuses based on current date
     const now = new Date();
-    for (const event of events) {
+    const updatedEvents = events as any[];
+    for (const event of updatedEvents) {
         const eventDate = new Date(event.startDate);
         if (event.status !== 'cancelled') {
             if (event.capacity && event.registered >= event.capacity) {
-                await collection.updateOne(
-                    { _id: event._id },
-                    { $set: { status: 'full' } }
-                );
-                event.status = 'full';
+                if (event.status !== 'full') {
+                    await Event.updateOne({ _id: event._id }, { $set: { status: 'full' } });
+                    event.status = 'full';
+                }
             } else if (eventDate < now) {
-                await collection.updateOne(
-                    { _id: event._id },
-                    { $set: { status: 'past' } }
-                );
-                event.status = 'past';
-            } else if (eventDate.toDateString() === now.toDateString()) {
-                await collection.updateOne(
-                    { _id: event._id },
-                    { $set: { status: 'ongoing' } }
-                );
-                event.status = 'ongoing';
+                if (event.status !== 'past') {
+                    await Event.updateOne({ _id: event._id }, { $set: { status: 'past' } });
+                    event.status = 'past';
+                }
             }
         }
     }
 
     return {
-        events: events.map((e: any) => ({ ...e, _id: e._id.toString() })) as EventItem[],
+        events: updatedEvents.map((e: any) => ({ ...e, _id: e._id.toString() })) as EventItem[],
         total,
         page,
         totalPages: Math.ceil(total / limit),
@@ -130,32 +149,15 @@ export const getEvents = cache(async (filters?: {
 });
 
 export async function getEventBySlug(slug: string): Promise<EventItem | null> {
-    const collection = await getEventsCollection();
-    const event = await collection.findOne({ slug });
+    await connectDB();
+    const event = await Event.findOne({ slug }).lean();
     if (!event) return null;
-    return { ...event, _id: event._id.toString() } as EventItem;
-}
-
-export async function getUpcomingEventsByBranch(branchId: string, limit: number = 5): Promise<EventItem[]> {
-    const collection = await getEventsCollection();
-    const today = new Date().toISOString().split('T')[0];
-
-    const events = await collection
-        .find({
-            branchId,
-            startDate: { $gte: today },
-            status: { $in: ['upcoming', 'ongoing'] }
-        })
-        .sort({ startDate: 1, startTime: 1 })
-        .limit(limit)
-        .toArray();
-
-    return events.map(e => ({ ...e, _id: e._id.toString() })) as EventItem[];
+    return { ...event, _id: (event as any)._id.toString() } as unknown as EventItem;
 }
 
 export async function createEvent(formData: FormData): Promise<{ success: boolean; error?: string; event?: EventItem }> {
     try {
-        const collection = await getEventsCollection();
+        await connectDB();
 
         // Validate required fields
         const title = formData.get('title') as string;
@@ -170,49 +172,60 @@ export async function createEvent(formData: FormData): Promise<{ success: boolea
             return { success: false, error: 'Required fields are missing' };
         }
 
-        const slug = slugify(title);
-        const existing = await collection.findOne({ slug });
+        const slug = formData.get('slug') as string || slugify(title);
+        const existing = await Event.findOne({ slug });
         const uniqueSlug = existing ? `${slug}-${Date.now()}` : slug;
 
         // Handle featured image
         let featuredImage: string | undefined;
         let featuredImageId: string | undefined;
-        const featuredImageFile = formData.get('featuredImage') as File;
-        if (featuredImageFile && featuredImageFile.size > 0) {
-            const uploadResult = await uploadMedia(featuredImageFile, 'events/featured');
-            featuredImage = uploadResult.url;
-            featuredImageId = uploadResult.fileId;
+        const featuredImageFile = formData.get('featuredImage');
+        if (featuredImageFile instanceof File && featuredImageFile.size > 0) {
+            try {
+                const uploadResult = await uploadMedia(featuredImageFile, 'events/featured');
+                featuredImage = uploadResult.url;
+                featuredImageId = uploadResult.fileId;
+            } catch (e) {
+                console.warn('Image upload failed, continuing without image:', e);
+            }
         }
 
         // Handle gallery
-        const galleryFiles = formData.getAll('gallery') as File[];
+        const galleryFiles = formData.getAll('gallery');
         const gallery: MediaItem[] = [];
         for (const file of galleryFiles) {
-            if (file && file.size > 0) {
-                const uploadResult = await uploadMedia(file, 'events/gallery');
-                gallery.push({
-                    url: uploadResult.url,
-                    fileId: uploadResult.fileId,
-                    type: uploadResult.type,
-                    thumbnail: uploadResult.thumbnail,
-                    alt: file.name,
-                });
+            if (file instanceof File && file.size > 0) {
+                try {
+                    const uploadResult = await uploadMedia(file, 'events/gallery');
+                    gallery.push({
+                        url: uploadResult.url,
+                        fileId: uploadResult.fileId,
+                        type: uploadResult.type,
+                        thumbnail: uploadResult.thumbnail,
+                        alt: file.name,
+                    });
+                } catch (e) {
+                    console.warn('Gallery item upload failed:', e);
+                }
             }
         }
 
         const tagsInput = formData.get('tags') as string;
         const tags = tagsInput?.split(',').map(t => t.trim().toLowerCase()).filter(Boolean) || [];
 
-        const registrationFieldsInput = formData.get('registrationFields') as string;
-        const registrationFields = registrationFieldsInput ? JSON.parse(registrationFieldsInput) : undefined;
+        const faqInput = formData.get('faq') as string;
+        let faq = undefined;
+        if (faqInput) {
+            try { faq = JSON.parse(faqInput); } catch (e) {}
+        }
 
-        const newEvent: any = {
+        const newEventData: any = {
             title,
             slug: uniqueSlug,
             description,
             fullDescription: formData.get('fullDescription') as string || description,
-            startDate,
-            endDate: formData.get('endDate') as string || undefined,
+            startDate: new Date(startDate),
+            endDate: formData.get('endDate') ? new Date(formData.get('endDate') as string) : undefined,
             startTime,
             endTime: formData.get('endTime') as string,
             location,
@@ -222,7 +235,6 @@ export async function createEvent(formData: FormData): Promise<{ success: boolea
             category,
             capacity: formData.get('capacity') ? parseInt(formData.get('capacity') as string) : undefined,
             registered: 0,
-            waitingList: 0,
             price: formData.get('price') as 'free' | 'paid',
             priceAmount: formData.get('priceAmount') as string || undefined,
             currency: 'INR',
@@ -235,113 +247,133 @@ export async function createEvent(formData: FormData): Promise<{ success: boolea
             featuredImageId,
             gallery: gallery.length > 0 ? gallery : undefined,
             tags,
-            status: 'upcoming',
+            status: formData.get('status') as any || 'upcoming',
             featured: formData.get('featured') === 'true',
-            requirements: formData.get('requirements')?.toString().split('\n').filter(Boolean) || undefined,
-            whatToBring: formData.get('whatToBring')?.toString().split('\n').filter(Boolean) || undefined,
-            faq: formData.get('faq') ? JSON.parse(formData.get('faq') as string) : undefined,
-            registrationFields,
-            attendees: [],
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
+            requirements: formData.get('requirements')?.toString().split('\n').filter(Boolean) || [],
+            whatToBring: formData.get('whatToBring')?.toString().split('\n').filter(Boolean) || [],
+            faq,
         };
 
-        const result = await collection.insertOne(newEvent);
+        const event = await Event.create(newEventData);
 
         revalidatePath('/events');
-        revalidatePath(`/events/${uniqueSlug}`);
         revalidateTag('events');
 
         return {
             success: true,
-            event: { ...newEvent, _id: result.insertedId.toString() }
+            event: { ...event.toObject(), _id: event._id.toString() } as unknown as EventItem
         };
-    } catch (error) {
+    } catch (error: any) {
         console.error('Create event error:', error);
-        return { success: false, error: 'Failed to create event' };
+        return { success: false, error: error.message || 'Failed to create event' };
     }
 }
 
-export async function registerForEvent(
-    eventId: string,
-    registrationData: {
-        name: string;
-        email: string;
-        phone: string;
-        branch?: string;
-        additionalInfo?: Record<string, any>;
-    }
-): Promise<{ success: boolean; error?: string; registration?: EventRegistration }> {
+export async function updateEvent(id: string, formData: FormData): Promise<{ success: boolean; error?: string; event?: EventItem }> {
     try {
-        const eventsCollection = await getEventsCollection();
-        const registrationsCollection = await getRegistrationsCollection();
+        await connectDB();
+        const existing = await Event.findById(id);
+        if (!existing) return { success: false, error: 'Event not found' };
 
-        const event = await eventsCollection.findOne({ _id: new ObjectId(eventId) });
-        if (!event) {
-            return { success: false, error: 'Event not found' };
-        }
-
-        // Check capacity
-        if (event.capacity && event.registered >= event.capacity) {
-            // Add to waiting list
-            await eventsCollection.updateOne(
-                { _id: new ObjectId(eventId) },
-                { $inc: { waitingList: 1 } }
-            );
-            return { success: false, error: 'Event is full. You have been added to waiting list.' };
-        }
-
-        // Check for duplicate registration
-        const existingRegistration = await registrationsCollection.findOne({
-            eventId,
-            email: registrationData.email
-        });
-
-        if (existingRegistration) {
-            return { success: false, error: 'You are already registered for this event' };
-        }
-
-        // Generate QR code
-        const qrCode = await generateQRCode(`${eventId}-${registrationData.email}-${Date.now()}`);
-
-        const registration: EventRegistration = {
-            eventId,
-            eventSlug: event.slug,
-            ...registrationData,
-            registeredAt: new Date().toISOString(),
-            status: 'confirmed',
-            qrCode,
+        const updateData: any = {
+            updatedAt: new Date(),
         };
 
-        await registrationsCollection.insertOne(registration);
+        const title = formData.get('title') as string;
+        if (title) {
+            updateData.title = title;
+            updateData.slug = slugify(title);
+        }
 
-        // Increment registered count
-        await eventsCollection.updateOne(
-            { _id: new ObjectId(eventId) },
-            { $inc: { registered: 1 } }
-        );
-
-        // Send confirmation email
-        await sendEmailNotification({
-            to: registrationData.email,
-            template: 'event-registration',
-            data: {
-                eventName: event.title,
-                eventDate: event.startDate,
-                eventTime: event.startTime,
-                location: event.location,
-                venue: event.venue,
-                qrCode,
-                registrationId: registration._id?.toString(),
-            }
+        const fields = ['description', 'fullDescription', 'startTime', 'endTime', 'location', 'venue', 'venueDetails', 'category', 'price', 'priceAmount', 'speaker', 'speakerTitle', 'speakerBio', 'registrationUrl', 'eventUrl', 'status'];
+        fields.forEach(field => {
+            const val = formData.get(field);
+            if (val !== null) updateData[field] = val;
         });
 
-        revalidatePath(`/events/${event.slug}`);
+        if (formData.get('startDate')) updateData.startDate = new Date(formData.get('startDate') as string);
+        if (formData.get('endDate')) updateData.endDate = new Date(formData.get('endDate') as string);
+        if (formData.get('capacity')) updateData.capacity = parseInt(formData.get('capacity') as string);
+        if (formData.get('featured')) updateData.featured = formData.get('featured') === 'true';
+
+        const tagsInput = formData.get('tags') as string;
+        if (tagsInput !== null) {
+            updateData.tags = tagsInput.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+        }
+
+        const faqInput = formData.get('faq') as string;
+        if (faqInput) {
+            try { updateData.faq = JSON.parse(faqInput); } catch (e) {}
+        }
+
+        // Handle featured image
+        const featuredImageFile = formData.get('featuredImage');
+        if (featuredImageFile instanceof File && featuredImageFile.size > 0) {
+            if (existing.featuredImageId) {
+                await deleteMedia(existing.featuredImageId);
+            }
+            const uploadResult = await uploadMedia(featuredImageFile, 'events/featured');
+            updateData.featuredImage = uploadResult.url;
+            updateData.featuredImageId = uploadResult.fileId;
+        }
+
+        const event = await Event.findByIdAndUpdate(id, { $set: updateData }, { new: true }).lean();
+
+        revalidatePath('/events');
         revalidateTag('events');
 
-        return { success: true, registration };
+        return { success: true, event: { ...(event as any), _id: id } as unknown as EventItem };
+    } catch (error: any) {
+        console.error('Update event error:', error);
+        return { success: false, error: error.message || 'Failed to update event' };
+    }
+}
+
+export async function deleteEvent(id: string): Promise<{ success: boolean; error?: string }> {
+    try {
+        await connectDB();
+        const existing = await Event.findById(id);
+        if (!existing) return { success: false, error: 'Event not found' };
+
+        if (existing.featuredImageId) {
+            await deleteMedia(existing.featuredImageId);
+        }
+
+        if (existing.gallery) {
+            for (const item of existing.gallery) {
+                if ((item as any).fileId) await deleteMedia((item as any).fileId);
+            }
+        }
+
+        await Event.findByIdAndDelete(id);
+
+        revalidatePath('/events');
+        revalidateTag('events');
+
+        return { success: true };
     } catch (error) {
-        console.error('Registration error:', error);
-        return { success: false, error: 'Failed to register for event' };
+        console.error('Delete event error:', error);
+        return { success: false, error: 'Failed to delete event' };
+    }
+}
+
+export async function incrementRegistration(id: string): Promise<{ success: boolean; registered?: number; error?: string }> {
+    try {
+        await connectDB();
+        const event = await Event.findByIdAndUpdate(
+            id,
+            { $inc: { registered: 1 } },
+            { new: true }
+        ).lean();
+
+        if (!event) return { success: false, error: 'Event not found' };
+
+        revalidatePath('/events');
+        revalidateTag('events');
+
+        return { success: true, registered: event.registered };
+    } catch (error) {
+        console.error('Increment registration error:', error);
+        return { success: false, error: 'Failed to update registration count' };
     }
 }

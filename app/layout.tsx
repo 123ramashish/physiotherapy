@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import { Providers } from "@/components/Providers";
 
 // ─── Font Optimization ───
 const geistSans = Geist({
@@ -295,7 +296,7 @@ export default function RootLayout({
 
         {/* ─── Main Content ─── */}
         <main id="main-content" className="flex-1">
-          {children}
+          <Providers>{children}</Providers>
         </main>
 
         {/* ─── Footer ─── */}

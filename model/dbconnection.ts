@@ -1,76 +1,39 @@
-// model/dbconnection.ts
-import { MongoClient, Db, Collection, ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI!;
-const MONGODB_DB = process.env.MONGODB_DB!;
+if (!MONGODB_URI) throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 
-if (!MONGODB_URI) {
-    throw new Error('Please define MONGODB_URI environment variable');
+let cached = (global as any).mongoose;
+
+if (!cached) {
+    cached = (global as any).mongoose = { conn: null, promise: null };
 }
 
-if (!MONGODB_DB) {
-    throw new Error('Please define MONGODB_DB environment variable');
-}
-
-let cachedClient: MongoClient | null = null;
-let cachedDb: Db | null = null;
-
-export async function connectToDatabase() {
-    if (cachedClient && cachedDb) {
-        return { client: cachedClient, db: cachedDb };
+export async function connectDB() {
+    if (cached.conn) return cached.conn;
+    if (!cached.promise) {
+        cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => mongoose);
+    }
+    cached.conn = await cached.promise;
+    return cached.conn;
     }
 
-    const client = await MongoClient.connect(MONGODB_URI);
-    const db = client.db(MONGODB_DB);
+    export const ObjectId = mongoose.Types.ObjectId;
 
-    cachedClient = client;
-    cachedDb = db;
+    export async function getEventsCollection() {
+    const db = (await connectDB()).connection.db;
+    if (!db) throw new Error('Database not connected');
+    return db.collection('events');
+    }
 
-    return { client, db };
-}
+    export async function getRegistrationsCollection() {
+    const db = (await connectDB()).connection.db;
+    if (!db) throw new Error('Database not connected');
+    return db.collection('event_registrations');
+    }
 
-export async function getEventsCollection(): Promise<Collection> {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('events');
-
-    // Create indexes
-    await collection.createIndexes([
-        { key: { slug: 1 }, unique: true },
-        { key: { status: 1, startDate: -1 } },
-        { key: { category: 1, location: 1 } },
-        { key: { branchId: 1, startDate: -1 } },
-        { key: { title: 'text', description: 'text', tags: 'text' } },
-        { key: { startDate: 1, endDate: 1 } },
-        { key: { featured: -1, startDate: 1 } }
-    ]);
-
-    return collection;
-}
-
-export async function getRegistrationsCollection(): Promise<Collection> {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('event_registrations');
-
-    await collection.createIndexes([
-        { key: { eventId: 1, email: 1 }, unique: true },
-        { key: { eventId: 1, status: 1 } },
-        { key: { registeredAt: -1 } },
-        { key: { qrCode: 1 }, unique: true, sparse: true }
-    ]);
-
-    return collection;
-}
-
-export async function getBranchesCollection(): Promise<Collection> {
-    const { db } = await connectToDatabase();
-    const collection = db.collection('branches');
-
-    await collection.createIndexes([
-        { key: { city: 1 } },
-        { key: { name: 1 }, unique: true }
-    ]);
-
-    return collection;
-}
-
-export { ObjectId };
+    export async function getBranchesCollection() {
+    const db = (await connectDB()).connection.db;
+    if (!db) throw new Error('Database not connected');
+    return db.collection('branches');
+    }

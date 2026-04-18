@@ -2,15 +2,15 @@
 import ImageKit from 'imagekit';
 import { v4 as uuidv4 } from 'uuid';
 
-if (!process.env.IMAGEKIT_PUBLIC_KEY || !process.env.IMAGEKIT_PRIVATE_KEY || !process.env.IMAGEKIT_URL_ENDPOINT) {
-    throw new Error('Please add ImageKit credentials to .env.local');
-}
+const hasCredentials = !!(process.env.IMAGEKIT_PUBLIC_KEY && process.env.IMAGEKIT_PRIVATE_KEY && process.env.IMAGEKIT_URL_ENDPOINT);
 
-export const imagekit = new ImageKit({
-    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
-});
+export const imagekit = hasCredentials 
+    ? new ImageKit({
+        publicKey: process.env.IMAGEKIT_PUBLIC_KEY!,
+        privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
+        urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT!,
+    })
+    : null;
 
 export interface UploadResult {
     fileId: string;
@@ -27,6 +27,9 @@ export async function uploadMedia(
     folder: string = 'events',
     branchId?: string
 ): Promise<UploadResult> {
+    if (!imagekit) {
+        throw new Error('ImageKit credentials missing. Please add them to .env.local');
+    }
     const buffer = await file.arrayBuffer();
     const fileBuffer = Buffer.from(buffer);
 
@@ -60,6 +63,7 @@ export async function uploadMedia(
 }
 
 export async function deleteMedia(fileId: string): Promise<boolean> {
+    if (!imagekit) return false;
     try {
         await imagekit.deleteFile(fileId);
         return true;

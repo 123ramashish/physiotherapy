@@ -715,7 +715,7 @@ export default function Header() {
       </motion.header>
 
       {/* Spacer for sticky header - responsive heights */}
-      <div className="h-[100px] md:h-[128px] transition-all duration-300" />
+      <div className="h-[80px] md:h-[100px] bg-gray-700 transition-all duration-300" />
     </>
   );
 }

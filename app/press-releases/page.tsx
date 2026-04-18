@@ -34,6 +34,7 @@ interface PressRelease {
     views: number;
     downloads: number;
     featured: boolean;
+    readTime?: string;
 }
 
 interface FilterState {
@@ -199,12 +200,12 @@ const generatePressReleaseSchema = (release: PressRelease): any => ({
 //  Animation Variants
 // ─────────────────────────────────────────────
 
-const fadeInUp = {
+const fadeInUp: any = {
     hidden: { opacity: 0, y: 24 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const staggerContainer = {
+const staggerContainer: any = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -212,13 +213,13 @@ const staggerContainer = {
     },
 };
 
-const modalVariants = {
+const modalVariants: any = {
     hidden: { opacity: 0, scale: 0.95, y: 20 },
     visible: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', damping: 25, stiffness: 300 } },
     exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } },
 };
 
-const backdropVariants = {
+const backdropVariants: any = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
     exit: { opacity: 0 },

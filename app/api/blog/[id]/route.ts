@@ -1,37 +1,29 @@
-// app/api/blog/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { BLOG_POSTS } from '../route'; // Import shared mock DB
+import { connectDB } from '@/lib/mongodb';
+import Blog from '@/models/Blog';
 
-// GET /api/blog/:id - Get single post
-export async function GET(
-    request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
-) {
-    try {
-        const { id } = await params;
-        const postId = parseInt(id, 10);
+// Next.js 15+ requires params to be awaited
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    await connectDB();
+    const { id } = await params;
+    const blog = await Blog.findById(id).lean();
+    if (!blog) return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
+    return NextResponse.json(blog);
+}
 
-        if (isNaN(postId)) {
-            return NextResponse.json({ error: 'Invalid post ID' }, { status: 400 });
-        }
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    await connectDB();
+    const { id } = await params;
+    const body = await request.json();
+    const blog = await Blog.findByIdAndUpdate(id, body, { new: true }).lean();
+    if (!blog) return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
+    return NextResponse.json(blog);
+}
 
-        const post = BLOG_POSTS.find(p => p.id === postId);
-        if (!post) {
-            return NextResponse.json({ error: 'Post not found' }, { status: 404 });
-        }
-
-        // Increment view count (async, non-blocking in production)
-        post.views += 1;
-
-        return NextResponse.json({
-            success: true,
-            data: post,
-        });
-    } catch (error) {
-        console.error('GET /api/blog/[id] error:', error);
-        return NextResponse.json(
-            { error: 'Failed to fetch post', message: error instanceof Error ? error.message : 'Unknown error' },
-            { status: 500 }
-        );
-    }
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    await connectDB();
+    const { id } = await params;
+    const blog = await Blog.findByIdAndDelete(id);
+    if (!blog) return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
+    return NextResponse.json({ message: 'Blog deleted successfully' });
 }

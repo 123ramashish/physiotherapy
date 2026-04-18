@@ -130,7 +130,7 @@ const TIMINGS = [
   { day: "Sunday / रविवार", time: "10:00 AM – 2:00 PM" },
 ];
 
-const TRUST_BADGES = ["4+ Years Experience", "6000+ Patients Healed", "Expert Physiotherapists"];
+const TRUST_BADGES = ["4+ Years Experience", "12000+ Patients Healed", "Expert Physiotherapists"];
 
 const BOT_INITIAL_MESSAGE = "👋 Hello! I'm SKM Bot. How can I help you today? / नमस्ते! मैं SKM बॉट हूँ। मैं आपकी कैसे मदद कर सकता हूँ?";
 

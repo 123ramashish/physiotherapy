@@ -21,12 +21,17 @@ import EventDetailModal from './components/EventDetailModal';
 
 // Import types and utils
 import { EventItem, FilterState, ModalState, EVENT_CATEGORIES, LOCATIONS, DATE_RANGES } from '../../lib/events/types';
-import { getEvents, createEvent, updateEvent, deleteEvent, incrementRegistration } from './actions/events';
+import { 
+    useGetEventsQuery, 
+    useCreateEventMutation, 
+    useUpdateEventMutation, 
+    useDeleteEventMutation,
+    useRegisterForEventMutation 
+} from '@/redux/api/eventApi';
+import { incrementRegistration } from './actions/events';
 
 export default function EventsPage() {
     // State
-    const [events, setEvents] = useState<EventItem[]>([]);
-    const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState<FilterState>({
         category: 'all',
         location: 'All Locations',
@@ -34,13 +39,34 @@ export default function EventsPage() {
         price: 'all',
         status: 'upcoming',
         search: '',
+        sortBy: 'date-asc',
         viewMode: 'grid',
     });
     const [searchQuery, setSearchQuery] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('');
     const [modal, setModal] = useState<ModalState>({ type: null, isOpen: false });
     const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
-    const [pagination, setPagination] = useState({ page: 1, totalPages: 1, total: 0 });
+    const [paginationState, setPaginationState] = useState({ page: 1 });
+
+    // RTK Query hooks
+    const { data: eventsResponse, isLoading: loading } = useGetEventsQuery({
+        ...filters,
+        search: debouncedSearch,
+        page: paginationState.page,
+        limit: 12,
+    });
+
+    const [createEventMutation] = useCreateEventMutation();
+    const [updateEventMutation] = useUpdateEventMutation();
+    const [deleteEventMutation] = useDeleteEventMutation();
+    const [registerForEventMutation] = useRegisterForEventMutation();
+
+    const events = eventsResponse?.events || [];
+    const pagination = {
+        page: eventsResponse?.page || 1,
+        totalPages: eventsResponse?.totalPages || 1,
+        total: eventsResponse?.total || 0
+    };
 
     // Debounce search
     useEffect(() => {
@@ -48,81 +74,71 @@ export default function EventsPage() {
         return () => clearTimeout(timer);
     }, [searchQuery]);
 
-    // Fetch events
-    const fetchEvents = useCallback(async () => {
-        setLoading(true);
-        try {
-            const result = await getEvents({
-                ...filters,
-                search: debouncedSearch,
-                page: pagination.page,
-                limit: 12,
-            });
-            setEvents(result.events);
-            setPagination({ page: result.page, totalPages: result.totalPages, total: result.total });
-        } catch (error) {
-            console.error('Failed to fetch events:', error);
-            showNotification('error', 'Failed to load events');
-        } finally {
-            setLoading(false);
-        }
-    }, [filters, debouncedSearch, pagination.page]);
-
-    useEffect(() => {
-        fetchEvents();
-    }, [fetchEvents]);
-
     // Handlers
     const handleFilterChange = (key: keyof FilterState, value: string) => {
         setFilters(prev => ({ ...prev, [key]: value }));
-        setPagination(prev => ({ ...prev, page: 1 })); // Reset to first page
+        setPaginationState({ page: 1 }); // Reset to first page
     };
 
     const handleCreateEvent = async (formData: FormData) => {
-        const result = await createEvent(formData);
-        if (result.success && result.event) {
-            showNotification('success', 'Event created successfully!');
-            setModal({ type: null, isOpen: false });
-            fetchEvents();
-        } else {
-            showNotification('error', result.error || 'Failed to create event');
-            throw new Error(result.error);
+        try {
+            const result = await createEventMutation(formData).unwrap();
+            if (result.success) {
+                showNotification('success', 'Event created successfully!');
+                setModal({ type: null, isOpen: false });
+            } else {
+                showNotification('error', result.error || 'Failed to create event');
+                throw new Error(result.error);
+            }
+        } catch (error: any) {
+            showNotification('error', error.data?.error || 'Failed to create event');
+            throw error;
         }
     };
 
     const handleUpdateEvent = async (id: string, formData: FormData) => {
-        const result = await updateEvent(id, formData);
-        if (result.success && result.event) {
-            showNotification('success', 'Event updated successfully!');
-            setModal({ type: null, isOpen: false });
-            fetchEvents();
-        } else {
-            showNotification('error', result.error || 'Failed to update event');
-            throw new Error(result.error);
+        try {
+            const result = await updateEventMutation({ id, body: formData }).unwrap();
+            if (result.success) {
+                showNotification('success', 'Event updated successfully!');
+                setModal({ type: null, isOpen: false });
+            } else {
+                showNotification('error', result.error || 'Failed to update event');
+                throw new Error(result.error);
+            }
+        } catch (error: any) {
+            showNotification('error', error.data?.error || 'Failed to update event');
+            throw error;
         }
     };
 
     const handleDeleteEvent = async (id: string) => {
         if (!confirm('Are you sure you want to delete this event?')) return;
 
-        const result = await deleteEvent(id);
-        if (result.success) {
-            showNotification('success', 'Event deleted successfully!');
-            fetchEvents();
-        } else {
-            showNotification('error', result.error || 'Failed to delete event');
+        try {
+            const result = await deleteEventMutation(id).unwrap();
+            if (result.success) {
+                showNotification('success', 'Event deleted successfully!');
+            } else {
+                showNotification('error', result.error || 'Failed to delete event');
+            }
+        } catch (error: any) {
+            showNotification('error', error.data?.error || 'Failed to delete event');
         }
     };
 
+
     const handleRegister = async (event: EventItem) => {
         if (event._id) {
-            const result = await incrementRegistration(event._id);
-            if (result.success) {
-                showNotification('success', 'Registration confirmed! Check your email.');
-                // Update local state
-                setEvents(prev => prev.map(e =>
-                    e._id === event._id ? { ...e, registered: result.registered } : e
-                ));
+            try {
+                const result = await registerForEventMutation(event._id).unwrap();
+                if (result.success) {
+                    showNotification('success', 'Registration confirmed! Check your email.');
+                } else {
+                    showNotification('error', result.error || 'Failed to register');
+                }
+            } catch (error: any) {
+                showNotification('error', error.data?.error || 'Failed to register');
             }
         }
     };
@@ -298,7 +314,7 @@ export default function EventsPage() {
                 {pagination.totalPages > 1 && (
                     <div className="flex items-center justify-center gap-2 mt-8">
                         <button
-                            onClick={() => setPagination(prev => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
+                            onClick={() => setPaginationState(prev => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
                             disabled={pagination.page === 1}
                             className="px-4 py-2 rounded-lg border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                         >
@@ -308,7 +324,7 @@ export default function EventsPage() {
                             Page {pagination.page} of {pagination.totalPages}
                         </span>
                         <button
-                            onClick={() => setPagination(prev => ({ ...prev, page: Math.min(pagination.totalPages, prev.page + 1) }))}
+                            onClick={() => setPaginationState(prev => ({ ...prev, page: Math.min(pagination.totalPages, prev.page + 1) }))}
                             disabled={pagination.page === pagination.totalPages}
                             className="px-4 py-2 rounded-lg border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                         >
@@ -343,7 +359,7 @@ export default function EventsPage() {
                 size="xl"
             >
                 <EventForm
-                    initialData={modal.data}
+                    initialData={modal.data || undefined}
                     onSubmit={async (formData) => {
                         if (modal.type === 'edit' && modal.data?._id) {
                             await handleUpdateEvent(modal.data._id, formData);
