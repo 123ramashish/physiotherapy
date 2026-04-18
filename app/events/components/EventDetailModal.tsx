@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/EventDetailModal.tsx
 import React from 'react';
 import { EventItem } from '@/lib/events/types';
 import { Calendar, Clock, MapPin, Users, Share2, ArrowRight, Tag, Info, CheckCircle2 } from 'lucide-react';
@@ -46,9 +46,8 @@ export default function EventDetailModal({ event, onRegister, onShare }: EventDe
                             <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold border border-white/30">
                                 {category.icon} {category.name}
                             </span>
-                            <span className={`px-3 py-1 rounded-full text-xs font-semibold border border-white/30 ${
-                                event.status === 'past' ? 'bg-gray-500/50 text-white' : 'bg-emerald-500/50 text-white'
-                            }`}>
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold border border-white/30 ${event.status === 'past' ? 'bg-gray-500/50 text-white' : 'bg-emerald-500/50 text-white'
+                                }`}>
                                 {event.status.toUpperCase()}
                             </span>
                         </div>

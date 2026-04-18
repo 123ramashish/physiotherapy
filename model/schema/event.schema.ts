@@ -56,12 +56,20 @@ const EventSchema = new Schema<IEvent>({
     price: { type: String, required: true, enum: ['free', 'paid'] },
     priceAmount: { type: String },
     currency: { type: String, default: 'INR' },
+    contactPhone: { type: String, trim: true },
     speaker: { type: String, trim: true },
     speakerTitle: { type: String, trim: true },
     speakerBio: { type: String },
     registrationUrl: { type: String },
     featuredImage: { type: String },
-    gallery: [{ type: String }],
+    featuredImageId: { type: String },
+    gallery: [{
+        url: { type: String, required: true },
+        fileId: { type: String, required: true },
+        type: { type: String, enum: ['image', 'video'], required: true },
+        thumbnail: { type: String },
+        alt: { type: String }
+    }],
     tags: [{ type: String, trim: true }],
     status: {
         type: String,

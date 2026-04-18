@@ -1,5 +1,5 @@
 'use server';
-
+// events/actions/events.ts
 import * as service from '@/lib/events/service';
 
 export async function getEvents(filters: any) {

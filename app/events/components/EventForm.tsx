@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/EventForm.tsx
 import React, { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -125,7 +125,7 @@ export default function EventForm({ initialData, onSubmit, onCancel, isEditing =
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 text-black">
             {/* Title & Slug */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -337,6 +337,18 @@ export default function EventForm({ initialData, onSubmit, onCancel, isEditing =
                         placeholder="Max attendees"
                     />
                 </div>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Contact Phone</label>
+                <input
+                    type="tel"
+                    name="contactPhone"
+                    defaultValue={initialData?.contactPhone}
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition-all"
+                    placeholder="+91 98765 43210"
+                />
             </div>
 
             {/* Speaker */}

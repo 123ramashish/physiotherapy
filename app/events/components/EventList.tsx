@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/EventList.tsx
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EventItem } from '@/lib/events/types';
@@ -8,7 +8,7 @@ import CalendarView from './CalendarView';
 
 interface EventListProps {
     events: EventItem[];
-    viewMode: string;
+    viewMode: 'grid' | 'list' | 'calendar' | string;
     onOpenDetail: (event: EventItem) => void;
     onRegister: (event: EventItem) => void;
     onEdit: (event: EventItem) => void;
@@ -17,10 +17,7 @@ interface EventListProps {
 
 const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.1 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
 };
 
 export default function EventList({
@@ -29,7 +26,7 @@ export default function EventList({
     onOpenDetail,
     onRegister,
     onEdit,
-    onDelete
+    onDelete,
 }: EventListProps) {
     if (viewMode === 'calendar') {
         return <CalendarView events={events} onOpenDetail={onOpenDetail} />;
@@ -42,7 +39,7 @@ export default function EventList({
             animate="visible"
             className={
                 viewMode === 'grid'
-                    ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+                    ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6'
                     : 'flex flex-col gap-4'
             }
         >
@@ -53,7 +50,7 @@ export default function EventList({
                         event={event}
                         onOpen={onOpenDetail}
                         onRegister={onRegister}
-                        viewMode={viewMode as 'grid' | 'list'}
+                        viewMode={viewMode === 'list' ? 'list' : 'grid'}
                     />
                 ))}
             </AnimatePresence>

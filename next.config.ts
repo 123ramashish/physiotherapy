@@ -2,11 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,     // ✅ required if you use next/image in static export
+    unoptimized: true,
   },
-
-  // optional (often useful for static hosting):
-  // trailingSlash: true,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2gb',
+    },
+  },
 };
 
 export default nextConfig;

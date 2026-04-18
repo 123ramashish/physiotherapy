@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/ShareModal.tsx
 import React, { useState } from 'react';
 import { Twitter, Facebook, Linkedin, Phone, Copy, Check } from 'lucide-react';
 

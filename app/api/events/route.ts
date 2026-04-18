@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getEvents, createEvent } from '@/lib/events/service';
 
+export const maxDuration = 300; // 5 minutes
+
 export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams;

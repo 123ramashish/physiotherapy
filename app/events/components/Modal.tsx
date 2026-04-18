@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/Modal.tsx
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { X } from 'lucide-react';

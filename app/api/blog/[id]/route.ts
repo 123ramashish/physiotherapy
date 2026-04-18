@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 
+export const maxDuration = 300; // 5 minutes
+
 // Next.js 15+ requires params to be awaited
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     await connectDB();

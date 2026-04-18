@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/CalendarView.tsx
 import React from 'react';
 import { EventItem } from '@/lib/events/types';
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';

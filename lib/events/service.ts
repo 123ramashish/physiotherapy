@@ -238,6 +238,7 @@ export async function createEvent(formData: FormData): Promise<{ success: boolea
             price: formData.get('price') as 'free' | 'paid',
             priceAmount: formData.get('priceAmount') as string || undefined,
             currency: 'INR',
+            contactPhone: formData.get('contactPhone') as string || undefined,
             speaker: formData.get('speaker') as string || undefined,
             speakerTitle: formData.get('speakerTitle') as string || undefined,
             speakerBio: formData.get('speakerBio') as string || undefined,
@@ -285,7 +286,7 @@ export async function updateEvent(id: string, formData: FormData): Promise<{ suc
             updateData.slug = slugify(title);
         }
 
-        const fields = ['description', 'fullDescription', 'startTime', 'endTime', 'location', 'venue', 'venueDetails', 'category', 'price', 'priceAmount', 'speaker', 'speakerTitle', 'speakerBio', 'registrationUrl', 'eventUrl', 'status'];
+        const fields = ['description', 'fullDescription', 'startTime', 'endTime', 'location', 'venue', 'venueDetails', 'category', 'price', 'priceAmount', 'contactPhone', 'speaker', 'speakerTitle', 'speakerBio', 'registrationUrl', 'eventUrl', 'status'];
         fields.forEach(field => {
             const val = formData.get(field);
             if (val !== null) updateData[field] = val;

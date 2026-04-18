@@ -2,16 +2,16 @@
 'use client';
 
 import { useState, useMemo, useCallback } from 'react';
-import { 
-  Search, Filter, Star, MapPin, User, Image as ImageIcon, 
-  Send, X, CheckCircle, ChevronDown, ChevronUp, Sparkles 
+import {
+  Search, Filter, Star, MapPin, User, Image as ImageIcon,
+  Send, X, CheckCircle, ChevronDown, ChevronUp, Sparkles
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 // Lazy load heavy components
-const TestimonialForm = dynamic(() => import('@/components/testimonials/TestimonialForm'), { 
+const TestimonialForm = dynamic(() => import('@/components/testimonials/TestimonialForm'), {
   loading: () => <div className="p-8 text-center text-slate-500">Loading form...</div>,
-  ssr: false 
+  ssr: false
 });
 
 // ─── Types ───
@@ -113,12 +113,12 @@ function SummaryStats({ testimonials }: { testimonials: Testimonial[] }) {
 }
 
 // ─── Filter Bar Component ───
-function FilterBar({ 
-  filters, 
-  setFilters, 
-  onSearch 
-}: { 
-  filters: FilterState; 
+function FilterBar({
+  filters,
+  setFilters,
+  onSearch
+}: {
+  filters: FilterState;
   setFilters: (f: FilterState) => void;
   onSearch: (q: string) => void;
 }) {
@@ -215,7 +215,7 @@ function FilterBar({
                 </button>
               </span>
             )}
-            <button 
+            <button
               onClick={() => setFilters({ branch: 'All', treatment: 'All', rating: 0, search: '' })}
               className="text-xs text-slate-500 hover:text-slate-700 underline"
             >
@@ -237,8 +237,8 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         {/* Avatar */}
         <div className="relative">
           {testimonial.avatar ? (
-            <img 
-              src={testimonial.avatar} 
+            <img
+              src={testimonial.avatar}
               alt={`${testimonial.name}'s profile`}
               className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm"
               loading="lazy"
@@ -274,10 +274,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         {/* Rating */}
         <div className="flex items-center gap-0.5">
           {[...Array(5)].map((_, i) => (
-            <Star 
-              key={i} 
-              size={14} 
-              className={i < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-slate-200'} 
+            <Star
+              key={i}
+              size={14}
+              className={i < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-slate-200'}
             />
           ))}
         </div>
@@ -321,7 +321,7 @@ export default function TestimonialsPage() {
     // Search
     if (filters.search) {
       const q = filters.search.toLowerCase();
-      result = result.filter(t => 
+      result = result.filter(t =>
         t.name.toLowerCase().includes(q) ||
         t.treatment.toLowerCase().includes(q) ||
         t.text.toLowerCase().includes(q) ||
@@ -376,10 +376,10 @@ export default function TestimonialsPage() {
       avatar: data.avatar,
       helpful: 0
     };
-    
+
     setTestimonials(prev => [newTestimonial, ...prev]);
     setShowForm(false);
-    
+
     // Show success toast (implement with your toast library)
     alert('Thank you! Your review is pending verification and will appear soon.');
   };
@@ -398,16 +398,16 @@ export default function TestimonialsPage() {
           <p className="text-slate-600 text-lg max-w-2xl mx-auto mb-8">
             Discover how patients across Delhi NCR achieved pain-free living with expert physiotherapy at SKM.
           </p>
-          
+
           {/* CTA Buttons */}
           <div className="flex flex-wrap justify-center gap-3">
-            <button 
+            <button
               onClick={() => setShowForm(true)}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-teal-200"
             >
               <Send size={16} /> Share Your Story
             </button>
-            <a 
+            <a
               href="#reviews"
               className="inline-flex items-center gap-2 border-2 border-teal-200 text-teal-700 font-semibold px-6 py-3 rounded-xl hover:bg-teal-50 transition-colors"
             >
@@ -456,7 +456,7 @@ export default function TestimonialsPage() {
             <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-slate-700 mb-2">No reviews found</h3>
             <p className="text-slate-500 text-sm mb-4">Try adjusting your filters or search terms</p>
-            <button 
+            <button
               onClick={() => setFilters({ branch: 'All', treatment: 'All', rating: 0, search: '' })}
               className="text-teal-600 font-medium text-sm hover:underline"
             >
@@ -477,8 +477,8 @@ export default function TestimonialsPage() {
 
       {/* Testimonial Submission Modal */}
       {showForm && (
-        <TestimonialForm 
-          onClose={() => setShowForm(false)} 
+        <TestimonialForm
+          onClose={() => setShowForm(false)}
           onSubmit={handleSubmitTestimonial}
           branches={BRANCHES.filter(b => b !== 'All')}
           treatments={TREATMENTS.filter(t => t !== 'All')}

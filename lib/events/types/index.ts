@@ -86,6 +86,7 @@ export interface EventItem {
     price: 'free' | 'paid';
     priceAmount?: string;
     currency: string;
+    contactPhone?: string;
     speaker?: string;
     speakerTitle?: string;
     speakerBio?: string;

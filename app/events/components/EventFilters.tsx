@@ -1,5 +1,5 @@
 'use client';
-
+// app/events/components/EventFilters.tsx
 import React from 'react';
 import { Search, Filter, ChevronDown, Grid3X3, List, CalendarDays, X, SlidersHorizontal } from 'lucide-react';
 import { FilterState, EVENT_CATEGORIES, LOCATIONS, DATE_RANGES } from '@/lib/events/types';
@@ -55,7 +55,7 @@ export default function EventFilters({
                         <select
                             value={filters.category}
                             onChange={(e) => onFilterChange('category', e.target.value)}
-                            className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
+                            className="appearance-none pl-4 text-black pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
                         >
                             {EVENT_CATEGORIES.map(cat => (
                                 <option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>
@@ -69,7 +69,7 @@ export default function EventFilters({
                         <select
                             value={filters.location}
                             onChange={(e) => onFilterChange('location', e.target.value)}
-                            className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
+                            className="appearance-none pl-4 text-black pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
                         >
                             {LOCATIONS.map(loc => <option key={loc} value={loc}>{loc}</option>)}
                         </select>
@@ -81,7 +81,7 @@ export default function EventFilters({
                         <select
                             value={filters.dateRange}
                             onChange={(e) => onFilterChange('dateRange', e.target.value)}
-                            className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
+                            className="appearance-none pl-4  text-black pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
                         >
                             {DATE_RANGES.map(range => (
                                 <option key={range.id} value={range.id}>{range.name}</option>
@@ -95,7 +95,7 @@ export default function EventFilters({
                         <select
                             value={filters.status}
                             onChange={(e) => onFilterChange('status', e.target.value)}
-                            className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
+                            className="appearance-none pl-4 pr-10 text-black py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
                         >
                             <option value="all">All Status</option>
                             <option value="upcoming">Upcoming</option>
@@ -111,7 +111,7 @@ export default function EventFilters({
                         <select
                             value={filters.sortBy}
                             onChange={(e) => onFilterChange('sortBy', e.target.value)}
-                            className="appearance-none pl-4 pr-10 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
+                            className="appearance-none pl-4 pr-10 py-2 text-black rounded-lg border border-gray-200 text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none bg-white min-w-[140px]"
                         >
                             <option value="date-asc">Date (Asc)</option>
                             <option value="date-desc">Date (Desc)</option>

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 
+
 export async function GET(request: NextRequest) {
     await connectDB();
     const { searchParams } = new URL(request.url);

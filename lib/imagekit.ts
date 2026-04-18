@@ -1,10 +1,11 @@
 // lib/imagekit.ts
 import ImageKit from 'imagekit';
 import { v4 as uuidv4 } from 'uuid';
+import { Readable } from 'stream';
 
 const hasCredentials = !!(process.env.IMAGEKIT_PUBLIC_KEY && process.env.IMAGEKIT_PRIVATE_KEY && process.env.IMAGEKIT_URL_ENDPOINT);
 
-export const imagekit = hasCredentials 
+export const imagekit = hasCredentials
     ? new ImageKit({
         publicKey: process.env.IMAGEKIT_PUBLIC_KEY!,
         privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
@@ -30,14 +31,31 @@ export async function uploadMedia(
     if (!imagekit) {
         throw new Error('ImageKit credentials missing. Please add them to .env.local');
     }
-    const buffer = await file.arrayBuffer();
-    const fileBuffer = Buffer.from(buffer);
+
+    // Use stream for large files instead of reading whole file into buffer
+    const webStream = file.stream();
+    const reader = webStream.getReader();
+    const nodeStream = new Readable({
+        async read() {
+            try {
+                const { done, value } = await reader.read();
+                if (done) {
+                    this.push(null);
+                } else {
+                    this.push(Buffer.from(value));
+                }
+            } catch (err) {
+                this.destroy(err as Error);
+            }
+        }
+    });
 
     const finalFolder = branchId ? `/${folder}/${branchId}` : `/${folder}`;
 
+    const cleanFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
     const uploadParams = {
-        file: fileBuffer,
-        fileName: `${uuidv4()}-${file.name}`,
+        file: nodeStream,
+        fileName: `${uuidv4()}-${cleanFileName}`,
         folder: finalFolder,
         useUniqueFileName: true,
         tags: file.type.startsWith('image/') ? ['event', 'image'] : ['event', 'video'],
@@ -45,20 +63,24 @@ export async function uploadMedia(
     };
 
     try {
-        const response = await imagekit.upload(uploadParams);
+        const response: any = await imagekit.upload(uploadParams);
 
         return {
             fileId: response.fileId,
             url: response.url,
             thumbnail: response.thumbnailUrl,
-            type: file.type.startsWith('image/') ? 'image' : 'video',
+            type: file.type.startsWith('video/') ? 'video' : 'image',
             name: response.name,
             size: response.size,
             fileType: response.fileType,
         };
-    } catch (error) {
-        console.error('ImageKit upload error:', error);
-        throw new Error('Failed to upload media');
+    } catch (error: any) {
+        console.error('ImageKit upload error detail:', {
+            message: error.message,
+            stack: error.stack,
+            help: error.help,
+        });
+        throw new Error(`ImageKit upload failed: ${error.message || 'Unknown error'}`);
     }
 }
 

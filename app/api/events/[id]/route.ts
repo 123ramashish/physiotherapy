@@ -1,7 +1,10 @@
+// app/api/events/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import { Event } from '@/model/schema/event.schema';
 import { updateEvent, deleteEvent } from '@/lib/events/service';
+
+export const maxDuration = 300; // 5 minutes
 
 export async function GET(
     request: NextRequest,
