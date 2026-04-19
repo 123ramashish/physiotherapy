@@ -26,7 +26,8 @@ import {
   Syringe,
   Waves,
   PersonStanding,
-  ArrowRight
+  ArrowRight,
+  Building2
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
@@ -75,6 +76,7 @@ const serviceImages = [
   'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80', // post covid
   'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&q=80', // frozen shoulder
   'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80', // paralysis rehab
+  'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80', // taping
 ];
 
 // ─── Services from the image ─────────────────────────────────────────────────
@@ -87,6 +89,7 @@ const services = [
     accent: 'from-emerald-500 to-teal-600',
     badge: 'Traditional',
     img: serviceImages[0],
+    href: '/services/cupping-hijama',
   },
   {
     icon: Syringe,
@@ -96,6 +99,7 @@ const services = [
     accent: 'from-blue-500 to-indigo-600',
     badge: 'Advanced',
     img: serviceImages[1],
+    href: '/services/dry-needling',
   },
   {
     icon: Activity,
@@ -105,6 +109,7 @@ const services = [
     accent: 'from-teal-500 to-cyan-600',
     badge: 'Popular',
     img: serviceImages[2],
+    href: '/services/back-pain',
   },
   {
     icon: PersonStanding,
@@ -114,6 +119,7 @@ const services = [
     accent: 'from-indigo-500 to-blue-600',
     badge: 'Popular',
     img: serviceImages[3],
+    href: '/services/neck-pain',
   },
   {
     icon: Bone,
@@ -123,6 +129,7 @@ const services = [
     accent: 'from-green-500 to-emerald-600',
     badge: 'Popular',
     img: serviceImages[4],
+    href: '/services/knee-pain',
   },
   {
     icon: Stethoscope,
@@ -132,6 +139,7 @@ const services = [
     accent: 'from-blue-600 to-indigo-700',
     badge: null,
     img: serviceImages[5],
+    href: '/services/arthritis',
   },
   {
     icon: Activity,
@@ -141,6 +149,7 @@ const services = [
     accent: 'from-teal-600 to-green-600',
     badge: null,
     img: serviceImages[6],
+    href: '/services/heel-pain',
   },
   {
     icon: Brain,
@@ -150,6 +159,7 @@ const services = [
     accent: 'from-indigo-600 to-blue-700',
     badge: 'Specialized',
     img: serviceImages[7],
+    href: '/services/bells-palsy',
   },
   {
     icon: Zap,
@@ -159,6 +169,7 @@ const services = [
     accent: 'from-emerald-600 to-teal-700',
     badge: 'Popular',
     img: serviceImages[8],
+    href: '/services/sciatica',
   },
   {
     icon: Dumbbell,
@@ -168,6 +179,7 @@ const services = [
     accent: 'from-blue-500 to-teal-600',
     badge: 'Most Popular',
     img: serviceImages[9],
+    href: '/services/sports-injuries',
   },
   {
     icon: Heart,
@@ -177,15 +189,27 @@ const services = [
     accent: 'from-green-500 to-indigo-500',
     badge: null,
     img: serviceImages[10],
+    href: '/services/relaxation',
   },
   {
     icon: Wind,
     title: 'Post COVID Rehab',
-    hindiTitle: 'टेपिंग',
+    hindiTitle: 'पोस्ट कोविड रिहैब',
     description: 'Specialised post-COVID rehabilitation for breathlessness, fatigue, and musculoskeletal recovery.',
     accent: 'from-teal-500 to-blue-500',
     badge: 'Specialized',
     img: serviceImages[11],
+    href: '/services/post-covid',
+  },
+  {
+    icon: Activity,
+    title: 'Taping',
+    hindiTitle: 'टेपिंग',
+    description: 'Kinesiology taping for joint support, muscle facilitation, and injury prevention.',
+    accent: 'from-blue-400 to-indigo-500',
+    badge: 'New',
+    img: serviceImages[14],
+    href: '/services/taping',
   },
   {
     icon: Target,
@@ -195,6 +219,7 @@ const services = [
     accent: 'from-indigo-500 to-green-500',
     badge: null,
     img: serviceImages[12],
+    href: '/services/frozen-shoulder',
   },
   {
     icon: Users,
@@ -204,16 +229,20 @@ const services = [
     accent: 'from-blue-600 to-emerald-600',
     badge: 'Specialized',
     img: serviceImages[13],
+    href: '/services/paralysis',
+  },
+  {
+    icon: Building2,
+    title: 'Corporate Wellness',
+    hindiTitle: 'कॉर्पोरेट वेलनेस',
+    description: 'Ergonomic assessments and wellness programs designed for corporate employees to prevent workplace injuries.',
+    accent: 'from-blue-700 to-indigo-800',
+    badge: 'Corporate',
+    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
+    href: '/services/corporate-wellness',
   },
 ];
 
-// ─── Why Choose Us ────────────────────────────────────────────────────────────
-const whyUs = [
-  { icon: Target, title: 'Personalised Plans', desc: 'Customised recovery programs based on individual assessment.', color: 'bg-emerald-100 text-emerald-700' },
-  { icon: Award, title: 'Certified Experts', desc: 'Licensed physiotherapists with advanced specialisation training.', color: 'bg-blue-100 text-blue-700' },
-  { icon: Zap, title: 'Advanced Technology', desc: 'Latest equipment and evidence-based treatment modalities.', color: 'bg-indigo-100 text-indigo-700' },
-  { icon: Heart, title: 'Holistic Approach', desc: 'Comprehensive care for physical, emotional, and lifestyle wellbeing.', color: 'bg-teal-100 text-teal-700' },
-];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const ServicesPage = () => {
@@ -487,11 +516,11 @@ const ServicesPage = () => {
                     ref={(el: any) => (cardRefs.current[index] = el)}
                     className={`service-card card-appear ${isVisible ? 'visible' : ''}`}
                     style={{ transitionDelay: `${(index % 4) * 80}ms`, minHeight: '300px' }}
-                    onClick={handleBook}
+                    onClick={() => router.push(service.href)}
                     tabIndex={0}
                     role="button"
-                    aria-label={`Book ${service.title}`}
-                    onKeyDown={e => e.key === 'Enter' && handleBook()}
+                    aria-label={`View ${service.title}`}
+                    onKeyDown={e => e.key === 'Enter' && router.push(service.href)}
                   >
                     {/* BG Image */}
                     <div className="card-img" style={{ backgroundImage: `url(${service.img})` }} />
@@ -538,54 +567,9 @@ const ServicesPage = () => {
           </div>
         </section>
 
-        {/* ── Why Choose Us ── */}
-        <section style={{ background: '#f8fafc', padding: '5rem 1.5rem', borderTop: '1px solid #e2e8f0' }}>
-          <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Why Choose <span className="gradient-text">SKM?</span></h2>
-              <div className="section-divider" style={{ marginBottom: '1rem' }}></div>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
-              {whyUs.map((item, i) => (
-                <div key={i} style={{ background: '#fff', borderRadius: '16px', padding: '1.75rem', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', border: '1px solid #e2e8f0', textAlign: 'center', transition: 'transform 0.25s, box-shadow 0.25s' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-6px)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.11)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = ''; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)'; }}
-                >
-                  <div style={{ width: '56px', height: '56px', borderRadius: '14px', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className={item.color}>
-                    <item.icon size={24} />
-                  </div>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>{item.title}</h3>
-                  <p style={{ fontSize: '0.83rem', color: '#64748b', lineHeight: 1.6 }}>{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* ── Home Visits Banner ── */}
-        <section style={{ padding: '3rem 1.5rem' }}>
-          <div style={{ maxWidth: '1100px', margin: '0 auto', background: 'linear-gradient(135deg,#059669 0%,#3b82f6 50%,#6366f1 100%)', borderRadius: '24px', padding: '3rem 2.5rem', textAlign: 'center', position: 'relative', overflow: 'hidden', boxShadow: '0 20px 60px rgba(59,130,246,0.3)' }}>
-            <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '180px', height: '180px', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }} />
-            <div style={{ position: 'absolute', bottom: '-40px', left: '-40px', width: '140px', height: '140px', background: 'rgba(255,255,255,0.08)', borderRadius: '50%' }} />
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <Home size={44} color="#fff" style={{ marginBottom: '1rem' }} />
-              <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.2 }}>
-                Convenient Home Visits Available
-              </h2>
-              <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '0.95rem', marginBottom: '1.5rem', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: 1.7 }}>
-                Expert physiotherapy at your doorstep. Ideal for post-surgical patients, elderly clients, and those with mobility challenges.
-              </p>
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <button onClick={handleBook} style={{ background: '#fff', color: '#059669', border: 'none', borderRadius: '50px', padding: '13px 30px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', fontFamily: "'Outfit',sans-serif", boxShadow: '0 4px 16px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Calendar size={16} /> Schedule Home Visit
-                </button>
-                <a href="tel:7982799147" style={{ background: 'transparent', color: '#fff', border: '2px solid rgba(255,255,255,0.6)', borderRadius: '50px', padding: '13px 30px', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Phone size={16} /> Call Now
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+
+
       </div>
     </>
   );

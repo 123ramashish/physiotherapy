@@ -18,12 +18,20 @@ export interface IEvent extends Document {
     price: 'free' | 'paid';
     priceAmount?: string;
     currency: string;
+    contactPhone?: string;
     speaker?: string;
     speakerTitle?: string;
     speakerBio?: string;
     registrationUrl?: string;
     featuredImage?: string;
-    gallery?: string[];
+    featuredImageId?: string;
+    gallery?: Array<{
+        url: string;
+        fileId: string;
+        type: 'image' | 'video';
+        thumbnail?: string;
+        alt?: string;
+    }>;
     tags: string[];
     status: 'upcoming' | 'ongoing' | 'past' | 'cancelled';
     featured: boolean;

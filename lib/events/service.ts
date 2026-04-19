@@ -258,6 +258,7 @@ export async function createEvent(formData: FormData): Promise<{ success: boolea
         const event = await Event.create(newEventData);
 
         revalidatePath('/events');
+        // @ts-ignore
         revalidateTag('events');
 
         return {
@@ -321,6 +322,7 @@ export async function updateEvent(id: string, formData: FormData): Promise<{ suc
         const event = await Event.findByIdAndUpdate(id, { $set: updateData }, { new: true }).lean();
 
         revalidatePath('/events');
+        // @ts-ignore
         revalidateTag('events');
 
         return { success: true, event: { ...(event as any), _id: id } as unknown as EventItem };
@@ -349,6 +351,7 @@ export async function deleteEvent(id: string): Promise<{ success: boolean; error
         await Event.findByIdAndDelete(id);
 
         revalidatePath('/events');
+        // @ts-ignore
         revalidateTag('events');
 
         return { success: true };
@@ -370,6 +373,7 @@ export async function incrementRegistration(id: string): Promise<{ success: bool
         if (!event) return { success: false, error: 'Event not found' };
 
         revalidatePath('/events');
+        // @ts-ignore
         revalidateTag('events');
 
         return { success: true, registered: event.registered };

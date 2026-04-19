@@ -516,11 +516,10 @@ export default function Footer() {
                 Our Branches / हमारी शाखाएँ
               </h3>
               <ul className="space-y-3">
-                {CONTACT_BRANCHES.map((branch) => (
+                {CONTACT_BRANCHES.filter(b => b.id === 'noida-swaran' || b.id === 'noida-135').map((branch) => (
                   <li key={branch.id}>
                     <Link
-                      href={branch.map || "#"}
-                      target="_blank"
+                      href={branch.href || "#"}
                       className={`group flex items-start gap-2.5 ${branch.comingSoon ? "opacity-60 pointer-events-none" : ""
                         }`}
                     >

@@ -1,7 +1,6 @@
 // lib/imagekit.ts
 import ImageKit from 'imagekit';
 import { v4 as uuidv4 } from 'uuid';
-import { Readable } from 'stream';
 
 const hasCredentials = !!(process.env.IMAGEKIT_PUBLIC_KEY && process.env.IMAGEKIT_PRIVATE_KEY && process.env.IMAGEKIT_URL_ENDPOINT);
 
@@ -32,29 +31,15 @@ export async function uploadMedia(
         throw new Error('ImageKit credentials missing. Please add them to .env.local');
     }
 
-    // Use stream for large files instead of reading whole file into buffer
-    const webStream = file.stream();
-    const reader = webStream.getReader();
-    const nodeStream = new Readable({
-        async read() {
-            try {
-                const { done, value } = await reader.read();
-                if (done) {
-                    this.push(null);
-                } else {
-                    this.push(Buffer.from(value));
-                }
-            } catch (err) {
-                this.destroy(err as Error);
-            }
-        }
-    });
+    // Convert File to Buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
     const finalFolder = branchId ? `/${folder}/${branchId}` : `/${folder}`;
 
     const cleanFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
     const uploadParams = {
-        file: nodeStream,
+        file: buffer,
         fileName: `${uuidv4()}-${cleanFileName}`,
         folder: finalFolder,
         useUniqueFileName: true,

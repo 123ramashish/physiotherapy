@@ -212,8 +212,8 @@ export default function FAQPage() {
                                         key={cat.label}
                                         onClick={() => setActiveCategory(cat.label)}
                                         className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold transition-all duration-300 ${activeCategory === cat.label
-                                                ? `bg-gradient-to-r ${cat.color} text-white shadow-lg scale-105`
-                                                : "bg-white border-2 border-gray-200 text-gray-600 hover:border-green-300 hover:text-green-600"
+                                            ? `bg-gradient-to-r ${cat.color} text-white shadow-lg scale-105`
+                                            : "bg-white border-2 border-gray-200 text-gray-600 hover:border-green-300 hover:text-green-600"
                                             }`}
                                     >
                                         <span>{cat.icon}</span>
@@ -316,19 +316,7 @@ export default function FAQPage() {
                 </div>
             </section>
 
-            {/* Final CTA */}
-            <section className="py-20 px-6 bg-gradient-to-r from-green-600 via-blue-600 to-indigo-700">
-                <div className="max-w-3xl mx-auto text-center">
-                    <Reveal>
-                        <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-                            Ready to Start Your Recovery?
-                        </h2>
-                        <a href="/book" className="inline-block px-10 py-4 rounded-2xl bg-white text-indigo-700 font-black text-lg shadow-2xl hover:scale-105 transition-all duration-300">
-                            Book a Consultation →
-                        </a>
-                    </Reveal>
-                </div>
-            </section>
+
         </main>
     );
 }

@@ -191,7 +191,7 @@ export default function AboutPage() {
               Book Your First Session
             </Link>
             <Link 
-              href="/service" 
+              href="/services" 
               className="px-8 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
               aria-label="Learn more about our services"
             >

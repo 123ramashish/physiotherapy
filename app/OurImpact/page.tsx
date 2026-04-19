@@ -297,22 +297,7 @@ export default function OurImpactPage() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-20 px-6 bg-white">
-                <div className="max-w-3xl mx-auto text-center">
-                    <Reveal>
-                        <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-                            Let Us Impact <span className="text-green-600">Your Life</span>
-                        </h2>
-                        <p className="text-gray-500 text-xl mb-10">
-                            Your recovery story starts with one appointment.
-                        </p>
-                        <a href="/book" className="inline-block px-10 py-4 rounded-2xl bg-gradient-to-r from-green-500 to-blue-600 text-white font-black text-lg shadow-xl hover:scale-105 transition-all duration-300">
-                            Book Your Consultation →
-                        </a>
-                    </Reveal>
-                </div>
-            </section>
+
         </main>
     );
 }

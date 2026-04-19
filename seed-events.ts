@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { Event } from './model/schema/event.schema.ts';
-import { connectDB } from './model/dbconnection.ts';
+import { Event } from './model/schema/event.schema';
+import { connectDB } from './model/dbconnection';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });

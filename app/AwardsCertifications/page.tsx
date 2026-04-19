@@ -302,8 +302,8 @@ export default function AwardsCertificationsPage() {
                                     key={c}
                                     onClick={() => setActiveCategory(c)}
                                     className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === c
-                                            ? "bg-gradient-to-r from-green-500 to-blue-600 text-white shadow-md scale-105"
-                                            : "bg-white border border-gray-200 text-gray-600 hover:border-green-300 hover:text-green-600"
+                                        ? "bg-gradient-to-r from-green-500 to-blue-600 text-white shadow-md scale-105"
+                                        : "bg-white border border-gray-200 text-gray-600 hover:border-green-300 hover:text-green-600"
                                         }`}
                                 >
                                     {c}
@@ -394,25 +394,7 @@ export default function AwardsCertificationsPage() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-20 px-6 bg-gradient-to-r from-green-500 via-blue-600 to-indigo-600">
-                <div className="max-w-3xl mx-auto text-center">
-                    <AnimatedSection>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-                            Excellence You Can Trust
-                        </h2>
-                        <p className="text-white/80 text-lg mb-10">
-                            Book a session with our certified team and experience world-class physiotherapy.
-                        </p>
-                        <a
-                            href="/book"
-                            className="inline-block px-10 py-4 rounded-2xl bg-white text-indigo-700 font-bold text-lg shadow-xl hover:scale-105 transition-all duration-300"
-                        >
-                            Book a Session →
-                        </a>
-                    </AnimatedSection>
-                </div>
-            </section>
+
         </main>
     );
 }

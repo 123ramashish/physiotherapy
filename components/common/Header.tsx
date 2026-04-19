@@ -31,7 +31,7 @@ const NAV_LINKS: NavItem[] = [
       // Group 1: Specialized Therapies
       {
         label: "Specialized Therapies / विशेष चिकित्सा",
-        href: "/services",
+        href: "/services/specialized-therapies",
         id: "specialized-therapies",
         icon: "🎯",
         dropdown: [
@@ -43,7 +43,7 @@ const NAV_LINKS: NavItem[] = [
       // Group 2: Pain Management
       {
         label: "Pain Management / दर्द प्रबंधन",
-        href: "/services",
+        href: "/services/pain-management",
         id: "pain-management",
         icon: "🩺",
         dropdown: [
@@ -57,7 +57,7 @@ const NAV_LINKS: NavItem[] = [
       // Group 3: Joint & Bone Conditions
       {
         label: "Joint & Bone / जोड़ और हड्डी",
-        href: "/services",
+        href: "/services/joint-bone",
         id: "joint-bone",
         icon: "🦴",
         dropdown: [
@@ -68,7 +68,7 @@ const NAV_LINKS: NavItem[] = [
       // Group 4: Neurological Conditions
       {
         label: "Neurological / न्यूरोलॉजिकल",
-        href: "/services",
+        href: "/services/neurological",
         id: "neurological",
         icon: "🧠",
         dropdown: [
@@ -79,18 +79,18 @@ const NAV_LINKS: NavItem[] = [
       // Group 5: Injury & Rehabilitation
       {
         label: "Injury & Rehab / चोट और पुनर्वास",
-        href: "/services",
+        href: "/services/injury-rehab",
         id: "injury-rehab",
         icon: "🏥",
         dropdown: [
           { label: "Sports Injuries / खेल कूद की चोटें", href: "/services/sports-injuries", id: "sports-injuries", icon: "⚡" },
-          { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services/post-covid-rehab", id: "post-covid", icon: "🔹" },
+          { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services/post-covid", id: "post-covid", icon: "🔹" },
         ]
       },
       // Group 6: Wellness
       {
         label: "Wellness / कल्याण",
-        href: "/services",
+        href: "/services/wellness",
         id: "wellness",
         icon: "🧘",
         dropdown: [
@@ -99,7 +99,7 @@ const NAV_LINKS: NavItem[] = [
       },
       // Quick links
       { label: "Home Visit / होम विजिट", href: "/services/home-visit", id: "home-visit", icon: "🏠" },
-      { label: "Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services/corporate-wellness", id: "corporate", icon: "🏢" }
+      { label: "Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services/corporate", id: "corporate", icon: "🏢" }
     ],
   },
   {
@@ -113,12 +113,10 @@ const NAV_LINKS: NavItem[] = [
         id: "noida",
         icon: "📍",
         dropdown: [
-          { label: "Swaran Nagari / स्वर्ण नगरी", href: "/branches/noida-swaran-nagari", id: "swaran-nagari", icon: "🏢" },
-          { label: "Sector 134 / सेक्टर 134", href: "/branches/noida-sector-134", id: "sector-134", icon: "🏢" },
+          { label: "Swaran Nagari / स्वर्ण नगरी", href: "/branches/greater-noida-swaran-nagari", id: "swaran-nagari", icon: "🏢" },
+          { label: "Sector 135 / सेक्टर 135", href: "/branches/noida-sector-135", id: "sector-135", icon: "🏢" },
         ]
       },
-      // { label: "Delhi / दिल्ली", href: "/branches/delhi", id: "delhi", icon: "📍", comingSoon: true },
-      // { label: "Gurgaon / गुड़गांव", href: "/branches/gurgaon", id: "gurgaon", icon: "📍", comingSoon: true },
     ],
   },
   {
@@ -126,23 +124,14 @@ const NAV_LINKS: NavItem[] = [
     href: "/about",
     id: "about",
     dropdown: [
-      { label: "Our Story / हमारी कहानी", href: "/about/story", id: "story" },
-      { label: "Why SKM / क्यों SKM", href: "/about/why-skm", id: "why-skm" },
-      { label: "Our Partners / हमारे साझेदार", href: "/about/our-partners", id: "partners" },
-      { label: "Our Impact / हमारा प्रभाव", href: "/about/our-impact", id: "impact" },
-      {
-        label: "Work With Us / हमारे साथ जुड़ें",
-        href: "/about/work-with-us",
-        id: "work-with-us",
-        dropdown: [
-          { label: "As a Partner / साझेदार के रूप में", href: "/about/work-with-us/partner", id: "partner" },
-          { label: "As a Franchise / फ्रैंचाइज़ी के रूप में", href: "/about/work-with-us/franchise", id: "franchise" },
-          { label: "As a Therapist / थेरेपिस्ट के रूप में", href: "/about/work-with-us/therapist", id: "therapist" },
-        ],
-      },
-      { label: "Testimonials / प्रशंसापत्र", href: "/about/testimonials", id: "testimonials" },
-      { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/about/faqs", id: "faqs" },
-      { label: "Certifications & Awards / प्रमाणन और पुरस्कार", href: "/about/certifications-and-awards", id: "awards" },
+      { label: "Our Story / हमारी कहानी", href: "/story", id: "story" },
+      { label: "Why SKM / क्यों SKM", href: "/WhySKM", id: "why-skm" },
+      { label: "Our Partners / हमारे साझेदार", href: "/OurPartners", id: "partners" },
+      { label: "Our Impact / हमारा प्रभाव", href: "/OurImpact", id: "impact" },
+      { label: "Work With Us / हमारे साथ जुड़ें", href: "/work-with-us", id: "work-with-us" },
+      { label: "Testimonials / प्रशंसापत्र", href: "/TestimonialsPage", id: "testimonials" },
+      { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/FAQ", id: "faqs" },
+      { label: "Certifications & Awards / प्रमाणन और पुरस्कार", href: "/AwardsCertifications", id: "awards" },
     ],
   },
   {
@@ -151,14 +140,10 @@ const NAV_LINKS: NavItem[] = [
     id: "media",
     dropdown: [
       { label: "Blog / ब्लॉग", href: "/blog", id: "blog" },
-      // { label: "Press Releases / प्रेस विज्ञप्ति", href: "/media/press-releases", id: "press" },
-      // { label: "News & Events / समाचार और आयोजन", href: "/media/news-and-events", id: "news" },
       { label: "Gallery / गैलरी", href: "/gallery", id: "gallery" },
       { label: "Events / आयोजन", href: "/events", id: "events" },
-      // { label: "Media Kit / मीडिया किट", href: "/media/media-kit", id: "media-kit" },
     ],
   },
-  // { label: "Franchise", href: "/franchise", id: "franchise-main" },
   { label: "Contact", href: "/contact", id: "contact" },
 ];
 
@@ -206,10 +191,8 @@ function DesktopNavItem({
       e.preventDefault();
       return;
     }
-    if (!hasChildren) {
-      e.preventDefault();
-      onNavigate(item.href, item.id);
-    }
+    // Fixed: Parent items are now clickable links even if they have dropdowns
+    onNavigate(item.href, item.id);
   };
 
   return (
@@ -218,27 +201,26 @@ function DesktopNavItem({
       onMouseEnter={() => !item.comingSoon && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {hasChildren ? (
-        <button
-          className={baseStyles}
-          onClick={handleClick}
-          disabled={item.comingSoon}
-          aria-expanded={isHovered}
-          aria-haspopup="true"
+      <a
+        href={item.href}
+        className={baseStyles}
+        onClick={handleClick}
+        data-nav-id={item.id}
+      >
+        {item.icon && <motion.span
+          className="text-base"
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          {item.icon && <motion.span
-            className="text-base"
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            {item.icon}
-          </motion.span>}
-          <span>{item.label}</span>
-          {item.comingSoon && (
-            <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">
-              Soon
-            </span>
-          )}
+          {item.icon}
+        </motion.span>}
+        <span>{item.label}</span>
+        {item.comingSoon && (
+          <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">
+            Soon
+          </span>
+        )}
+        {hasChildren && (
           <motion.svg
             className={`w-3.5 h-3.5 ${depth === 0 ? "" : "rotate-270"}`}
             fill="none"
@@ -250,29 +232,8 @@ function DesktopNavItem({
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </motion.svg>
-        </button>
-      ) : (
-        <a
-          href={item.href}
-          className={baseStyles}
-          onClick={handleClick}
-          data-nav-id={item.id}
-        >
-          {item.icon && <motion.span
-            className="text-base"
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            {item.icon}
-          </motion.span>}
-          <span>{item.label}</span>
-          {item.comingSoon && (
-            <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">
-              Soon
-            </span>
-          )}
-        </a>
-      )}
+        )}
+      </a>
 
       {/* Recursive Dropdown Menu with AnimatePresence */}
       <AnimatePresence>
@@ -321,7 +282,6 @@ function MobileNavItem({
   const indentClass = depth > 0 ? `pl-${Math.min(depth * 4, 12)}` : "";
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
     if (item.comingSoon) return;
 
     if (hasChildren) {
@@ -589,7 +549,7 @@ export default function Header() {
             {/* CTA Buttons - Desktop */}
             <div className="hidden lg:flex items-center gap-2">
               <motion.a
-                href="tel:+919876543210"
+                href="tel:+917982799147"
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-blue-600 border-2 border-blue-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-150"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -601,7 +561,7 @@ export default function Header() {
               </motion.a>
 
               <motion.a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/917982799147"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-green-500 rounded-xl hover:bg-green-600 shadow-lg shadow-green-200 hover:shadow-green-300 transition-all duration-150"
@@ -613,22 +573,6 @@ export default function Header() {
                 </svg>
                 WhatsApp
               </motion.a>
-
-              {/* <motion.a
-                href="/book-appointment"
-                className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl hover:from-blue-600 hover:to-indigo-700 shadow-lg shadow-blue-200 hover:shadow-indigo-300 transition-all duration-150"
-                whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(59,130,246,0.4)" }}
-                whileTap={{ scale: 0.97 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigate("/book-appointment");
-                }}
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Book Appointment
-              </motion.a> */}
             </div>
 
             {/* Mobile hamburger */}
@@ -686,14 +630,14 @@ export default function Header() {
                 <div className="pt-3 pb-2 space-y-2 border-t border-gray-100 mt-2">
                   <div className="flex gap-2">
                     <motion.a
-                      href="tel:+919876543210"
+                      href="tel:+917982799147"
                       className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-semibold text-blue-600 border-2 border-blue-200 rounded-xl hover:bg-blue-50 transition-colors"
                       whileTap={{ scale: 0.98 }}
                     >
                       📞 Call Now
                     </motion.a>
                     <motion.a
-                      href="https://wa.me/919876543210"
+                      href="https://wa.me/917982799147"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-sm font-semibold text-white bg-green-500 rounded-xl hover:bg-green-600 transition-colors"
@@ -702,17 +646,6 @@ export default function Header() {
                       💬 WhatsApp
                     </motion.a>
                   </div>
-                  {/* <motion.a
-                    href="/book-appointment"
-                    className="w-full flex items-center justify-center gap-1.5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all"
-                    whileTap={{ scale: 0.98 }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavigate("/book-appointment");
-                    }}
-                  >
-                    📅 Book Appointment
-                  </motion.a> */}
                 </div>
               </div>
             </motion.div>

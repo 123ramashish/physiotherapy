@@ -309,22 +309,7 @@ export default function WhySKMPage() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-20 px-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-green-600">
-                <div className="max-w-3xl mx-auto text-center">
-                    <Reveal>
-                        <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-                            Experience the SKM Difference
-                        </h2>
-                        <p className="text-white/80 text-xl mb-10">
-                            Book your first consultation and see why thousands chose SKM for their recovery.
-                        </p>
-                        <a href="/book" className="inline-block px-10 py-4 rounded-2xl bg-white text-blue-700 font-black text-lg shadow-2xl hover:scale-105 transition-all duration-300">
-                            Book a Free Consultation →
-                        </a>
-                    </Reveal>
-                </div>
-            </section>
+
         </main>
     );
 }

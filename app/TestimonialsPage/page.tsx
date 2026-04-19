@@ -298,25 +298,6 @@ export default function TestimonialsPage() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-20 px-6 bg-gradient-to-r from-indigo-600 via-blue-600 to-green-500">
-                <div className="max-w-3xl mx-auto text-center">
-                    <AnimatedSection>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-                            Ready to Write Your Story?
-                        </h2>
-                        <p className="text-white/80 text-lg mb-10">
-                            Book a consultation and take the first step toward a pain-free, active life.
-                        </p>
-                        <a
-                            href="/book"
-                            className="inline-block px-10 py-4 rounded-2xl bg-white text-blue-700 font-bold text-lg shadow-xl hover:scale-105 transition-all duration-300"
-                        >
-                            Book a Consultation →
-                        </a>
-                    </AnimatedSection>
-                </div>
-            </section>
         </main>
     );
 }

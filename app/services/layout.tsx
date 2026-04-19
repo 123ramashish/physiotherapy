@@ -15,7 +15,7 @@ export async function generateMetadata(
   return {
     title: "Physiotherapy Services | Cupping, Dry Needling, Sports Rehab | SKM",
     description:
-      "14+ expert physiotherapy treatments: cupping therapy (Hijama), dry needling, back/knee pain relief, sports injury rehab & post-COVID recovery. 4 NCR branches. Book 24/7.",
+      "15+ expert physiotherapy treatments: cupping therapy (Hijama), dry needling, taping, back/knee pain relief, sports injury rehab & post-COVID recovery. 4 NCR branches. Book 24/7.",
     
     keywords: [
       // Core Services
@@ -23,6 +23,8 @@ export async function generateMetadata(
       "cupping therapy",
       "hijama therapy",
       "dry needling",
+      "taping therapy",
+      "kinesiology taping",
       "trigger point therapy",
       
       // Pain Conditions
@@ -75,7 +77,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: "Pain Relief Without Surgery | SKM Physiotherapy Services",
       description:
-        "14+ treatments: cupping, dry needling, sports rehab. Expert therapists across Delhi, Gurgaon, Noida & Faridabad. Book your free consultation today.",
+        "15+ treatments: cupping, dry needling, taping, sports rehab. Expert therapists across Delhi, Gurgaon, Noida & Faridabad. Book your free consultation today.",
       images: ["https://skmphysiotherapy.com/og-services.jpg"],
       creator: "@skmphysio",
     },
@@ -115,7 +117,7 @@ const servicesStructuredData = {
   name: "SKM Physiotherapy Services",
   description: "Comprehensive physiotherapy and rehabilitation treatments for pain relief, injury recovery, and long-term wellness.",
   url: "https://skmphysiotherapy.com/services",
-  numberOfItems: 14,
+  numberOfItems: 15,
   itemListElement: [
     {
       "@type": "ListItem",
