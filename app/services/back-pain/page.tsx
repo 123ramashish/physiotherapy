@@ -81,7 +81,6 @@ const PROCESS_STEPS: ProcessStep[] = [
     },
     {
         number: 2,
-        number: 2,
         titleEn: 'Manual Therapy',
         titleHi: 'मैनुअल थेरेपी',
         descriptionEn: 'Hands-on mobilization to restore joint movement.',

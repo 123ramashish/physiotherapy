@@ -104,7 +104,7 @@ const NAV_LINKS: NavItem[] = [
   },
   {
     label: "Branches",
-    href: "/branches",
+    href: "/branches/noida-sector-135",
     id: "branches",
     dropdown: [
       {
@@ -121,7 +121,7 @@ const NAV_LINKS: NavItem[] = [
   },
   {
     label: "About",
-    href: "/about",
+    href: "/TestimonialsPage",
     id: "about",
     dropdown: [
       { label: "Our Story / हमारी कहानी", href: "/story", id: "story" },
@@ -136,7 +136,7 @@ const NAV_LINKS: NavItem[] = [
   },
   {
     label: "Media",
-    href: "/media",
+    href: "/blog",
     id: "media",
     dropdown: [
       { label: "Blog / ब्लॉग", href: "/blog", id: "blog" },
