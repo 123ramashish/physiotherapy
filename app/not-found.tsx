@@ -126,9 +126,9 @@ const PageNotFound: React.FC = () => {
 
   const quickLinks: QuickLink[] = [
     { icon: Home, label: 'Home', link: '/', color: 'from-emerald-500 to-teal-500' },
-    { icon: Activity, label: 'Services', link: '/services', color: 'from-blue-500 to-indigo-500' },
-    { icon: Heart, label: 'About Us', link: '/about', color: 'from-indigo-500 to-purple-500' },
-    { icon: Phone, label: 'Contact', link: '/contact', color: 'from-teal-500 to-emerald-500' }
+    { icon: Activity, label: 'Services', link: '/services-skm-physiotherapy', color: 'from-blue-500 to-indigo-500' },
+    { icon: Heart, label: 'About Us', link: '/OurStory-skm-physiotherapy', color: 'from-indigo-500 to-purple-500' },
+    { icon: Phone, label: 'Contact', link: '/contact-skm-physiotherapy', color: 'from-teal-500 to-emerald-500' }
   ];
 
   const floatingIcons: LucideIcon[] = [Activity, Heart, Activity, Heart, MapPin, Clock];
@@ -321,7 +321,7 @@ const PageNotFound: React.FC = () => {
           </motion.button>
 
           <motion.a
-            href="/services"
+            href="/services-skm-physiotherapy"
             className="relative w-full sm:w-auto"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

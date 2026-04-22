@@ -56,35 +56,35 @@ interface QuickLink {
 // ─────────────────────────────────────────────
 
 const SERVICES: Service[] = [
-  { label: "Cupping & Hijama / कपिंग व हिजामा", href: "/services/cupping-hijama", icon: "🎯" },
-  { label: "Dry Needling / ड्राई निडलिंग", href: "/services/dry-needling", icon: "💉" },
-  { label: "Taping / टेपिंग", href: "/services/taping", icon: "🩹" },
-  { label: "Back Pain / कमर दर्द", href: "/services/back-pain", icon: "🔹" },
-  { label: "Neck Pain / गर्दन दर्द", href: "/services/neck-pain", icon: "🔹" },
-  { label: "Knee Pain / घुटनों का दर्द", href: "/services/knee-pain", icon: "🔹" },
-  { label: "Sciatica / साइटिका", href: "/services/sciatica", icon: "🔹" },
-  { label: "Arthritis / गठिया", href: "/services/arthritis", icon: "🦴" },
-  { label: "Frozen Shoulder / कंधे की जकड़न", href: "/services/frozen-shoulder", icon: "🔹" },
-  { label: "Bell's Palsy / चेहरे का लकवा", href: "/services/bells-palsy", icon: "🧠" },
-  { label: "Paralysis / लकवा", href: "/services/paralysis", icon: "🔹" },
-  { label: "Sports Injuries / खेल चोटें", href: "/services/sports-injuries", icon: "⚡" },
-  { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services/post-covid", icon: "🔹" },
-  { label: "Relaxation Therapy / आराम थेरेपी", href: "/services/relaxation", icon: "🧘" },
-  { label: "🏠 Home Visit / होम विजिट", href: "/services/home-visit", icon: "🏠", featured: true },
-  { label: "🏢 Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services/corporate", icon: "🏢", featured: true },
+  { label: "Cupping & Hijama / कपिंग व हिजामा", href: "/services-skm-physiotherapy/cupping-hijama", icon: "🎯" },
+  { label: "Dry Needling / ड्राई निडलिंग", href: "/services-skm-physiotherapy/dry-needling", icon: "💉" },
+  { label: "Taping / टेपिंग", href: "/services-skm-physiotherapy/taping", icon: "🩹" },
+  { label: "Back Pain / कमर दर्द", href: "/services-skm-physiotherapy/back-pain", icon: "🔹" },
+  { label: "Neck Pain / गर्दन दर्द", href: "/services-skm-physiotherapy/neck-pain", icon: "🔹" },
+  { label: "Knee Pain / घुटनों का दर्द", href: "/services-skm-physiotherapy/knee-pain", icon: "🔹" },
+  { label: "Sciatica / साइटिका", href: "/services-skm-physiotherapy/sciatica", icon: "🔹" },
+  { label: "Arthritis / गठिया", href: "/services-skm-physiotherapy/arthritis", icon: "🦴" },
+  { label: "Frozen Shoulder / कंधे की जकड़न", href: "/services-skm-physiotherapy/frozen-shoulder", icon: "🔹" },
+  { label: "Bell's Palsy / चेहरे का लकवा", href: "/services-skm-physiotherapy/bells-palsy", icon: "🧠" },
+  { label: "Paralysis / लकवा", href: "/services-skm-physiotherapy/paralysis", icon: "🔹" },
+  { label: "Sports Injuries / खेल चोटें", href: "/services-skm-physiotherapy/sports-injuries", icon: "⚡" },
+  { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services-skm-physiotherapy/post-covid", icon: "🔹" },
+  { label: "Relaxation Therapy / आराम थेरेपी", href: "/services-skm-physiotherapy/relaxation", icon: "🧘" },
+  { label: "🏠 Home Visit / होम विजिट", href: "/services-skm-physiotherapy/home-visit", icon: "🏠", featured: true },
+  { label: "🏢 Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services-skm-physiotherapy/corporate", icon: "🏢", featured: true },
 ];
 
 
 
 const QUICK_LINKS: QuickLink[] = [
-  { label: "About Us / हमारे बारे में", href: "/about" },
-  { label: "Our Story / हमारी कहानी", href: "/about/story" },
-  { label: "Why SKM / क्यों SKM", href: "/about/why-skm" },
-  { label: "Testimonials / प्रशंसापत्र", href: "/about/testimonials" },
-  { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/about/faqs" },
-  { label: "Franchise / फ्रैंचाइज़ी", href: "/franchise" },
-  { label: "Careers / करियर", href: "/about/work-with-us" },
-  { label: "Blog / ब्लॉग", href: "/blog" },
+  { label: "About Us / हमारे बारे में", href: "/OurStory-skm-physiotherapy" },
+  { label: "Our Story / हमारी कहानी", href: "/OurStory-skm-physiotherapy" },
+  { label: "Why SKM / क्यों SKM", href: "/Why-skm-physiotherapy" },
+  { label: "Testimonials / प्रशंसापत्र", href: "/testimonials-skm-physiotherapy" },
+  { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/FAQ-skm-physiotherapy" },
+  { label: "Franchise / फ्रैंचाइज़ी", href: "/franchise-skm-physiotherapy" },
+  { label: "Careers / करियर", href: "/work-with-skm-physiotherapy" },
+  { label: "Blog / ब्लॉग", href: "/blog-physiotherapy" },
 ];
 
 const LEGAL_LINKS: QuickLink[] = [
@@ -125,12 +125,9 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
 ];
 
-const TIMINGS = [
-  { day: "Monday – Saturday / सोमवार – शनिवार", time: "9:00 AM – 8:00 PM" },
-  { day: "Sunday / रविवार", time: "10:00 AM – 2:00 PM" },
-];
 
-const TRUST_BADGES = ["4+ Years Experience", "12000+ Patients Healed", "Expert Physiotherapists"];
+
+const TRUST_BADGES = ["5+ Years Experience", "20000+ Patients Healed", "Expert Physiotherapists"];
 
 const BOT_INITIAL_MESSAGE = "👋 Hello! I'm SKM Bot. How can I help you today? / नमस्ते! मैं SKM बॉट हूँ। मैं आपकी कैसे मदद कर सकता हूँ?";
 
@@ -381,7 +378,7 @@ function ContactFAB() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className={`w-11 h-11 rounded-xl flex items-center justify-center text-white shadow-lg border-2 transition-all ${social.color}`}
+                className={`w-11 h-11 rounded-xl flex items-center justify-center text-black shadow-lg border-2 transition-all ${social.color}`}
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={social.label}
@@ -412,13 +409,13 @@ function ContactFAB() {
       </motion.button>
 
       {/* Label */}
-      <motion.span
+      {/* <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-1 bg-gray-900 text-white text-[10px] rounded-md"
       >
         {isOpen ? "" : ""}
-      </motion.span>
+      </motion.span> */}
     </div>
   );
 }
@@ -516,7 +513,7 @@ export default function Footer() {
                 Our Branches / हमारी शाखाएँ
               </h3>
               <ul className="space-y-3">
-                {CONTACT_BRANCHES.filter(b => b.id === 'noida-swaran' || b.id === 'noida-135').map((branch) => (
+                {CONTACT_BRANCHES.filter(b => b.id === 'noida-swaran' || b.id === 'noida-134').map((branch) => (
                   <li key={branch.id}>
                     <Link
                       href={branch.href || "#"}
@@ -648,7 +645,7 @@ export default function Footer() {
       </footer>
 
       {/* Floating Action Buttons Container */}
-      <div className="fixed bottom-6 left-0 right-0 px-4 z-50 pointer-events-none">
+      <div className="fixed bottom-6 right-0 right-0 px-4 z-50 pointer-events-none">
         <div className="max-w-7xl mx-auto flex justify-between items-end">
 
           {/* Left: Contact FAB */}
@@ -678,7 +675,7 @@ export default function Footer() {
             </AnimatePresence>
 
             {/* Chatbot Toggle */}
-            <motion.button
+            {/* <motion.button
               onClick={() => setIsChatOpen(!isChatOpen)}
               className={`w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center transition-all ${isChatOpen
                 ? 'bg-gray-900 text-white'
@@ -712,7 +709,7 @@ export default function Footer() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.button>
+            </motion.button> */}
 
 
           </div>

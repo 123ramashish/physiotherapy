@@ -180,9 +180,9 @@ const GlobalErrorPage: React.FC<GlobalErrorPageProps> = ({
 
   const quickLinks: QuickLink[] = [
     { name: 'Home', path: '/', icon: Home, color: 'from-emerald-500 to-teal-500' },
-    { name: 'Services', path: '/services', icon: Activity, color: 'from-blue-500 to-indigo-500' },
-    { name: 'Contact', path: '/contact', icon: Phone, color: 'from-teal-500 to-cyan-500' },
-    { name: 'About', path: '/about', icon: Heart, color: 'from-indigo-500 to-purple-500' },
+    { name: 'Services', path: '/services-skm-physiotherapy', icon: Activity, color: 'from-blue-500 to-indigo-500' },
+    { name: 'Contact', path: '/contact-skm-physiotherapy', icon: Phone, color: 'from-teal-500 to-cyan-500' },
+    { name: 'About', path: '/OurStory-skm-physiotherapy', icon: Heart, color: 'from-indigo-500 to-purple-500' },
   ];
 
   // Helper function to get gradient color values
