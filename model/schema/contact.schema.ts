@@ -17,7 +17,7 @@ export const CONTACT_BRANCHES: ContactBranch[] = [
         address: '123, MG Road, Sector 14, Gurugram, Haryana',
         phone: '+91 79827 99147',
         map: 'https://maps.google.com/?q=Sector+14+Gurugram+Haryana',
-        href: '/branches/gurugram-sector-14'
+        href: '/branches-skm-physiotherapy/gurugram-sector-14'
     },
     {
         id: 'noida-swaran',
@@ -25,7 +25,7 @@ export const CONTACT_BRANCHES: ContactBranch[] = [
         address: 'D-Block, D-3, Near Krishna Hospital, Swarn Nagari, Greater Noida, UP 201315',
         phone: '+91 79827 99147',
         map: 'https://maps.app.goo.gl/Us4jVhy8foKxxawE7',
-        href: '/branches/greater-noida-swaran-nagari'
+        href: '/branches-skm-physiotherapy/greater-noida-swaran-nagari'
     },
     {
         id: 'noida-135',
@@ -33,7 +33,7 @@ export const CONTACT_BRANCHES: ContactBranch[] = [
         address: 'B-45, Sector 135, Noida, UP 201303',
         phone: '+91 98765 43210',
         map: 'https://maps.google.com/?q=Sector+135+Noida',
-        href: '/branches/noida-sector-135'
+        href: '/branches-skm-physiotherapy/noida-sector-135'
     },
     {
         id: 'gurugram-45',
@@ -41,7 +41,7 @@ export const CONTACT_BRANCHES: ContactBranch[] = [
         address: 'Plot 45, Sector 45, Gurugram, Haryana',
         phone: '+91 79827 99148',
         map: 'https://maps.google.com/?q=Sector+45+Gurugram+Haryana',
-        href: '/branches/gurugram-sector-45'
+        href: '/branches-skm-physiotherapy/gurugram-sector-45'
     },
     {
         id: 'delhi',

@@ -1,4 +1,4 @@
-// app/branches/gurugram-dlf-phase2/layout.tsx
+// app/branches-skm-physiotherapy/gurugram-dlf-phase2/layout.tsx
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'physiotherapy near cyber hub gurugram',
   ],
   alternates: {
-    canonical: 'https://www.skmphysio.in/branches/gurugram-dlf-phase2',
+    canonical: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-dlf-phase2',
   },
   openGraph: {
     title: "SKM Physiotherapy DLF Phase 2 — Paediatric & Women's Physiotherapy",
     description:
       "Women's health, paediatric physiotherapy, hijama & dry needling near Cyber Hub, DLF Phase 2, Gurugram. Call 7982799149.",
-    url: 'https://www.skmphysio.in/branches/gurugram-dlf-phase2',
+    url: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-dlf-phase2',
     siteName: 'SKM Physiotherapy & Rehabilitation Centre',
     images: [
       {
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 const jsonLdMedicalBusiness = {
   '@context': 'https://schema.org',
   '@type': ['MedicalBusiness', 'LocalBusiness'],
-  '@id': 'https://www.skmphysio.in/branches/gurugram-dlf-phase2',
+  '@id': 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-dlf-phase2',
   name: 'SKM Physiotherapy & Rehabilitation Centre — DLF Phase 2, Gurugram',
-  url: 'https://www.skmphysio.in/branches/gurugram-dlf-phase2',
+  url: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-dlf-phase2',
   telephone: '+917982799149',
   email: 'dlf@skmphysio.in',
   image: [
@@ -98,7 +98,7 @@ const jsonLdBreadcrumb = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skmphysio.in' },
     { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://www.skmphysio.in/branches' },
-    { '@type': 'ListItem', position: 3, name: 'DLF Phase 2, Gurugram', item: 'https://www.skmphysio.in/branches/gurugram-dlf-phase2' },
+    { '@type': 'ListItem', position: 3, name: 'DLF Phase 2, Gurugram', item: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-dlf-phase2' },
   ],
 };
 

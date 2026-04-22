@@ -61,7 +61,7 @@ export default function TherapistsPage() {
                   <span className="text-sm sm:text-base">View Our Team</span>
                 </a>
                 <a 
-                  href="/contact" 
+                  href="/contact-skm-physiotherapy" 
                   className="px-6 sm:px-8 py-3 sm:py-3.5 bg-white border-2 border-rose-600 text-rose-600 font-semibold rounded-lg hover:bg-rose-50 transition-all duration-300 transform hover:-translate-y-1 shadow-md flex items-center justify-center gap-2"
                   aria-label="Book a consultation"
                 >
@@ -207,7 +207,7 @@ export default function TherapistsPage() {
               
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6 px-4">
                 <a 
-                  href="/contact" 
+                  href="/contact-skm-physiotherapy" 
                   className="group px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-white text-rose-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                   aria-label="Book your appointment"
                 >
@@ -215,7 +215,7 @@ export default function TherapistsPage() {
                   Book Your Appointment
                 </a>
                 <a 
-                  href="/contact" 
+                  href="/contact-skm-physiotherapy" 
                   className="px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base"
                   aria-label="Emergency consultation"
                 >
@@ -227,7 +227,7 @@ export default function TherapistsPage() {
               <div className="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-white/20">
                 <p className="text-base sm:text-lg mb-4 sm:mb-6 px-4">Not sure which therapist is right for you?</p>
                 <a 
-                  href="/contact" 
+                  href="/contact-skm-physiotherapy" 
                   className="inline-flex items-center gap-2 text-white/90 hover:text-white font-medium underline decoration-2 underline-offset-4 transition-colors text-sm sm:text-base"
                   aria-label="Get matched with a specialist"
                 >

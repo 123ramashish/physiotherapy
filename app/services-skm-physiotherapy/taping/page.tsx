@@ -494,7 +494,7 @@ export default function TapingPage() {
             <nav className="bg-white border-b border-blue-100 py-3">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 text-sm flex-wrap">
-                        {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Kinesio Taping', href: null }]
+                        {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services-skm-physiotherapy' }, { label: 'Kinesio Taping', href: null }]
                             .map((item, index, array) => (
                                 <React.Fragment key={item.label}>
                                     {item.href
@@ -792,7 +792,7 @@ export default function TapingPage() {
                     <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">Get Dynamic Support Today</h2>
                     <p className="text-teal-50 mb-8 text-lg opacity-90">Whether you are training for a marathon or recovering from an injury, our taping experts can help you move with confidence.</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-teal-600 rounded-xl font-bold hover:bg-teal-50 transition-colors shadow-lg">
+                        <a href="/contact-skm-physiotherapy" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-teal-600 rounded-xl font-bold hover:bg-teal-50 transition-colors shadow-lg">
                             Book Taping Session <ArrowRight className="w-5 h-5" />
                         </a>
                         <a href="tel:+917982799147" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-colors border border-blue-400">

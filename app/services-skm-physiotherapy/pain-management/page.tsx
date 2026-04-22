@@ -23,7 +23,7 @@ const services = [
         accent: 'from-teal-500 to-blue-600',
         badge: 'Popular',
         img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
-        href: '/services/back-pain',
+        href: '/services-skm-physiotherapy/back-pain',
     },
     {
         icon: PersonStanding,
@@ -33,7 +33,7 @@ const services = [
         accent: 'from-indigo-500 to-blue-600',
         badge: 'Specialized',
         img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80',
-        href: '/services/neck-pain',
+        href: '/services-skm-physiotherapy/neck-pain',
     },
     {
         icon: Bone,
@@ -43,7 +43,7 @@ const services = [
         accent: 'from-green-500 to-emerald-600',
         badge: 'Effective',
         img: 'https://images.unsplash.com/photo-1567013127542-490d757e51cd?w=600&q=80',
-        href: '/services/knee-pain',
+        href: '/services-skm-physiotherapy/knee-pain',
     },
     {
         icon: Activity,
@@ -53,7 +53,7 @@ const services = [
         accent: 'from-teal-600 to-emerald-600',
         badge: 'High Relief',
         img: 'https://images.unsplash.com/photo-1598901865264-4f54e0c2a11c?w=600&q=80',
-        href: '/services/heel-pain',
+        href: '/services-skm-physiotherapy/heel-pain',
     },
     {
         icon: Zap,
@@ -63,7 +63,7 @@ const services = [
         accent: 'from-emerald-600 to-teal-700',
         badge: 'Neural Care',
         img: 'https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=600&q=80',
-        href: '/services/sciatica',
+        href: '/services-skm-physiotherapy/sciatica',
     },
 ];
 
@@ -127,7 +127,7 @@ export default function PainManagementCategoryPage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.05),transparent_50%)]" />
                 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <Link href="/services" className="inline-flex items-center gap-2 text-gray-500 hover:text-teal-600 font-medium transition-colors mb-12 group">
+                    <Link href="/services-skm-physiotherapy" className="inline-flex items-center gap-2 text-gray-500 hover:text-teal-600 font-medium transition-colors mb-12 group">
                         <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> Back to All Services
                     </Link>
 
@@ -238,7 +238,7 @@ export default function PainManagementCategoryPage() {
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 tracking-tight">Ready for a Pain-Free Life?</h2>
                     <p className="text-gray-600 mb-12 text-lg">Book your physical assessment today and take the first step towards recovery with Gurugram's top spinal and joint specialists.</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/contact" className="px-8 py-4 bg-teal-600 text-white rounded-2xl font-bold hover:bg-teal-700 shadow-lg shadow-teal-200 transition-all flex items-center justify-center gap-2">
+                        <Link href="/contact-skm-physiotherapy" className="px-8 py-4 bg-teal-600 text-white rounded-2xl font-bold hover:bg-teal-700 shadow-lg shadow-teal-200 transition-all flex items-center justify-center gap-2">
                             Book Appointment <ArrowRight className="w-5 h-5" />
                         </Link>
                         <a href="tel:+917982799147" className="px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">

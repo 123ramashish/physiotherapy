@@ -56,7 +56,7 @@ const SERVICES: ServiceCard[] = [
     description: 'Ancient therapy for natural healing, pain relief, and detoxification with modern medical expertise.',
     icon: <Droplets className="w-7 h-7" />,
     image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80',
-    href: '/services/cupping-hijama',
+    href: '/services-skm-physiotherapy/cupping-hijama',
     color: '#059669',
     gradient: 'from-emerald-500 to-teal-600',
   },
@@ -66,7 +66,7 @@ const SERVICES: ServiceCard[] = [
     description: 'Comprehensive non-surgical solutions for acute and chronic back pain with expert physiotherapy.',
     icon: <Activity className="w-7 h-7" />,
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80',
-    href: '/services/back-pain',
+    href: '/services-skm-physiotherapy/back-pain',
     color: '#2563eb',
     gradient: 'from-blue-500 to-indigo-600',
   },
@@ -76,7 +76,7 @@ const SERVICES: ServiceCard[] = [
     description: 'Holistic arthritis care reducing inflammation, improving mobility, and enhancing quality of life.',
     icon: <Shield className="w-7 h-7" />,
     image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80',
-    href: '/services/arthritis',
+    href: '/services-skm-physiotherapy/arthritis',
     color: '#7c3aed',
     gradient: 'from-violet-500 to-purple-700',
   },
@@ -86,7 +86,7 @@ const SERVICES: ServiceCard[] = [
     description: 'Specialized neurological rehabilitation for facial paralysis recovery with compassionate expert care.',
     icon: <Brain className="w-7 h-7" />,
     image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=600&q=80',
-    href: '/services/bells-palsy',
+    href: '/services-skm-physiotherapy/bells-palsy',
     color: '#d97706',
     gradient: 'from-amber-500 to-orange-600',
   },
@@ -130,7 +130,7 @@ const BRANCHES: Branch[] = [
     location: 'Greater Noida, UP',
     address: 'D-Block, D-3, Near Krishna Hospital, Swarn Nagari, Greater Noida',
     phone: '+91 79827 99147',
-    href: '/branches/greater-noida-swaran-nagari',
+    href: '/branches-skm-physiotherapy/greater-noida-swaran-nagari',
     mapLink: 'https://maps.app.goo.gl/Us4jVhy8foKxxawE7',
     timing: 'Mon – Sat: 9 AM – 8 PM',
   },
@@ -140,7 +140,7 @@ const BRANCHES: Branch[] = [
     location: 'Noida, UP',
     address: 'B-45, Sector 135, Noida, Uttar Pradesh',
     phone: '+91 97184 34818',
-    href: '/branches/noida-sector-135',
+    href: '/branches-skm-physiotherapy/noida-sector-135',
     mapLink: 'https://maps.google.com/?q=Sector+135+Noida',
     timing: 'Mon – Sat: 9 AM – 8 PM',
   },
@@ -693,7 +693,7 @@ export default function HomePage() {
             className="text-center mt-12"
           >
             <button
-              onClick={() => router.push('/services')}
+              onClick={() => router.push('/services-skm-physiotherapy')}
               className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:opacity-90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2"
             >
               View All Services <ArrowRight className="w-5 h-5" />
@@ -820,7 +820,7 @@ export default function HomePage() {
                     <span className="flex items-center gap-1"><MapPin className="w-4 h-4" />{event.location}</span>
                   </div>
                   <button
-                    onClick={() => router.push('/events')}
+                    onClick={() => router.push('/events-skm-physiotherapy')}
                     className="text-blue-600 font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
                   >
                     Learn More <ChevronRight className="w-4 h-4" />
@@ -920,7 +920,7 @@ export default function HomePage() {
             className="text-center mt-12"
           >
             <button
-              onClick={() => router.push('/branches')}
+              onClick={() => router.push('/branches-skm-physiotherapy')}
               className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:opacity-90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2"
             >
               <Navigation className="w-5 h-5" /> Explore All Branches

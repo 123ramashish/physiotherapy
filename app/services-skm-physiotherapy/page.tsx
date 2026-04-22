@@ -89,7 +89,7 @@ const services = [
     accent: 'from-emerald-500 to-teal-600',
     badge: 'Traditional',
     img: serviceImages[0],
-    href: '/services/cupping-hijama',
+    href: '/services-skm-physiotherapy/cupping-hijama',
   },
   {
     icon: Syringe,
@@ -99,7 +99,7 @@ const services = [
     accent: 'from-blue-500 to-indigo-600',
     badge: 'Advanced',
     img: serviceImages[1],
-    href: '/services/dry-needling',
+    href: '/services-skm-physiotherapy/dry-needling',
   },
   {
     icon: Activity,
@@ -109,7 +109,7 @@ const services = [
     accent: 'from-teal-500 to-cyan-600',
     badge: 'Popular',
     img: serviceImages[2],
-    href: '/services/back-pain',
+    href: '/services-skm-physiotherapy/back-pain',
   },
   {
     icon: PersonStanding,
@@ -119,7 +119,7 @@ const services = [
     accent: 'from-indigo-500 to-blue-600',
     badge: 'Popular',
     img: serviceImages[3],
-    href: '/services/neck-pain',
+    href: '/services-skm-physiotherapy/neck-pain',
   },
   {
     icon: Bone,
@@ -129,7 +129,7 @@ const services = [
     accent: 'from-green-500 to-emerald-600',
     badge: 'Popular',
     img: serviceImages[4],
-    href: '/services/knee-pain',
+    href: '/services-skm-physiotherapy/knee-pain',
   },
   {
     icon: Stethoscope,
@@ -139,7 +139,7 @@ const services = [
     accent: 'from-blue-600 to-indigo-700',
     badge: null,
     img: serviceImages[5],
-    href: '/services/arthritis',
+    href: '/services-skm-physiotherapy/arthritis',
   },
   {
     icon: Activity,
@@ -149,7 +149,7 @@ const services = [
     accent: 'from-teal-600 to-green-600',
     badge: null,
     img: serviceImages[6],
-    href: '/services/heel-pain',
+    href: '/services-skm-physiotherapy/heel-pain',
   },
   {
     icon: Brain,
@@ -159,7 +159,7 @@ const services = [
     accent: 'from-indigo-600 to-blue-700',
     badge: 'Specialized',
     img: serviceImages[7],
-    href: '/services/bells-palsy',
+    href: '/services-skm-physiotherapy/bells-palsy',
   },
   {
     icon: Zap,
@@ -169,7 +169,7 @@ const services = [
     accent: 'from-emerald-600 to-teal-700',
     badge: 'Popular',
     img: serviceImages[8],
-    href: '/services/sciatica',
+    href: '/services-skm-physiotherapy/sciatica',
   },
   {
     icon: Dumbbell,
@@ -179,7 +179,7 @@ const services = [
     accent: 'from-blue-500 to-teal-600',
     badge: 'Most Popular',
     img: serviceImages[9],
-    href: '/services/sports-injuries',
+    href: '/services-skm-physiotherapy/sports-injuries',
   },
   {
     icon: Heart,
@@ -189,7 +189,7 @@ const services = [
     accent: 'from-green-500 to-indigo-500',
     badge: null,
     img: serviceImages[10],
-    href: '/services/relaxation',
+    href: '/services-skm-physiotherapy/relaxation',
   },
   {
     icon: Wind,
@@ -199,7 +199,7 @@ const services = [
     accent: 'from-teal-500 to-blue-500',
     badge: 'Specialized',
     img: serviceImages[11],
-    href: '/services/post-covid',
+    href: '/services-skm-physiotherapy/post-covid',
   },
   {
     icon: Activity,
@@ -209,7 +209,7 @@ const services = [
     accent: 'from-blue-400 to-indigo-500',
     badge: 'New',
     img: serviceImages[14],
-    href: '/services/taping',
+    href: '/services-skm-physiotherapy/taping',
   },
   {
     icon: Target,
@@ -219,7 +219,7 @@ const services = [
     accent: 'from-indigo-500 to-green-500',
     badge: null,
     img: serviceImages[12],
-    href: '/services/frozen-shoulder',
+    href: '/services-skm-physiotherapy/frozen-shoulder',
   },
   {
     icon: Users,
@@ -229,7 +229,7 @@ const services = [
     accent: 'from-blue-600 to-emerald-600',
     badge: 'Specialized',
     img: serviceImages[13],
-    href: '/services/paralysis',
+    href: '/services-skm-physiotherapy/paralysis',
   },
   {
     icon: Building2,
@@ -239,7 +239,7 @@ const services = [
     accent: 'from-blue-700 to-indigo-800',
     badge: 'Corporate',
     img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
-    href: '/services/corporate-wellness',
+    href: '/services-skm-physiotherapy/corporate-wellness',
   },
 ];
 
@@ -269,7 +269,7 @@ const ServicesPage = () => {
     return () => observers.forEach(o => o?.disconnect());
   }, []);
 
-  const handleBook = () => router.push('/contact');
+  const handleBook = () => router.push('/contact-skm-physiotherapy');
 
   return (
     <>

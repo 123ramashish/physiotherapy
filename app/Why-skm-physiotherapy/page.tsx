@@ -152,7 +152,7 @@ export default function WhySKMPage() {
                             <a href="/our-story" className="px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg shadow-lg shadow-blue-200 hover:shadow-blue-300 hover:scale-105 transition-all duration-300">
                                 Our Story
                             </a>
-                            <a href="/faq" className="px-8 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-lg hover:border-blue-400 hover:text-blue-600 transition-all duration-300">
+                            <a href="/FAQ-skm-physiotherapy" className="px-8 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-lg hover:border-blue-400 hover:text-blue-600 transition-all duration-300">
                                 Read FAQs →
                             </a>
                         </div>

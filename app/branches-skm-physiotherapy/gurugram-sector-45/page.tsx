@@ -1,5 +1,5 @@
 'use client';
-// app/branches/gurugram-sector-45/page.tsx
+// app/branches-skm-physiotherapy/gurugram-sector-45/page.tsx
 // SKM Physiotherapy — South Extension, Sector 45, Gurugram
 // Accent: Blue (#3b82f6)
 
@@ -65,8 +65,8 @@ const BRANCH = {
     { q: 'Is there parking at this location?', a: 'Yes, parking is available adjacent to the clinic on Sohna Road.' },
   ],
   otherBranches: [
-    { name: 'Main Centre', location: 'Sector 14, Gurugram', phone: '7982799147', href: '/branches/gurugram-sector-14', color: '#059669' },
-    { name: 'DLF Phase 2', location: 'DLF Phase 2, Gurugram', phone: '7982799149', href: '/branches/gurugram-dlf-phase2', color: '#6366f1' },
+    { name: 'Main Centre', location: 'Sector 14, Gurugram', phone: '7982799147', href: '/branches-skm-physiotherapy/gurugram-sector-14', color: '#059669' },
+    { name: 'DLF Phase 2', location: 'DLF Phase 2, Gurugram', phone: '7982799149', href: '/branches-skm-physiotherapy/gurugram-dlf-phase2', color: '#6366f1' },
   ],
 };
 
@@ -124,7 +124,7 @@ export default function Sector45Page() {
         {/* Breadcrumb */}
         <nav style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '11px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: '0.8rem', flexWrap: 'wrap' }}>
-            {[['Home', '/'], ['Branches', '/branches'], ['Sector 45, Gurugram', null]].map(([l, h], i, a) => (
+            {[['Home', '/'], ['Branches', '/branches-skm-physiotherapy'], ['Sector 45, Gurugram', null]].map(([l, h], i, a) => (
               <React.Fragment key={i}>
                 {h ? <a href={h as string} style={{ color: ACC, fontWeight: 700, textDecoration: 'none' }}>{l}</a>
                   : <span style={{ color: '#64748b', fontWeight: 500 }}>{l}</span>}
@@ -159,7 +159,7 @@ export default function Sector45Page() {
                 <span className="spec-badge"><Dumbbell size={12} /> Sports Injuries</span>
               </div>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                <button onClick={() => router.push('/contact')} style={{ background: `linear-gradient(135deg,${ACC},${ACC_MID})`, color: '#fff', border: 'none', borderRadius: 50, padding: '12px 24px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif", boxShadow: `0 6px 20px rgba(${RGB},0.4)`, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <button onClick={() => router.push('/contact-skm-physiotherapy')} style={{ background: `linear-gradient(135deg,${ACC},${ACC_MID})`, color: '#fff', border: 'none', borderRadius: 50, padding: '12px 24px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif", boxShadow: `0 6px 20px rgba(${RGB},0.4)`, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Calendar size={14} /> Book Appointment
                 </button>
                 <a href={`https://wa.me/${BRANCH.whatsapp}`} target="_blank" rel="noopener noreferrer" style={{ background: '#25D366', color: '#fff', borderRadius: 50, padding: '12px 20px', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -247,8 +247,8 @@ export default function Sector45Page() {
               {BRANCH.services.map((s, i) => <span className="spill" key={i}><CheckCircle2 size={13} />{s}</span>)}
             </div>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: '2rem' }}>
-              <button onClick={() => router.push('/services')} style={{ background: ACC, color: '#fff', border: 'none', borderRadius: 50, padding: '11px 22px', fontWeight: 700, fontSize: '0.86rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif", display: 'flex', alignItems: 'center', gap: 6 }}>View All Services <ArrowRight size={13} /></button>
-              <button onClick={() => router.push('/contact')} style={{ background: '#fff', color: ACC, border: `2px solid ${ACC}`, borderRadius: 50, padding: '9px 22px', fontWeight: 700, fontSize: '0.86rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif" }}>Book a Service</button>
+              <button onClick={() => router.push('/services-skm-physiotherapy')} style={{ background: ACC, color: '#fff', border: 'none', borderRadius: 50, padding: '11px 22px', fontWeight: 700, fontSize: '0.86rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif", display: 'flex', alignItems: 'center', gap: 6 }}>View All Services <ArrowRight size={13} /></button>
+              <button onClick={() => router.push('/contact-skm-physiotherapy')} style={{ background: '#fff', color: ACC, border: `2px solid ${ACC}`, borderRadius: 50, padding: '9px 22px', fontWeight: 700, fontSize: '0.86rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif" }}>Book a Service</button>
             </div>
           </div>
         </section>
@@ -372,7 +372,7 @@ export default function Sector45Page() {
               <h2 className="bp2-display" style={{ fontSize: 'clamp(1.5rem,3vw,2.2rem)', fontWeight: 900, color: '#fff', marginBottom: '0.75rem' }}>Start Your Recovery at Sector 45</h2>
               <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '0.93rem', marginBottom: '2rem', maxWidth: 520, margin: '0 auto 2rem', lineHeight: 1.7 }}>Expert neuro and sports physiotherapy — book your appointment today.</p>
               <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-                <button onClick={() => router.push('/contact')} style={{ background: '#fff', color: ACC, border: 'none', borderRadius: 50, padding: '14px 28px', fontWeight: 700, fontSize: '0.93rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif", boxShadow: '0 6px 20px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <button onClick={() => router.push('/contact-skm-physiotherapy')} style={{ background: '#fff', color: ACC, border: 'none', borderRadius: 50, padding: '14px 28px', fontWeight: 700, fontSize: '0.93rem', cursor: 'pointer', fontFamily: "'Plus Jakarta Sans',sans-serif", boxShadow: '0 6px 20px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Calendar size={15} /> Book Appointment
                 </button>
                 <a href={`tel:${BRANCH.phone}`} style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', border: '2px solid rgba(255,255,255,0.5)', borderRadius: 50, padding: '12px 24px', fontWeight: 700, fontSize: '0.93rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>

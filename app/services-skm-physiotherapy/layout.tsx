@@ -1,4 +1,4 @@
-// app/services/layout.tsx
+// app/services-skm-physiotherapy/layout.tsx
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {

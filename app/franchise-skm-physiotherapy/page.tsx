@@ -544,7 +544,7 @@ export default function FranchisePage() {
           <div
             className="max-w-3xl mx-auto space-y-5"
             itemScope
-            itemType="https://schema.org/FAQPage"
+            itemType="https://schema.org/FAQ-skm-physiotherapyPage"
           >
             {faqs.map((faq, i) => (
               <div
@@ -747,7 +747,7 @@ export default function FranchisePage() {
               Request Info Pack
             </Link>
             <Link
-              href="/contact"
+              href="/contact-skm-physiotherapy"
               className="px-9 py-4 border-2 border-white/70 text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
               aria-label="Contact our team directly"
             >

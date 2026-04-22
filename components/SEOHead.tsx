@@ -265,13 +265,13 @@ export default function SEOHead({
           generateBreadcrumbSchema([
             { name: "Home", item: baseUrl },
             { name: "Blog", item: `${baseUrl}/blog` },
-            ...(pathname !== '/blog' ? [{ name: "Articles", item: canonicalUrl }] : [])
+            ...(pathname !== '/blog-physiotherapy' ? [{ name: "Articles", item: canonicalUrl }] : [])
           ])
         ) }} 
       />
       
       {/* ===== FAQ Schema for Homepage ===== */}
-      {pathname === '/blog' && (
+      {pathname === '/blog-physiotherapy' && (
         <script 
           type="application/ld+json" 
           dangerouslySetInnerHTML={{ __html: JSON.stringify({

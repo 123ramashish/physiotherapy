@@ -19,132 +19,132 @@ const NAV_LINKS: NavItem[] = [
   { label: "Home", href: "/", id: "home" },
   {
     label: "Services",
-    href: "/services",
+    href: "/services-skm-physiotherapy",
     id: "services",
     dropdown: [
       {
         label: "All Services / सभी सेवाएं",
-        href: "/services",
+        href: "/services-skm-physiotherapy",
         id: "all-services",
         icon: "🎯",
       },
       // Group 1: Specialized Therapies
       {
         label: "Specialized Therapies / विशेष चिकित्सा",
-        href: "/services/specialized-therapies",
+        href: "/services-skm-physiotherapy/specialized-therapies",
         id: "specialized-therapies",
         icon: "🎯",
         dropdown: [
-          { label: "Cupping and Hijama / कपिंग व हिजामा", href: "/services/cupping-hijama", id: "cupping-hijama", icon: "" },
-          { label: "Dry Needling / ड्राई निडलिंग", href: "/services/dry-needling", id: "dry-needling", icon: "💉" },
-          { label: "Taping / टेपिंग", href: "/services/taping", id: "taping", icon: "🩹" },
+          { label: "Cupping and Hijama / कपिंग व हिजामा", href: "/services-skm-physiotherapy/cupping-hijama", id: "cupping-hijama", icon: "" },
+          { label: "Dry Needling / ड्राई निडलिंग", href: "/services-skm-physiotherapy/dry-needling", id: "dry-needling", icon: "💉" },
+          { label: "Taping / टेपिंग", href: "/services-skm-physiotherapy/taping", id: "taping", icon: "🩹" },
         ]
       },
       // Group 2: Pain Management
       {
         label: "Pain Management / दर्द प्रबंधन",
-        href: "/services/pain-management",
+        href: "/services-skm-physiotherapy/pain-management",
         id: "pain-management",
         icon: "🩺",
         dropdown: [
-          { label: "Back Pain / कमर दर्द", href: "/services/back-pain", id: "back-pain", icon: "🔹" },
-          { label: "Neck Pain / गर्दन दर्द", href: "/services/neck-pain", id: "neck-pain", icon: "🔹" },
-          { label: "Knee Pain / घुटनों का दर्द", href: "/services/knee-pain", id: "knee-pain", icon: "🔹" },
-          { label: "Heel Pain / एड़ी का दर्द", href: "/services/heel-pain", id: "heel-pain", icon: "🔹" },
-          { label: "Sciatica Pain / साइटिका", href: "/services/sciatica", id: "sciatica", icon: "🔹" },
+          { label: "Back Pain / कमर दर्द", href: "/services-skm-physiotherapy/back-pain", id: "back-pain", icon: "🔹" },
+          { label: "Neck Pain / गर्दन दर्द", href: "/services-skm-physiotherapy/neck-pain", id: "neck-pain", icon: "🔹" },
+          { label: "Knee Pain / घुटनों का दर्द", href: "/services-skm-physiotherapy/knee-pain", id: "knee-pain", icon: "🔹" },
+          { label: "Heel Pain / एड़ी का दर्द", href: "/services-skm-physiotherapy/heel-pain", id: "heel-pain", icon: "🔹" },
+          { label: "Sciatica Pain / साइटिका", href: "/services-skm-physiotherapy/sciatica", id: "sciatica", icon: "🔹" },
         ]
       },
       // Group 3: Joint & Bone Conditions
       {
         label: "Joint & Bone / जोड़ और हड्डी",
-        href: "/services/joint-bone",
+        href: "/services-skm-physiotherapy/joint-bone",
         id: "joint-bone",
         icon: "🦴",
         dropdown: [
-          { label: "Arthritis / गठिया, वाय", href: "/services/arthritis", id: "arthritis", icon: "🔹" },
-          { label: "Frozen Shoulder / कंधे की जकड़न", href: "/services/frozen-shoulder", id: "frozen-shoulder", icon: "🔹" },
+          { label: "Arthritis / गठिया, वाय", href: "/services-skm-physiotherapy/arthritis", id: "arthritis", icon: "🔹" },
+          { label: "Frozen Shoulder / कंधे की जकड़न", href: "/services-skm-physiotherapy/frozen-shoulder", id: "frozen-shoulder", icon: "🔹" },
         ]
       },
       // Group 4: Neurological Conditions
       {
         label: "Neurological / न्यूरोलॉजिकल",
-        href: "/services/neurological",
+        href: "/services-skm-physiotherapy/neurological",
         id: "neurological",
         icon: "🧠",
         dropdown: [
-          { label: "Bell's Palsy / चेहरे का लकवा", href: "/services/bells-palsy", id: "bells-palsy", icon: "🔹" },
-          { label: "Paralysis (Stroke) / लकवा", href: "/services/paralysis", id: "paralysis", icon: "🔹" },
+          { label: "Bell's Palsy / चेहरे का लकवा", href: "/services-skm-physiotherapy/bells-palsy", id: "bells-palsy", icon: "🔹" },
+          { label: "Paralysis (Stroke) / लकवा", href: "/services-skm-physiotherapy/paralysis", id: "paralysis", icon: "🔹" },
         ]
       },
       // Group 5: Injury & Rehabilitation
       {
         label: "Injury & Rehab / चोट और पुनर्वास",
-        href: "/services/injury-rehab",
+        href: "/services-skm-physiotherapy/injury-rehab",
         id: "injury-rehab",
         icon: "🏥",
         dropdown: [
-          { label: "Sports Injuries / खेल कूद की चोटें", href: "/services/sports-injuries", id: "sports-injuries", icon: "⚡" },
-          { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services/post-covid", id: "post-covid", icon: "🔹" },
+          { label: "Sports Injuries / खेल कूद की चोटें", href: "/services-skm-physiotherapy/sports-injuries", id: "sports-injuries", icon: "⚡" },
+          { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services-skm-physiotherapy/post-covid", id: "post-covid", icon: "🔹" },
         ]
       },
       // Group 6: Wellness
       {
         label: "Wellness / कल्याण",
-        href: "/services/wellness",
+        href: "/services-skm-physiotherapy/wellness",
         id: "wellness",
         icon: "🧘",
         dropdown: [
-          { label: "Soreness Relaxation / सूजन की परेशानी", href: "/services/relaxation", id: "relaxation", icon: "🔹" },
+          { label: "Soreness Relaxation / सूजन की परेशानी", href: "/services-skm-physiotherapy/relaxation", id: "relaxation", icon: "🔹" },
         ]
       },
       // Quick links
-      { label: "Home Visit / होम विजिट", href: "/services/home-visit", id: "home-visit", icon: "🏠" },
-      { label: "Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services/corporate", id: "corporate", icon: "🏢" }
+      { label: "Home Visit / होम विजिट", href: "/services-skm-physiotherapy/home-visit", id: "home-visit", icon: "🏠" },
+      { label: "Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services-skm-physiotherapy/corporate", id: "corporate", icon: "🏢" }
     ],
   },
   {
     label: "Branches",
-    href: "/branches/noida-sector-135",
+    href: "/branches-skm-physiotherapy",
     id: "branches",
     dropdown: [
       {
         label: "Noida / नोएडा",
-        href: "/branches",
+        href: "/branches-skm-physiotherapy",
         id: "noida",
         icon: "📍",
         dropdown: [
-          { label: "Swaran Nagari / स्वर्ण नगरी", href: "/branches/greater-noida-swaran-nagari", id: "swaran-nagari", icon: "🏢" },
-          { label: "Sector 135 / सेक्टर 135", href: "/branches/noida-sector-135", id: "sector-135", icon: "🏢" },
+          { label: "Swaran Nagari / स्वर्ण नगरी", href: "/branches-skm-physiotherapy/greater-noida-swaran-nagari", id: "swaran-nagari", icon: "🏢" },
+          { label: "Sector 135 / सेक्टर 135", href: "/branches-skm-physiotherapy/noida-sector-135", id: "sector-135", icon: "🏢" },
         ]
       },
     ],
   },
   {
     label: "About",
-    href: "/TestimonialsPage",
+    href: "/testimonials-skm-physiotherapy",
     id: "about",
     dropdown: [
-      { label: "Our Story / हमारी कहानी", href: "/story", id: "story" },
-      { label: "Why SKM / क्यों SKM", href: "/WhySKM", id: "why-skm" },
-      { label: "Our Partners / हमारे साझेदार", href: "/OurPartners", id: "partners" },
-      { label: "Our Impact / हमारा प्रभाव", href: "/OurImpact", id: "impact" },
-      { label: "Work With Us / हमारे साथ जुड़ें", href: "/work-with-us", id: "work-with-us" },
-      { label: "Testimonials / प्रशंसापत्र", href: "/TestimonialsPage", id: "testimonials" },
-      { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/FAQ", id: "faqs" },
-      { label: "Certifications & Awards / प्रमाणन और पुरस्कार", href: "/AwardsCertifications", id: "awards" },
+      { label: "Our Story / हमारी कहानी", href: "/OurStory-skm-physiotherapy", id: "story" },
+      { label: "Why SKM / क्यों SKM", href: "/Why-skm-physiotherapy", id: "why-skm" },
+      { label: "Our Partners / हमारे साझेदार", href: "/OurPartners-skm-physiotherapy", id: "partners" },
+      { label: "Our Impact / हमारा प्रभाव", href: "/OurImpact-skm-physiotherapy", id: "impact" },
+      { label: "Work With Us / हमारे साथ जुड़ें", href: "/work-with-skm-physiotherapy", id: "work-with-us" },
+      { label: "Testimonials / प्रशंसापत्र", href: "/testimonials-skm-physiotherapy", id: "testimonials" },
+      { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/FAQ-skm-physiotherapy", id: "faqs" },
+      { label: "Certifications & Awards / प्रमाणन और पुरस्कार", href: "/AwardsCertifications-skm-physiotherapy", id: "awards" },
     ],
   },
   {
     label: "Media",
-    href: "/blog",
+    href: "/blog-physiotherapy",
     id: "media",
     dropdown: [
-      { label: "Blog / ब्लॉग", href: "/blog", id: "blog" },
-      { label: "Gallery / गैलरी", href: "/gallery", id: "gallery" },
-      { label: "Events / आयोजन", href: "/events", id: "events" },
+      { label: "Blog / ब्लॉग", href: "/blog-physiotherapy", id: "blog" },
+      { label: "Gallery / गैलरी", href: "/gallery-skm-physiotherapy", id: "gallery" },
+      { label: "Events / आयोजन", href: "/events-skm-physiotherapy", id: "events" },
     ],
   },
-  { label: "Contact", href: "/contact", id: "contact" },
+  { label: "Contact", href: "/contact-skm-physiotherapy", id: "contact" },
 ];
 
 // Helper: Check if a nav item is active

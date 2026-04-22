@@ -1,5 +1,5 @@
 'use client';
-// app/branches/gurugram-dlf-phase2/page.tsx
+// app/branches-skm-physiotherapy/gurugram-dlf-phase2/page.tsx
 // SKM Physiotherapy — DLF Phase 2, Gurugram
 // Accent: Indigo (#6366f1)
 
@@ -77,8 +77,8 @@ const BRANCH = {
     { q: 'What payment methods are accepted?', a: 'Cash, UPI (PhonePe / GPay), Insurance (TPA), Debit/Credit Card, and Corporate Tie-Ups.' },
   ],
   otherBranches: [
-    { name: 'Main Centre', location: 'Sector 14, Gurugram', phone: '7982799147', href: '/branches/gurugram-sector-14', color: '#059669' },
-    { name: 'South Extension', location: 'Sector 45, Gurugram', phone: '7982799148', href: '/branches/gurugram-sector-45', color: '#3b82f6' },
+    { name: 'Main Centre', location: 'Sector 14, Gurugram', phone: '7982799147', href: '/branches-skm-physiotherapy/gurugram-sector-14', color: '#059669' },
+    { name: 'South Extension', location: 'Sector 45, Gurugram', phone: '7982799148', href: '/branches-skm-physiotherapy/gurugram-sector-45', color: '#3b82f6' },
   ],
 };
 
@@ -135,7 +135,7 @@ export default function DlfPhase2Page() {
         {/* Breadcrumb */}
         <nav style={{ background:'#eef2ff', borderBottom:'1px solid #c7d2fe', padding:'11px 24px' }}>
           <div style={{ maxWidth:1200, margin:'0 auto', display:'flex', gap:6, alignItems:'center', fontSize:'0.8rem', flexWrap:'wrap' }}>
-            {[['Home','/'],['Branches','/branches'],['DLF Phase 2, Gurugram',null]].map(([l,h],i,a)=>(
+            {[['Home','/'],['Branches','/branches-skm-physiotherapy'],['DLF Phase 2, Gurugram',null]].map(([l,h],i,a)=>(
               <React.Fragment key={i}>
                 {h ? <a href={h as string} style={{ color:ACC, fontWeight:700, textDecoration:'none' }}>{l}</a>
                    : <span style={{ color:'#64748b', fontWeight:500 }}>{l}</span>}
@@ -171,7 +171,7 @@ export default function DlfPhase2Page() {
                 <span className="spec-badge"><Syringe size={12}/> Hijama & Dry Needling</span>
               </div>
               <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
-                <button onClick={()=>router.push('/contact')} style={{ background:`linear-gradient(135deg,${ACC},${ACC_MID})`, color:'#fff', border:'none', borderRadius:50, padding:'12px 24px', fontWeight:700, fontSize:'0.88rem', cursor:'pointer', fontFamily:"'Sora',sans-serif", boxShadow:`0 6px 20px rgba(${RGB},0.4)`, display:'flex', alignItems:'center', gap:8 }}>
+                <button onClick={()=>router.push('/contact-skm-physiotherapy')} style={{ background:`linear-gradient(135deg,${ACC},${ACC_MID})`, color:'#fff', border:'none', borderRadius:50, padding:'12px 24px', fontWeight:700, fontSize:'0.88rem', cursor:'pointer', fontFamily:"'Sora',sans-serif", boxShadow:`0 6px 20px rgba(${RGB},0.4)`, display:'flex', alignItems:'center', gap:8 }}>
                   <Calendar size={14}/> Book Appointment
                 </button>
                 <a href={`https://wa.me/${BRANCH.whatsapp}`} target="_blank" rel="noopener noreferrer" style={{ background:'#25D366', color:'#fff', borderRadius:50, padding:'12px 20px', fontWeight:700, fontSize:'0.88rem', textDecoration:'none', display:'flex', alignItems:'center', gap:8 }}>
@@ -259,8 +259,8 @@ export default function DlfPhase2Page() {
               {BRANCH.services.map((s,i)=><span className="spill" key={i}><CheckCircle2 size={13}/>{s}</span>)}
             </div>
             <div style={{ display:'flex', gap:10, flexWrap:'wrap', marginTop:'2rem' }}>
-              <button onClick={()=>router.push('/services')} style={{ background:ACC, color:'#fff', border:'none', borderRadius:50, padding:'11px 22px', fontWeight:700, fontSize:'0.86rem', cursor:'pointer', fontFamily:"'Sora',sans-serif", display:'flex', alignItems:'center', gap:6 }}>View All Services <ArrowRight size={13}/></button>
-              <button onClick={()=>router.push('/contact')} style={{ background:'#fff', color:ACC, border:`2px solid ${ACC}`, borderRadius:50, padding:'9px 22px', fontWeight:700, fontSize:'0.86rem', cursor:'pointer', fontFamily:"'Sora',sans-serif" }}>Book a Service</button>
+              <button onClick={()=>router.push('/services-skm-physiotherapy')} style={{ background:ACC, color:'#fff', border:'none', borderRadius:50, padding:'11px 22px', fontWeight:700, fontSize:'0.86rem', cursor:'pointer', fontFamily:"'Sora',sans-serif", display:'flex', alignItems:'center', gap:6 }}>View All Services <ArrowRight size={13}/></button>
+              <button onClick={()=>router.push('/contact-skm-physiotherapy')} style={{ background:'#fff', color:ACC, border:`2px solid ${ACC}`, borderRadius:50, padding:'9px 22px', fontWeight:700, fontSize:'0.86rem', cursor:'pointer', fontFamily:"'Sora',sans-serif" }}>Book a Service</button>
             </div>
           </div>
         </section>
@@ -384,7 +384,7 @@ export default function DlfPhase2Page() {
               <h2 className="bp3-display" style={{ fontSize:'clamp(1.5rem,3vw,2.2rem)', fontWeight:900, color:'#fff', marginBottom:'0.75rem' }}>Book Your Appointment at DLF Phase 2</h2>
               <p style={{ color:'rgba(255,255,255,0.88)', fontSize:'0.93rem', marginBottom:'2rem', maxWidth:520, margin:'0 auto 2rem', lineHeight:1.7 }}>Expert paediatric, women's health & advanced physiotherapy — same-day slots available.</p>
               <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap' }}>
-                <button onClick={()=>router.push('/contact')} style={{ background:'#fff', color:ACC, border:'none', borderRadius:50, padding:'14px 28px', fontWeight:700, fontSize:'0.93rem', cursor:'pointer', fontFamily:"'Sora',sans-serif", boxShadow:'0 6px 20px rgba(0,0,0,0.15)', display:'flex', alignItems:'center', gap:8 }}>
+                <button onClick={()=>router.push('/contact-skm-physiotherapy')} style={{ background:'#fff', color:ACC, border:'none', borderRadius:50, padding:'14px 28px', fontWeight:700, fontSize:'0.93rem', cursor:'pointer', fontFamily:"'Sora',sans-serif", boxShadow:'0 6px 20px rgba(0,0,0,0.15)', display:'flex', alignItems:'center', gap:8 }}>
                   <Calendar size={15}/> Book Appointment
                 </button>
                 <a href={`tel:${BRANCH.phone}`} style={{ background:'rgba(255,255,255,0.15)', color:'#fff', border:'2px solid rgba(255,255,255,0.5)', borderRadius:50, padding:'12px 24px', fontWeight:700, fontSize:'0.93rem', textDecoration:'none', display:'flex', alignItems:'center', gap:8 }}>

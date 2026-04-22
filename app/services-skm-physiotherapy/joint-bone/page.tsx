@@ -24,7 +24,7 @@ const services = [
     accent: 'from-emerald-500 to-teal-600',
     badge: 'Holistic',
     img: 'https://images.unsplash.com/photo-1581056344408-02600c2c5029?w=600&q=80',
-    href: '/services/arthritis',
+    href: '/services-skm-physiotherapy/arthritis',
   },
   {
     icon: Target,
@@ -34,7 +34,7 @@ const services = [
     accent: 'from-blue-500 to-indigo-600',
     badge: 'Specialized',
     img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80',
-    href: '/services/frozen-shoulder',
+    href: '/services-skm-physiotherapy/frozen-shoulder',
   },
 ];
 
@@ -98,7 +98,7 @@ export default function JointBoneCategoryPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(16,185,129,0.05),transparent_50%)]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Link href="/services" className="inline-flex items-center gap-2 text-gray-500 hover:text-emerald-600 font-medium transition-colors mb-12 group">
+          <Link href="/services-skm-physiotherapy" className="inline-flex items-center gap-2 text-gray-500 hover:text-emerald-600 font-medium transition-colors mb-12 group">
             <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> Back to All Services
           </Link>
 
@@ -209,7 +209,7 @@ export default function JointBoneCategoryPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 tracking-tight">Regain Your Active Lifestyle</h2>
           <p className="text-gray-600 mb-12 text-lg">Our joint and bone specialists are ready to help you overcome stiffness and pain. Start your journey to better mobility today.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2">
+            <Link href="/contact-skm-physiotherapy" className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-bold hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2">
               Book Joint Assessment <ArrowRight className="w-5 h-5" />
             </Link>
             <a href="tel:+917982799147" className="px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">

@@ -24,7 +24,7 @@ const services = [
     accent: 'from-indigo-500 to-blue-600',
     badge: 'Specialized',
     img: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80',
-    href: '/services/bells-palsy',
+    href: '/services-skm-physiotherapy/bells-palsy',
   },
   {
     icon: Users,
@@ -34,7 +34,7 @@ const services = [
     accent: 'from-blue-600 to-emerald-600',
     badge: 'Intensive',
     img: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80',
-    href: '/services/paralysis',
+    href: '/services-skm-physiotherapy/paralysis',
   },
 ];
 
@@ -98,7 +98,7 @@ export default function NeurologicalCategoryPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.05),transparent_50%)]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Link href="/services" className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 font-medium transition-colors mb-12 group">
+          <Link href="/services-skm-physiotherapy" className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 font-medium transition-colors mb-12 group">
             <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> Back to All Services
           </Link>
 
@@ -209,7 +209,7 @@ export default function NeurologicalCategoryPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 tracking-tight">Start Your Recovery Journey Today</h2>
           <p className="text-gray-600 mb-12 text-lg">Our neurological specialists are here to help you or your loved ones regain function and improve quality of life.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
+            <Link href="/contact-skm-physiotherapy" className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
               Book Consultation <ArrowRight className="w-5 h-5" />
             </Link>
             <a href="tel:+917982799147" className="px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">

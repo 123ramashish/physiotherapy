@@ -87,8 +87,8 @@ const PRESS_RELEASES: PressRelease[] = [
             { name: 'High-Res Images', url: '/press/neuro-centre-images.zip', size: '12.4 MB' },
         ],
         relatedLinks: [
-            { title: 'Neuro-Rehabilitation Services', url: '/services/neuro-rehab' },
-            { title: 'Book a Consultation', url: '/contact' },
+            { title: 'Neuro-Rehabilitation Services', url: '/services-skm-physiotherapy/neuro-rehab' },
+            { title: 'Book a Consultation', url: '/contact-skm-physiotherapy' },
         ],
         tags: ['neuro-rehabilitation', 'stroke recovery', 'Greater Noida', 'clinic expansion', 'robotic therapy'],
         views: 2847,

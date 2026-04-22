@@ -559,7 +559,7 @@ export default function KneePainPage() {
             <nav className="bg-white border-b border-blue-100 py-3">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 text-sm flex-wrap">
-                        {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Knee Pain', href: null }]
+                        {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services-skm-physiotherapy' }, { label: 'Knee Pain', href: null }]
                             .map((item, index, array) => (
                                 <React.Fragment key={item.label}>
                                     {item.href
@@ -854,7 +854,7 @@ export default function KneePainPage() {
                     <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Get Back on Your Feet?</h2>
                     <p className="text-blue-100 mb-8 text-lg">Book your consultation today and start your journey to pain-free knees</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-100 transition-colors">
+                        <a href="/contact-skm-physiotherapy" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-xl font-bold hover:bg-gray-100 transition-colors">
                             Book Appointment <ArrowRight className="w-5 h-5" />
                         </a>
                         <a href="tel:+917542918414" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-colors border border-blue-400">

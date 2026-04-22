@@ -70,8 +70,8 @@ const BRANCH = {
     { q: 'Do you offer sports rehab here?', a: 'Yes! We specialize in sports injury rehabilitation at our Sector 135 branch.' },
   ],
   otherBranches: [
-    { name: 'Greater Noida', location: 'Swaran Nagari', phone: '7982799147', href: '/branches/greater-noida-swaran-nagari', color: '#3b82f6' },
-    { name: 'Gurugram Main', location: 'Sector 14, Gurugram', phone: '7982799147', href: '/branches/gurugram-sector-14', color: '#059669' },
+    { name: 'Greater Noida', location: 'Swaran Nagari', phone: '7982799147', href: '/branches-skm-physiotherapy/greater-noida-swaran-nagari', color: '#3b82f6' },
+    { name: 'Gurugram Main', location: 'Sector 14, Gurugram', phone: '7982799147', href: '/branches-skm-physiotherapy/gurugram-sector-14', color: '#059669' },
   ],
 };
 
@@ -128,7 +128,7 @@ export default function Sector135Page() {
         {/* Breadcrumb */}
         <nav style={{ background: ACC_LIGHT, borderBottom: `1px solid ${ACC}22`, padding: '11px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: '0.8rem', flexWrap: 'wrap' }}>
-            {[['Home', '/'], ['Branches', '/branches'], ['Sector 135, Noida', null]].map(([l, h], i, a) => (
+            {[['Home', '/'], ['Branches', '/branches-skm-physiotherapy'], ['Sector 135, Noida', null]].map(([l, h], i, a) => (
               <React.Fragment key={i}>
                 {h ? <a href={h as string} style={{ color: ACC, fontWeight: 700, textDecoration: 'none' }}>{l}</a>
                   : <span style={{ color: '#64748b', fontWeight: 500 }}>{l}</span>}
@@ -158,7 +158,7 @@ export default function Sector135Page() {
                 {BRANCH.landmarks.map((l, i) => <span key={i} style={{ background: '#f1f5f9', color: '#475569', fontSize: '0.73rem', fontWeight: 500, padding: '4px 10px', borderRadius: 20, border: '1px solid #e2e8f0' }}>📍 {l}</span>)}
               </div>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                <button onClick={() => router.push('/contact')} style={{ background: `linear-gradient(135deg,${ACC},${ACC_MID})`, color: '#fff', border: 'none', borderRadius: 50, padding: '12px 24px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', fontFamily: "'DM Sans',sans-serif", boxShadow: `0 6px 20px rgba(${RGB},0.4)`, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <button onClick={() => router.push('/contact-skm-physiotherapy')} style={{ background: `linear-gradient(135deg,${ACC},${ACC_MID})`, color: '#fff', border: 'none', borderRadius: 50, padding: '12px 24px', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', fontFamily: "'DM Sans',sans-serif", boxShadow: `0 6px 20px rgba(${RGB},0.4)`, display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Calendar size={14} /> Book Appointment
                 </button>
                 <a href={`tel:${BRANCH.phone}`} style={{ background: '#fff', color: ACC, border: `2px solid ${ACC}`, borderRadius: 50, padding: '10px 18px', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>

@@ -374,7 +374,7 @@ export default function OurStoryPage() {
                             Whether you&apos;re a patient seeking recovery or a therapist wanting to make a difference — SKM is where your story continues.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="/work-with-us" className="px-8 py-4 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg shadow-lg hover:scale-105 transition-all duration-300">
+                            <a href="/work-with-skm-physiotherapy" className="px-8 py-4 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg shadow-lg hover:scale-105 transition-all duration-300">
                                 Join Our Team
                             </a>
                             <a href="/our-impact" className="px-8 py-4 rounded-2xl border-2 border-indigo-200 text-indigo-700 font-bold text-lg hover:bg-indigo-50 transition-all duration-300">

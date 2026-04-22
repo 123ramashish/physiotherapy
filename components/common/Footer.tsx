@@ -56,35 +56,35 @@ interface QuickLink {
 // ─────────────────────────────────────────────
 
 const SERVICES: Service[] = [
-  { label: "Cupping & Hijama / कपिंग व हिजामा", href: "/services/cupping-hijama", icon: "🎯" },
-  { label: "Dry Needling / ड्राई निडलिंग", href: "/services/dry-needling", icon: "💉" },
-  { label: "Taping / टेपिंग", href: "/services/taping", icon: "🩹" },
-  { label: "Back Pain / कमर दर्द", href: "/services/back-pain", icon: "🔹" },
-  { label: "Neck Pain / गर्दन दर्द", href: "/services/neck-pain", icon: "🔹" },
-  { label: "Knee Pain / घुटनों का दर्द", href: "/services/knee-pain", icon: "🔹" },
-  { label: "Sciatica / साइटिका", href: "/services/sciatica", icon: "🔹" },
-  { label: "Arthritis / गठिया", href: "/services/arthritis", icon: "🦴" },
-  { label: "Frozen Shoulder / कंधे की जकड़न", href: "/services/frozen-shoulder", icon: "🔹" },
-  { label: "Bell's Palsy / चेहरे का लकवा", href: "/services/bells-palsy", icon: "🧠" },
-  { label: "Paralysis / लकवा", href: "/services/paralysis", icon: "🔹" },
-  { label: "Sports Injuries / खेल चोटें", href: "/services/sports-injuries", icon: "⚡" },
-  { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services/post-covid", icon: "🔹" },
-  { label: "Relaxation Therapy / आराम थेरेपी", href: "/services/relaxation", icon: "🧘" },
-  { label: "🏠 Home Visit / होम विजिट", href: "/services/home-visit", icon: "🏠", featured: true },
-  { label: "🏢 Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services/corporate", icon: "🏢", featured: true },
+  { label: "Cupping & Hijama / कपिंग व हिजामा", href: "/services-skm-physiotherapy/cupping-hijama", icon: "🎯" },
+  { label: "Dry Needling / ड्राई निडलिंग", href: "/services-skm-physiotherapy/dry-needling", icon: "💉" },
+  { label: "Taping / टेपिंग", href: "/services-skm-physiotherapy/taping", icon: "🩹" },
+  { label: "Back Pain / कमर दर्द", href: "/services-skm-physiotherapy/back-pain", icon: "🔹" },
+  { label: "Neck Pain / गर्दन दर्द", href: "/services-skm-physiotherapy/neck-pain", icon: "🔹" },
+  { label: "Knee Pain / घुटनों का दर्द", href: "/services-skm-physiotherapy/knee-pain", icon: "🔹" },
+  { label: "Sciatica / साइटिका", href: "/services-skm-physiotherapy/sciatica", icon: "🔹" },
+  { label: "Arthritis / गठिया", href: "/services-skm-physiotherapy/arthritis", icon: "🦴" },
+  { label: "Frozen Shoulder / कंधे की जकड़न", href: "/services-skm-physiotherapy/frozen-shoulder", icon: "🔹" },
+  { label: "Bell's Palsy / चेहरे का लकवा", href: "/services-skm-physiotherapy/bells-palsy", icon: "🧠" },
+  { label: "Paralysis / लकवा", href: "/services-skm-physiotherapy/paralysis", icon: "🔹" },
+  { label: "Sports Injuries / खेल चोटें", href: "/services-skm-physiotherapy/sports-injuries", icon: "⚡" },
+  { label: "Post COVID Rehab / पोस्ट कोविड रिहैब", href: "/services-skm-physiotherapy/post-covid", icon: "🔹" },
+  { label: "Relaxation Therapy / आराम थेरेपी", href: "/services-skm-physiotherapy/relaxation", icon: "🧘" },
+  { label: "🏠 Home Visit / होम विजिट", href: "/services-skm-physiotherapy/home-visit", icon: "🏠", featured: true },
+  { label: "🏢 Corporate Wellness / कॉर्पोरेट वेलनेस", href: "/services-skm-physiotherapy/corporate", icon: "🏢", featured: true },
 ];
 
 
 
 const QUICK_LINKS: QuickLink[] = [
-  { label: "About Us / हमारे बारे में", href: "/about" },
-  { label: "Our Story / हमारी कहानी", href: "/about/story" },
-  { label: "Why SKM / क्यों SKM", href: "/about/why-skm" },
-  { label: "Testimonials / प्रशंसापत्र", href: "/about/testimonials" },
-  { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/about/faqs" },
-  { label: "Franchise / फ्रैंचाइज़ी", href: "/franchise" },
-  { label: "Careers / करियर", href: "/about/work-with-us" },
-  { label: "Blog / ब्लॉग", href: "/blog" },
+  { label: "About Us / हमारे बारे में", href: "/OurStory-skm-physiotherapy" },
+  { label: "Our Story / हमारी कहानी", href: "/OurStory-skm-physiotherapy" },
+  { label: "Why SKM / क्यों SKM", href: "/Why-skm-physiotherapy" },
+  { label: "Testimonials / प्रशंसापत्र", href: "/testimonials-skm-physiotherapy" },
+  { label: "FAQs / अक्सर पूछे जाने वाले प्रश्न", href: "/FAQ-skm-physiotherapy" },
+  { label: "Franchise / फ्रैंचाइज़ी", href: "/franchise-skm-physiotherapy" },
+  { label: "Careers / करियर", href: "/work-with-skm-physiotherapy" },
+  { label: "Blog / ब्लॉग", href: "/blog-physiotherapy" },
 ];
 
 const LEGAL_LINKS: QuickLink[] = [

@@ -593,7 +593,7 @@ export default function CuppingHijamaPage() {
             <nav className="bg-white border-b border-blue-100 py-3">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-2 text-sm flex-wrap">
-                        {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Cupping & Hijama', href: null }]
+                        {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services-skm-physiotherapy' }, { label: 'Cupping & Hijama', href: null }]
                             .map((item, index, array) => (
                                 <React.Fragment key={item.label}>
                                     {item.href

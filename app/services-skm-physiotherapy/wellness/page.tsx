@@ -23,7 +23,7 @@ const services = [
         accent: 'from-pink-500 to-rose-600',
         badge: 'Wellness',
         img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80',
-        href: '/services/relaxation',
+        href: '/services-skm-physiotherapy/relaxation',
     },
     {
         icon: Building2,
@@ -33,7 +33,7 @@ const services = [
         accent: 'from-blue-600 to-indigo-700',
         badge: 'Enterprise',
         img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80',
-        href: '/contact', // Corporate wellness often requires a direct contact/quote
+        href: '/contact-skm-physiotherapy', // Corporate wellness often requires a direct contact/quote
     },
 ];
 
@@ -77,7 +77,7 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
                 <p className="text-rose-600 font-semibold mb-4">{service.hindiTitle}</p>
                 <p className="text-gray-600 leading-relaxed mb-8">{service.description}</p>
                 <div className="flex items-center text-rose-600 font-bold group/btn">
-                    {service.href === '/contact' ? 'Inquire Now' : 'View Treatment Details'}
+                    {service.href === '/contact-skm-physiotherapy' ? 'Inquire Now' : 'View Treatment Details'}
                     <ChevronRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-2" />
                 </div>
             </div>
@@ -97,7 +97,7 @@ export default function WellnessCategoryPage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(244,63,94,0.05),transparent_50%)]" />
                 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <Link href="/services" className="inline-flex items-center gap-2 text-gray-500 hover:text-rose-600 font-medium transition-colors mb-12 group">
+                    <Link href="/services-skm-physiotherapy" className="inline-flex items-center gap-2 text-gray-500 hover:text-rose-600 font-medium transition-colors mb-12 group">
                         <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> Back to All Services
                     </Link>
 
@@ -208,7 +208,7 @@ export default function WellnessCategoryPage() {
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 tracking-tight">Recharge Your Vitality</h2>
                     <p className="text-gray-600 mb-12 text-lg">Our wellness experts are ready to help you or your team find physical balance. Book your session or inquire about corporate programs today.</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/contact" className="px-8 py-4 bg-rose-600 text-white rounded-2xl font-bold hover:bg-rose-700 shadow-lg shadow-rose-200 transition-all flex items-center justify-center gap-2">
+                        <Link href="/contact-skm-physiotherapy" className="px-8 py-4 bg-rose-600 text-white rounded-2xl font-bold hover:bg-rose-700 shadow-lg shadow-rose-200 transition-all flex items-center justify-center gap-2">
                             Book Wellness Session <ArrowRight className="w-5 h-5" />
                         </Link>
                         <a href="tel:+917982799147" className="px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">

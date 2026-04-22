@@ -19,7 +19,7 @@ const BRANCHES = [
     address: '123, MG Road, Sector 14, Gurugram, Haryana',
     phone: '7982799147',
     timings: '9:00 AM – 8:00 PM',
-    href: '/branches/gurugram-sector-14',
+    href: '/branches-skm-physiotherapy/gurugram-sector-14',
     img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80',
     color: 'from-emerald-500 to-teal-600',
     stats: { patients: '4,500+', rating: '4.9★' }
@@ -31,7 +31,7 @@ const BRANCHES = [
     address: 'D-Block, D-3, Near Krishna Hospital, Swarn Nagari, Greater Noida, UP',
     phone: '7982799147',
     timings: '9:00 AM – 8:00 PM',
-    href: '/branches/greater-noida-swaran-nagari',
+    href: '/branches-skm-physiotherapy/greater-noida-swaran-nagari',
     img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80',
     color: 'from-blue-500 to-indigo-600',
     stats: { patients: '1,200+', rating: '4.9★' }
@@ -43,7 +43,7 @@ const BRANCHES = [
     address: 'B-45, Sector 134, Noida, UP 201303',
     phone: '9876543210',
     timings: '8:00 AM – 8:00 PM',
-    href: '/branches/noida-sector-134',
+    href: '/branches-skm-physiotherapy/noida-sector-134',
     img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
     color: 'from-teal-500 to-emerald-600',
     stats: { patients: '800+', rating: '4.8★' }
@@ -55,7 +55,7 @@ const BRANCHES = [
     address: 'Plot 45, Sector 45, Gurugram, Haryana',
     phone: '7982799148',
     timings: '9:00 AM – 8:00 PM',
-    href: '/branches/gurugram-sector-45',
+    href: '/branches-skm-physiotherapy/gurugram-sector-45',
     img: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&q=80',
     color: 'from-cyan-500 to-blue-600',
     stats: { patients: '1,500+', rating: '4.8★' }
@@ -201,10 +201,10 @@ export default function BranchesPage() {
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Can't Find a Branch Nearby?</h2>
         <p className="text-gray-600 mb-10 max-w-xl mx-auto text-lg">We are expanding rapidly. In the meantime, you can book a home-visit session and receive expert care at your doorstep.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services/home-visit" className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-2xl font-bold hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
+            <Link href="/services-skm-physiotherapy/home-visit" className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-2xl font-bold hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
                 Learn About Home Visit <ArrowRight size={18} />
             </Link>
-            <Link href="/contact" className="px-8 py-4 bg-gray-900 text-white rounded-2xl font-bold hover:bg-black transition-all flex items-center justify-center gap-2 shadow-xl shadow-gray-200">
+            <Link href="/contact-skm-physiotherapy" className="px-8 py-4 bg-gray-900 text-white rounded-2xl font-bold hover:bg-black transition-all flex items-center justify-center gap-2 shadow-xl shadow-gray-200">
                 Inquire Now
             </Link>
         </div>

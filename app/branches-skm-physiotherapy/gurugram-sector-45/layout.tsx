@@ -1,4 +1,4 @@
-// app/branches/gurugram-sector-45/layout.tsx
+// app/branches-skm-physiotherapy/gurugram-sector-45/layout.tsx
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'physiotherapy south extension gurugram',
   ],
   alternates: {
-    canonical: 'https://www.skmphysio.in/branches/gurugram-sector-45',
+    canonical: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-45',
   },
   openGraph: {
     title: 'SKM Physiotherapy South Extension — Sector 45, Gurugram',
     description:
       'Neurological rehabilitation, sports injuries, back pain & knee pain treatment at Sector 45, Gurugram. Call 7982799148.',
-    url: 'https://www.skmphysio.in/branches/gurugram-sector-45',
+    url: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-45',
     siteName: 'SKM Physiotherapy & Rehabilitation Centre',
     images: [
       {
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 const jsonLdMedicalBusiness = {
   '@context': 'https://schema.org',
   '@type': ['MedicalBusiness', 'LocalBusiness'],
-  '@id': 'https://www.skmphysio.in/branches/gurugram-sector-45',
+  '@id': 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-45',
   name: 'SKM Physiotherapy & Rehabilitation Centre — Sector 45 South Extension, Gurugram',
-  url: 'https://www.skmphysio.in/branches/gurugram-sector-45',
+  url: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-45',
   telephone: '+917982799148',
   email: 'sector45@skmphysio.in',
   image: [
@@ -95,7 +95,7 @@ const jsonLdBreadcrumb = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skmphysio.in' },
     { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://www.skmphysio.in/branches' },
-    { '@type': 'ListItem', position: 3, name: 'Sector 45, Gurugram', item: 'https://www.skmphysio.in/branches/gurugram-sector-45' },
+    { '@type': 'ListItem', position: 3, name: 'Sector 45, Gurugram', item: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-45' },
   ],
 };
 

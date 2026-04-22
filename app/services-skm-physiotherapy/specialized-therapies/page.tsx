@@ -23,7 +23,7 @@ const services = [
         accent: 'from-blue-500 to-indigo-600',
         badge: 'Top Rated',
         img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80',
-        href: '/services/cupping-hijama',
+        href: '/services-skm-physiotherapy/cupping-hijama',
     },
     {
         icon: Syringe,
@@ -33,7 +33,7 @@ const services = [
         accent: 'from-purple-500 to-indigo-600',
         badge: 'Clinical',
         img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80',
-        href: '/services/dry-needling',
+        href: '/services-skm-physiotherapy/dry-needling',
     },
     {
         icon: Activity,
@@ -43,7 +43,7 @@ const services = [
         accent: 'from-teal-500 to-blue-600',
         badge: 'Sport-Grade',
         img: 'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80',
-        href: '/services/taping',
+        href: '/services-skm-physiotherapy/taping',
     },
 ];
 
@@ -107,7 +107,7 @@ export default function SpecializedTherapiesCategoryPage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.05),transparent_50%)]" />
                 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <Link href="/services" className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 font-medium transition-colors mb-12 group">
+                    <Link href="/services-skm-physiotherapy" className="inline-flex items-center gap-2 text-gray-500 hover:text-indigo-600 font-medium transition-colors mb-12 group">
                         <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> Back to All Services
                     </Link>
 
@@ -218,7 +218,7 @@ export default function SpecializedTherapiesCategoryPage() {
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 tracking-tight">Ready to Experience Elite Care?</h2>
                     <p className="text-gray-600 mb-12 text-lg">Book your assessment today and discover how our specialized clinical therapies can accelerate your healing process.</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/contact" className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
+                        <Link href="/contact-skm-physiotherapy" className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
                             Book Assessment <ArrowRight className="w-5 h-5" />
                         </Link>
                         <a href="tel:+917982799147" className="px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
