@@ -125,12 +125,9 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
 ];
 
-const TIMINGS = [
-  { day: "Monday – Saturday / सोमवार – शनिवार", time: "9:00 AM – 8:00 PM" },
-  { day: "Sunday / रविवार", time: "10:00 AM – 2:00 PM" },
-];
 
-const TRUST_BADGES = ["4+ Years Experience", "12000+ Patients Healed", "Expert Physiotherapists"];
+
+const TRUST_BADGES = ["5+ Years Experience", "20000+ Patients Healed", "Expert Physiotherapists"];
 
 const BOT_INITIAL_MESSAGE = "👋 Hello! I'm SKM Bot. How can I help you today? / नमस्ते! मैं SKM बॉट हूँ। मैं आपकी कैसे मदद कर सकता हूँ?";
 
@@ -381,7 +378,7 @@ function ContactFAB() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className={`w-11 h-11 rounded-xl flex items-center justify-center text-white shadow-lg border-2 transition-all ${social.color}`}
+                className={`w-11 h-11 rounded-xl flex items-center justify-center text-black shadow-lg border-2 transition-all ${social.color}`}
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={social.label}
@@ -412,13 +409,13 @@ function ContactFAB() {
       </motion.button>
 
       {/* Label */}
-      <motion.span
+      {/* <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-1 bg-gray-900 text-white text-[10px] rounded-md"
       >
         {isOpen ? "" : ""}
-      </motion.span>
+      </motion.span> */}
     </div>
   );
 }
@@ -516,7 +513,7 @@ export default function Footer() {
                 Our Branches / हमारी शाखाएँ
               </h3>
               <ul className="space-y-3">
-                {CONTACT_BRANCHES.filter(b => b.id === 'noida-swaran' || b.id === 'noida-135').map((branch) => (
+                {CONTACT_BRANCHES.filter(b => b.id === 'noida-swaran' || b.id === 'noida-134').map((branch) => (
                   <li key={branch.id}>
                     <Link
                       href={branch.href || "#"}
@@ -648,7 +645,7 @@ export default function Footer() {
       </footer>
 
       {/* Floating Action Buttons Container */}
-      <div className="fixed bottom-6 left-0 right-0 px-4 z-50 pointer-events-none">
+      <div className="fixed bottom-6 right-0 right-0 px-4 z-50 pointer-events-none">
         <div className="max-w-7xl mx-auto flex justify-between items-end">
 
           {/* Left: Contact FAB */}
@@ -678,7 +675,7 @@ export default function Footer() {
             </AnimatePresence>
 
             {/* Chatbot Toggle */}
-            <motion.button
+            {/* <motion.button
               onClick={() => setIsChatOpen(!isChatOpen)}
               className={`w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center transition-all ${isChatOpen
                 ? 'bg-gray-900 text-white'
@@ -712,7 +709,7 @@ export default function Footer() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.button>
+            </motion.button> */}
 
 
           </div>

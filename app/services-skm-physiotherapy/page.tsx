@@ -37,27 +37,20 @@ const branches = [
   {
     id: 1,
     name: 'Branch 1 – Main Centre',
-    address: '123 MG Road, Sector 14, Gurugram, Haryana',
-    phone: '7982799147',
-    timing: 'Mon–Sat: 9 AM – 8 PM',
+    address: 'D-3 Ground Floor, Block-D, Swaran Nagari, Noida, Uttar Pradesh',
+    phone: '+91-7982799147',
+    timing: 'Mon–Sun: 10 AM – 10 PM',
     mapLink: '#'
   },
   {
     id: 2,
-    name: 'Branch 2 – South Extension',
-    address: '45 South Ex Road, Sector 45, Gurugram, Haryana',
-    phone: '7982799148',
-    timing: 'Mon–Sat: 9 AM – 8 PM',
+    name: 'Branch 2 – Noida sector 134',
+    address: 'B-45, Sector 134, Noida, UP 201303',
+    phone: '+91-917870072822',
+    timing: 'Mon–Sun: 10 AM – 10 PM',
     mapLink: '#'
   },
-  {
-    id: 3,
-    name: 'Branch 3 – DLF Phase',
-    address: '78 Cyber Hub, DLF Phase 2, Gurugram, Haryana',
-    phone: '7982799149',
-    timing: 'Mon–Sat: 9 AM – 8 PM',
-    mapLink: '#'
-  }
+ 
 ];
 
 // ─── Service image backgrounds (Unsplash free) ──────────────────────────────
@@ -416,7 +409,7 @@ const ServicesPage = () => {
             <div className="section-divider" style={{ marginBottom: '1.5rem' }}></div>
 
             <p style={{ fontSize: '1.05rem', color: '#475569', maxWidth: '640px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-              Comprehensive physiotherapy and rehabilitation care across <strong>3 branches</strong> in Gurugram. Expert treatment for pain relief, sports injuries, neuro-rehab, and more.
+              Comprehensive physiotherapy and rehabilitation care across <strong>3 branches</strong> in Noida. Expert treatment for pain relief, sports injuries, neuro-rehab, and more.
             </p>
 
             {/* Stats */}
@@ -424,7 +417,7 @@ const ServicesPage = () => {
               {[
                 { n: '14+', l: 'Services Offered', color: '#059669' },
                 { n: '3', l: 'Branches', color: '#3b82f6' },
-                { n: '1000+', l: 'Patients Treated', color: '#6366f1' },
+                { n: '20000+', l: 'Patients Treated', color: '#6366f1' },
                 { n: '98%', l: 'Satisfaction Rate', color: '#0891b2' },
                 { n: '24/7', l: 'Emergency Care', color: '#047857' },
               ].map((s, i) => (

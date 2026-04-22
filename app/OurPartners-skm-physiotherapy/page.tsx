@@ -158,17 +158,17 @@ export default function OurPartnersPage() {
             </section>
 
             {/* Marquee strip */}
-            <section className="py-6 bg-gray-50 border-y border-gray-100 overflow-hidden">
+            {/* <section className="py-6 bg-gray-50 border-y border-gray-100 overflow-hidden">
                 <Marquee items={partnerLogos} speed={40} />
-            </section>
+            </section> */}
 
             {/* Stats */}
             <section className="py-20 px-6 bg-white">
                 <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-5">
-                    <StatBox value={40} suffix="+" label="Active Partners" delay={0} />
-                    <StatBox value={12} suffix="+" label="Hospital Networks" delay={80} />
-                    <StatBox value={15} suffix="+" label="Corporate Clients" delay={160} />
-                    <StatBox value={6} suffix="+" label="Research Partners" delay={240} />
+                    <StatBox value={4} suffix="+" label="Active Partners" delay={0} />
+                    <StatBox value={2} suffix="+" label="Hospital Networks" delay={80} />
+                    <StatBox value={5} suffix="+" label="Corporate Clients" delay={160} />
+                    <StatBox value={3} suffix="+" label="Research Partners" delay={240} />
                 </div>
             </section>
 
@@ -178,7 +178,7 @@ export default function OurPartnersPage() {
                     <Reveal>
                         <div className="text-center mb-12">
                             <h2 className="text-4xl md:text-5xl font-black text-gray-900">
-                                Partnership <span className="text-green-600">Ecosystem</span>
+                             Upcoming  Partnership <span className="text-green-600">Ecosystem</span>
                             </h2>
                         </div>
                     </Reveal>

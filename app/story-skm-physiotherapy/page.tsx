@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 /* ─── Timeline data ─── */
 const milestones = [
     {
-        year: "2008",
+        year: "2021",
         era: "The Spark",
         title: "A Graduate With a Dream",
         story:
@@ -181,7 +181,7 @@ export default function OurStoryPage() {
                         <Reveal delay={0}>
                             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-bold mb-8 tracking-wide">
                                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                Est. 2008 — Our Journey
+                                Est. 2021 — Our Journey
                             </span>
                         </Reveal>
                         <Reveal delay={100}>
@@ -208,9 +208,9 @@ export default function OurStoryPage() {
                     <Reveal delay={200} direction="right">
                         <div className="grid grid-cols-2 gap-4">
                             {[
-                                { n: 15, suffix: "+", label: "Years of Healing", icon: "🗓️", grad: "from-green-500 to-emerald-400" },
-                                { n: 5000, suffix: "+", label: "Patients Treated", icon: "❤️", grad: "from-blue-500 to-cyan-500" },
-                                { n: 8, suffix: "+", label: "Clinic Branches", icon: "🏥", grad: "from-indigo-500 to-blue-500" },
+                                { n: 5, suffix: "+", label: "Years of Healing", icon: "🗓️", grad: "from-green-500 to-emerald-400" },
+                                { n: 20000, suffix: "+", label: "Patients Treated", icon: "❤️", grad: "from-blue-500 to-cyan-500" },
+                                { n: 3, suffix: "+", label: "Clinic Branches", icon: "🏥", grad: "from-indigo-500 to-blue-500" },
                                 { n: 98, suffix: "%", label: "Satisfaction Rate", icon: "⭐", grad: "from-teal-500 to-green-500" },
                             ].map((s, i) => (
                                 <div key={i} className="bg-white rounded-3xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">

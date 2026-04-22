@@ -132,25 +132,25 @@ const BRANCHES: Branch[] = [
     phone: '+91 79827 99147',
     href: '/branches-skm-physiotherapy/greater-noida-swaran-nagari',
     mapLink: 'https://maps.app.goo.gl/Us4jVhy8foKxxawE7',
-    timing: 'Mon – Sat: 9 AM – 8 PM',
+    timing: 'Mon – Sun: 10 AM – 10 PM',
   },
   {
-    name: 'Sector 135, Noida',
-    nameHi: 'सेक्टर 135, नोएडा',
+    name: 'Sector 134, Noida',
+    nameHi: 'सेक्टर 134, नोएडा',
     location: 'Noida, UP',
-    address: 'B-45, Sector 135, Noida, Uttar Pradesh',
+    address: 'B-45, Sector 134, Noida, Uttar Pradesh',
     phone: '+91 97184 34818',
     href: '/branches-skm-physiotherapy/noida-sector-135',
-    mapLink: 'https://maps.google.com/?q=Sector+135+Noida',
-    timing: 'Mon – Sat: 9 AM – 8 PM',
+    mapLink: 'https://maps.google.com/?q=Sector+134+Noida',
+    timing: 'Mon – Sun: 10 AM – 10 PM',
   },
 ];
 
 const STATS = [
-  { number: '10,000+', label: 'Patients Treated', labelHi: 'मरीज़ ठीक हुए', icon: <Users className="w-6 h-6" /> },
-  { number: '15+', label: 'Years Experience', labelHi: 'वर्षों का अनुभव', icon: <Award className="w-6 h-6" /> },
-  { number: '96%', label: 'Success Rate', labelHi: 'सफलता दर', icon: <TrendingUp className="w-6 h-6" /> },
-  { number: '4.9★', label: 'Patient Rating', labelHi: 'मरीज़ रेटिंग', icon: <Star className="w-6 h-6" /> },
+  { number: '20,000+', label: 'Patients Treated', labelHi: 'मरीज़ ठीक हुए', icon: <Users className="w-6 h-6" /> },
+  { number: '5', label: 'Years Experience', labelHi: 'वर्षों का अनुभव', icon: <Award className="w-6 h-6" /> },
+  { number: '98%', label: 'Success Rate', labelHi: 'सफलता दर', icon: <TrendingUp className="w-6 h-6" /> },
+  { number: '5.0★', label: 'Patient Rating', labelHi: 'मरीज़ रेटिंग', icon: <Star className="w-6 h-6" /> },
 ];
 
 // ─────────────────────────────────────────────
@@ -572,7 +572,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="font-bold text-white text-sm">Certified Experts</p>
-                    <p className="text-gray-400 text-xs">15+ Years Experience</p>
+                    <p className="text-gray-400 text-xs">5 Years Experience</p>
                   </div>
                 </div>
                 <div className="h-1 bg-white/10 rounded-full">
@@ -590,8 +590,8 @@ export default function HomePage() {
                     <Star className="w-5 h-5 text-blue-300" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-sm">4.9 Rating</p>
-                    <p className="text-gray-400 text-xs">10,000+ Happy Patients</p>
+                    <p className="font-bold text-white text-sm">5.0 Rating</p>
+                    <p className="text-gray-400 text-xs">20,000+ Happy Patients</p>
                   </div>
                 </div>
                 <div className="flex gap-0.5 mt-2">

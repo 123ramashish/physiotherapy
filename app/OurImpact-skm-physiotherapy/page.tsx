@@ -26,12 +26,12 @@ function AnimCount({ to, suffix = "", prefix = "", duration = 2000 }: { to: numb
 }
 
 const impactNumbers = [
-    { value: 15000, suffix: "+", label: "Patients Treated", icon: "❤️", color: "from-green-500 to-emerald-500", desc: "Lives touched across all SKM branches" },
-    { value: 92, suffix: "%", label: "Full Recovery Rate", icon: "🎯", color: "from-blue-500 to-cyan-500", desc: "Patients achieving their recovery goals" },
-    { value: 8, suffix: "+", label: "Clinic Branches", icon: "🏥", color: "from-indigo-500 to-violet-500", desc: "Across the region and growing" },
+    { value: 20000, suffix: "+", label: "Patients Treated", icon: "❤️", color: "from-green-500 to-emerald-500", desc: "Lives touched across all SKM branches" },
+    { value: 99, suffix: "%", label: "Full Recovery Rate", icon: "🎯", color: "from-blue-500 to-cyan-500", desc: "Patients achieving their recovery goals" },
+    { value: 3, suffix: "", label: "Clinic Branches", icon: "🏥", color: "from-indigo-500 to-violet-500", desc: "Across the region and growing" },
     { value: 50000, suffix: "+", label: "Sessions Delivered", icon: "🙌", color: "from-teal-500 to-green-600", desc: "Hours of dedicated therapeutic care" },
-    { value: 35, suffix: "+", label: "Expert Therapists", icon: "👨‍⚕️", color: "from-sky-500 to-blue-600", desc: "Certified specialists across all domains" },
-    { value: 15, suffix: "+", label: "Years of Service", icon: "🗓️", color: "from-green-600 to-teal-500", desc: "Continuous care since 2008" },
+    { value: 14, suffix: "+", label: "Expert Therapists", icon: "👨‍⚕️", color: "from-sky-500 to-blue-600", desc: "Certified specialists across all domains" },
+    { value: 5, suffix: "", label: "Years of Service", icon: "🗓️", color: "from-green-600 to-teal-500", desc: "Continuous care since 2008" },
 ];
 
 const conditions = [

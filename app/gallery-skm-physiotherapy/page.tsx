@@ -132,7 +132,7 @@ export default function GalleryPage() {
                             </motion.p>
                         </div>
 
-                        <motion.button
+                        {/* <motion.button
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             whileHover={{ scale: 1.05 }}
@@ -142,7 +142,7 @@ export default function GalleryPage() {
                         >
                             <Plus size={20} />
                             Upload Media
-                        </motion.button>
+                        </motion.button> */}
                     </div>
                 </div>
             </section>

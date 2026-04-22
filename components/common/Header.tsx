@@ -114,7 +114,7 @@ const NAV_LINKS: NavItem[] = [
         icon: "📍",
         dropdown: [
           { label: "Swaran Nagari / स्वर्ण नगरी", href: "/branches-skm-physiotherapy/greater-noida-swaran-nagari", id: "swaran-nagari", icon: "🏢" },
-          { label: "Sector 135 / सेक्टर 135", href: "/branches-skm-physiotherapy/noida-sector-135", id: "sector-135", icon: "🏢" },
+          { label: "Sector 134 / सेक्टर 134", href: "/branches-skm-physiotherapy/noida-sector-134", id: "sector-134", icon: "🏢" },
         ]
       },
     ],

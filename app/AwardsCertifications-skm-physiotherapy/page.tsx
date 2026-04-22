@@ -246,8 +246,8 @@ export default function AwardsCertificationsPage() {
 
             {/* Timeline badges */}
             <section className="py-6 px-6 bg-gradient-to-r from-indigo-600 to-blue-600 overflow-x-auto">
-                <div className="flex items-center gap-6 max-w-5xl mx-auto min-w-max px-2">
-                    {["2012", "2015", "2018", "2020", "2021", "2022", "2023", "2024"].map((y, i) => (
+                <div className="flex items-center gap-6 justify-center max-w-5xl mx-auto min-w-max px-2">
+                    {["2021", "2022", "2023", "2024", "2025", "2026"].map((y, i) => (
                         <div key={i} className="flex items-center gap-2">
                             <div className="w-3 h-3 rounded-full bg-white/60" />
                             <span className="text-white/80 text-sm font-semibold">{y}</span>

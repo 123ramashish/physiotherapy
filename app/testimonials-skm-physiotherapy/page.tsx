@@ -98,8 +98,8 @@ const videoTestimonials = [
 const stats = [
     { val: "98%", label: "Patient Satisfaction" },
     { val: "15K+", label: "Lives Transformed" },
-    { val: "4.9★", label: "Average Rating" },
-    { val: "50+", label: "Google Reviews" },
+    { val: "5.0★", label: "Average Rating" },
+    { val: "350+", label: "Google Reviews" },
 ];
 
 function Stars({ count }: { count: number }) {
