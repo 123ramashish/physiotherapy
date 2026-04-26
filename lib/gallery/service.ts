@@ -13,6 +13,7 @@ export const getGalleryItems = cache(async (filters?: {
     limit?: number;
     page?: number;
 }) => {
+
     await connectDB();
     const query: any = {};
 
@@ -70,10 +71,10 @@ export async function createGalleryItem(formData: FormData) {
         });
 
         revalidatePath('/gallery');
-        
-        return { 
-            success: true, 
-            item: { ...newItem.toObject(), _id: newItem._id.toString() } 
+
+        return {
+            success: true,
+            item: { ...newItem.toObject(), _id: newItem._id.toString() }
         };
     } catch (error: any) {
         console.error('Create gallery item error:', error);
