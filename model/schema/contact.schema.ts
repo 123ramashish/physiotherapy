@@ -11,7 +11,7 @@ export interface ContactBranch {
 }
 
 export const CONTACT_BRANCHES: ContactBranch[] = [
-    
+
     {
         id: 'noida-swaran',
         name: 'Swaran Nagari, Greater Noida',
@@ -23,12 +23,12 @@ export const CONTACT_BRANCHES: ContactBranch[] = [
     {
         id: 'noida-134',
         name: 'Sector 134, Noida',
-        address: 'B-45, Sector 134, Noida, UP 201303',
+        address: 'Shop-No-1, Market, Wazidpur Rd, near Shiv Shakti Mandir, Wazidpur, Sector 134, Noida, Uttar Pradesh 201304',
         phone: '+917870072822',
         map: 'https://www.google.com/maps?vet=10CAAQoqAOahcKEwjos6jP74GUAxUAAAAAHQAAAAAQDA..i&pvq=Cg0vZy8xMWtiZnExYl84IhcKEXNrbSBwaHlzaW90aGVyYXB5EAIYAw&lqi=ChFza20gcGh5c2lvdGhlcmFweUjo14LbqbGAgAhaGxAAEAEYABgBIhFza20gcGh5c2lvdGhlcmFweZIBFHBoeXNpb3RoZXJhcHlfY2VudGVy&fvr=1&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x390ce9d917d48885:0x8667f8c063e418a8',
         href: '/branches-skm-physiotherapy/noida-sector-134'
     },
-   
+
 ];
 
 export const contactSubmissionSchema = z.object({
