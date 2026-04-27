@@ -1,5 +1,5 @@
+import { IBlog } from '@/model/schema/blog.schema';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IBlog } from '@/models/Blog';
 
 export interface PaginationMeta {
     page: number;
