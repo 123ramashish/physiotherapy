@@ -1,7 +1,7 @@
 'use server';
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
-import Blog from '@/models/Blog';
+import blogSchema from '@/model/schema/blog.schema';
 
 
 export async function GET(request: NextRequest) {
@@ -52,8 +52,8 @@ export async function GET(request: NextRequest) {
     }
 
     const [blogs, total] = await Promise.all([
-        Blog.find(query).sort(sort).skip(skip).limit(limit).lean(),
-        Blog.countDocuments(query)
+        blogSchema.find(query).sort(sort).skip(skip).limit(limit).lean(),
+        blogSchema.countDocuments(query)
     ]);
 
     return NextResponse.json({
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
             body.readTime = `${Math.ceil(words / wordsPerMinute)} min`;
         }
 
-        const blog = await Blog.create(body);
+        const blog = await blogSchema.create(body);
         return NextResponse.json(blog, { status: 201 });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 400 });
