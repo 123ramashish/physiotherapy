@@ -25,23 +25,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   // ─── Core Metadata ───
   title: {
-    default: "SKM Physiotherapy Clinic | Expert Pain Relief & Rehabilitation",
+    default: "SKM Physiotherapy Clinic | Expert Physiotherapy & Wellness Center in Delhi NCR",
     template: "%s | SKM Physiotherapy", // Auto-appends brand to page titles
   },
   description:
-    "SKM Physiotherapy Clinic provides expert physiotherapy treatment for pain relief, sports injury recovery, and rehabilitation across Delhi NCR. Book your free consultation today.",
+    "SKM Physiotherapy Clinic provides expert physiotherapy treatment  and rehabilitation across Delhi NCR. Book your free consultation today.",
 
   // ─── Keywords (for legacy search engines) ───
   keywords: [
     "SKM Physiotherapy",
     "physiotherapy clinic Delhi",
     "best physiotherapist near me",
-    "pain relief treatment",
     "sports injury rehabilitation",
     "cupping therapy Hijama",
     "dry needling specialist",
-    "back pain treatment",
-    "knee pain physiotherapy",
     "post-surgery rehabilitation",
   ].join(", "),
 
@@ -56,7 +53,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "https://skmphysiotherapy.com",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    title: "SKM Physiotherapy | Advanced Pain Relief Without Surgery",
+    title: "SKM Physiotherapy | Expert Physiotherapy & Wellness Center in Delhi NCR",
     description:
       "Expert physiotherapy for back pain, sports injuries, cupping therapy, dry needling & more. 4 branches across NCR. AI-powered booking 24/7.",
     images: [

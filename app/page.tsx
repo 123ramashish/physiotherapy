@@ -53,7 +53,7 @@ const SERVICES: ServiceCard[] = [
   {
     titleEn: 'Cupping & Hijama',
     titleHi: 'कपिंग और हिजामा',
-    description: 'Ancient therapy for natural healing, pain relief, and detoxification with modern medical expertise.',
+    description: 'Ancient therapy for natural healing,  and detoxification with modern medical expertise.',
     icon: <Droplets className="w-7 h-7" />,
     image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80',
     href: '/services-skm-physiotherapy/cupping-hijama',
