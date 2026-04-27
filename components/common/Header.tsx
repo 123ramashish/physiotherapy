@@ -474,8 +474,8 @@ export default function Header() {
         animate={{ y: headerVisible ? 0 : -120 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
-          : "bg-white"
+          ? "bg-green-50/95 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+          : "bg-green-50/80 backdrop-blur-sm"
           }`}
       >
         {/* Top micro-bar - hidden on mobile for space */}

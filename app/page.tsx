@@ -55,7 +55,7 @@ const SERVICES: ServiceCard[] = [
     titleHi: 'कपिंग और हिजामा',
     description: 'Ancient therapy for natural healing,  and detoxification with modern medical expertise.',
     icon: <Droplets className="w-7 h-7" />,
-    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80',
+    image: 'https://ik.imagekit.io/62nzwyhwd/services/IMG20250930195025.jpg',
     href: '/services-skm-physiotherapy/cupping-hijama',
     color: '#059669',
     gradient: 'from-emerald-500 to-teal-600',
@@ -65,7 +65,7 @@ const SERVICES: ServiceCard[] = [
     titleHi: 'पीठ दर्द उपचार',
     description: 'Comprehensive non-surgical solutions for acute and chronic back pain with expert physiotherapy.',
     icon: <Activity className="w-7 h-7" />,
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80',
+    image: 'https://ik.imagekit.io/62nzwyhwd/services/IMG20260314110233.jpg',
     href: '/services-skm-physiotherapy/back-pain',
     color: '#2563eb',
     gradient: 'from-blue-500 to-indigo-600',
@@ -75,7 +75,7 @@ const SERVICES: ServiceCard[] = [
     titleHi: 'गठिया प्रबंधन',
     description: 'Holistic arthritis care reducing inflammation, improving mobility, and enhancing quality of life.',
     icon: <Shield className="w-7 h-7" />,
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80',
+    image: 'https://ik.imagekit.io/62nzwyhwd/services/IMG_3246.HEIC',
     href: '/services-skm-physiotherapy/arthritis',
     color: '#7c3aed',
     gradient: 'from-violet-500 to-purple-700',
@@ -85,7 +85,7 @@ const SERVICES: ServiceCard[] = [
     titleHi: 'बेल्स पाल्सी उपचार',
     description: 'Specialized neurological rehabilitation for facial paralysis recovery with compassionate expert care.',
     icon: <Brain className="w-7 h-7" />,
-    image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=600&q=80',
+    image: 'https://ik.imagekit.io/62nzwyhwd/services/IMG20250907135009.jpg',
     href: '/services-skm-physiotherapy/bells-palsy',
     color: '#d97706',
     gradient: 'from-amber-500 to-orange-600',
@@ -422,10 +422,10 @@ export default function HomePage() {
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0.2]);
 
   const HERO_IMAGES = [
-    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1800&q=85',
-    'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1800&q=85',
-    'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1800&q=85',
-    'https://images.unsplash.com/photo-1551076805-e1869033e561?w=1800&q=85',
+    'https://ik.imagekit.io/62nzwyhwd/IMG_3256.HEIC',
+    'https://ik.imagekit.io/62nzwyhwd/Home%20page/IMG_2209.HEIC',
+    'https://ik.imagekit.io/62nzwyhwd/Home%20page/IMG20260313122326.jpg',
+    'https://ik.imagekit.io/62nzwyhwd/Home%20page/IMG-20250318-WA0092.jpg',
   ];
 
   useEffect(() => {
@@ -506,7 +506,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm mb-6 border border-white/20"
+                className="inline-flex items-center gap-2 px-4 py-2   rounded-full text-sm mb-6 border border-white/20"
               >
                 <Sparkles className="w-4 h-4 text-blue-300" />
                 <span className="text-blue-200 font-medium">Expert Physiotherapy Care Since 2018</span>
@@ -761,10 +761,10 @@ export default function HomePage() {
               className="relative"
             >
               <div className="grid grid-cols-2 gap-4">
-                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&q=80" alt="Treatment" className="rounded-2xl shadow-md w-full h-52 object-cover" />
-                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&q=80" alt="Equipment" className="rounded-2xl shadow-md w-full h-52 object-cover mt-8" />
-                <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=500&q=80" alt="Recovery" className="rounded-2xl shadow-md w-full h-52 object-cover" />
-                <img src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=500&q=80" alt="Exercise" className="rounded-2xl shadow-md w-full h-52 object-cover mt-8" />
+                <img src="https://ik.imagekit.io/62nzwyhwd/services/IMG_3246.HEIC" alt="Treatment" className="rounded-2xl shadow-md w-full h-52 object-cover" />
+                <img src="https://ik.imagekit.io/62nzwyhwd/services/IMG20250907135009.jpg" alt="Equipment" className="rounded-2xl shadow-md w-full h-52 object-cover mt-8" />
+                <img src="https://ik.imagekit.io/62nzwyhwd/services/IMG20250906152042.jpg" alt="Recovery" className="rounded-2xl shadow-md w-full h-52 object-cover" />
+                <img src="https://ik.imagekit.io/62nzwyhwd/IMG_3256.HEIC?updatedAt=1777308546518" alt="Exercise" className="rounded-2xl shadow-md w-full h-52 object-cover mt-8" />
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 hidden sm:flex items-center gap-3">
