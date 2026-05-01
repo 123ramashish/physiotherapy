@@ -5,7 +5,7 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { Providers } from "@/components/Providers";
-
+import Script from "next/script";
 // ─── Font Optimization ───
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -227,6 +227,21 @@ export default function RootLayout({
       suppressHydrationWarning // Prevents hydration mismatch with theme providers
     >
       <head>
+      {/* Google Ads Global Tag */}
+    <Script
+      src="https://www.googletagmanager.com/gtag/js?id=AW-664004213"
+      strategy="afterInteractive"
+    />
+
+    <Script id="google-ads">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-664004213');
+      `}
+    </Script>
+
         {/* ─── Structured Data ─── */}
         <script
           type="application/ld+json"
