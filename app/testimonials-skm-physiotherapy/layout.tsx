@@ -25,8 +25,8 @@ export async function generateMetadata(
     openGraph: {
       title: "Real Patient Success Stories | SKM Physiotherapy",
       description: "5000+ verified reviews. 98% recovery rate. See why patients trust SKM across 4 NCR branches.",
-      url: "https://skmphysiotherapy.com/testimonials",
-      images: [{ url: "https://skmphysiotherapy.com/og-testimonials.jpg", width: 1200, height: 630 }],
+      url: "https://www.skmphysiotherapy.com/testimonials",
+      images: [{ url: "https://www.skmphysiotherapy.com/og-testimonials.jpg", width: 1200, height: 630 }],
     },
 
     twitter: {
@@ -36,8 +36,8 @@ export async function generateMetadata(
     },
 
     alternates: {
-      canonical: "https://skmphysiotherapy.com/testimonials",
-      languages: { "en-IN": "https://skmphysiotherapy.com/testimonials" },
+      canonical: "https://www.skmphysiotherapy.com/testimonials",
+      languages: { "en-IN": "https://www.skmphysiotherapy.com/testimonials" },
     },
 
     robots: { index: true, follow: true },
@@ -71,8 +71,8 @@ const structuredData = {
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", "position": 2, "name": "Testimonials", "item": "https://skmphysiotherapy.com/testimonials" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", "position": 2, "name": "Testimonials", "item": "https://www.skmphysiotherapy.com/testimonials" }
       ]
     }
   ]

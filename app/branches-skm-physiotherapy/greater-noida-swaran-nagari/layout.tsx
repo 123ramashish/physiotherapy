@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SKM Physiotherapy - Swaran Nagari, Greater Noida | Open 7 Days",
     description: "Expert physiotherapy in Swaran Nagari, Greater Noida. Back pain, knee pain, sports rehab, cupping & neuro physio. D-3, D-Block, near Krishna Hospital. Open 10AM–10PM.",
-    url: "https://skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari",
+    url: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-greater-noida.jpg",
+        url: "https://www.skmphysiotherapy.com/og-greater-noida.jpg",
         width: 1200, height: 630,
         alt: "SKM Physiotherapy Swaran Nagari Greater Noida Branch",
         type: "image/jpeg",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SKM Physiotherapy | Swaran Nagari, Greater Noida",
     description: "Expert physio in Greater Noida. Back pain, sports injuries, cupping & more. Open 10AM–10PM, Mon–Sun.",
-    images: ["https://skmphysiotherapy.com/og-greater-noida.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-greater-noida.jpg"],
     creator: "@skmphysio",
   },
-  alternates: { canonical: "https://skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -44,13 +44,13 @@ const localBusinessData = {
   "@graph": [
     {
       "@type": "MedicalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches/greater-noida-swaran-nagari",
+      "@id": "https://www.skmphysiotherapy.com/branches/greater-noida-swaran-nagari",
       name: "SKM Physiotherapy & Rehabilitation Centre — Swaran Nagari",
       description: "Expert physiotherapy clinic in Swaran Nagari, Greater Noida, offering back pain treatment, knee pain physiotherapy, cupping therapy, sports injury rehab and neurological rehabilitation.",
-      url: "https://skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari",
+      url: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari",
       telephone: "+917982799147",
       priceRange: "₹₹",
-      image: "https://skmphysiotherapy.com/og-greater-noida.jpg",
+      image: "https://www.skmphysiotherapy.com/og-greater-noida.jpg",
       address: {
         "@type": "PostalAddress",
         streetAddress: "D-Block, D-3, Near Krishna Hospital, Swarn Nagari",
@@ -71,14 +71,14 @@ const localBusinessData = {
       aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "500", bestRating: "5" },
       sameAs: ["https://www.google.com/maps?cid=skmphysio-noida"],
       medicalSpecialty: ["Physiotherapy", "Rehabilitation"],
-      parentOrganization: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      parentOrganization: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Branches", item: "https://skmphysiotherapy.com/branches-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Swaran Nagari, Greater Noida", item: "https://skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Branches", item: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Swaran Nagari, Greater Noida", item: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari" },
       ],
     },
   ],

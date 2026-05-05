@@ -641,7 +641,7 @@ function NewsDetailContent({ item, onShare }: NewsDetailProps) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
-        await navigator.clipboard.writeText(`https://skmphysiotherapy.com/news/${item.slug}`);
+        await navigator.clipboard.writeText(`https://www.skmphysiotherapy.com/news/${item.slug}`);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -1443,7 +1443,7 @@ const openRegister = (item: EventItem) => setModal({ type: 'register', data: ite
 
             {/* Modals */}
             <Modal isOpen={modal.isOpen && modal.type === 'news-detail'} onClose={() => setModal({ type: null, isOpen: false })} title="News Article" size="xl">
-                {modal.data && 'excerpt' in modal.data && <NewsDetailContent item={modal.data} onShare={() => setModal({ type: 'share', data: { ...modal.data, shareUrl: `https://skmphysiotherapy.com/news/${modal.data.slug}` }, isOpen: true })} />}
+                {modal.data && 'excerpt' in modal.data && <NewsDetailContent item={modal.data} onShare={() => setModal({ type: 'share', data: { ...modal.data, shareUrl: `https://www.skmphysiotherapy.com/news/${modal.data.slug}` }, isOpen: true })} />}
             </Modal>
 
             <Modal isOpen={modal.isOpen && modal.type === 'event-detail'} onClose={() => setModal({ type: null, isOpen: false })} title="Event Details" size="lg">

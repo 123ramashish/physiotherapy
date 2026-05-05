@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SKM Physiotherapy Clinic Gallery | Modern Facilities in Noida",
     description: "Tour our state-of-the-art physiotherapy clinics in Noida & Greater Noida. Modern equipment, expert therapists, and world-class treatment facilities.",
-    url: "https://skmphysiotherapy.com/gallery-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/gallery-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-gallery.jpg",
+        url: "https://www.skmphysiotherapy.com/og-gallery.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Clinic Gallery - Modern Facilities",
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Clinic Gallery | SKM Physiotherapy",
     description: "State-of-the-art physiotherapy facilities in Noida & Greater Noida. See our modern clinics and equipment.",
-    images: ["https://skmphysiotherapy.com/og-gallery.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-gallery.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/gallery-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/gallery-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/gallery-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/gallery-skm-physiotherapy" },
   },
 
   robots: {
@@ -60,7 +60,7 @@ const galleryStructuredData = {
   "@type": "ImageGallery",
   name: "SKM Physiotherapy Clinic Gallery",
   description: "Photos of SKM Physiotherapy's modern clinic facilities, treatment rooms, and advanced equipment in Noida and Greater Noida.",
-  url: "https://skmphysiotherapy.com/gallery-skm-physiotherapy",
+  url: "https://www.skmphysiotherapy.com/gallery-skm-physiotherapy",
   author: {
     "@type": "MedicalOrganization",
     name: "SKM Physiotherapy & Rehabilitation Centre",
@@ -71,8 +71,8 @@ const breadcrumbData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-    { "@type": "ListItem", position: 2, name: "Gallery", item: "https://skmphysiotherapy.com/gallery-skm-physiotherapy" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+    { "@type": "ListItem", position: 2, name: "Gallery", item: "https://www.skmphysiotherapy.com/gallery-skm-physiotherapy" },
   ],
 };
 

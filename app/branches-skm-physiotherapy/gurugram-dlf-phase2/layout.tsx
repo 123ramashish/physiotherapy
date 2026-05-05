@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'physiotherapy near cyber hub gurugram',
   ],
   alternates: {
-    canonical: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
+    canonical: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
   },
   openGraph: {
     title: "SKM Physiotherapy DLF Phase 2 — Paediatric & Women's Physiotherapy",
     description:
       "Women's health, paediatric physiotherapy, hijama & dry needling near Cyber Hub, DLF Phase 2, Gurugram. Call 7982799149.",
-    url: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
+    url: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
     siteName: 'SKM Physiotherapy & Rehabilitation Centre',
     images: [
       {
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 const jsonLdMedicalBusiness = {
   '@context': 'https://schema.org',
   '@type': ['MedicalBusiness', 'LocalBusiness'],
-  '@id': 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
+  '@id': 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
   name: 'SKM Physiotherapy & Rehabilitation Centre — DLF Phase 2, Gurugram',
-  url: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
+  url: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2',
   telephone: '+917982799149',
   email: 'dlf@skmphysio.in',
   image: [
@@ -89,16 +89,16 @@ const jsonLdMedicalBusiness = {
     'Sciatica Pain','Sports Injuries','Post COVID Rehab','Frozen Shoulder',
     'Paralysis (Stroke) Rehab','Paediatric Physiotherapy','Soreness & Relaxation',
   ].map(name => ({ '@type': 'MedicalTherapy', name })),
-  parentOrganization: { '@type': 'MedicalOrganization', name: 'SKM Physiotherapy & Rehabilitation Centre', url: 'https://skmphysiotherapy.com' },
+  parentOrganization: { '@type': 'MedicalOrganization', name: 'SKM Physiotherapy & Rehabilitation Centre', url: 'https://www.skmphysiotherapy.com' },
 };
 
 const jsonLdBreadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skmphysiotherapy.com' },
-    { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://skmphysiotherapy.com/branches' },
-    { '@type': 'ListItem', position: 3, name: 'DLF Phase 2, Gurugram', item: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skmphysiotherapy.com' },
+    { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://www.skmphysiotherapy.com/branches' },
+    { '@type': 'ListItem', position: 3, name: 'DLF Phase 2, Gurugram', item: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2' },
   ],
 };
 

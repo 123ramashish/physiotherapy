@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "All Physiotherapy Services | SKM Physiotherapy Noida",
     description: "15+ expert physiotherapy services in Noida & Greater Noida. Back pain, knee pain, cupping, dry needling, sports rehab & more.",
-    url: "https://skmphysiotherapy.com/physiotherapy-services",
+    url: "https://www.skmphysiotherapy.com/physiotherapy-services",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-services.jpg", width: 1200, height: 630 }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-services.jpg", width: 1200, height: 630 }],
     locale: "en_IN",
     type: "website",
   },
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Physiotherapy Services | SKM Physiotherapy Noida",
     description: "15+ treatments in Noida & Greater Noida. Book Mon–Sun 10AM–10PM.",
-    images: ["https://skmphysiotherapy.com/og-services.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-services.jpg"],
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy",
+    canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy",
   },
 
   robots: { index: true, follow: true },

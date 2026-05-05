@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Physiotherapy Careers | Join SKM Physiotherapy Team",
     description: "6 open roles for physiotherapists & specialists. Competitive pay, CPD budget, flexible working, and a culture that genuinely cares. Apply today.",
-    url: "https://skmphysiotherapy.com/work-with-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/work-with-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-careers.jpg",
+        url: "https://www.skmphysiotherapy.com/og-careers.jpg",
         width: 1200,
         height: 630,
         alt: "Physiotherapy Careers at SKM - Join Our Expert Team",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Physio Jobs | SKM Physiotherapy Careers",
     description: "Senior physio, sports rehab, neuro rehab & more. 4.9★ Glassdoor. Apply now.",
-    images: ["https://skmphysiotherapy.com/og-careers.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-careers.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/work-with-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/work-with-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/work-with-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/work-with-skm-physiotherapy" },
   },
 
   robots: {
@@ -68,7 +68,7 @@ const jobPostingData = {
       hiringOrganization: {
         "@type": "Organization",
         name: "SKM Physiotherapy & Rehabilitation Centre",
-        sameAs: "https://skmphysiotherapy.com",
+        sameAs: "https://www.skmphysiotherapy.com",
       },
       jobLocation: {
         "@type": "Place",
@@ -86,8 +86,8 @@ const jobPostingData = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Work With Us", item: "https://skmphysiotherapy.com/work-with-skm-physiotherapy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Work With Us", item: "https://www.skmphysiotherapy.com/work-with-skm-physiotherapy" },
       ],
     },
   ],

@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Physiotherapy Events & Health Camps | SKM Physiotherapy",
     description: "Join free health camps, ergonomics workshops, and wellness events. Serving Noida & Greater Noida. Get expert tips from certified physiotherapists.",
-    url: "https://skmphysiotherapy.com/news-and-events-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/news-and-events-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-events.jpg",
+        url: "https://www.skmphysiotherapy.com/og-events.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Events and Health Camps",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Free Health Camps & Events | SKM Physiotherapy",
     description: "Free back pain screening, workshops & webinars in Noida & Greater Noida. Stay updated with our latest events.",
-    images: ["https://skmphysiotherapy.com/og-events.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-events.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/news-and-events-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/news-and-events-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/news-and-events-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/news-and-events-skm-physiotherapy" },
   },
 
   robots: {
@@ -66,7 +66,7 @@ const eventsStructuredData = {
   organizer: {
     "@type": "MedicalOrganization",
     name: "SKM Physiotherapy & Rehabilitation Centre",
-    url: "https://skmphysiotherapy.com",
+    url: "https://www.skmphysiotherapy.com",
   },
   location: {
     "@type": "Place",
@@ -84,8 +84,8 @@ const breadcrumbData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-    { "@type": "ListItem", position: 2, name: "News & Events", item: "https://skmphysiotherapy.com/news-and-events-skm-physiotherapy" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+    { "@type": "ListItem", position: 2, name: "News & Events", item: "https://www.skmphysiotherapy.com/news-and-events-skm-physiotherapy" },
   ],
 };
 

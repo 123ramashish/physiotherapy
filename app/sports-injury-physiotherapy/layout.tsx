@@ -27,11 +27,11 @@ export const metadata: Metadata = {
     title: "Sports Injury Rehabilitation | SKM Physiotherapy Noida",
     description:
       "Get back to peak performance with expert sports injury physio. ACL, muscle tears, ligament sprains, tennis elbow & more. Specialized sports rehab in Noida & Greater Noida.",
-    url: "https://skmphysiotherapy.com/sports-injury-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/sports-injury-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-sports-injury.jpg",
+        url: "https://www.skmphysiotherapy.com/og-sports-injury.jpg",
         width: 1200,
         height: 630,
         alt: "Sports Injury Physiotherapy at SKM - Expert Rehabilitation",
@@ -46,13 +46,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sports Injury Physiotherapy | SKM Physiotherapy Noida",
     description: "ACL rehab, muscle tears, ligament injuries & more. Expert sports physio in Noida & Greater Noida. Book today.",
-    images: ["https://skmphysiotherapy.com/og-sports-injury.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-sports-injury.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/sports-injury-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/sports-injury-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/sports-injury-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/sports-injury-physiotherapy" },
   },
 
   robots: {
@@ -79,15 +79,15 @@ const sportsStructuredData = {
       provider: {
         "@type": "MedicalOrganization",
         name: "SKM Physiotherapy & Rehabilitation Centre",
-        url: "https://skmphysiotherapy.com",
+        url: "https://www.skmphysiotherapy.com",
       },
       areaServed: ["Noida", "Greater Noida", "Delhi NCR"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Sports Injury Physiotherapy", item: "https://skmphysiotherapy.com/sports-injury-physiotherapy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Sports Injury Physiotherapy", item: "https://www.skmphysiotherapy.com/sports-injury-physiotherapy" },
       ],
     },
   ],

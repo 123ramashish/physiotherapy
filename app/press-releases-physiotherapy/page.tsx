@@ -81,7 +81,7 @@ const PRESS_RELEASES: PressRelease[] = [
         location: 'Greater Noida',
         author: 'Dr. Shravan Kumar',
         authorTitle: 'Founder & Lead Physiotherapist',
-        featuredImage: 'https://skmphysiotherapy.com/images/neuro-centre-launch.jpg',
+        featuredImage: 'https://www.skmphysiotherapy.com/images/neuro-centre-launch.jpg',
         attachments: [
             { name: 'Press Release PDF', url: '/press/neuro-centre-launch.pdf', size: '245 KB' },
             { name: 'High-Res Images', url: '/press/neuro-centre-images.zip', size: '12.4 MB' },
@@ -163,15 +163,15 @@ const generatePressReleaseSchema = (release: PressRelease): any => ({
     author: {
         '@type': 'Organization',
         name: 'SKM Physiotherapy & Rehabilitation Centre',
-        url: 'https://skmphysiotherapy.com',
+        url: 'https://www.skmphysiotherapy.com',
     },
     publisher: {
         '@type': 'Organization',
         name: 'SKM Physiotherapy',
-        url: 'https://skmphysiotherapy.com',
+        url: 'https://www.skmphysiotherapy.com',
         logo: {
             '@type': 'ImageObject',
-            url: 'https://skmphysiotherapy.com/logo-schema.jpg',
+            url: 'https://www.skmphysiotherapy.com/logo-schema.jpg',
             width: 600,
             height: 60,
         },
@@ -185,12 +185,12 @@ const generatePressReleaseSchema = (release: PressRelease): any => ({
     } : undefined,
     mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `https://skmphysiotherapy.com/press-releases/${release.slug}`,
+        '@id': `https://www.skmphysiotherapy.com/press-releases/${release.slug}`,
     },
     about: {
         '@type': 'MedicalBusiness',
         name: 'SKM Physiotherapy',
-        url: 'https://skmphysiotherapy.com',
+        url: 'https://www.skmphysiotherapy.com',
     },
     keywords: release.tags.join(', '),
     locationCreated: release.location,
@@ -589,7 +589,7 @@ function DetailContent({ release, onShare }: DetailContentProps) {
 // ─────────────────────────────────────────────
 
 function ShareContent({ release }: { release: PressRelease }) {
-    const url = `https://skmphysiotherapy.com/press-releases/${release.slug}`;
+    const url = `https://www.skmphysiotherapy.com/press-releases/${release.slug}`;
     const [copied, setCopied] = useState(false);
 
     const shareLinks = [

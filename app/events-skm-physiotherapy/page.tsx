@@ -156,7 +156,7 @@ export default function EventsPage() {
                             item: {
                                 '@type': 'Event',
                                 name: event.title,
-                                url: `https://skmphysiotherapy.com/events/${event.slug}`,
+                                url: `https://www.skmphysiotherapy.com/events/${event.slug}`,
                             },
                         })),
                     }),
@@ -380,7 +380,7 @@ export default function EventsPage() {
             >
                 {modal.data && (
                     <ShareModal
-                        url={`https://skmphysiotherapy.com/events/${modal.data.slug}`}
+                        url={`https://www.skmphysiotherapy.com/events/${modal.data.slug}`}
                         title={modal.data.title}
                     />
                 )}

@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     title: "NABH Accredited & Award-Winning Physiotherapy | SKM",
     description:
       "Internationally certified physiotherapy with NABH accreditation, ISO 9001:2015, McKenzie, Bobath NDT, dry needling & more. See why SKM is trusted as one of India's best physiotherapy clinics.",
-    url: "https://skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-awards.jpg",
+        url: "https://www.skmphysiotherapy.com/og-awards.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Awards and Certifications - NABH, ISO & More",
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NABH Accredited Physiotherapy | SKM Awards & Certifications",
     description: "ISO certified. NABH accredited. Multiple national healthcare awards. Internationally certified therapists.",
-    images: ["https://skmphysiotherapy.com/og-awards.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-awards.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy" },
   },
 
   robots: {
@@ -65,9 +65,9 @@ const awardsStructuredData = {
   "@graph": [
     {
       "@type": "MedicalOrganization",
-      "@id": "https://skmphysiotherapy.com/#organization",
+      "@id": "https://www.skmphysiotherapy.com/#organization",
       name: "SKM Physiotherapy & Rehabilitation Centre",
-      url: "https://skmphysiotherapy.com",
+      url: "https://www.skmphysiotherapy.com",
       hasCredential: [
         {
           "@type": "EducationalOccupationalCredential",
@@ -89,8 +89,8 @@ const awardsStructuredData = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Awards & Certifications", item: "https://skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Awards & Certifications", item: "https://www.skmphysiotherapy.com/AwardsCertifications-skm-physiotherapy" },
       ],
     },
   ],

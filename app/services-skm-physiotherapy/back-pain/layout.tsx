@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Back Pain Treatment Without Surgery | SKM Physiotherapy — Noida & Gurugram",
     description: "Non-surgical back pain relief across Delhi NCR — Noida, Greater Noida & Gurugram. Specialized physio for lower back pain, sciatica, disc bulge & spondylosis.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/back-pain",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/back-pain",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-back-pain.jpg", width: 1200, height: 630, alt: "Back Pain Treatment at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-back-pain.jpg", width: 1200, height: 630, alt: "Back Pain Treatment at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Back Pain Treatment | SKM Physiotherapy Noida", description: "Non-surgical back pain relief. Expert physio for sciatica, disc bulge & chronic back pain in Noida.", images: ["https://skmphysiotherapy.com/og-back-pain.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/back-pain" },
+  twitter: { card: "summary_large_image", title: "Back Pain Treatment | SKM Physiotherapy Noida", description: "Non-surgical back pain relief. Expert physio for sciatica, disc bulge & chronic back pain in Noida.", images: ["https://www.skmphysiotherapy.com/og-back-pain.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/back-pain" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Sciatica" },
         { "@type": "MedicalCondition", name: "Lumbar Spondylosis" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Back Pain Treatment", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/back-pain" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Back Pain Treatment", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/back-pain" },
       ],
     },
   ],

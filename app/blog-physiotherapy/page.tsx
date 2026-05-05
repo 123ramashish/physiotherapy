@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Physiotherapy Blog | Expert Guides & Health Tips | SKM",
     description: "Expert articles on back pain, sports injuries, cupping therapy, ergonomics, and recovery from SKM's certified physiotherapists.",
-    url: "https://skmphysiotherapy.com/blog-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/blog-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-blog.jpg", width: 1200, height: 630 }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-blog.jpg", width: 1200, height: 630 }],
     locale: "en_IN",
     type: "website",
   },
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Physiotherapy Blog | SKM Expert Health Tips",
     description: "Back pain guides, injury prevention, cupping & dry needling explained by certified physios.",
-    images: ["https://skmphysiotherapy.com/og-blog.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-blog.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/blog-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/blog-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/blog-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/blog-physiotherapy" },
   },
 
   robots: {

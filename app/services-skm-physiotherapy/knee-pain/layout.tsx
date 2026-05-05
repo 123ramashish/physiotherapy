@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Knee Pain Treatment Without Surgery | SKM Physiotherapy — Noida & Gurugram",
     description: "Expert non-surgical knee pain treatment across Noida, Greater Noida & Gurugram. Osteoarthritis, ACL, runner's knee, meniscus tear & post-surgery rehab.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/knee-pain",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/knee-pain",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-knee-pain.jpg", width: 1200, height: 630, alt: "Knee Pain Treatment at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-knee-pain.jpg", width: 1200, height: 630, alt: "Knee Pain Treatment at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Knee Pain Treatment | SKM Physiotherapy Noida", description: "Non-surgical knee pain relief for osteoarthritis, ACL, runner's knee & more.", images: ["https://skmphysiotherapy.com/og-knee-pain.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/knee-pain" },
+  twitter: { card: "summary_large_image", title: "Knee Pain Treatment | SKM Physiotherapy Noida", description: "Non-surgical knee pain relief for osteoarthritis, ACL, runner's knee & more.", images: ["https://www.skmphysiotherapy.com/og-knee-pain.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/knee-pain" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Patellofemoral Pain Syndrome" },
         { "@type": "MedicalCondition", name: "Meniscus Tear" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Knee Pain Treatment", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/knee-pain" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Knee Pain Treatment", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/knee-pain" },
       ],
     },
   ],

@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cupping Therapy (Hijama) | SKM Physiotherapy Noida",
     description: "Certified wet & dry cupping (Hijama) therapy across Noida, Greater Noida & Gurugram. Deep tissue pain relief, improved circulation & detox. Safe, sterile technique.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-cupping.jpg", width: 1200, height: 630, alt: "Cupping Therapy Hijama at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-cupping.jpg", width: 1200, height: 630, alt: "Cupping Therapy Hijama at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Cupping Therapy (Hijama) | SKM Physiotherapy Noida", description: "Certified wet & dry cupping in Noida. Deep pain relief, better circulation & muscle recovery.", images: ["https://skmphysiotherapy.com/og-cupping.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama" },
+  twitter: { card: "summary_large_image", title: "Cupping Therapy (Hijama) | SKM Physiotherapy Noida", description: "Certified wet & dry cupping in Noida. Deep pain relief, better circulation & muscle recovery.", images: ["https://www.skmphysiotherapy.com/og-cupping.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Muscle Tension" },
         { "@type": "MedicalCondition", name: "Sports Fatigue" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Cupping Therapy (Hijama)", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Cupping Therapy (Hijama)", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama" },
       ],
     },
   ],

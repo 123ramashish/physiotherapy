@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Paralysis Rehabilitation | SKM Physiotherapy Noida",
     description: "Expert paralysis rehab across Noida, Greater Noida & Gurugram. Hemiplegia, paraplegia, stroke & spinal cord injury. Bobath NDT & PNF certified therapists.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/paralysis",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/paralysis",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-paralysis.jpg", width: 1200, height: 630, alt: "Paralysis Rehabilitation at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-paralysis.jpg", width: 1200, height: 630, alt: "Paralysis Rehabilitation at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Paralysis Rehab | SKM Physiotherapy Noida", description: "Hemiplegia, paraplegia & stroke paralysis rehab. Bobath & PNF certified in Noida.", images: ["https://skmphysiotherapy.com/og-paralysis.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/paralysis" },
+  twitter: { card: "summary_large_image", title: "Paralysis Rehab | SKM Physiotherapy Noida", description: "Hemiplegia, paraplegia & stroke paralysis rehab. Bobath & PNF certified in Noida.", images: ["https://www.skmphysiotherapy.com/og-paralysis.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/paralysis" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -37,15 +37,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Stroke" },
         { "@type": "MedicalCondition", name: "Spinal Cord Injury" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Paralysis Rehabilitation", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/paralysis" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Paralysis Rehabilitation", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/paralysis" },
       ],
     },
   ],

@@ -59,12 +59,12 @@ export const metadata: Metadata = {
     openGraph: {
       title: "Advanced Physiotherapy Services | SKM Rehabilitation Centre",
       description:
-        "Expert care for pain relief & recovery: cupping, dry needling, sports rehab & more. 4 branches across NCR. AI-powered booking available 24/7.",
-      url: "https://skmphysiotherapy.com/services-skm-physiotherapy",
+        "Expert care for pain relief & recovery: cupping, dry needling, sports rehab, home visit & corporate wellness. 4 clinics across Delhi NCR.",
+      url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy",
       siteName: "SKM Physiotherapy & Rehabilitation Centre",
       images: [
         {
-          url: "https://skmphysiotherapy.com/og-services.jpg",
+          url: "https://www.skmphysiotherapy.com/og-services.jpg",
           width: 1200,
           height: 630,
           alt: "SKM Physiotherapy Services - Expert Treatment for Pain Relief",
@@ -81,15 +81,15 @@ export const metadata: Metadata = {
       title: "Pain Relief Without Surgery | SKM Physiotherapy Services",
       description:
         "15+ treatments: cupping, dry needling, taping, sports rehab. Expert therapists across Delhi, Gurgaon, Noida & Faridabad. Book your free consultation today.",
-      images: ["https://skmphysiotherapy.com/og-services.jpg"],
+      images: ["https://www.skmphysiotherapy.com/og-services.jpg"],
       creator: "@skmphysio",
     },
 
     // ─── Canonical & Alternates ───
     alternates: {
-      canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy",
+      canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy",
       languages: {
-        "en-IN": "https://skmphysiotherapy.com/services-skm-physiotherapy",
+        "en-IN": "https://www.skmphysiotherapy.com/services-skm-physiotherapy",
       },
     },
 
@@ -106,10 +106,6 @@ export const metadata: Metadata = {
       },
     },
 
-    // ─── Verification ───
-    verification: {
-      google: "your-google-site-verification-code",
-    },
 };
 
 // ─── Structured Data: Service Collection (JSON-LD) ───
@@ -118,7 +114,7 @@ const servicesStructuredData = {
   "@type": "ItemList",
   name: "SKM Physiotherapy Services",
   description: "Comprehensive physiotherapy and rehabilitation treatments for pain relief, injury recovery, and long-term wellness.",
-  url: "https://skmphysiotherapy.com/services-skm-physiotherapy",
+  url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy",
   numberOfItems: 15,
   itemListElement: [
     {
@@ -130,7 +126,7 @@ const servicesStructuredData = {
         description: "Ancient healing technique for deep tissue relief, improved circulation, and toxin removal.",
         provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre" },
         areaServed: ["Delhi", "Gurgaon", "Noida", "Faridabad"],
-        availableChannel: { "@type": "ServiceChannel", serviceUrl: "https://skmphysiotherapy.com/services#book" },
+        availableChannel: { "@type": "ServiceChannel", serviceUrl: "https://www.skmphysiotherapy.com/services#book" },
       },
     },
     {
@@ -166,13 +162,13 @@ const breadcrumbStructuredData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://skmphysiotherapy.com",
+      item: "https://www.skmphysiotherapy.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Services",
-      item: "https://skmphysiotherapy.com/services-skm-physiotherapy",
+      item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy",
     },
   ],
 };

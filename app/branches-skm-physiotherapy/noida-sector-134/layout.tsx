@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SKM Physiotherapy - Sector 134, Noida | Open 7 Days",
     description: "Expert physiotherapy in Sector 134, Noida. Back pain, knee pain, sports rehab, cupping & neuro physio. B-45, Sector 134. Open Mon–Sun 10AM–10PM. Call +91 97184 34818.",
-    url: "https://skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134",
+    url: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-noida-sector-134.jpg",
+        url: "https://www.skmphysiotherapy.com/og-noida-sector-134.jpg",
         width: 1200, height: 630,
         alt: "SKM Physiotherapy Sector 134 Noida Branch",
         type: "image/jpeg",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SKM Physiotherapy | Sector 134, Noida",
     description: "Expert physio in Sector 134, Noida. Back pain, sports injuries, cupping & more. Open 10AM–10PM, Mon–Sun.",
-    images: ["https://skmphysiotherapy.com/og-noida-sector-134.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-noida-sector-134.jpg"],
     creator: "@skmphysio",
   },
-  alternates: { canonical: "https://skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -44,13 +44,13 @@ const localBusinessData = {
   "@graph": [
     {
       "@type": "MedicalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches/noida-sector-134",
+      "@id": "https://www.skmphysiotherapy.com/branches/noida-sector-134",
       name: "SKM Physiotherapy & Rehabilitation Centre — Sector 134, Noida",
       description: "Expert physiotherapy clinic in Sector 134, Noida offering back pain treatment, knee pain physiotherapy, cupping therapy (Hijama), dry needling, sports injury rehab and neurological rehabilitation.",
-      url: "https://skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134",
+      url: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134",
       telephone: "+919718434818",
       priceRange: "₹₹",
-      image: "https://skmphysiotherapy.com/og-noida-sector-134.jpg",
+      image: "https://www.skmphysiotherapy.com/og-noida-sector-134.jpg",
       address: {
         "@type": "PostalAddress",
         streetAddress: "B-45, Sector 134",
@@ -68,14 +68,14 @@ const localBusinessData = {
       ],
       aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "400", bestRating: "5" },
       medicalSpecialty: ["Physiotherapy", "Rehabilitation"],
-      parentOrganization: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      parentOrganization: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Branches", item: "https://skmphysiotherapy.com/branches-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Sector 134, Noida", item: "https://skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Branches", item: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Sector 134, Noida", item: "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134" },
       ],
     },
   ],

@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Arthritis Physiotherapy | SKM Physiotherapy Noida",
     description: "Non-surgical arthritis pain relief & mobility improvement across Noida, Greater Noida & Gurugram. Osteoarthritis, rheumatoid arthritis & joint care programs.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/arthritis",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/arthritis",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-arthritis.jpg", width: 1200, height: 630, alt: "Arthritis Physiotherapy Treatment at SKM Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-arthritis.jpg", width: 1200, height: 630, alt: "Arthritis Physiotherapy Treatment at SKM Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Arthritis Treatment | SKM Physiotherapy Noida", description: "Non-surgical arthritis pain relief for osteoarthritis & rheumatoid arthritis in Noida.", images: ["https://skmphysiotherapy.com/og-arthritis.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/arthritis" },
+  twitter: { card: "summary_large_image", title: "Arthritis Treatment | SKM Physiotherapy Noida", description: "Non-surgical arthritis pain relief for osteoarthritis & rheumatoid arthritis in Noida.", images: ["https://www.skmphysiotherapy.com/og-arthritis.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/arthritis" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Gout" },
         { "@type": "MedicalCondition", name: "Joint Pain" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Arthritis Treatment", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/arthritis" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Arthritis Treatment", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/arthritis" },
       ],
     },
   ],

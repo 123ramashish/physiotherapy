@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Physiotherapy FAQs | SKM Physiotherapy Answers",
     description: "Answers to 20+ common questions about physiotherapy: referrals, session counts, insurance, costs, treatments and more.",
-    url: "https://skmphysiotherapy.com/FAQ-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/FAQ-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-faq.jpg",
+        url: "https://www.skmphysiotherapy.com/og-faq.jpg",
         width: 1200,
         height: 630,
         alt: "Physiotherapy FAQ - SKM Physiotherapy Answers Your Questions",
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Physiotherapy FAQs | SKM Physiotherapy",
     description: "All your physiotherapy questions answered. Costs, sessions, insurance, booking & more.",
-    images: ["https://skmphysiotherapy.com/og-faq.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-faq.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/FAQ-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/FAQ-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/FAQ-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/FAQ-skm-physiotherapy" },
   },
 
   robots: {
@@ -124,8 +124,8 @@ const breadcrumbData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-    { "@type": "ListItem", position: 2, name: "FAQ", item: "https://skmphysiotherapy.com/FAQ-skm-physiotherapy" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+    { "@type": "ListItem", position: 2, name: "FAQ", item: "https://www.skmphysiotherapy.com/FAQ-skm-physiotherapy" },
   ],
 };
 

@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   ].join(", "),
 
   // ─── Authors & Publisher ───
-  authors: [{ name: "SKM Physiotherapy Team", url: "https://skmphysiotherapy.com" }],
+  authors: [{ name: "SKM Physiotherapy Team", url: "https://www.skmphysiotherapy.com" }],
   creator: "SKM Physiotherapy & Rehabilitation Centre",
   publisher: "SKM Physiotherapy",
 
@@ -66,14 +66,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://skmphysiotherapy.com",
+    url: "https://www.skmphysiotherapy.com",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     title: "SKM Physiotherapy | Expert Physiotherapy & Wellness Center in Delhi NCR",
     description:
-      "Expert physiotherapy for back pain, sports injuries, cupping therapy, dry needling & more. 4 branches across NCR. AI-powered booking 24/7.",
+      "Expert physiotherapy for back pain, sports injuries, cupping therapy, dry needling & more. Home visit & corporate wellness available. 4 clinics across Delhi NCR.",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-image.jpg",
+        url: "https://www.skmphysiotherapy.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Clinic - Expert Therapists Helping Patients Recover",
@@ -87,16 +87,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pain Relief Without Surgery | SKM Physiotherapy",
     description: "Advanced physiotherapy: cupping, dry needling, sports rehab. Book 24/7 across Delhi NCR.",
-    images: ["https://skmphysiotherapy.com/og-image.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-image.jpg"],
     creator: "@skmphysio",
   },
 
   // ─── Canonical URLs & Hreflang ───
   alternates: {
-    canonical: "https://skmphysiotherapy.com",
+    canonical: "https://www.skmphysiotherapy.com",
     languages: {
-      "en-IN": "https://skmphysiotherapy.com",
-      "hi-IN": "https://skmphysiotherapy.com/hi", // If you add Hindi version
+      "en-IN": "https://www.skmphysiotherapy.com",
     },
   },
 
@@ -115,25 +114,11 @@ export const metadata: Metadata = {
 
   // ─── Verification Tokens ───
   verification: {
-    google: "your-google-site-verification-code",
-    yandex: "your-yandex-verification-code",
-    other: {
-      "msvalidate.01": "your-bing-verification-code",
-    },
+    google: "google-site-verification=1hfQQ5xT6ZEdeuuuLgnE1XhAs81oX5k4V-FbqgtX7as",
   },
 
-  // ─── Category & App Links ───
+  // ─── Category ───
   category: "health",
-  appLinks: {
-    ios: {
-      url: "skmphysio://home",
-      app_store_id: "123456789",
-    },
-    android: {
-      url: "skmphysio://home",
-      package: "com.skmphysio.app",
-    },
-  },
 };
 
 // ─── Viewport Configuration (Mobile Optimization) ───
@@ -154,22 +139,28 @@ const globalStructuredData = {
   "@graph": [
     {
       "@type": "MedicalBusiness",
-      "@id": "https://skmphysiotherapy.com/#organization",
+      "@id": "https://www.skmphysiotherapy.com/#organization",
       name: "SKM Physiotherapy & Rehabilitation Centre",
       description: "Expert physiotherapy and rehabilitation services offering cupping therapy, dry needling, sports injury rehab, and personalized recovery programs across Delhi NCR.",
-      url: "https://skmphysiotherapy.com",
-      telephone: "+91-98110-XXXXX",
+      url: "https://www.skmphysiotherapy.com",
+      telephone: "+919718434818",
       email: "info@skmphysiotherapy.com",
       priceRange: "₹₹",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "500",
+        bestRating: "5",
+      },
       medicalSpecialty: ["Physiotherapy", "SportsMedicine", "Rehabilitation"],
       areaServed: ["Delhi", "Gurugram", "Gurgaon", "Noida", "Greater Noida", "Faridabad", "National Capital Region"],
       logo: {
         "@type": "ImageObject",
-        url: "https://skmphysiotherapy.com/logo.png",
+        url: "https://www.skmphysiotherapy.com/logo.png",
         width: "512",
         height: "512",
       },
-      image: "https://skmphysiotherapy.com/og-image.jpg",
+      image: "https://www.skmphysiotherapy.com/og-image.jpg",
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Physiotherapy Services",
@@ -186,7 +177,7 @@ const globalStructuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134",
+      "@id": "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/noida-sector-134",
       name: "SKM Physiotherapy - Sector 134, Noida",
       address: {
         "@type": "PostalAddress",
@@ -212,7 +203,7 @@ const globalStructuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari",
+      "@id": "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/greater-noida-swaran-nagari",
       name: "SKM Physiotherapy - Swaran Nagari, Greater Noida",
       address: {
         "@type": "PostalAddress",
@@ -233,7 +224,7 @@ const globalStructuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14",
+      "@id": "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14",
       name: "SKM Physiotherapy - Sector 14, Gurugram",
       address: {
         "@type": "PostalAddress",
@@ -261,7 +252,7 @@ const globalStructuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2",
+      "@id": "https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2",
       name: "SKM Physiotherapy - DLF Phase 2, Gurugram",
       address: {
         "@type": "PostalAddress",
@@ -289,14 +280,14 @@ const globalStructuredData = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://skmphysiotherapy.com/#website",
-      url: "https://skmphysiotherapy.com",
+      "@id": "https://www.skmphysiotherapy.com/#website",
+      url: "https://www.skmphysiotherapy.com",
       name: "SKM Physiotherapy & Rehabilitation Centre",
-      publisher: { "@id": "https://skmphysiotherapy.com/#organization" },
+      publisher: { "@id": "https://www.skmphysiotherapy.com/#organization" },
       inLanguage: "en-IN",
       potentialAction: {
         "@type": "SearchAction",
-        target: "https://skmphysiotherapy.com/search?q={search_term_string}",
+        target: "https://www.skmphysiotherapy.com/search?q={search_term_string}",
         "query-input": "required name=search_term_string",
       },
     },
@@ -316,21 +307,6 @@ export default function RootLayout({
       suppressHydrationWarning // Prevents hydration mismatch with theme providers
     >
       <head>
-      {/* Google Ads Global Tag */}
-    <Script
-      src="https://www.googletagmanager.com/gtag/js?id=AW-664004213"
-      strategy="afterInteractive"
-    />
-
-    <Script id="google-ads">
-      {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-664004213');
-      `}
-    </Script>
-
         {/* ─── Structured Data ─── */}
         <script
           type="application/ld+json"
@@ -347,39 +323,22 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-        {/* <link rel="manifest" href="/site.webmanifest" /> */}
-
-        {/* ─── Analytics (Google Analytics 4) ─── */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
-
-        {/* ─── Microsoft Clarity (Session Recording) ─── */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
-            `,
-          }}
-        />
       </head>
+
+      {/* ─── GA4 + Google Ads — single GTM load, both configured together ─── */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-5MYVPZYFV6"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-5MYVPZYFV6');
+          gtag('config', 'AW-664004213');
+        `}
+      </Script>
 
       <body
         className={`min-h-screen flex flex-col bg-white text-gray-900 antialiased ${geistSans.variable} ${geistMono.variable}`}

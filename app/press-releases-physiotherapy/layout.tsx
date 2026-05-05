@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Press Releases | SKM Physiotherapy in the Media",
     description: "Latest press releases, news coverage, and announcements from SKM Physiotherapy & Rehabilitation Centre.",
-    url: "https://skmphysiotherapy.com/press-releases-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/press-releases-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-press.jpg",
+        url: "https://www.skmphysiotherapy.com/og-press.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Press Releases",
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SKM Physiotherapy Press Releases & Media",
     description: "Latest news and media coverage from SKM Physiotherapy.",
-    images: ["https://skmphysiotherapy.com/og-press.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-press.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/press-releases-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/press-releases-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/press-releases-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/press-releases-physiotherapy" },
   },
 
   robots: {
@@ -58,8 +58,8 @@ const breadcrumbData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-    { "@type": "ListItem", position: 2, name: "Press Releases", item: "https://skmphysiotherapy.com/press-releases-physiotherapy" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+    { "@type": "ListItem", position: 2, name: "Press Releases", item: "https://www.skmphysiotherapy.com/press-releases-physiotherapy" },
   ],
 };
 

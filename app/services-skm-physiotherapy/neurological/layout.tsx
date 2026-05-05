@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Neurological Physiotherapy & Stroke Rehab | SKM Noida",
     description: "Expert neuro physio for stroke, Parkinson's, MS, cerebral palsy & spinal cord injury across Noida, Greater Noida & Gurugram. Bobath & PNF certified therapists.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/neurological",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/neurological",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-neurological.jpg", width: 1200, height: 630, alt: "Neurological Physiotherapy at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-neurological.jpg", width: 1200, height: 630, alt: "Neurological Physiotherapy at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Neuro Physiotherapy | SKM Noida", description: "Stroke, Parkinson's, MS, cerebral palsy & spinal cord rehab. Bobath & PNF certified in Noida.", images: ["https://skmphysiotherapy.com/og-neurological.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/neurological" },
+  twitter: { card: "summary_large_image", title: "Neuro Physiotherapy | SKM Noida", description: "Stroke, Parkinson's, MS, cerebral palsy & spinal cord rehab. Bobath & PNF certified in Noida.", images: ["https://www.skmphysiotherapy.com/og-neurological.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/neurological" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Cerebral Palsy" },
         { "@type": "MedicalCondition", name: "Spinal Cord Injury" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Neurological Physiotherapy", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/neurological" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Neurological Physiotherapy", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/neurological" },
       ],
     },
   ],

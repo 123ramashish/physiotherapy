@@ -26,11 +26,11 @@ export const metadata: Metadata = {
     title: "Meet Our Expert Physiotherapy Team | SKM Physiotherapy",
     description:
       "Licensed physiotherapists with 5+ years experience. Specialized in sports rehab, pain management, cupping therapy & neurological conditions. Serving Noida & Greater Noida.",
-    url: "https://skmphysiotherapy.com/therapist-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/therapist-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-therapists.jpg",
+        url: "https://www.skmphysiotherapy.com/og-therapists.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Expert Therapists Team",
@@ -46,14 +46,14 @@ export const metadata: Metadata = {
     title: "Expert Physiotherapists | SKM Physiotherapy Team",
     description:
       "Certified therapists for back pain, sports injuries, cupping & more. Serving Noida & Greater Noida.",
-    images: ["https://skmphysiotherapy.com/og-therapists.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-therapists.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/therapist-skm-physiotherapy",
+    canonical: "https://www.skmphysiotherapy.com/therapist-skm-physiotherapy",
     languages: {
-      "en-IN": "https://skmphysiotherapy.com/therapist-skm-physiotherapy",
+      "en-IN": "https://www.skmphysiotherapy.com/therapist-skm-physiotherapy",
     },
   },
 
@@ -75,9 +75,9 @@ const therapistStructuredData = {
   "@graph": [
     {
       "@type": "MedicalOrganization",
-      "@id": "https://skmphysiotherapy.com/#organization",
+      "@id": "https://www.skmphysiotherapy.com/#organization",
       name: "SKM Physiotherapy & Rehabilitation Centre",
-      url: "https://skmphysiotherapy.com",
+      url: "https://www.skmphysiotherapy.com",
       medicalSpecialty: ["Physiotherapy", "SportsMedicine", "Rehabilitation", "Neurology"],
       employee: [
         {
@@ -91,8 +91,8 @@ const therapistStructuredData = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Our Therapists", item: "https://skmphysiotherapy.com/therapist-skm-physiotherapy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Our Therapists", item: "https://www.skmphysiotherapy.com/therapist-skm-physiotherapy" },
       ],
     },
   ],

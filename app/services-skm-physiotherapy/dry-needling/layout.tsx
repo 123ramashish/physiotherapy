@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dry Needling Trigger Point Therapy | SKM Physiotherapy Noida",
     description: "INDN-certified dry needling for muscle knots, chronic pain, headaches & sports injuries. Fast, targeted pain relief across Noida, Greater Noida & Gurugram.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/dry-needling",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/dry-needling",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-dry-needling.jpg", width: 1200, height: 630, alt: "Dry Needling Therapy at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-dry-needling.jpg", width: 1200, height: 630, alt: "Dry Needling Therapy at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Dry Needling Therapy | SKM Physiotherapy Noida", description: "Certified trigger point dry needling for muscle knots, chronic pain & sports injuries in Noida.", images: ["https://skmphysiotherapy.com/og-dry-needling.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/dry-needling" },
+  twitter: { card: "summary_large_image", title: "Dry Needling Therapy | SKM Physiotherapy Noida", description: "Certified trigger point dry needling for muscle knots, chronic pain & sports injuries in Noida.", images: ["https://www.skmphysiotherapy.com/og-dry-needling.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/dry-needling" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Chronic Muscle Pain" },
         { "@type": "MedicalCondition", name: "Sports Muscle Injury" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Dry Needling", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/dry-needling" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Dry Needling", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/dry-needling" },
       ],
     },
   ],

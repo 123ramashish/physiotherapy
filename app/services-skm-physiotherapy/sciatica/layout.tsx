@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sciatica Treatment Without Surgery | SKM Physiotherapy Noida",
     description: "Expert non-surgical sciatica treatment across Noida, Greater Noida & Gurugram. Sciatic nerve pain, leg numbness & radiating pain relief. Book free consultation.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/sciatica",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/sciatica",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-sciatica.jpg", width: 1200, height: 630, alt: "Sciatica Treatment at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-sciatica.jpg", width: 1200, height: 630, alt: "Sciatica Treatment at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Sciatica Treatment | SKM Physiotherapy Noida", description: "Non-surgical sciatica & sciatic nerve pain relief across Noida, Greater Noida & Gurugram.", images: ["https://skmphysiotherapy.com/og-sciatica.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/sciatica" },
+  twitter: { card: "summary_large_image", title: "Sciatica Treatment | SKM Physiotherapy Noida", description: "Non-surgical sciatica & sciatic nerve pain relief across Noida, Greater Noida & Gurugram.", images: ["https://www.skmphysiotherapy.com/og-sciatica.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/sciatica" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Piriformis Syndrome" },
         { "@type": "MedicalCondition", name: "Lumbar Radiculopathy" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Sciatica Treatment", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/sciatica" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Sciatica Treatment", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/sciatica" },
       ],
     },
   ],

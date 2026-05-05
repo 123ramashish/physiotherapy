@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sports Injury Rehabilitation | SKM Physiotherapy Noida",
     description: "Get back to peak performance. Expert sports physio for ACL, muscle tears, sprains, tennis elbow & more across Noida, Greater Noida & Gurugram.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/sports-injuries",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/sports-injuries",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-sports-injury.jpg", width: 1200, height: 630, alt: "Sports Injury Rehabilitation at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-sports-injury.jpg", width: 1200, height: 630, alt: "Sports Injury Rehabilitation at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Sports Injury Rehab | SKM Physiotherapy Noida", description: "ACL, muscle tears, sprains, tennis elbow & more. Expert sports physio in Noida.", images: ["https://skmphysiotherapy.com/og-sports-injury.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/sports-injuries" },
+  twitter: { card: "summary_large_image", title: "Sports Injury Rehab | SKM Physiotherapy Noida", description: "ACL, muscle tears, sprains, tennis elbow & more. Expert sports physio in Noida.", images: ["https://www.skmphysiotherapy.com/og-sports-injury.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/sports-injuries" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -39,15 +39,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Tennis Elbow" },
         { "@type": "MedicalCondition", name: "Ankle Sprain" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Sports Injury Rehabilitation", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/sports-injuries" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Sports Injury Rehabilitation", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/sports-injuries" },
       ],
     },
   ],

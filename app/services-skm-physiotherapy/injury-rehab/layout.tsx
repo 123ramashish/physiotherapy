@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Injury Rehabilitation Physiotherapy | SKM Physiotherapy Noida",
     description: "Complete injury rehab across Noida, Greater Noida & Gurugram. Post-surgery, fractures, ligament repair, rotator cuff & joint replacement. Evidence-based, personalized protocols.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-injury-rehab.jpg", width: 1200, height: 630, alt: "Injury Rehabilitation at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-injury-rehab.jpg", width: 1200, height: 630, alt: "Injury Rehabilitation at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Injury Rehab | SKM Physiotherapy Noida", description: "Post-surgery, fractures, ligament & joint replacement rehab. Evidence-based physio in Noida.", images: ["https://skmphysiotherapy.com/og-injury-rehab.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab" },
+  twitter: { card: "summary_large_image", title: "Injury Rehab | SKM Physiotherapy Noida", description: "Post-surgery, fractures, ligament & joint replacement rehab. Evidence-based physio in Noida.", images: ["https://www.skmphysiotherapy.com/og-injury-rehab.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -38,15 +38,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Rotator Cuff Tear" },
         { "@type": "MedicalCondition", name: "Joint Replacement" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Injury Rehabilitation", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Injury Rehabilitation", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab" },
       ],
     },
   ],

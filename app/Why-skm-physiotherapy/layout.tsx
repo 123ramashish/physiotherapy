@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Why SKM Physiotherapy? | The Best Choice in Noida & Greater Noida",
     description: "Evidence-based care, 1 dedicated therapist every visit, 12 specializations, shockwave therapy, and 98% satisfaction. See the SKM difference.",
-    url: "https://skmphysiotherapy.com/Why-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/Why-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-why-skm.jpg",
+        url: "https://www.skmphysiotherapy.com/og-why-skm.jpg",
         width: 1200,
         height: 630,
         alt: "Why Choose SKM Physiotherapy - The Best in Noida",
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Why SKM Physiotherapy? | 98% Satisfaction, 12 Specializations",
     description: "Evidence-based protocols, dedicated therapist, advanced tech. See why SKM beats every other physio clinic in Noida.",
-    images: ["https://skmphysiotherapy.com/og-why-skm.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-why-skm.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/Why-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/Why-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/Why-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/Why-skm-physiotherapy" },
   },
 
   robots: {
@@ -62,8 +62,8 @@ const breadcrumbData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-    { "@type": "ListItem", position: 2, name: "Why SKM?", item: "https://skmphysiotherapy.com/Why-skm-physiotherapy" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+    { "@type": "ListItem", position: 2, name: "Why SKM?", item: "https://www.skmphysiotherapy.com/Why-skm-physiotherapy" },
   ],
 };
 

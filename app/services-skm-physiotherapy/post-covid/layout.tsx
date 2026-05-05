@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Post-COVID Rehabilitation | SKM Physiotherapy Noida",
     description: "Recover fully from long COVID — breathlessness, fatigue, brain fog, muscle weakness & joint pain. Expert cardiopulmonary & neuro physio in Noida.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/post-covid",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/post-covid",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-post-covid.jpg", width: 1200, height: 630, alt: "Post-COVID Rehabilitation at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-post-covid.jpg", width: 1200, height: 630, alt: "Post-COVID Rehabilitation at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Post-COVID Rehab | SKM Physiotherapy Noida", description: "Long COVID recovery: breathlessness, fatigue, muscle weakness & joint pain in Noida.", images: ["https://skmphysiotherapy.com/og-post-covid.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/post-covid" },
+  twitter: { card: "summary_large_image", title: "Post-COVID Rehab | SKM Physiotherapy Noida", description: "Long COVID recovery: breathlessness, fatigue, muscle weakness & joint pain in Noida.", images: ["https://www.skmphysiotherapy.com/og-post-covid.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/post-covid" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -36,15 +36,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Post-COVID Fatigue Syndrome" },
         { "@type": "MedicalCondition", name: "Post-COVID Breathlessness" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Post-COVID Rehabilitation", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/post-covid" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Post-COVID Rehabilitation", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/post-covid" },
       ],
     },
   ],

@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bell's Palsy Physiotherapy | Facial Nerve Rehab | SKM — Noida & Gurugram",
     description: "Expert facial nerve rehabilitation for Bell's palsy across Noida, Greater Noida & Gurugram. Neuromuscular re-education, e-stim & mirror therapy. Certified neurophysiotherapists.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/bells-palsy",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/bells-palsy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-bells-palsy.jpg", width: 1200, height: 630, alt: "Bell's Palsy Treatment at SKM Physiotherapy Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-bells-palsy.jpg", width: 1200, height: 630, alt: "Bell's Palsy Treatment at SKM Physiotherapy Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Bell's Palsy Treatment | SKM Physiotherapy Noida", description: "Facial nerve rehab, neuromuscular re-education & faster Bell's palsy recovery in Noida.", images: ["https://skmphysiotherapy.com/og-bells-palsy.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/bells-palsy" },
+  twitter: { card: "summary_large_image", title: "Bell's Palsy Treatment | SKM Physiotherapy Noida", description: "Facial nerve rehab, neuromuscular re-education & faster Bell's palsy recovery in Noida.", images: ["https://www.skmphysiotherapy.com/og-bells-palsy.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/bells-palsy" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -37,15 +37,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Facial Nerve Palsy" },
         { "@type": "MedicalCondition", name: "Facial Paralysis" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Bell's Palsy Treatment", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/bells-palsy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Bell's Palsy Treatment", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/bells-palsy" },
       ],
     },
   ],

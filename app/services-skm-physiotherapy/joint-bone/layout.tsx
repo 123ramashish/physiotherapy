@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Joint & Bone Pain Physiotherapy | SKM Physiotherapy Noida",
     description: "Non-surgical joint and bone pain relief across Noida, Greater Noida & Gurugram. Hip, shoulder, elbow, wrist pain & osteoporosis treatment. Expert manual therapy.",
-    url: "https://skmphysiotherapy.com/services-skm-physiotherapy/joint-bone",
+    url: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/joint-bone",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
-    images: [{ url: "https://skmphysiotherapy.com/og-joint-bone.jpg", width: 1200, height: 630, alt: "Joint and Bone Pain Physiotherapy at SKM Noida" }],
+    images: [{ url: "https://www.skmphysiotherapy.com/og-joint-bone.jpg", width: 1200, height: 630, alt: "Joint and Bone Pain Physiotherapy at SKM Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Joint & Bone Pain Relief | SKM Physiotherapy Noida", description: "Hip, shoulder, elbow & wrist pain. Osteoporosis. Non-surgical physio in Noida.", images: ["https://skmphysiotherapy.com/og-joint-bone.jpg"], creator: "@skmphysio" },
-  alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/joint-bone" },
+  twitter: { card: "summary_large_image", title: "Joint & Bone Pain Relief | SKM Physiotherapy Noida", description: "Hip, shoulder, elbow & wrist pain. Osteoporosis. Non-surgical physio in Noida.", images: ["https://www.skmphysiotherapy.com/og-joint-bone.jpg"], creator: "@skmphysio" },
+  alternates: { canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/joint-bone" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
 
@@ -39,15 +39,15 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Wrist Pain" },
         { "@type": "MedicalCondition", name: "Osteoporosis" },
       ],
-      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
+      provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://www.skmphysiotherapy.com" },
       areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://skmphysiotherapy.com/services-skm-physiotherapy" },
-        { "@type": "ListItem", position: 3, name: "Joint & Bone Pain", item: "https://skmphysiotherapy.com/services-skm-physiotherapy/joint-bone" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy" },
+        { "@type": "ListItem", position: 3, name: "Joint & Bone Pain", item: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/joint-bone" },
       ],
     },
   ],

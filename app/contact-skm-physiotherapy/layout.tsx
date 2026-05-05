@@ -24,11 +24,11 @@ export const metadata: Metadata = {
     title: "Book Your Physiotherapy Appointment | SKM Physiotherapy",
     description:
       "Book a physiotherapy consultation at SKM. 2 branches in Noida & Greater Noida. Expert care for back pain, sports injuries, cupping therapy & more. Call or WhatsApp +91 79827 99147.",
-    url: "https://skmphysiotherapy.com/contact-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/contact-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-contact.jpg",
+        url: "https://www.skmphysiotherapy.com/og-contact.jpg",
         width: 1200,
         height: 630,
         alt: "Contact SKM Physiotherapy - Book Your Appointment Today",
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     title: "Book Physiotherapy Appointment | SKM Physiotherapy",
     description:
       "2 branches in Noida & Greater Noida. Mon–Sun 10AM–10PM. Call or WhatsApp to book your slot today.",
-    images: ["https://skmphysiotherapy.com/og-contact.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-contact.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/contact-skm-physiotherapy",
+    canonical: "https://www.skmphysiotherapy.com/contact-skm-physiotherapy",
     languages: {
-      "en-IN": "https://skmphysiotherapy.com/contact-skm-physiotherapy",
+      "en-IN": "https://www.skmphysiotherapy.com/contact-skm-physiotherapy",
     },
   },
 
@@ -74,9 +74,9 @@ const contactStructuredData = {
   "@graph": [
     {
       "@type": "MedicalBusiness",
-      "@id": "https://skmphysiotherapy.com/#organization",
+      "@id": "https://www.skmphysiotherapy.com/#organization",
       name: "SKM Physiotherapy & Rehabilitation Centre",
-      url: "https://skmphysiotherapy.com",
+      url: "https://www.skmphysiotherapy.com",
       telephone: "+917982799147",
       email: "skmphysiotherapy@gmail.com",
       openingHours: "Mo-Su 10:00-22:00",
@@ -102,7 +102,7 @@ const contactStructuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches/greater-noida",
+      "@id": "https://www.skmphysiotherapy.com/branches/greater-noida",
       name: "SKM Physiotherapy - Swaran Nagari, Greater Noida",
       address: {
         "@type": "PostalAddress",
@@ -130,7 +130,7 @@ const contactStructuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://skmphysiotherapy.com/branches/noida-sector-134",
+      "@id": "https://www.skmphysiotherapy.com/branches/noida-sector-134",
       name: "SKM Physiotherapy - Sector 134, Noida",
       address: {
         "@type": "PostalAddress",
@@ -153,8 +153,8 @@ const contactStructuredData = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Contact", item: "https://skmphysiotherapy.com/contact-skm-physiotherapy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Contact", item: "https://www.skmphysiotherapy.com/contact-skm-physiotherapy" },
       ],
     },
   ],

@@ -26,11 +26,11 @@ export const metadata: Metadata = {
     title: "Back Pain Treatment Without Surgery | SKM Physiotherapy Noida",
     description:
       "Expert non-surgical back pain relief in Noida & Greater Noida. Specialized physiotherapy for lower back pain, sciatica, disc bulge & chronic pain. 98% success rate.",
-    url: "https://skmphysiotherapy.com/back-pain-treatment",
+    url: "https://www.skmphysiotherapy.com/back-pain-treatment",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-back-pain.jpg",
+        url: "https://www.skmphysiotherapy.com/og-back-pain.jpg",
         width: 1200,
         height: 630,
         alt: "Back Pain Treatment at SKM Physiotherapy - Expert Relief Without Surgery",
@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Back Pain Treatment | SKM Physiotherapy Noida",
     description: "Non-surgical back pain relief. Expert physio for sciatica, disc pain & chronic back conditions. Book in Noida or Greater Noida.",
-    images: ["https://skmphysiotherapy.com/og-back-pain.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-back-pain.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/back-pain",
+    canonical: "https://www.skmphysiotherapy.com/services-skm-physiotherapy/back-pain",
   },
 
   robots: {

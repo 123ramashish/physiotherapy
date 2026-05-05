@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'physiotherapy south extension gurugram',
   ],
   alternates: {
-    canonical: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
+    canonical: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
   },
   openGraph: {
     title: 'SKM Physiotherapy South Extension — Sector 45, Gurugram',
     description:
       'Neurological rehabilitation, sports injuries, back pain & knee pain treatment at Sector 45, Gurugram. Call 7982799148.',
-    url: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
+    url: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
     siteName: 'SKM Physiotherapy & Rehabilitation Centre',
     images: [
       {
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 const jsonLdMedicalBusiness = {
   '@context': 'https://schema.org',
   '@type': ['MedicalBusiness', 'LocalBusiness'],
-  '@id': 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
+  '@id': 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
   name: 'SKM Physiotherapy & Rehabilitation Centre — Sector 45 South Extension, Gurugram',
-  url: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
+  url: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45',
   telephone: '+917982799148',
   email: 'sector45@skmphysio.in',
   image: [
@@ -86,16 +86,16 @@ const jsonLdMedicalBusiness = {
     'Sports Injuries','Sciatica Pain','Frozen Shoulder','Post COVID Rehab',
     'Paralysis (Stroke) Rehab','Manual Therapy','Cupping Therapy',
   ].map(name => ({ '@type': 'MedicalTherapy', name })),
-  parentOrganization: { '@type': 'MedicalOrganization', name: 'SKM Physiotherapy & Rehabilitation Centre', url: 'https://skmphysiotherapy.com' },
+  parentOrganization: { '@type': 'MedicalOrganization', name: 'SKM Physiotherapy & Rehabilitation Centre', url: 'https://www.skmphysiotherapy.com' },
 };
 
 const jsonLdBreadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skmphysiotherapy.com' },
-    { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://skmphysiotherapy.com/branches' },
-    { '@type': 'ListItem', position: 3, name: 'Sector 45, Gurugram', item: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skmphysiotherapy.com' },
+    { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://www.skmphysiotherapy.com/branches' },
+    { '@type': 'ListItem', position: 3, name: 'Sector 45, Gurugram', item: 'https://www.skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-45' },
   ],
 };
 

@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "20,000+ Lives Transformed | SKM Physiotherapy Impact",
     description: "99% recovery rate. 20,000+ patients treated. Real stories from stroke survivors, athletes, and chronic pain sufferers who found their lives again at SKM.",
-    url: "https://skmphysiotherapy.com/OurImpact-skm-physiotherapy",
+    url: "https://www.skmphysiotherapy.com/OurImpact-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
       {
-        url: "https://skmphysiotherapy.com/og-impact.jpg",
+        url: "https://www.skmphysiotherapy.com/og-impact.jpg",
         width: 1200,
         height: 630,
         alt: "SKM Physiotherapy Patient Impact - 20,000+ Patients Treated",
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "20,000+ Patients Healed | SKM Physiotherapy Impact",
     description: "99% recovery rate. Real stories of stroke, ACL, and chronic pain recovery. See SKM's impact on lives.",
-    images: ["https://skmphysiotherapy.com/og-impact.jpg"],
+    images: ["https://www.skmphysiotherapy.com/og-impact.jpg"],
     creator: "@skmphysio",
   },
 
   alternates: {
-    canonical: "https://skmphysiotherapy.com/OurImpact-skm-physiotherapy",
-    languages: { "en-IN": "https://skmphysiotherapy.com/OurImpact-skm-physiotherapy" },
+    canonical: "https://www.skmphysiotherapy.com/OurImpact-skm-physiotherapy",
+    languages: { "en-IN": "https://www.skmphysiotherapy.com/OurImpact-skm-physiotherapy" },
   },
 
   robots: {
@@ -62,7 +62,7 @@ const impactStructuredData = {
   "@graph": [
     {
       "@type": "MedicalOrganization",
-      "@id": "https://skmphysiotherapy.com/#organization",
+      "@id": "https://www.skmphysiotherapy.com/#organization",
       name: "SKM Physiotherapy & Rehabilitation Centre",
       aggregateRating: {
         "@type": "AggregateRating",
@@ -75,8 +75,8 @@ const impactStructuredData = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://skmphysiotherapy.com" },
-        { "@type": "ListItem", position: 2, name: "Our Impact", item: "https://skmphysiotherapy.com/OurImpact-skm-physiotherapy" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.skmphysiotherapy.com" },
+        { "@type": "ListItem", position: 2, name: "Our Impact", item: "https://www.skmphysiotherapy.com/OurImpact-skm-physiotherapy" },
       ],
     },
   ],
