@@ -9,7 +9,7 @@ const categories = [
     { label: "Appointments", icon: "📅", color: "from-indigo-500 to-violet-500", bg: "bg-indigo-50", accent: "text-indigo-700", border: "border-indigo-200" },
     { label: "Costs & Insurance", icon: "💳", color: "from-teal-500 to-green-600", bg: "bg-teal-50", accent: "text-teal-700", border: "border-teal-200" },
     { label: "Recovery & Results", icon: "📈", color: "from-sky-500 to-blue-600", bg: "bg-sky-50", accent: "text-sky-700", border: "border-sky-200" },
-];
+];     
 
 const faqs: Record<string, { q: string; a: string }[]> = {
     "Getting Started": [
