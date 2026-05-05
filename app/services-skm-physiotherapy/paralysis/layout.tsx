@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Paralysis Rehabilitation Physiotherapy Noida | SKM Physiotherapy",
   description:
-    "Specialized physiotherapy for paralysis rehabilitation at SKM in Noida & Greater Noida. Expert neuro rehab for hemiplegia, paraplegia, stroke-induced paralysis & spinal cord injury. Bobath NDT & PNF techniques. Regain movement and independence.",
+    "Specialized physiotherapy for paralysis rehabilitation at SKM across Noida, Greater Noida & Gurugram. Expert neuro rehab for hemiplegia, paraplegia, stroke-induced paralysis & spinal cord injury. Bobath NDT & PNF techniques. Regain movement and independence.",
   keywords: [
     "paralysis rehabilitation Noida", "hemiplegia physiotherapy", "paraplegia rehab Greater Noida",
     "stroke paralysis treatment Noida", "spinal cord injury rehab", "paralysis physiotherapy near me",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Paralysis Rehabilitation | SKM Physiotherapy Noida",
-    description: "Expert paralysis rehab in Noida & Greater Noida. Hemiplegia, paraplegia, stroke & spinal cord injury. Bobath NDT & PNF certified therapists.",
+    description: "Expert paralysis rehab across Noida, Greater Noida & Gurugram. Hemiplegia, paraplegia, stroke & spinal cord injury. Bobath NDT & PNF certified therapists.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/paralysis",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-paralysis.jpg", width: 1200, height: 630, alt: "Paralysis Rehabilitation at SKM Physiotherapy Noida" }],
@@ -38,7 +38,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Spinal Cord Injury" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

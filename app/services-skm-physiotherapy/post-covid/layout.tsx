@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Post-COVID Rehabilitation Physiotherapy Noida | SKM Physiotherapy",
   description:
-    "Expert post-COVID rehabilitation at SKM in Noida & Greater Noida. Recovery from long COVID symptoms: breathlessness, fatigue, brain fog, muscle weakness & joint pain. Cardiopulmonary & neuro physio specialists. Restore your health fully.",
+    "Expert post-COVID rehabilitation at SKM across Noida, Greater Noida & Gurugram. Recovery from long COVID symptoms: breathlessness, fatigue, brain fog, muscle weakness & joint pain. Cardiopulmonary & neuro physio specialists. Restore your health fully.",
   keywords: [
     "post COVID physiotherapy Noida", "long COVID rehabilitation", "COVID recovery physiotherapy",
     "post COVID breathlessness treatment", "COVID fatigue physiotherapy", "long COVID Noida",
@@ -37,7 +37,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Post-COVID Breathlessness" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Joint & Bone Pain Physiotherapy Noida & Greater Noida | SKM",
+  title: "Joint & Bone Pain Physiotherapy Noida, Greater Noida & Gurugram | SKM",
   description:
-    "Expert physiotherapy for joint and bone pain at SKM in Noida & Greater Noida. Treatment for hip pain, shoulder pain, elbow pain, wrist pain, osteoporosis & joint stiffness. Manual therapy & mobilisation techniques. Non-surgical relief. Book free consultation.",
+    "Expert physiotherapy for joint and bone pain at SKM across Noida, Greater Noida & Gurugram. Treatment for hip pain, shoulder pain, elbow pain, wrist pain, osteoporosis & joint stiffness. Manual therapy & mobilisation techniques. Non-surgical relief. Book free consultation.",
   keywords: [
     "joint pain physiotherapy Noida", "bone pain treatment Greater Noida",
     "hip pain physiotherapy", "shoulder pain treatment Noida", "elbow pain physiotherapy",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Joint & Bone Pain Physiotherapy | SKM Physiotherapy Noida",
-    description: "Non-surgical joint and bone pain relief in Noida & Greater Noida. Hip, shoulder, elbow, wrist pain & osteoporosis treatment. Expert manual therapy.",
+    description: "Non-surgical joint and bone pain relief across Noida, Greater Noida & Gurugram. Hip, shoulder, elbow, wrist pain & osteoporosis treatment. Expert manual therapy.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/joint-bone",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-joint-bone.jpg", width: 1200, height: 630, alt: "Joint and Bone Pain Physiotherapy at SKM Noida" }],
@@ -40,7 +40,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Osteoporosis" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

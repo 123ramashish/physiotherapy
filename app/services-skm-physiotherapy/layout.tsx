@@ -1,32 +1,34 @@
 // app/services-skm-physiotherapy/layout.tsx
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
-type Props = {
-  children: React.ReactNode;
-};
-
-// ─── SEO: Dynamic Metadata with ResolvingMetadata ───
-export async function generateMetadata(
-  { }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const previousOG = (await parent).openGraph;
-
-  return {
+// ─── SEO: Metadata ───
+export const metadata: Metadata = {
     title: "Physiotherapy Services | Cupping, Dry Needling, Sports Rehab | SKM",
     description:
       "15+ expert physiotherapy treatments: cupping therapy (Hijama), dry needling, taping, back/knee pain relief, sports injury rehab & post-COVID recovery. 4 NCR branches. Book 24/7.",
     
     keywords: [
       // Core Services
-      "physiotherapy services",
-      "cupping therapy",
-      "hijama therapy",
-      "dry needling",
+      "physiotherapy services Delhi NCR",
+      "cupping therapy Noida",
+      "hijama therapy Gurugram",
+      "dry needling Noida",
       "taping therapy",
       "kinesiology taping",
       "trigger point therapy",
-      
+
+      // Home & Corporate
+      "home visit physiotherapy",
+      "home service physiotherapy",
+      "physiotherapy at home Noida",
+      "home physiotherapist Gurugram",
+      "doorstep physiotherapy Delhi NCR",
+      "corporate office physiotherapy",
+      "corporate physiotherapy Gurugram",
+      "corporate physiotherapy Noida",
+      "workplace wellness physiotherapy",
+      "on-site office physiotherapy",
+
       // Pain Conditions
       "back pain treatment",
       "neck pain relief",
@@ -35,18 +37,19 @@ export async function generateMetadata(
       "frozen shoulder treatment",
       "heel pain treatment",
       "plantar fasciitis",
-      
+
       // Specialized Care
       "sports injury rehabilitation",
       "post stroke rehabilitation",
       "bell's palsy therapy",
       "arthritis management",
       "post covid rehabilitation",
-      
+
       // Location + Brand
       "physiotherapy Delhi",
-      "physiotherapy Gurgaon",
+      "physiotherapy Gurugram",
       "physiotherapy Noida",
+      "physiotherapy Greater Noida",
       "physiotherapy Faridabad",
       "SKM physiotherapy",
       "best physiotherapist near me",
@@ -57,7 +60,7 @@ export async function generateMetadata(
       title: "Advanced Physiotherapy Services | SKM Rehabilitation Centre",
       description:
         "Expert care for pain relief & recovery: cupping, dry needling, sports rehab & more. 4 branches across NCR. AI-powered booking available 24/7.",
-      url: "https://skmphysiotherapy.com/services",
+      url: "https://skmphysiotherapy.com/services-skm-physiotherapy",
       siteName: "SKM Physiotherapy & Rehabilitation Centre",
       images: [
         {
@@ -84,9 +87,9 @@ export async function generateMetadata(
 
     // ─── Canonical & Alternates ───
     alternates: {
-      canonical: "https://skmphysiotherapy.com/services",
+      canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy",
       languages: {
-        "en-IN": "https://skmphysiotherapy.com/services",
+        "en-IN": "https://skmphysiotherapy.com/services-skm-physiotherapy",
       },
     },
 
@@ -107,8 +110,7 @@ export async function generateMetadata(
     verification: {
       google: "your-google-site-verification-code",
     },
-  };
-}
+};
 
 // ─── Structured Data: Service Collection (JSON-LD) ───
 const servicesStructuredData = {
@@ -116,7 +118,7 @@ const servicesStructuredData = {
   "@type": "ItemList",
   name: "SKM Physiotherapy Services",
   description: "Comprehensive physiotherapy and rehabilitation treatments for pain relief, injury recovery, and long-term wellness.",
-  url: "https://skmphysiotherapy.com/services",
+  url: "https://skmphysiotherapy.com/services-skm-physiotherapy",
   numberOfItems: 15,
   itemListElement: [
     {
@@ -170,12 +172,12 @@ const breadcrumbStructuredData = {
       "@type": "ListItem",
       position: 2,
       name: "Services",
-      item: "https://skmphysiotherapy.com/services",
+      item: "https://skmphysiotherapy.com/services-skm-physiotherapy",
     },
   ],
 };
 
-export default function ServicesLayout({ children }: Props) {
+export default function ServicesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {/* ─── JSON-LD Structured Data ─── */}

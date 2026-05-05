@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Neurological Physiotherapy in Noida & Greater Noida | SKM",
+  title: "Neurological Physiotherapy in Noida, Greater Noida & Gurugram | SKM",
   description:
-    "Expert neurological physiotherapy at SKM in Noida & Greater Noida. Rehabilitation for stroke, Parkinson's disease, multiple sclerosis, cerebral palsy & spinal cord injury. Bobath, PNF & FES certified therapists. Restore function & independence.",
+    "Expert neurological physiotherapy at SKM across Noida, Greater Noida & Gurugram. Rehabilitation for stroke, Parkinson's disease, multiple sclerosis, cerebral palsy & spinal cord injury. Bobath, PNF & FES certified therapists. Restore function & independence.",
   keywords: [
     "neurological physiotherapy Noida", "stroke rehabilitation Noida", "neuro physiotherapy Greater Noida",
     "Parkinson physiotherapy", "cerebral palsy physiotherapy Noida", "spinal cord injury rehab",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Neurological Physiotherapy & Stroke Rehab | SKM Noida",
-    description: "Expert neuro physio for stroke, Parkinson's, MS, cerebral palsy & spinal cord injury in Noida & Greater Noida. Bobath & PNF certified therapists.",
+    description: "Expert neuro physio for stroke, Parkinson's, MS, cerebral palsy & spinal cord injury across Noida, Greater Noida & Gurugram. Bobath & PNF certified therapists.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/neurological",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-neurological.jpg", width: 1200, height: 630, alt: "Neurological Physiotherapy at SKM Physiotherapy Noida" }],
@@ -39,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Spinal Cord Injury" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Chronic Pain Management Physiotherapy Noida | SKM Physiotherapy",
   description:
-    "Expert chronic pain management at SKM Physiotherapy in Noida & Greater Noida. Holistic physiotherapy approach for fibromyalgia, chronic pain syndrome, persistent musculoskeletal pain & CRPS. Evidence-based pain science education & hands-on therapy.",
+    "Expert chronic pain management at SKM Physiotherapy across Noida, Greater Noida & Gurugram. Holistic physiotherapy approach for fibromyalgia, chronic pain syndrome, persistent musculoskeletal pain & CRPS. Evidence-based pain science education & hands-on therapy.",
   keywords: [
     "chronic pain management Noida", "pain management physiotherapy", "fibromyalgia treatment Noida",
     "chronic pain syndrome physiotherapy", "pain clinic Greater Noida", "persistent pain treatment",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Chronic Pain Management Physiotherapy | SKM Noida",
-    description: "Holistic chronic pain management in Noida & Greater Noida. Fibromyalgia, pain syndrome & CRPS. Pain science education + hands-on therapy. Book free consultation.",
+    description: "Holistic chronic pain management across Noida, Greater Noida & Gurugram. Fibromyalgia, pain syndrome & CRPS. Pain science education + hands-on therapy. Book free consultation.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/pain-management",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-pain-management.jpg", width: 1200, height: 630, alt: "Chronic Pain Management at SKM Physiotherapy Noida" }],
@@ -38,7 +38,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Persistent Musculoskeletal Pain" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

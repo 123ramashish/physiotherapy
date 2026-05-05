@@ -2,18 +2,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Neck Pain Treatment in Noida & Greater Noida | SKM Physiotherapy",
+  title: "Neck Pain Treatment in Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Expert physiotherapy for neck pain at SKM in Noida & Greater Noida. Treatment for cervical spondylosis, stiff neck, cervical disc pain, whiplash & posture-related neck pain. Certified therapists. Book free consultation today.",
+    "Expert physiotherapy for neck pain at SKM across Noida, Greater Noida & Gurugram. Treatment for cervical spondylosis, stiff neck, cervical disc pain, whiplash & posture-related neck pain. Certified therapists. Book your consultation today.",
   keywords: [
     "neck pain treatment Noida", "cervical spondylosis physiotherapy", "neck pain clinic Greater Noida",
-    "cervical pain physiotherapy", "stiff neck treatment", "whiplash treatment Noida",
-    "neck pain specialist near me", "posture neck pain relief", "cervical disc pain treatment",
-    "physiotherapy for neck pain", "neck pain clinic Noida",
+    "neck pain treatment Gurugram", "cervical pain physiotherapy Gurugram", "stiff neck treatment",
+    "whiplash treatment Noida", "neck pain specialist near me", "posture neck pain relief",
+    "cervical disc pain treatment", "physiotherapy for neck pain", "neck pain clinic Gurugram",
+    "neck pain physiotherapy Delhi NCR",
   ].join(", "),
   openGraph: {
-    title: "Neck Pain & Cervical Spondylosis Treatment | SKM Physiotherapy Noida",
-    description: "Expert physiotherapy for neck pain, cervical spondylosis, whiplash & disc pain in Noida & Greater Noida. Non-surgical, personalized treatment.",
+    title: "Neck Pain & Cervical Spondylosis Treatment | SKM Physiotherapy — Noida & Gurugram",
+    description: "Expert physiotherapy for neck pain, cervical spondylosis, whiplash & disc pain across Noida, Greater Noida & Gurugram. Non-surgical, personalized treatment.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/neck-pain",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-neck-pain.jpg", width: 1200, height: 630, alt: "Neck Pain Treatment at SKM Physiotherapy Noida" }],
@@ -38,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Neck Pain" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

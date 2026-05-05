@@ -2,18 +2,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Arthritis Physiotherapy Treatment in Noida & Greater Noida | SKM",
+  title: "Arthritis Physiotherapy Treatment in Noida, Greater Noida & Gurugram | SKM",
   description:
-    "Expert physiotherapy for arthritis at SKM in Noida & Greater Noida. Non-surgical pain relief and mobility improvement for osteoarthritis, rheumatoid arthritis & gout. Joint care programs to keep you active. Certified therapists. Book free consultation.",
+    "Expert physiotherapy for arthritis at SKM across Noida, Greater Noida & Gurugram. Non-surgical pain relief and mobility improvement for osteoarthritis, rheumatoid arthritis & gout. Joint care programs to keep you active. Certified therapists. Book free consultation.",
   keywords: [
     "arthritis physiotherapy Noida", "arthritis treatment Greater Noida", "osteoarthritis physiotherapy",
     "rheumatoid arthritis treatment Noida", "joint pain physiotherapy", "arthritis pain relief",
     "arthritis management program", "knee arthritis treatment", "hip arthritis physiotherapy",
     "arthritis specialist Noida", "non-surgical arthritis treatment",
+    "arthritis Gurugram",
   ].join(", "),
   openGraph: {
     title: "Arthritis Physiotherapy | SKM Physiotherapy Noida",
-    description: "Non-surgical arthritis pain relief & mobility improvement in Noida & Greater Noida. Osteoarthritis, rheumatoid arthritis & joint care programs.",
+    description: "Non-surgical arthritis pain relief & mobility improvement across Noida, Greater Noida & Gurugram. Osteoarthritis, rheumatoid arthritis & joint care programs.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/arthritis",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-arthritis.jpg", width: 1200, height: 630, alt: "Arthritis Physiotherapy Treatment at SKM Noida" }],
@@ -38,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Joint Pain" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

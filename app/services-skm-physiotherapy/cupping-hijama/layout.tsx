@@ -2,18 +2,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cupping Therapy (Hijama) in Noida & Greater Noida | SKM Physiotherapy",
+  title: "Cupping Therapy (Hijama) in Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Certified cupping therapy (Hijama) at SKM Physiotherapy in Noida & Greater Noida. Wet and dry cupping for deep tissue pain relief, improved circulation, detoxification & muscle recovery. Safe, sterile, expert-administered. Book a session today.",
+    "Certified cupping therapy (Hijama) at SKM Physiotherapy across Noida, Greater Noida & Gurugram. Wet and dry cupping for deep tissue pain relief, improved circulation, detoxification & muscle recovery. Safe, sterile, expert-administered. Book a session today.",
   keywords: [
     "cupping therapy Noida", "hijama therapy Greater Noida", "cupping therapy near me",
     "wet cupping treatment Noida", "dry cupping physiotherapy", "hijama Noida",
     "cupping for back pain", "cupping for muscle pain", "blood cupping therapy",
     "hijama centre Noida", "cupping therapy certified",
+    "cupping-hijama Gurugram",
   ].join(", "),
   openGraph: {
     title: "Cupping Therapy (Hijama) | SKM Physiotherapy Noida",
-    description: "Certified wet & dry cupping (Hijama) therapy in Noida & Greater Noida. Deep tissue pain relief, improved circulation & detox. Safe, sterile technique.",
+    description: "Certified wet & dry cupping (Hijama) therapy across Noida, Greater Noida & Gurugram. Deep tissue pain relief, improved circulation & detox. Safe, sterile technique.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/cupping-hijama",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-cupping.jpg", width: 1200, height: 630, alt: "Cupping Therapy Hijama at SKM Physiotherapy Noida" }],
@@ -38,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Sports Fatigue" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

@@ -2,18 +2,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Knee Pain Treatment in Noida & Greater Noida | SKM Physiotherapy",
+  title: "Knee Pain Treatment in Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Expert physiotherapy for knee pain at SKM in Noida & Greater Noida. Treatment for osteoarthritis, ACL injury, runner's knee, meniscus tear, patellar pain & post-knee surgery rehab. Non-surgical, personalized care. Book free consultation.",
+    "Expert physiotherapy for knee pain at SKM across Noida, Greater Noida & Gurugram. Treatment for osteoarthritis, ACL injury, runner's knee, meniscus tear, patellar pain & post-knee surgery rehab. Non-surgical, personalized care. Book your consultation.",
   keywords: [
-    "knee pain treatment Noida", "knee physiotherapy Greater Noida", "knee osteoarthritis treatment",
-    "ACL injury rehab Noida", "runner knee physiotherapy", "meniscus tear treatment",
-    "patellar pain physiotherapy", "knee replacement rehab", "knee pain specialist near me",
-    "non-surgical knee pain relief", "knee pain clinic Noida",
+    "knee pain treatment Noida", "knee physiotherapy Greater Noida", "knee pain treatment Gurugram",
+    "knee osteoarthritis treatment", "ACL injury rehab Noida", "runner knee physiotherapy",
+    "meniscus tear treatment", "patellar pain physiotherapy", "knee replacement rehab",
+    "knee pain specialist near me", "non-surgical knee pain relief", "knee pain clinic Gurugram",
+    "knee physiotherapy Delhi NCR",
   ].join(", "),
   openGraph: {
-    title: "Knee Pain Treatment Without Surgery | SKM Physiotherapy Noida",
-    description: "Expert non-surgical knee pain treatment in Noida. Osteoarthritis, ACL, runner's knee, meniscus tear & post-surgery rehab. Certified physiotherapists.",
+    title: "Knee Pain Treatment Without Surgery | SKM Physiotherapy — Noida & Gurugram",
+    description: "Expert non-surgical knee pain treatment across Noida, Greater Noida & Gurugram. Osteoarthritis, ACL, runner's knee, meniscus tear & post-surgery rehab.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/knee-pain",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-knee-pain.jpg", width: 1200, height: 630, alt: "Knee Pain Treatment at SKM Physiotherapy Noida" }],
@@ -38,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Meniscus Tear" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

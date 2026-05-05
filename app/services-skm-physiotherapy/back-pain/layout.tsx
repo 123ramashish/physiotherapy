@@ -2,18 +2,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Back Pain Treatment in Noida & Greater Noida | SKM Physiotherapy",
+  title: "Back Pain Treatment in Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Expert non-surgical back pain treatment at SKM Physiotherapy. Specialized physiotherapy for lower back pain, lumbar disc bulge, spondylosis & sciatica. Certified therapists in Noida & Greater Noida. 98% success rate. Book free consultation.",
+    "Expert non-surgical back pain treatment at SKM Physiotherapy across Delhi NCR. Specialized physiotherapy for lower back pain, lumbar disc bulge, spondylosis & sciatica. Certified therapists in Noida, Greater Noida & Gurugram. Book your consultation.",
   keywords: [
     "back pain treatment Noida", "lower back pain physiotherapy", "back pain clinic Greater Noida",
+    "back pain treatment Gurugram", "back pain physiotherapy Delhi NCR",
     "lumbar pain treatment", "spondylosis physiotherapy", "disc bulge treatment Noida",
     "non-surgical back pain relief", "back pain specialist near me", "physiotherapy for back pain",
-    "chronic back pain Noida", "acute back pain treatment",
+    "chronic back pain Noida", "acute back pain treatment Gurugram",
   ].join(", "),
   openGraph: {
-    title: "Back Pain Treatment Without Surgery | SKM Physiotherapy Noida",
-    description: "Non-surgical back pain relief in Noida & Greater Noida. Specialized physio for lower back pain, sciatica, disc bulge & spondylosis. 98% success rate.",
+    title: "Back Pain Treatment Without Surgery | SKM Physiotherapy — Noida & Gurugram",
+    description: "Non-surgical back pain relief across Delhi NCR — Noida, Greater Noida & Gurugram. Specialized physio for lower back pain, sciatica, disc bulge & spondylosis.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/back-pain",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-back-pain.jpg", width: 1200, height: 630, alt: "Back Pain Treatment at SKM Physiotherapy Noida" }],
@@ -38,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Lumbar Spondylosis" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

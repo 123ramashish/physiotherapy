@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kinesiology Taping Therapy Noida & Greater Noida | SKM Physiotherapy",
+  title: "Kinesiology Taping Therapy Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Expert kinesiology taping (K-Tape) and sports taping at SKM in Noida & Greater Noida. Support injured joints & muscles, reduce swelling, improve performance & speed up recovery. Used for back pain, sports injuries, knee & shoulder conditions.",
+    "Expert kinesiology taping (K-Tape) and sports taping at SKM across Noida, Greater Noida & Gurugram. Support injured joints & muscles, reduce swelling, improve performance & speed up recovery. Used for back pain, sports injuries, knee & shoulder conditions.",
   keywords: [
     "kinesiology taping Noida", "K-tape physiotherapy", "sports taping Greater Noida",
     "taping therapy near me", "Kinesio tape back pain", "KT tape sports injury",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Kinesiology Taping (K-Tape) | SKM Physiotherapy Noida",
-    description: "Expert kinesiology & sports taping in Noida & Greater Noida. Reduce swelling, support injuries & improve performance. Used for back, knee, shoulder & sports conditions.",
+    description: "Expert kinesiology & sports taping across Noida, Greater Noida & Gurugram. Reduce swelling, support injuries & improve performance. Used for back, knee, shoulder & sports conditions.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/taping",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-taping.jpg", width: 1200, height: 630, alt: "Kinesiology Taping Therapy at SKM Physiotherapy Noida" }],
@@ -32,7 +32,7 @@ const structuredData = {
       name: "Kinesiology Taping Therapy",
       description: "Expert kinesiology (K-Tape) and sports taping to support injured muscles and joints, reduce swelling, and improve athletic performance.",
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

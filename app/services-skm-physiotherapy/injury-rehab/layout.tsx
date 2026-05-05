@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Injury Rehabilitation Physiotherapy Noida & Greater Noida | SKM",
+  title: "Injury Rehabilitation Physiotherapy Noida, Greater Noida & Gurugram | SKM",
   description:
-    "Comprehensive injury rehabilitation at SKM Physiotherapy in Noida & Greater Noida. Post-surgery rehab, fracture recovery, ligament repair, rotator cuff & joint replacement rehabilitation. Evidence-based protocols for faster, complete recovery.",
+    "Comprehensive injury rehabilitation at SKM Physiotherapy across Noida, Greater Noida & Gurugram. Post-surgery rehab, fracture recovery, ligament repair, rotator cuff & joint replacement rehabilitation. Evidence-based protocols for faster, complete recovery.",
   keywords: [
     "injury rehabilitation Noida", "injury rehab physiotherapy Greater Noida",
     "post surgery rehabilitation", "fracture recovery physiotherapy", "ligament repair rehab",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ].join(", "),
   openGraph: {
     title: "Injury Rehabilitation Physiotherapy | SKM Physiotherapy Noida",
-    description: "Complete injury rehab in Noida & Greater Noida. Post-surgery, fractures, ligament repair, rotator cuff & joint replacement. Evidence-based, personalized protocols.",
+    description: "Complete injury rehab across Noida, Greater Noida & Gurugram. Post-surgery, fractures, ligament repair, rotator cuff & joint replacement. Evidence-based, personalized protocols.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/injury-rehab",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-injury-rehab.jpg", width: 1200, height: 630, alt: "Injury Rehabilitation at SKM Physiotherapy Noida" }],
@@ -39,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Joint Replacement" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

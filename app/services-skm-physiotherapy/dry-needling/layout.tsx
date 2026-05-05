@@ -2,18 +2,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dry Needling Treatment in Noida & Greater Noida | SKM Physiotherapy",
+  title: "Dry Needling Treatment in Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Certified dry needling therapy at SKM Physiotherapy in Noida & Greater Noida. Trigger point release for muscle knots, chronic pain, tension headaches & sports injuries. INDN-certified therapists. Fast, effective pain relief. Book today.",
+    "Certified dry needling therapy at SKM Physiotherapy across Noida, Greater Noida & Gurugram. Trigger point release for muscle knots, chronic pain, tension headaches & sports injuries. INDN-certified therapists. Fast, effective pain relief. Book today.",
   keywords: [
     "dry needling Noida", "dry needling Greater Noida", "dry needling near me",
     "trigger point therapy Noida", "muscle knot treatment", "myofascial release Noida",
     "dry needling for back pain", "dry needling for neck pain", "dry needling sports injuries",
     "certified dry needling", "intramuscular stimulation", "IMS therapy Noida",
+    "dry-needling Gurugram",
   ].join(", "),
   openGraph: {
     title: "Dry Needling Trigger Point Therapy | SKM Physiotherapy Noida",
-    description: "INDN-certified dry needling for muscle knots, chronic pain, headaches & sports injuries. Fast, targeted pain relief in Noida & Greater Noida.",
+    description: "INDN-certified dry needling for muscle knots, chronic pain, headaches & sports injuries. Fast, targeted pain relief across Noida, Greater Noida & Gurugram.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/dry-needling",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-dry-needling.jpg", width: 1200, height: 630, alt: "Dry Needling Therapy at SKM Physiotherapy Noida" }],
@@ -38,7 +39,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Sports Muscle Injury" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

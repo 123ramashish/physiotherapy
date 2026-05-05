@@ -2,27 +2,31 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SKM Physiotherapy Branches | Clinics in Noida & Greater Noida",
+  title: "SKM Physiotherapy Branches | Clinics in Noida, Greater Noida & Gurugram",
   description:
-    "Find your nearest SKM Physiotherapy clinic. Branches in Swaran Nagari (Greater Noida) and Sector 134 (Noida). Open Mon–Sun 10 AM–10 PM. Expert physiotherapy for back pain, sports injuries, cupping therapy & more.",
+    "Find your nearest SKM Physiotherapy clinic. 4 branches across Delhi NCR — Swaran Nagari (Greater Noida), Sector 134 (Noida), Sector 14 (Gurugram) & DLF Phase 2 (Gurugram). Expert physiotherapy for back pain, sports injuries, cupping therapy, home visits & corporate wellness.",
 
   keywords: [
     "physiotherapy clinic Noida",
     "physiotherapy clinic Greater Noida",
+    "physiotherapy clinic Gurugram",
     "SKM physiotherapy branches",
     "physiotherapy near me Noida",
     "physiotherapy near Swaran Nagari",
     "physiotherapy Sector 134 Noida",
+    "physiotherapy Sector 14 Gurugram",
+    "physiotherapy DLF Phase 2 Gurugram",
     "physio clinic near me",
-    "physiotherapy center Noida",
+    "physiotherapy center Gurugram",
     "best physiotherapy clinic near me",
     "physiotherapy Greater Noida location",
+    "physiotherapy clinic Delhi NCR",
   ].join(", "),
 
   openGraph: {
-    title: "SKM Physiotherapy Clinic Locations | Noida & Greater Noida",
+    title: "SKM Physiotherapy Clinic Locations | Noida, Greater Noida & Gurugram",
     description:
-      "2 expert physiotherapy clinics in NCR. Swaran Nagari, Greater Noida & Sector 134, Noida. Open 7 days a week. Book your appointment today.",
+      "4 expert physiotherapy clinics across Delhi NCR — Noida, Greater Noida & Gurugram. Home visit & corporate office physiotherapy also available. Book your appointment today.",
     url: "https://skmphysiotherapy.com/branches-skm-physiotherapy",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [
@@ -30,7 +34,7 @@ export const metadata: Metadata = {
         url: "https://skmphysiotherapy.com/og-branches.jpg",
         width: 1200,
         height: 630,
-        alt: "SKM Physiotherapy Clinic Locations in Noida and Greater Noida",
+        alt: "SKM Physiotherapy Clinic Locations in Noida, Greater Noida and Gurugram",
         type: "image/jpeg",
       },
     ],
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Find Your Nearest SKM Physiotherapy Clinic",
-    description: "2 branches in Noida & Greater Noida. Open Mon–Sun 10AM–10PM. Expert care for all conditions.",
+    title: "Find Your Nearest SKM Physiotherapy Clinic — Noida, Greater Noida & Gurugram",
+    description: "4 branches across Delhi NCR. Home visits & corporate wellness also available. Expert care for all conditions.",
     images: ["https://skmphysiotherapy.com/og-branches.jpg"],
     creator: "@skmphysio",
   },
@@ -122,6 +126,48 @@ const branchesStructuredData = {
           opens: "10:00",
           closes: "22:00",
         },
+      ],
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14",
+      name: "SKM Physiotherapy - Sector 14, Gurugram",
+      description: "SKM Physiotherapy Main Centre in Sector 14, Gurugram. Expert cupping, hijama, dry needling, back pain, sports injuries & neuro rehab near MG Road.",
+      url: "https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14",
+      telephone: "+917982799147",
+      priceRange: "₹₹",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "123, MG Road, Sector 14",
+        addressLocality: "Gurugram",
+        addressRegion: "Haryana",
+        postalCode: "122001",
+        addressCountry: "IN",
+      },
+      openingHoursSpecification: [
+        { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "21:00" },
+        { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday"], opens: "09:00", closes: "18:00" },
+      ],
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2",
+      name: "SKM Physiotherapy - DLF Phase 2, Gurugram",
+      description: "SKM Physiotherapy DLF Phase 2 Gurugram — women's health, paediatric physiotherapy, hijama & dry needling near Cyber Hub.",
+      url: "https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-dlf-phase2",
+      telephone: "+917982799149",
+      priceRange: "₹₹",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "78, Cyber Hub Road, DLF Phase 2",
+        addressLocality: "Gurugram",
+        addressRegion: "Haryana",
+        postalCode: "122002",
+        addressCountry: "IN",
+      },
+      openingHoursSpecification: [
+        { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:30", closes: "20:30" },
+        { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday"], opens: "09:00", closes: "18:00" },
       ],
     },
     {

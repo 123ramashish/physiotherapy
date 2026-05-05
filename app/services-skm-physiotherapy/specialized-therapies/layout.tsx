@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Specialized Physiotherapy Treatments Noida | SKM Physiotherapy",
   description:
-    "Advanced specialized physiotherapy treatments at SKM in Noida & Greater Noida. Shockwave therapy, ultrasound therapy, TENS, electrical stimulation, hydrotherapy, manual therapy & more. Expert therapists using the latest evidence-based modalities.",
+    "Advanced specialized physiotherapy treatments at SKM across Noida, Greater Noida & Gurugram. Shockwave therapy, ultrasound therapy, TENS, electrical stimulation, hydrotherapy, manual therapy & more. Expert therapists using the latest evidence-based modalities.",
   keywords: [
     "specialized physiotherapy Noida", "shockwave therapy Noida", "ultrasound therapy physiotherapy",
     "TENS physiotherapy", "electrical stimulation therapy", "hydrotherapy Noida",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     images: [{ url: "https://skmphysiotherapy.com/og-specialized.jpg", width: 1200, height: 630, alt: "Specialized Physiotherapy Treatments at SKM Noida" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Specialized Physiotherapy | SKM Noida", description: "Shockwave, ultrasound, TENS, e-stim & hydrotherapy. Advanced physio in Noida & Greater Noida.", images: ["https://skmphysiotherapy.com/og-specialized.jpg"], creator: "@skmphysio" },
+  twitter: { card: "summary_large_image", title: "Specialized Physiotherapy | SKM Noida", description: "Shockwave, ultrasound, TENS, e-stim & hydrotherapy. Advanced physio across Noida, Greater Noida & Gurugram.", images: ["https://skmphysiotherapy.com/og-specialized.jpg"], creator: "@skmphysio" },
   alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/specialized-therapies" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
@@ -33,7 +33,7 @@ const structuredData = {
       name: "Specialized Physiotherapy Treatments",
       description: "Advanced physiotherapy modalities including shockwave therapy, ultrasound therapy, TENS, electrical stimulation, hydrotherapy and Maitland manual therapy.",
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

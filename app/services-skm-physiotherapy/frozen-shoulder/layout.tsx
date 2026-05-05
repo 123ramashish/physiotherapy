@@ -2,24 +2,25 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Frozen Shoulder Treatment in Noida & Greater Noida | SKM Physiotherapy",
+  title: "Frozen Shoulder Treatment in Noida, Greater Noida & Gurugram | SKM Physiotherapy",
   description:
-    "Expert physiotherapy for frozen shoulder (adhesive capsulitis) at SKM in Noida & Greater Noida. Regain full shoulder mobility without surgery. Manual therapy, mobilisation & exercise programs. Certified therapists. Book free consultation.",
+    "Expert physiotherapy for frozen shoulder (adhesive capsulitis) at SKM across Noida, Greater Noida & Gurugram. Regain full shoulder mobility without surgery. Manual therapy, mobilisation & exercise programs. Certified therapists. Book free consultation.",
   keywords: [
     "frozen shoulder treatment Noida", "adhesive capsulitis physiotherapy", "frozen shoulder clinic Greater Noida",
     "shoulder pain treatment Noida", "shoulder stiffness physiotherapy", "shoulder mobility treatment",
     "shoulder physiotherapy near me", "frozen shoulder recovery", "shoulder joint pain relief",
     "non-surgical frozen shoulder", "shoulder specialist Noida",
+    "frozen-shoulder Gurugram",
   ].join(", "),
   openGraph: {
     title: "Frozen Shoulder Treatment | SKM Physiotherapy Noida",
-    description: "Regain full shoulder mobility without surgery. Expert physiotherapy for frozen shoulder & adhesive capsulitis in Noida & Greater Noida.",
+    description: "Regain full shoulder mobility without surgery. Expert physiotherapy for frozen shoulder & adhesive capsulitis across Noida, Greater Noida & Gurugram.",
     url: "https://skmphysiotherapy.com/services-skm-physiotherapy/frozen-shoulder",
     siteName: "SKM Physiotherapy & Rehabilitation Centre",
     images: [{ url: "https://skmphysiotherapy.com/og-frozen-shoulder.jpg", width: 1200, height: 630, alt: "Frozen Shoulder Treatment at SKM Physiotherapy" }],
     locale: "en_IN", type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Frozen Shoulder Treatment | SKM Physiotherapy Noida", description: "Regain full shoulder mobility without surgery. Expert physio in Noida & Greater Noida.", images: ["https://skmphysiotherapy.com/og-frozen-shoulder.jpg"], creator: "@skmphysio" },
+  twitter: { card: "summary_large_image", title: "Frozen Shoulder Treatment | SKM Physiotherapy Noida", description: "Regain full shoulder mobility without surgery. Expert physio across Noida, Greater Noida & Gurugram.", images: ["https://skmphysiotherapy.com/og-frozen-shoulder.jpg"], creator: "@skmphysio" },
   alternates: { canonical: "https://skmphysiotherapy.com/services-skm-physiotherapy/frozen-shoulder" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
 };
@@ -37,7 +38,7 @@ const structuredData = {
         { "@type": "MedicalCondition", name: "Shoulder Impingement" },
       ],
       provider: { "@type": "MedicalOrganization", name: "SKM Physiotherapy & Rehabilitation Centre", url: "https://skmphysiotherapy.com" },
-      areaServed: ["Noida", "Greater Noida"],
+      areaServed: ["Noida", "Greater Noida", "Gurugram"],
     },
     {
       "@type": "BreadcrumbList",

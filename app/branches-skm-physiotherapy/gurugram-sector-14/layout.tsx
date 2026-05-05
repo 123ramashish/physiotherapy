@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'sports injury rehab gurugram',
   ],
   alternates: {
-    canonical: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-14',
+    canonical: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14',
   },
   openGraph: {
     title: 'SKM Physiotherapy Main Centre — Sector 14, Gurugram',
     description:
       'Expert physiotherapy for back pain, knee pain, sports injuries, dry needling & hijama at our Main Centre in Sector 14, Gurugram. Call 7982799147.',
-    url: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-14',
+    url: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14',
     siteName: 'SKM Physiotherapy & Rehabilitation Centre',
     images: [
       {
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 const jsonLdMedicalBusiness = {
   '@context': 'https://schema.org',
   '@type': ['MedicalBusiness', 'LocalBusiness'],
-  '@id': 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-14',
+  '@id': 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14',
   name: 'SKM Physiotherapy & Rehabilitation Centre — Sector 14, Gurugram',
-  url: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-14',
+  url: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14',
   telephone: '+917982799147',
   email: 'sector14@skmphysio.in',
   image: [
@@ -88,16 +88,16 @@ const jsonLdMedicalBusiness = {
     'Arthritis Management','Heel Pain','Bell\'s Palsy','Sciatica Pain','Sports Injuries','Post COVID Rehab',
     'Frozen Shoulder','Paralysis (Stroke) Rehab','Soreness & Relaxation',
   ].map(name => ({ '@type': 'MedicalTherapy', name })),
-  parentOrganization: { '@type': 'MedicalOrganization', name: 'SKM Physiotherapy & Rehabilitation Centre', url: 'https://www.skmphysio.in' },
+  parentOrganization: { '@type': 'MedicalOrganization', name: 'SKM Physiotherapy & Rehabilitation Centre', url: 'https://skmphysiotherapy.com' },
 };
 
 const jsonLdBreadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.skmphysio.in' },
-    { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://www.skmphysio.in/branches' },
-    { '@type': 'ListItem', position: 3, name: 'Sector 14, Gurugram', item: 'https://www.skmphysio.in/branches-skm-physiotherapy/gurugram-sector-14' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skmphysiotherapy.com' },
+    { '@type': 'ListItem', position: 2, name: 'Branches', item: 'https://skmphysiotherapy.com/branches' },
+    { '@type': 'ListItem', position: 3, name: 'Sector 14, Gurugram', item: 'https://skmphysiotherapy.com/branches-skm-physiotherapy/gurugram-sector-14' },
   ],
 };
 
